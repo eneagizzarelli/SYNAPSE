@@ -20,55 +20,56 @@ def main():
     while True:
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-        try:
-            response = generate_response(terminal_messages)
+        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            # TODO
+            pass
+        else:
+            try:
+                response = generate_response(terminal_messages)
+                terminal_msg = response.choices[0].message.content
+                terminal_message = {"role": 'assistant', "content": terminal_msg}
 
-            msg = res.choices[0].message.content
-            message = {"content": msg, "role": 'assistant'}
+                if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
+                    terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
-            if "$cd" in message["content"] or "$ cd" in message["content"]:
-                message["content"] = message["content"].split("\n")[1]
+                terminal_messages.append(terminal_message)
 
-            lines = []
-
-            messages.append(message)
-
-            logs.write(messages[len(messages) - 1]["content"])
-            logs.close()
-
-            logs = open("history.txt", "a+", encoding="utf-8")
-            
-            if "will be reported" in messages[len(messages) - 1]["content"]:
-                print(messages[len(messages) - 1]["content"])
-                raise KeyboardInterrupt 
-
-            if "exit" in messages[len(messages) - 1]["content"]:
-                print("logout")
-                raise KeyboardInterrupt
-
-            if "PING" in message["content"]:
-                lines = message["content"].split("\n")
-                print(lines[0])
-
-                for i in range(1, len(lines)-5):
-                    print(lines[i])
-                    sleep(random.uniform(0.1, 0.5))
+                terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
                 
-                for i in range(len(lines)-4, len(lines)-1):
-                    print(lines[i])
+                # check over user trying to exit
+                if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
+                    print("logout")
+                    raise KeyboardInterrupt
                 
-                user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-                messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                logs.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                # check over user trying to sudo
+                if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
+                    print(terminal_messages[len(terminal_messages) - 1]["content"])
+                    raise KeyboardInterrupt
 
-            else:
-                user_input = input(f'\n{messages[len(messages) - 1]["content"]}'.strip() + " ")
-                messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                logs.write(" " + user_input + f"\t<{datetime.now()}>\n")
-        except KeyboardInterrupt:
-            messages.append({"role": "user", "content": "\n"})
-            print("")
-            break
+                # check over user trying to ping: print ping messages in a coherent way (pauses between each ping message)
+                lines = []
+                if "PING" in terminal_message["content"]:
+                    lines = terminal_message["content"].split("\n")
+                    print(lines[0])
+
+                    for i in range(1, len(lines)-5):
+                        print(lines[i])
+                        sleep(random.uniform(0.1, 0.5))
+                    
+                    for i in range(len(lines)-4, len(lines)-1):
+                        print(lines[i])
+                    
+                    user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
+                    terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+                    terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                else:
+                    user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
+                    terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+                    terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            except KeyboardInterrupt:
+                terminal_messages.append({"role": "user", "content": "\n"})
+                print("")
+                break
         
         terminal_history.close()
 
