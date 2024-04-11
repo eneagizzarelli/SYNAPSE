@@ -1,0 +1,10 @@
+services:
+    mysql:
+        prompt: |
+            
+    ftp:
+        prompt: |
+            
+    http:
+        prompt: |
+            
