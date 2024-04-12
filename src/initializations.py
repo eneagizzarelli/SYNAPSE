@@ -3,8 +3,9 @@ import yaml
 import argparse
 from datetime import datetime
 
-terminal_history_path = os.path.join("logs", "terminal_history.txt")
-mysql_history_path = os.path.join("logs", "mysql_history.txt")
+terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
+mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
+
 today = datetime.now()
 
 def load_prompts():
@@ -12,12 +13,12 @@ def load_prompts():
     mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
-        with open(os.path.join("personality.yml"), 'r', encoding="utf-8") as personality_file:
+        with open("/home/user/SYNAPSE/personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
 
-        with open(os.path.join("services.yml"), 'r', encoding="utf-8") as services_file:
+        with open("/home/user/SYNAPSE/services.yml", 'r', encoding="utf-8") as services_file:
             mysql_identity = yaml.safe_load(services_file)
         mysql_identity = mysql_identity['services']
         mysql_identity = mysql_identity['mysql']
