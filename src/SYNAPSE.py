@@ -18,22 +18,19 @@ def main():
     terminal_messages = load_terminal_messages(args)
 
     while True:
-        terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
-
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"]:
             # TODO
             pass
         else:
             try:
-                response = generate_response(terminal_messages)
-                terminal_msg = response.choices[0].message.content
-                terminal_message = {"role": 'assistant', "content": terminal_msg}
+                terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+
+                terminal_message = generate_response(terminal_messages)
 
                 if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
                     terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
                 terminal_messages.append(terminal_message)
-
                 terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
                 
                 # check over user trying to exit
@@ -46,7 +43,7 @@ def main():
                     print(terminal_messages[len(terminal_messages) - 1]["content"])
                     raise KeyboardInterrupt
 
-                # check over user trying to ping: print ping messages in a coherent way (pauses between each ping message)
+                # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
                 lines = []
                 if "PING" in terminal_message["content"]:
                     lines = terminal_message["content"].split("\n")
@@ -69,9 +66,8 @@ def main():
             except KeyboardInterrupt:
                 terminal_messages.append({"role": "user", "content": "\n"})
                 print("")
+                terminal_history.close()
                 break
-        
-        terminal_history.close()
 
 if __name__ == "__main__":
     main()
