@@ -7,8 +7,8 @@ from initializations import load_prompts, parse_arguments, load_terminal_message
 from ai_requests import generate_response
 
 today = datetime.now()
-terminal_history_path = os.path.join("logs", "terminal_history.txt")
-mysql_history_path = os.path.join("logs", "mysql_history.txt")
+terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
+mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 
 terminal_prompt, mysql_prompt = load_prompts()
 
