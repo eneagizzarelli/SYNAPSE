@@ -5,7 +5,6 @@ from datetime import datetime
 
 terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
-
 today = datetime.now()
 
 def load_prompts():
@@ -42,8 +41,7 @@ def parse_arguments(terminal_prompt, mysql_prompt):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--personality", type=str, default= terminal_prompt + 
-                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message." +
-                        "Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
+                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
     parser.add_argument("--mysql", type=str, default= mysql_prompt + 
                         f"\n ... \n")
     

@@ -5,9 +5,9 @@ import random
 from initializations import load_prompts, parse_arguments, load_terminal_messages
 from ai_requests import generate_response
 
-today = datetime.now()
 terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
+today = datetime.now()
 
 terminal_prompt, mysql_prompt = load_prompts()
 
