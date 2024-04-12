@@ -17,11 +17,11 @@ def main():
     terminal_messages = load_terminal_messages(args)
 
     while True:
-        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"]:
-            # TODO
-            pass
-        else:
-            try:
+        try:
+            if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"]:
+                # TODO
+                pass
+            else:
                 terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
                 terminal_message = generate_response(terminal_messages)
@@ -33,7 +33,7 @@ def main():
                 terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
 
                 terminal_history.close()
-                
+
                 terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
                 
                 # check over user trying to exit
@@ -66,11 +66,11 @@ def main():
                     user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
                     terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                     terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
-            except KeyboardInterrupt:
-                terminal_messages.append({"role": "user", "content": "\n"})
-                print("")
-                terminal_history.close()
-                break
+        except KeyboardInterrupt:
+            terminal_messages.append({"role": "user", "content": "\n"})
+            print("")
+            terminal_history.close()
+            break
 
 if __name__ == "__main__":
     main()
