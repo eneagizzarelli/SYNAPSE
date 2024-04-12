@@ -8,4 +8,7 @@ model = "gpt-3.5-turbo-16k"
 
 def generate_response(messages):
     response = openai.chat.completions.create(model=model, messages = messages, temperature = 0.0, max_tokens = 800)
-    return response
+
+    terminal_message = {"role": 'assistant', "content": response.choices[0].message.content}
+    
+    return terminal_message
