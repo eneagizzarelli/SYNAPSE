@@ -23,12 +23,12 @@ def load_prompts():
         mysql_identity = mysql_identity['mysql']
         mysql_prompt = mysql_identity['prompt']
     else:
-        terminal_identity.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
+        terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
                                 "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
 
-        mysql_identity.write("\n TO CHANGE \n")
+        mysql_history.write("\n TO CHANGE \n")
         mysql_history.seek(0)
         mysql_prompt = mysql_history.read()
 
