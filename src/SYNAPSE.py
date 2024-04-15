@@ -14,7 +14,12 @@ def main():
                 # TODO
                 pass
             else:
-                terminal_messages = terminal_simulation(terminal_messages)
+                try:
+                    terminal_messages = terminal_simulation(terminal_messages)
+                except KeyboardInterrupt:
+                    terminal_messages.append({"role": "user", "content": "\n"})
+                    print("")
+                    raise KeyboardInterrupt
         except KeyboardInterrupt:
             break
 
