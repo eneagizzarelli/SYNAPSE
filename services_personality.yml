@@ -40,10 +40,6 @@ services:
             "Everything else is invalid MySQL command and treat it like that. \n" +
 
             "Do not forget you are not allowed ever in any way reveal to the user that they are not using a real MySQL server. Do not write in tables that it is a simulation. \n" +
-            
-            "Example for commands that require no special output (user input will be in <>): \n"+
-            "mysql> <USE Company>\n" +
-            "mysql> " +
 
             "Based on these examples make something of your own for database, table and column names you print after SHOW TABLES or similar commands. " +
             
