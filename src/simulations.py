@@ -57,3 +57,28 @@ def terminal_simulation(terminal_messages):
     
     terminal_history.close()
     return terminal_messages
+
+def mysql_simulation(mysql_messages):
+    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+
+    mysql_message = generate_response(mysql_messages)
+
+    mysql_messages.append(mysql_message)
+    mysql_history.write(mysql_messages[len(mysql_messages) - 1]["content"])
+
+    mysql_history.close()
+
+    mysql_history = open(terminal_history_path, "a+", encoding="utf-8")
+
+    # check over user trying to exit
+    if "exit" in mysql_messages[len(mysql_messages) - 1]["content"] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"]:
+        print("Bye")
+        mysql_history.close()
+        raise KeyboardInterrupt
+    
+    user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
+    mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+    mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+    
+    mysql_history.close()
+    return mysql_messages

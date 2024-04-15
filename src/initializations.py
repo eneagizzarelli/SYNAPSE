@@ -9,30 +9,33 @@ today = datetime.now()
 
 def load_prompts():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
-    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
-        with open("/home/user/SYNAPSE/personality.yml", 'r', encoding="utf-8") as personality_file:
+        with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
-
-        with open("/home/user/SYNAPSE/services.yml", 'r', encoding="utf-8") as services_file:
-            mysql_identity = yaml.safe_load(services_file)
-        mysql_identity = mysql_identity['services']
-        mysql_identity = mysql_identity['mysql']
-        mysql_prompt = mysql_identity['prompt']
     else:
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
                                 "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
 
+    terminal_history.close()
+
+    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+
+    if os.stat(mysql_history_path).st_size == 0:
+        with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
+            mysql_identity = yaml.safe_load(services_file)
+        mysql_identity = mysql_identity['services']
+        mysql_identity = mysql_identity['mysql']
+        mysql_prompt = mysql_identity['prompt']
+    else:
         mysql_history.write("\n TO CHANGE \n")
         mysql_history.seek(0)
         mysql_prompt = mysql_history.read()
 
-    terminal_history.close()
     mysql_history.close()
     
     return terminal_prompt, mysql_prompt
@@ -40,18 +43,18 @@ def load_prompts():
 def parse_arguments(terminal_prompt, mysql_prompt):
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--personality", type=str, default= terminal_prompt + 
+    parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
                         f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
-    parser.add_argument("--mysql", type=str, default= mysql_prompt + 
-                        f"\n ... \n")
+    parser.add_argument("--mysql_personality", type=str, default= mysql_prompt + 
+                        f"\nBased on these examples make something of your own (different connection id and server version) to be a starting message. Always start the communication in this way and make sure your output ends with 'mysql >'.\n")
     
     args = parser.parse_args()
     return args
 
-def load_terminal_messages(args):
+def load_terminal_messages(terminal_personality):
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-    initial_prompt = f"You are Linux OS terminal. Your personality is: {args.personality}"
+    initial_prompt = f"You are Linux OS terminal. Your personality is: {terminal_personality}"
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
@@ -64,3 +67,20 @@ def load_terminal_messages(args):
     terminal_history.close()
 
     return terminal_messages
+
+def load_mysql_messages(mysql_personality):
+    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+
+    initial_prompt = f"You are Linux OS terminal and you are MySQL server. Your personality is: {mysql_personality}"
+
+    mysql_messages = [{"role": "system", "content": initial_prompt}]
+
+    if os.stat(mysql_history_path).st_size == 0:
+        for msg in mysql_messages:
+            mysql_history.write(msg["content"])
+    else:
+        mysql_history.write("The session continues in following lines.\n\n")
+
+    mysql_history.close()
+
+    return mysql_messages
