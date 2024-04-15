@@ -16,8 +16,7 @@ def main():
                     mysql_messages = mysql_simulation(mysql_messages)
                 except KeyboardInterrupt:
                     mysql_messages.append({"role": "user", "content": "\n"})
-                    print("")
-                    raise KeyboardInterrupt
+                    terminal_messages.append({"role": "user", "content": "Coming back from mysql server. \n"})
             else:
                 try:
                     terminal_messages = terminal_simulation(terminal_messages)
