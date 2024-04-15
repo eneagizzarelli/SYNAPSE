@@ -1,9 +1,6 @@
 from initializations import load_prompts, parse_arguments, load_terminal_messages
 from simulation import terminal_simulation
 
-terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
-mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
-
 terminal_prompt, mysql_prompt = load_prompts()
 
 def main():
