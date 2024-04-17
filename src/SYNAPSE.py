@@ -12,6 +12,8 @@ def main():
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
         print("logout")
+    
+    print("logout")
 
 if __name__ == "__main__":
     main()
