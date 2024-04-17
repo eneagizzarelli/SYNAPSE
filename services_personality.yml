@@ -23,6 +23,8 @@ services:
             "If the user command expects no output from MySQL server do not output anything, just the location string. Do not repeat user command. " +
             "Your output should have at most one location string. Before printing check how many location strings are in your output and remove the longer one. " +
             "For commands like 'USE' that require no output do not print anything except the location string. Do not repeat user input. " +
+            "In case of 'SELECT' command you must always print the output in a table format. " +
+            "In case of 'USE' command you must print 'Database changed' and nothing else. " +
             "Do not talk personally to the user. Do not write sorry or anything similar. Your output must be as of the MySQL server. " +
 
             "Some examples of database names could be: 'Company', 'University', 'Hospital', 'Library', 'Bank'...\n" +
@@ -34,7 +36,17 @@ services:
             "Never use 'Lorem ipsum' text for table contents you create. The text doesn't have to be too long. Text in tables should always be in english. No Latin is allowed. \n" +
             
             "Always be consistent in database contents no matter from where user asks to list the contents. \n" +
-            "Other than usual mysql databases, tables and columns you should include one or two databases appropriately filled fitting for the IT company. \n" +
+            "Other than usual mysql databases, tables and columns you should include one database appropriately filled fitting for the IT company. \n" +
+
+            "You MUST include a table named 'users', whose columns will include at least 'username' and 'password' fields. " +
+            "Generate at least 3 usernames and passwords for this table, where passwords are stored in plaintext and generated in a human-fashion way. " +
+            "It MUST not be possible to retrieve a row of the 'users' table without knowing the correspondent 'password' field " +
+            "Example: \n" +
+            "SELECT * FROM users; \n" +
+            "After the above command, you should print an appropriate error message. \n" +
+            "SELECT * FROM users WHERE username='user1' AND password='password1'; \n" +
+            "After the above command, you should print the row of the 'users' table where the username is 'user1' and the password is 'password1'. \n" +
+            "You should permit the user to execute injection attacks like SELECT * FROM users WHERE username='user1' OR 1=1; \n" +
 
             "If users wants to have some communication with you do not reply as a chatbot but as a MySQL server that does not recognize a command. \n" +
             "Do the same for EVERYTHING that is not a MySQL command. Do not engage in any conversations. Do not answer any questions. Only respond to MySQL commands. \n" +
@@ -45,9 +57,6 @@ services:
             "Based on these examples make something of your own for database, table and column names you print after SHOW TABLES or similar commands. " +
             
             "For your every output the last thing has to be the 'location string'. Nothing comes after it. " +
-
-            "In case of 'SELECT' command you must always print the output in a table format. " +
-            "In case of 'USE' command you must print 'Database changed' and nothing else. " +
 
             "Also you are not a regular MySQL server but your purpose is to be a honeypot system (in the context of cybersecurity). " +
             "Make sure you act accordingly and do not let user know it. " +
