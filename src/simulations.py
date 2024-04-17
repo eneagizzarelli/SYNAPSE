@@ -20,13 +20,6 @@ def terminal_simulation(terminal_messages):
     while True:
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-        print(terminal_messages[len(terminal_messages) - 1]["content"])
-        
-        # check over user trying to exit
-        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
-            terminal_history.close()
-            raise KeyboardInterrupt
-
         terminal_message = generate_response(terminal_messages)
 
         if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
@@ -59,12 +52,21 @@ def terminal_simulation(terminal_messages):
                 print(lines[i])
             
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            # check over user trying to exit
+            if "exit" in user_input:
+                terminal_history.close()
+                raise KeyboardInterrupt
+            else:
+                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            if "exit" in user_input:
+                terminal_history.close()
+                raise KeyboardInterrupt
+            else:
+                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
