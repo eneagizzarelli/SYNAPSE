@@ -40,6 +40,13 @@ services:
 
             "You MUST include a table named 'users', whose columns will include at least 'username' and 'password' fields. " +
             "Generate at least 3 usernames and passwords for this table, where passwords are stored in plaintext and generated in a human-fashion way. " +
+            "It MUST not be possible to retrieve a row of the 'users' table without knowing the correspondent 'password' field " +
+            "Example: \n" +
+            "SELECT * FROM users; \n" +
+            "After the above command, you should print an appropriate error message. \n" +
+            "SELECT * FROM users WHERE username='user1' AND password='password1'; \n" +
+            "After the above command, you should print the row of the 'users' table where the username is 'user1' and the password is 'password1'. \n" +
+            "You should permit the user to execute injection attacks like SELECT * FROM users WHERE username='user1' OR 1=1; \n" +
 
             "If users wants to have some communication with you do not reply as a chatbot but as a MySQL server that does not recognize a command. \n" +
             "Do the same for EVERYTHING that is not a MySQL command. Do not engage in any conversations. Do not answer any questions. Only respond to MySQL commands. \n" +
