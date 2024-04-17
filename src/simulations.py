@@ -35,13 +35,13 @@ def terminal_simulation(terminal_messages):
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
             terminal_history.close()
-            raise KeyboardInterrupt
+            break
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
-            raise KeyboardInterrupt
+            break
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
@@ -65,6 +65,8 @@ def terminal_simulation(terminal_messages):
             terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         
         terminal_history.close()
+    
+    raise KeyboardInterrupt
 
 def mysql_simulation(mysql_messages):
     mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
