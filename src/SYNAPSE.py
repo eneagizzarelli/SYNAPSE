@@ -9,7 +9,7 @@ def main():
     terminal_messages = load_terminal_messages(args.terminal_personality)
 
     try:
-        terminal_messages = terminal_simulation(terminal_messages)
+        terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
         print("logout")
 

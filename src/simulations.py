@@ -65,7 +65,6 @@ def terminal_simulation(terminal_messages):
             terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         
         terminal_history.close()
-        return terminal_messages
 
 def mysql_simulation(mysql_messages):
     mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
