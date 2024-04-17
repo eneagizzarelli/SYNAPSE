@@ -10,6 +10,8 @@ today = datetime.now()
 def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
+    print(os.stat(terminal_history_path).st_size)
+
     if os.stat(terminal_history_path).st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
