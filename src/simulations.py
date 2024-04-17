@@ -18,6 +18,11 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages):
     while True:
+        
+        # check over user trying to exit
+        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            raise KeyboardInterrupt
+        
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
@@ -32,16 +37,11 @@ def terminal_simulation(terminal_messages):
 
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
         
-        # check over user trying to exit
-        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
-            terminal_history.close()
-            return
-        
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
-            return
+            raise KeyboardInterrupt
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
