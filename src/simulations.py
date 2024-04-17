@@ -20,10 +20,12 @@ def terminal_simulation(terminal_messages):
     while True:
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-        # # check over user trying to exit
-        # if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
-        #     terminal_history.close()
-        #     raise KeyboardInterrupt
+        print(terminal_messages[len(terminal_messages) - 1]["content"])
+        
+        # check over user trying to exit
+        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            terminal_history.close()
+            raise KeyboardInterrupt
 
         terminal_message = generate_response(terminal_messages)
 
