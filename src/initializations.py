@@ -17,13 +17,11 @@ def load_terminal_prompt():
         terminal_prompt = terminal_identity['prompt']
     else:
         print("ciao2")
-        terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+        with open(terminal_history_path, 'r', encoding="utf-8") as terminal_history:
 
-        terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
-        terminal_history.seek(0)
-        terminal_prompt = terminal_history.read()
-
-        terminal_history.close()
+            terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
+            terminal_history.seek(0)
+            terminal_prompt = terminal_history.read()
 
     return terminal_prompt
 
