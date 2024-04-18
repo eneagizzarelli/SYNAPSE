@@ -27,7 +27,6 @@ def terminal_simulation(terminal_messages):
 
         terminal_messages.append(terminal_message)
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
-        terminal_history.flush()
 
         terminal_history.close()
 
@@ -36,7 +35,6 @@ def terminal_simulation(terminal_messages):
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
             print(terminal_messages[len(terminal_messages) - 1]["content"])
-            terminal_history.close()
             raise KeyboardInterrupt
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
@@ -53,27 +51,23 @@ def terminal_simulation(terminal_messages):
                 print(lines[i])
             
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                terminal_history.close()
-                raise KeyboardInterrupt
-            else:
-                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
-                terminal_history.flush()
-
-                terminal_history.close()
+            # # check over user trying to exit
+            # if "exit" in user_input:
+            #     terminal_history.close()
+            #     raise KeyboardInterrupt
+            # else:
+            terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            if "exit" in user_input:
-                terminal_history.close()
-                raise KeyboardInterrupt
-            else:
-                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
-                terminal_history.flush()
+            # if "exit" in user_input:
+            #     terminal_history.close()
+            #     raise KeyboardInterrupt
+            # else:
+            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
-                terminal_history.close()
+        terminal_history.close()
 
 def mysql_simulation(mysql_messages):
     mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
