@@ -17,7 +17,7 @@ def load_terminal_prompt():
         with open(terminal_history_path, 'a+', encoding="utf-8") as terminal_history:
             terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
             terminal_history.seek(0)
-        terminal_prompt = terminal_history.read()
+            terminal_prompt = terminal_history.read()
 
     return terminal_prompt
 
@@ -34,7 +34,7 @@ def load_mysql_prompt():
         with open(mysql_history_path, 'a+', encoding="utf-8") as mysql_history:
             mysql_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same database, table and column names. Ignore date-time in <>. This is not your concern.\n")
             mysql_history.seek(0)
-        mysql_prompt = mysql_history.read()
+            mysql_prompt = mysql_history.read()
     
     return mysql_prompt
 
