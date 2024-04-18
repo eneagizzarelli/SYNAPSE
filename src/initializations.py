@@ -11,7 +11,8 @@ def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
     print("ciao1")
-    if os.stat(terminal_history_path).st_size == 0:
+    #if os.stat(terminal_history_path).st_size == 0:
+    if os.path.getsize(terminal_history_path) == 0:
         print("ciao2")
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
@@ -29,7 +30,9 @@ def load_terminal_prompt():
 
 def load_mysql_prompt():
     print("ciao4")
-    if os.stat(mysql_history_path).st_size == 0:
+    #if os.stat(mysql_history_path).st_size == 0:
+    if os.path.getsize(terminal_history_path) == 0:
+
         print("ciao5")
 
         with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
