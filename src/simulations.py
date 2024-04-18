@@ -29,8 +29,8 @@ def terminal_simulation(terminal_messages):
         
 
         for i in range(0,len(terminal_messages)):
-            print(terminal_messages[i]) 
-            
+            print(i, terminal_messages[i]) 
+
         print(terminal_messages[len(terminal_messages) - 1]["content"])
 
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
