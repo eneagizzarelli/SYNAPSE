@@ -18,7 +18,7 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages):
     while True:
-        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
+        terminal_history = open(terminal_history_path, "a", encoding="utf-8", buffering=0)
 
         terminal_message = generate_response(terminal_messages)
         
@@ -26,7 +26,7 @@ def terminal_simulation(terminal_messages):
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
         terminal_messages.append(terminal_message)
-        terminal_history.writelines(terminal_messages[len(terminal_messages) - 1]["content"])
+        terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
 
         terminal_history.close()
 
