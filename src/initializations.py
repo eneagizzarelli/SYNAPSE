@@ -7,8 +7,8 @@ terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 today = datetime.now()
 
-def load_terminal_prompt(terminal_history):
-    # terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+def load_terminal_prompt():
+    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
@@ -67,12 +67,12 @@ def parse_mysql_argument(mysql_prompt):
     
     return args
 
-def load_terminal_messages(terminal_personality, terminal_history):
+def load_terminal_messages(terminal_personality):
     initial_prompt = f"You are Linux OS terminal. Your personality is: {terminal_personality}"
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
-    # terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
         for terminal_message in terminal_messages:

@@ -16,9 +16,9 @@ today = datetime.now()
 #                     mysql_messages.append({"role": "user", "content": "\n"})
 #                     terminal_messages.append({"role": "user", "content": "cd . \n"})
 
-def terminal_simulation(terminal_messages, terminal_history):
+def terminal_simulation(terminal_messages):
     while True:
-        # terminal_history = open(terminal_history_path, "a", encoding="utf-8")
+        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
 
