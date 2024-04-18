@@ -94,7 +94,6 @@ def load_mysql_messages(mysql_personality):
     if os.stat(mysql_history_path).st_size == 0:
         for msg in mysql_messages:
             mysql_history.write(msg["content"])
-            mysql_history.flush()
 
         mysql_history.close()
     else:
