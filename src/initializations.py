@@ -7,8 +7,8 @@ terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 today = datetime.now()
 
-def load_terminal_prompt():
-    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+def load_terminal_prompt(terminal_history):
+    # terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
@@ -16,12 +16,12 @@ def load_terminal_prompt():
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
     else:
-        terminal_history.writelines("Here the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
-                              "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.")
+        terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
+                              "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
 
-    terminal_history.close()
+    # terminal_history.close()
 
     return terminal_prompt
 
@@ -67,12 +67,12 @@ def parse_mysql_argument(mysql_prompt):
     
     return args
 
-def load_terminal_messages(terminal_personality):
+def load_terminal_messages(terminal_personality, terminal_history):
     initial_prompt = f"You are Linux OS terminal. Your personality is: {terminal_personality}"
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
-    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+    # terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
     if os.stat(terminal_history_path).st_size == 0:
         for terminal_message in terminal_messages:
@@ -80,7 +80,7 @@ def load_terminal_messages(terminal_personality):
     else:
         terminal_history.write("The session continues in following lines.\n\n")
 
-    terminal_history.close()
+    # terminal_history.close()
 
     return terminal_messages
 
