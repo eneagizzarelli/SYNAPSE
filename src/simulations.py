@@ -21,7 +21,7 @@ def terminal_simulation(terminal_messages):
         terminal_history = open(terminal_history_path, "a", encoding="utf-8")
 
         #terminal_message = generate_response(terminal_messages)
-        terminal_message = "ciao"
+        terminal_message = { "content": "CIAO"}
         if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
