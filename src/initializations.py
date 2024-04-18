@@ -10,14 +10,15 @@ today = datetime.now()
 def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
+    print("ciao")
     if os.stat(terminal_history_path).st_size == 0:
+        print("ciao1")
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
-
-        terminal_history.flush()
     else:
+        print("ciao2")
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
