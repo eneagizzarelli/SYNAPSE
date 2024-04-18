@@ -18,7 +18,7 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages):
     while True:
-        terminal_history = open(terminal_history_path, "a", encoding="utf-8", buffering=0)
+        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         

@@ -18,7 +18,8 @@ def load_terminal_prompt():
     else:
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
                               "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
-        terminal_history.seek(0)
+        terminal_history.seek(0, 0)
+        terminal_history.truncate()
         terminal_prompt = terminal_history.read()
 
     terminal_history.close()
