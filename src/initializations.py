@@ -9,8 +9,7 @@ today = datetime.now()
 
 def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
-    terminal_history.flush()
-    #print(os.path.getsize(terminal_history_path))
+
     if os.stat(terminal_history_path).st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
@@ -22,7 +21,7 @@ def load_terminal_prompt():
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
 
-    # terminal_history.close()
+    terminal_history.close()
 
     return terminal_prompt
 
@@ -81,7 +80,7 @@ def load_terminal_messages(terminal_personality):
     else:
         terminal_history.write("The session continues in following lines.\n\n")
 
-    # terminal_history.close()
+    terminal_history.close()
 
     return terminal_messages
 
