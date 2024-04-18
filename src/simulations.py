@@ -59,6 +59,7 @@ def terminal_simulation(terminal_messages):
             else:
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                terminal_history.close()
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
             if "exit" in user_input:
@@ -67,8 +68,7 @@ def terminal_simulation(terminal_messages):
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
-
-        terminal_history.close()
+                terminal_history.close()
 
 def mysql_simulation(mysql_messages):
     mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
