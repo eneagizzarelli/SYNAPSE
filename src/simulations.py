@@ -26,7 +26,6 @@ def terminal_simulation(terminal_messages):
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
         terminal_messages.append(terminal_message)
-        print(terminal_history.read())
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
         terminal_history.flush()
 
@@ -71,7 +70,6 @@ def terminal_simulation(terminal_messages):
                 raise KeyboardInterrupt
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                print(terminal_history.read())
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
                 terminal_history.flush()
 

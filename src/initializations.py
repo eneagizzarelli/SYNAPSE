@@ -16,8 +16,10 @@ def load_terminal_prompt():
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
 
+        terminal_history.flush()
         terminal_history.close()
     else:
+        terminal_history.flush()
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern .\n")
         terminal_history.flush()
 
