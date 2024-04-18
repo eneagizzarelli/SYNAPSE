@@ -26,6 +26,9 @@ def terminal_simulation(terminal_messages):
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
         terminal_messages.append(terminal_message)
+
+
+        print(terminal_messages[terminal_messages[:-1]]["content"])
         terminal_history.write(terminal_messages[terminal_messages[:-1]]["content"])
 
         terminal_history.close()
