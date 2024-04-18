@@ -10,7 +10,7 @@ today = datetime.now()
 def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-    if os.stat(terminal_history_path).st_size == 0:
+    if os.lstat(terminal_history_path).st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
@@ -105,7 +105,7 @@ def load_mysql_messages(mysql_personality):
     else:
         mysql_history.write("The session continues in following lines.\n\n")
         mysql_history.flush()
-        
+
         mysql_history.close()
 
     return mysql_messages
