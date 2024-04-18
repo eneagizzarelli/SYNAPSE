@@ -27,6 +27,7 @@ def terminal_simulation(terminal_messages):
 
         terminal_messages.append(terminal_message)
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
+        terminal_history.flush()
 
         terminal_history.close()
 
@@ -59,6 +60,8 @@ def terminal_simulation(terminal_messages):
             else:
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                terminal_history.flush()
+
                 terminal_history.close()
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
@@ -68,6 +71,8 @@ def terminal_simulation(terminal_messages):
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                terminal_history.flush()
+
                 terminal_history.close()
 
 def mysql_simulation(mysql_messages):
@@ -80,7 +85,7 @@ def mysql_simulation(mysql_messages):
 
     mysql_history.close()
 
-    mysql_history = open(terminal_history_path, "a+", encoding="utf-8")
+    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
 
     # check over user trying to exit
     if "exit" in mysql_messages[len(mysql_messages) - 1]["content"] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"]:

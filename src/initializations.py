@@ -16,12 +16,14 @@ def load_terminal_prompt():
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
 
-        terminal_history.flush()
         terminal_history.close()
     else:
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern .\n")
+        terminal_history.flush()
+
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
+
         terminal_history.close()
 
     return terminal_prompt
@@ -39,8 +41,11 @@ def load_mysql_prompt():
         mysql_history.close()
     else:
         mysql_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same database, table and column names. Ignore date-time in <>. This is not your concern.\n")
+        mysql_history.flush()
+
         mysql_history.seek(0)
         mysql_prompt = mysql_history.read()
+
         mysql_history.close()
     
     return mysql_prompt
@@ -73,9 +78,13 @@ def load_terminal_messages(terminal_personality):
     if os.stat(terminal_history_path).st_size == 0:
         for msg in terminal_messages:
             terminal_history.write(msg["content"])
+            terminal_history.flush()
+
         terminal_history.close()
     else:
         terminal_history.write("The session continues in following lines.\n\n")
+        terminal_history.flush()
+
         terminal_history.close()
 
     return terminal_messages
@@ -90,9 +99,13 @@ def load_mysql_messages(mysql_personality):
     if os.stat(mysql_history_path).st_size == 0:
         for msg in mysql_messages:
             mysql_history.write(msg["content"])
+            mysql_history.flush()
+
         mysql_history.close()
     else:
         mysql_history.write("The session continues in following lines.\n\n")
+        mysql_history.flush()
+        
         mysql_history.close()
 
     return mysql_messages
