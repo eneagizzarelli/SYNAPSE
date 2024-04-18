@@ -3,7 +3,9 @@ from simulations import terminal_simulation
 
 def main():
     terminal_prompt = load_terminal_prompt()
-    
+
+    print("ciao")
+
     args = parse_terminal_argument(terminal_prompt)
 
     terminal_messages = load_terminal_messages(args.terminal_personality)

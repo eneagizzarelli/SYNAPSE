@@ -13,8 +13,6 @@ def load_terminal_prompt():
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
-
-        return terminal_prompt
     else:
         terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
