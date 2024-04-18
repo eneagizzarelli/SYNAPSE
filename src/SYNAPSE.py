@@ -9,7 +9,7 @@ def main():
     args = parse_terminal_argument(terminal_prompt)
 
     #terminal_messages = load_terminal_messages(args.terminal_personality)
-    terminal_messages =""
+    terminal_messages = ""
     try:
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
