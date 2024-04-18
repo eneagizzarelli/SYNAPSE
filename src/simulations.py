@@ -3,8 +3,6 @@ from time import sleep
 from datetime import datetime
 import random
 
-import sys
-
 terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 today = datetime.now()
@@ -28,8 +26,7 @@ def terminal_simulation(terminal_messages):
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
         terminal_messages.append(terminal_message)
-        terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
-        sys.stdout.flush()
+        terminal_history.writelines(terminal_messages[len(terminal_messages) - 1]["content"])
 
         terminal_history.close()
 
