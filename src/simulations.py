@@ -18,7 +18,7 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages):
     while True:
-        terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
 
@@ -30,7 +30,7 @@ def terminal_simulation(terminal_messages):
 
         terminal_history.close()
 
-        terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
