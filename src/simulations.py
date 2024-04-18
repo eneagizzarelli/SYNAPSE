@@ -27,7 +27,7 @@ def terminal_simulation(terminal_messages):
 
         terminal_messages.append(terminal_message)
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
-        terminal_history.truncate()
+        
         terminal_history.close()
 
         terminal_history = open(terminal_history_path, "a", encoding="utf-8")
