@@ -10,16 +10,12 @@ today = datetime.now()
 def load_terminal_prompt():
     terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
 
-    print("ciao1")
-    #if os.stat(terminal_history_path).st_size == 0:
     if os.path.getsize(terminal_history_path) == 0:
-        print("ciao2")
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
     else:
-        print("ciao3")
         terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern .\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
@@ -29,23 +25,18 @@ def load_terminal_prompt():
     return terminal_prompt
 
 def load_mysql_prompt():
-    print("ciao4")
-    #if os.stat(mysql_history_path).st_size == 0:
-    if os.path.getsize(terminal_history_path) == 0:
+    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
 
-        print("ciao5")
-
+    if os.path.getsize(mysql_history_path) == 0:
         with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
             mysql_identity = yaml.safe_load(services_file)
         mysql_identity = mysql_identity['services']
         mysql_identity = mysql_identity['mysql']
         mysql_prompt = mysql_identity['prompt']
     else:
-        print("ciao6")
-        with open(mysql_history_path, 'a+', encoding="utf-8") as mysql_history:
-            mysql_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same database, table and column names. Ignore date-time in <>. This is not your concern.\n")
-            mysql_history.seek(0)
-            mysql_prompt = mysql_history.read()
+        mysql_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. Make sure you use same database, table and column names. Ignore date-time in <>. This is not your concern.\n")
+        mysql_history.seek(0)
+        mysql_prompt = mysql_history.read()
     
     return mysql_prompt
 
@@ -74,7 +65,7 @@ def load_terminal_messages(terminal_personality):
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
-    if os.stat(terminal_history_path).st_size == 0:
+    if os.path.getsize(terminal_history_path) == 0:
         for msg in terminal_messages:
             terminal_history.write(msg["content"])
     else:
@@ -91,7 +82,7 @@ def load_mysql_messages(mysql_personality):
 
     mysql_messages = [{"role": "system", "content": initial_prompt}]
 
-    if os.stat(mysql_history_path).st_size == 0:
+    if os.path.getsize(mysql_history_path) == 0:
         for msg in mysql_messages:
             mysql_history.write(msg["content"])
     else:
