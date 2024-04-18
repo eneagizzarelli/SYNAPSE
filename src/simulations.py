@@ -20,13 +20,13 @@ def terminal_simulation(terminal_messages):
     while True:
         terminal_history = open(terminal_history_path, "a", encoding="utf-8")
 
-        #terminal_message = generate_response(terminal_messages)
-        terminal_message = { "content": "CIAO"}
+        terminal_message = generate_response(terminal_messages)
+
         if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
             terminal_message["content"] = terminal_message["content"].split("\n")[1]
 
         terminal_messages.append(terminal_message)
-        terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
+        terminal_history.write(terminal_messages[terminal_messages[-1]]["content"])
 
         terminal_history.close()
 
