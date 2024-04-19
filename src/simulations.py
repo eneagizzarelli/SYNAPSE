@@ -9,8 +9,6 @@ terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 today = datetime.now()
 
-mysql_prompt = load_mysql_prompt()
-
 def terminal_simulation(terminal_messages):
     while True:
         terminal_history = open(terminal_history_path, "a", encoding="utf-8")
@@ -54,10 +52,13 @@ def terminal_simulation(terminal_messages):
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
+                mysql_prompt = load_mysql_prompt()
                 args = parse_mysql_argument(mysql_prompt)
                 mysql_messages = load_mysql_messages(args.mysql_personality)
                 mysql_simulation(mysql_messages)
                 print("Bye")
+
+                terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
             else:
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
@@ -70,10 +71,13 @@ def terminal_simulation(terminal_messages):
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
+                mysql_prompt = load_mysql_prompt()
                 args = parse_mysql_argument(mysql_prompt)
                 mysql_messages = load_mysql_messages(args.mysql_personality)
                 mysql_simulation(mysql_messages)
                 print("Bye")
+
+                terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
