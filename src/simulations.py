@@ -47,7 +47,7 @@ def terminal_simulation(terminal_messages):
                 print("ciao")
                 print(lines[i])
 
-            print(lines[i])
+            print(lines[len(lines)-1])
             
         user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
         # check over user trying to exit
