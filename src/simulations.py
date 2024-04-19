@@ -51,21 +51,20 @@ def terminal_simulation(terminal_messages):
                 print(lines[i])
             
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            # # check over user trying to exit
-            # if "exit" in user_input:
-            #     terminal_history.close()
-            #     raise KeyboardInterrupt
-            # else:
-            terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            # check over user trying to exit
+            if "exit" in user_input:
+                raise KeyboardInterrupt
+            else:
+                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            # if "exit" in user_input:
-            #     terminal_history.close()
-            #     raise KeyboardInterrupt
-            # else:
-            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            # check over user trying to exit
+            if "exit" in user_input:
+                raise KeyboardInterrupt
+            else:
+                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
