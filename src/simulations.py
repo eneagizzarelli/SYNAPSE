@@ -30,13 +30,13 @@ def terminal_simulation(terminal_messages):
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
             print(terminal_messages[len(terminal_messages) - 1]["content"])
+            terminal_history.close()
             raise KeyboardInterrupt
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
         if "PING" in terminal_message["content"]:
             lines = terminal_message["content"].split("\n")
-            print(len(lines))
             print(lines[0])
 
             for i in range(1, len(lines)-5):
@@ -45,42 +45,59 @@ def terminal_simulation(terminal_messages):
             
             for i in range(len(lines)-4, len(lines)-1):
                 print(lines[i])
-
-            print(lines[len(lines)-1].split("\n")[0])
             
-        user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-        # check over user trying to exit
-        if "exit" in user_input:
-            raise KeyboardInterrupt
-        # elif "mysql" in user_input:
-        #     mysql_simulation(mysql_messages)
+            user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
+            # check over user trying to exit
+            if "exit" in user_input:
+                terminal_history.close()
+                raise KeyboardInterrupt
+            elif "mysql" in user_input:
+                args = parse_mysql_argument(mysql_prompt)
+                mysql_messages = load_mysql_messages(args.mysql_personality)
+                mysql_simulation(mysql_messages)
+                print("Bye")
+                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
+            else:
+                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
-            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
+            # check over user trying to exit
+            if "exit" in user_input:
+                terminal_history.close()
+                raise KeyboardInterrupt
+            elif "mysql" in user_input:
+                args = parse_mysql_argument(mysql_prompt)
+                mysql_messages = load_mysql_messages(args.mysql_personality)
+                mysql_simulation(mysql_messages)
+                print("Bye")
+                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
+            else:
+                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
 def mysql_simulation(mysql_messages):
-    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+    while True:
+        mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
 
-    mysql_message = generate_response(mysql_messages)
+        mysql_message = generate_response(mysql_messages)
 
-    mysql_messages.append(mysql_message)
-    mysql_history.write(mysql_messages[len(mysql_messages) - 1]["content"])
+        mysql_messages.append(mysql_message)
+        mysql_history.write(mysql_messages[len(mysql_messages) - 1]["content"])
 
-    mysql_history.close()
-
-    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
-
-    # check over user trying to exit
-    if "exit" in mysql_messages[len(mysql_messages) - 1]["content"] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"]:
-        print("Bye")
         mysql_history.close()
-        raise KeyboardInterrupt
-    
-    user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
-    mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-    mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
-    
-    mysql_history.close()
-    return mysql_messages
+
+        mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+        
+        user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
+        # check over user trying to exit
+        if "exit" in user_input or "quit" in user_input:
+            mysql_history.close()
+            break
+        else:
+            mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+            mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+        
+        mysql_history.close()
