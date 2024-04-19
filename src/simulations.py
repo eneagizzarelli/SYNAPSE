@@ -47,18 +47,13 @@ def terminal_simulation(terminal_messages):
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
             # check over user trying to exit
             if "exit" in user_input:
+                terminal_history.write(" " + "exit" + f"\t<{datetime.now()}>\n")
                 terminal_history.close()
                 raise KeyboardInterrupt
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
-                mysql_prompt = load_mysql_prompt()
-                args = parse_mysql_argument(mysql_prompt)
-                mysql_messages = load_mysql_messages(args.mysql_personality)
-                try:
-                    mysql_simulation(mysql_messages)
-                except KeyboardInterrupt:
-                    pass
+                run_mysql_simulation()
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
@@ -69,18 +64,13 @@ def terminal_simulation(terminal_messages):
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
             # check over user trying to exit
             if "exit" in user_input:
+                terminal_history.write(" " + "exit" + f"\t<{datetime.now()}>\n")
                 terminal_history.close()
                 raise KeyboardInterrupt
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
-                mysql_prompt = load_mysql_prompt()
-                args = parse_mysql_argument(mysql_prompt)
-                mysql_messages = load_mysql_messages(args.mysql_personality)
-                try:
-                    mysql_simulation(mysql_messages)
-                except KeyboardInterrupt:
-                    pass
+                run_mysql_simulation()
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
@@ -89,6 +79,18 @@ def terminal_simulation(terminal_messages):
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
+
+def run_mysql_simulation():
+    mysql_prompt = load_mysql_prompt()
+
+    args = parse_mysql_argument(mysql_prompt)
+
+    mysql_messages = load_mysql_messages(args.mysql_personality)
+
+    try:
+        mysql_simulation(mysql_messages)
+    except KeyboardInterrupt:
+        pass
 
 def mysql_simulation(mysql_messages):
     while True:
