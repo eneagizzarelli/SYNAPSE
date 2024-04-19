@@ -59,11 +59,11 @@ def terminal_simulation(terminal_messages):
                 mysql_simulation(mysql_messages)
                 print("Bye")
                 
-                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
+                terminal_messages.append({"role": "user", "content": "\n" + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + f"\t<{datetime.now()}>\n")
             else:
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+                terminal_history.write("\n" + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
             # check over user trying to exit
@@ -78,8 +78,8 @@ def terminal_simulation(terminal_messages):
                 mysql_simulation(mysql_messages)
                 print("Bye")
 
-                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
-                terminal_history.write(" " + f"\t<{datetime.now()}>\n")
+                terminal_messages.append({"role": "user", "content": "\n" + f"\t<{datetime.now()}>\n"})
+                terminal_history.write("\n" + f"\t<{datetime.now()}>\n")
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
