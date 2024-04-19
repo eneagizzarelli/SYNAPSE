@@ -45,24 +45,16 @@ def terminal_simulation(terminal_messages):
             
             for i in range(len(lines)-4, len(lines)-1):
                 print(lines[i])
-            
-            user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                raise KeyboardInterrupt
-            else:
-                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+
+        user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
+        # check over user trying to exit
+        if "exit" in user_input:
+            raise KeyboardInterrupt
+        # elif "mysql" in user_input:
+        #     mysql_simulation(mysql_messages)
         else:
-            user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                raise KeyboardInterrupt
-            # elif "mysql" in user_input:
-            #     mysql_simulation(mysql_messages)
-            else:
-                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
