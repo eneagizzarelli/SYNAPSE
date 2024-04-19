@@ -36,6 +36,7 @@ def terminal_simulation(terminal_messages):
         lines = []
         if "PING" in terminal_message["content"]:
             lines = terminal_message["content"].split("\n")
+            print(lines)
             print(lines[0])
 
             for i in range(1, len(lines)-5):
@@ -53,7 +54,6 @@ def terminal_simulation(terminal_messages):
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
-            print("ciao")
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
             # check over user trying to exit
             if "exit" in user_input:
