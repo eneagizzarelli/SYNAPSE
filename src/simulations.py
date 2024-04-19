@@ -55,7 +55,10 @@ def terminal_simulation(terminal_messages):
                 mysql_prompt = load_mysql_prompt()
                 args = parse_mysql_argument(mysql_prompt)
                 mysql_messages = load_mysql_messages(args.mysql_personality)
-                mysql_simulation(mysql_messages)
+                try:
+                    mysql_simulation(mysql_messages)
+                except KeyboardInterrupt:
+                    pass
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
@@ -74,7 +77,10 @@ def terminal_simulation(terminal_messages):
                 mysql_prompt = load_mysql_prompt()
                 args = parse_mysql_argument(mysql_prompt)
                 mysql_messages = load_mysql_messages(args.mysql_personality)
-                mysql_simulation(mysql_messages)
+                try:
+                    mysql_simulation(mysql_messages)
+                except KeyboardInterrupt:
+                    pass
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
