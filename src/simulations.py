@@ -3,18 +3,13 @@ from time import sleep
 from datetime import datetime
 import random
 
+from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
+
 terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
 mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
 today = datetime.now()
 
-# mysql_messages = load_mysql_messages(args.mysql_personality)
-
-#             if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"]:
-#                 try:
-#                     mysql_messages = mysql_simulation(mysql_messages)
-#                 except KeyboardInterrupt:
-#                     mysql_messages.append({"role": "user", "content": "\n"})
-#                     terminal_messages.append({"role": "user", "content": "cd . \n"})
+mysql_prompt = load_mysql_prompt()
 
 def terminal_simulation(terminal_messages):
     while True:
@@ -49,22 +44,16 @@ def terminal_simulation(terminal_messages):
             
             for i in range(len(lines)-4, len(lines)-1):
                 print(lines[i])
-            
-            user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                raise KeyboardInterrupt
-            else:
-                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+
+        user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
+        # check over user trying to exit
+        if "exit" in user_input:
+            raise KeyboardInterrupt
+        # elif "mysql" in user_input:
+        #     mysql_simulation(mysql_messages)
         else:
-            user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                raise KeyboardInterrupt
-            else:
-                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
