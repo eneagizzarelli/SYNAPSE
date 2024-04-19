@@ -36,7 +36,7 @@ def terminal_simulation(terminal_messages):
         lines = []
         if "PING" in terminal_message["content"]:
             lines = terminal_message["content"].split("\n")
-            print(lines)
+            print(len(lines))
             print(lines[0])
 
             for i in range(1, len(lines)-5):
@@ -44,8 +44,9 @@ def terminal_simulation(terminal_messages):
                 sleep(random.uniform(0.1, 0.5))
             
             for i in range(len(lines)-4, len(lines)-1):
+                print("ciao")
                 print(lines[i])
-
+            
         user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
         # check over user trying to exit
         if "exit" in user_input:
