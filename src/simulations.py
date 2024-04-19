@@ -56,7 +56,6 @@ def terminal_simulation(terminal_messages):
                 mysql_messages = load_mysql_messages(args.mysql_personality)
                 mysql_simulation(mysql_messages)
                 print("Bye")
-                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
             else:
                 terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
@@ -71,7 +70,6 @@ def terminal_simulation(terminal_messages):
                 mysql_messages = load_mysql_messages(args.mysql_personality)
                 mysql_simulation(mysql_messages)
                 print("Bye")
-                terminal_messages.append({"role": "user", "content": " " + f"\t<{datetime.now()}>\n"})
             else:
                 terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
