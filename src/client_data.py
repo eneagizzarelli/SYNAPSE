@@ -3,7 +3,7 @@ import json
 import geoip2.database
 
 import subprocess
-import pyshark
+from scapy.all import sniff, wrpcap, rdpcap
 
 base_path = "/home/user/SYNAPSE/"
 
@@ -90,23 +90,26 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
-def capture_traffic(interface, output_file, user_ip):
-    # Execute tcpdump command to capture traffic
-    tcpdump_cmd = ["tcpdump", "-i", interface, "-w", output_file, "host", user_ip]
-    subprocess.Popen(tcpdump_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def capture_traffic(output_file):
+    def process_packet(packet):
+        wrpcap(output_file, packet, append=True)
 
-def parse_pcap(file_path, user_ip):
-    cap = pyshark.FileCapture(file_path)
+    sniff(prn=process_packet, store=0)
+
+def parse_packets(file_path, user_ip):
     sent_traffic = 0
     received_traffic = 0
 
-    for packet in cap:
-        try:
-            if 'TCP' in packet and packet['IP'].src == user_ip:
-                sent_traffic += int(packet['IP'].len)
-            elif 'TCP' in packet and packet['IP'].dst == user_ip:
-                received_traffic += int(packet['IP'].len)
-        except Exception as e:
-            print("Error parsing packet:", e)
+    # Read the captured packets from the output file
+    packets = rdpcap(file_path)
+
+    # Parse and analyze each packet
+    for packet in packets:
+        if packet.haslayer('IP'):
+            ip = packet['IP']
+            if ip.src == user_ip:
+                sent_traffic += len(packet)
+            elif ip.dst == user_ip:
+                received_traffic += len(packet)
 
     return sent_traffic, received_traffic
