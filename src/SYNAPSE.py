@@ -2,7 +2,7 @@ import time
 
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
-from client_data import get_client_ip, initialize_client_data, increment_client_number_of_connections, write_client_session_duration
+from client_data import get_client_ip, initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
 
 def main():
     client_ip = get_client_ip()
@@ -21,8 +21,9 @@ def main():
         print("logout")
 
     session_end_time = time.time()
-    session_duration = session_end_time - session_start_time
-    write_client_session_duration(session_duration, client_ip)
+    session_duration_in_seconds = session_end_time - session_start_time
+    session_duration_in_seconds = round(session_duration_in_seconds, 2)
+    write_client_session_duration(session_duration_in_seconds, client_ip)
 
 if __name__ == "__main__":
     main()
