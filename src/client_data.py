@@ -5,28 +5,13 @@ from getmac import get_mac_address
 
 base_path = "/home/user/SYNAPSE/"
 
-def get_client_ip():
-    ssh_connection_info = os.environ.get("SSH_CONNECTION")
-    
-    if ssh_connection_info:
-        client_ip = ssh_connection_info.split()[0]
-        client_port = ssh_connection_info.split()[1]
-        server_port = ssh_connection_info.split()[3]
-        
-        if not os.path.exists(base_path + "logs/" + client_ip):
-            os.makedirs(base_path + "logs/" + client_ip)
-
-            initialize_client_data(client_ip, client_port, server_port)
-
-        return client_ip
-
-def initialize_client_data(client_ip, client_port, server_port):
+def initialize_client_data(client_ip, client_mac, client_port, server_port, client_geolocation):
     data = {
         "ip": client_ip,
-        "mac": "",
+        "MAC": client_mac,
         "client_port": client_port,
         "server_port": server_port,
-        "geolocation": None,
+        "geolocation": client_geolocation,
         "number_of_connections": 0,
         "session_durations_in_seconds": []
     }
@@ -35,30 +20,14 @@ def initialize_client_data(client_ip, client_port, server_port):
         json.dump(data, client_data_file)
         client_data_file.write("\n")
 
-def write_client_MAC(client_ip):
-    try:
-        client_mac = get_mac_address()
-    except Exception as e:
-        print("Error:", e)
-        return None
-    
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
-            data = json.load(client_data_file)
-            
-    data["mac"] = client_mac
-
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-        json.dump(data, client_data_file)
-        client_data_file.write("\n")
-
-def write_client_geolocation(client_ip):
+def get_client_geolocation(client_ip):
     database_path = base_path + "data/" + "GeoLite2-City.mmdb"
     reader = geoip2.database.Reader(database_path)
 
     try:
         response = reader.city(client_ip)
         
-        geolocation_data = {
+        client_geolocation = {
             "country": {
                 "name": response.country.name,
                 "iso_code": response.country.iso_code
@@ -77,19 +46,29 @@ def write_client_geolocation(client_ip):
                 "code": response.continent.code
             }
         }
-        
-        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
-            data = json.load(client_data_file)
-            
-        data["geolocation"] = geolocation_data
 
-        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-            json.dump(data, client_data_file)
-            client_data_file.write("\n")
+        return client_geolocation
     except geoip2.errors.AddressNotFoundError:
         return None
     finally:
         reader.close()
+
+def get_client_ip():
+    ssh_connection_info = os.environ.get("SSH_CONNECTION")
+    
+    if ssh_connection_info:
+        client_ip = ssh_connection_info.split()[0]
+        client_port = ssh_connection_info.split()[1]
+        server_port = ssh_connection_info.split()[3]
+        
+        if not os.path.exists(base_path + "logs/" + client_ip):
+            os.makedirs(base_path + "logs/" + client_ip)
+
+            client_mac = get_mac_address()
+            client_geolocation = get_client_geolocation(client_ip)
+            initialize_client_data(client_ip, client_mac, client_port, server_port, client_geolocation)
+
+        return client_ip
 
 def increment_client_number_of_connections(client_ip):
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
