@@ -55,7 +55,9 @@ def get_client_geolocation(client_ip):
 def get_client_traffic():
     ssh_pid = None
 
-    for conn in psutil.net_connections(kind='all'):
+    for conn in psutil.net_connections(kind='tcp'):
+        print(conn.status)
+        print(conn.laddr.port)
         if conn.status == psutil.CONN_ESTABLISHED and conn.laddr.port == 22:
             ssh_pid = conn.pid
             break
