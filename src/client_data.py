@@ -2,9 +2,6 @@ import os
 import json
 import geoip2.database
 
-import subprocess
-from scapy.all import sniff, wrpcap, rdpcap
-
 base_path = "/home/user/SYNAPSE/"
 
 def initialize_client_data(client_ip, client_port, server_port, client_geolocation):
@@ -89,27 +86,3 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
-
-def capture_traffic(output_file):
-    def process_packet(packet):
-        wrpcap(output_file, packet, append=True)
-
-    sniff(prn=process_packet, store=0)
-
-def parse_packets(file_path, user_ip):
-    sent_traffic = 0
-    received_traffic = 0
-
-    # Read the captured packets from the output file
-    packets = rdpcap(file_path)
-
-    # Parse and analyze each packet
-    for packet in packets:
-        if packet.haslayer('IP'):
-            ip = packet['IP']
-            if ip.src == user_ip:
-                sent_traffic += len(packet)
-            elif ip.dst == user_ip:
-                received_traffic += len(packet)
-
-    return sent_traffic, received_traffic
