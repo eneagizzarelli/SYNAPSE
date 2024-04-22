@@ -1,6 +1,4 @@
 import os
-import subprocess
-import psutil
 import json
 import geoip2.database
 
@@ -54,12 +52,24 @@ def get_client_geolocation(client_ip):
         reader.close()
 
 def get_client_traffic():
-    ssh_processes = []
-    for proc in psutil.process_iter(attrs=['pid', 'name']):
-        if 'ssh' in proc.info['name']:
-            ssh_processes.append(proc.info['pid'])
+    ssh_pid = os.getppid()  # Get the parent PID, assuming this script is executed from an SSH session
+    
+    # Path to the network I/O statistics file for the process
+    net_dev_file = f"/proc/{ssh_pid}/net/dev"
 
-    print(ssh_processes)
+    # Read network I/O statistics from the file
+    try:
+        with open(net_dev_file, "r") as f:
+            lines = f.readlines()
+            if len(lines) >= 3:  # Check if the file contains the required data
+                # Extract network I/O stats
+                fields = lines[2].split()
+                bytes_received = int(fields[1])
+                bytes_transmitted = int(fields[9])
+                return bytes_received, bytes_transmitted
+    except FileNotFoundError:
+        print("Network statistics file not found. Are you sure the SSH session is active?")
+    return 0, 0
 
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")

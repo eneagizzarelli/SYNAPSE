@@ -26,7 +26,5 @@ def main():
     session_duration_in_seconds = round(session_duration_in_seconds, 2)
     write_client_session_duration_in_seconds(session_duration_in_seconds, client_ip)
 
-    print(get_client_traffic())
-
 if __name__ == "__main__":
     main()
