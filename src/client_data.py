@@ -1,4 +1,5 @@
 import os
+import psutil
 import json
 import geoip2.database
 
@@ -15,7 +16,7 @@ def initialize_client_data(client_ip, client_port, server_port, client_geolocati
     }
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-        json.dump(data, client_data_file)
+        json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
 def get_client_geolocation(client_ip):
@@ -51,6 +52,29 @@ def get_client_geolocation(client_ip):
     finally:
         reader.close()
 
+def get_client_traffic():
+    ssh_pid = None
+
+    for conn in psutil.net_connections(kind='tcp'):
+        if conn.status == psutil.CONN_ESTABLISHED and conn.laddr.port == 22:
+            ssh_pid = conn.pid
+            break
+
+    if ssh_pid is None:
+        print("SSH connection not found")
+        return 0
+    
+    total_bytes_sent = 0
+    total_bytes_recv = 0
+    for proc in psutil.process_iter(['pid', 'io']):
+        if proc.info['pid'] == ssh_pid:
+            io_counters = proc.info['io']
+            total_bytes_sent = io_counters.bytes_sent
+            total_bytes_recv = io_counters.bytes_recv
+            break
+
+    return total_bytes_sent, total_bytes_recv
+
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")
     
@@ -74,7 +98,7 @@ def increment_client_number_of_connections(client_ip):
     data["number_of_connections"] += 1
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-        json.dump(data, client_data_file)
+        json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
 def write_client_session_duration_in_seconds(session_duration_in_seconds, client_ip):
@@ -84,5 +108,5 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
     data["session_durations_in_seconds"].append(session_duration_in_seconds)
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-        json.dump(data, client_data_file)
+        json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
