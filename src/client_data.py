@@ -12,6 +12,8 @@ def get_client_ip():
         if not os.path.exists(base_path + "logs/" + client_ip):
             os.makedirs(base_path + "logs/" + client_ip)
 
+            initialize_client_data(client_ip)
+
         return client_ip
 
 def initialize_client_data(client_ip):
