@@ -5,8 +5,6 @@ from getmac import get_mac_address
 
 base_path = "/home/user/SYNAPSE/"
 
-print(os.getenv("SSH_CLIENT_VERSION"))
-
 def initialize_client_data(client_ip, client_mac, client_port, server_port, client_geolocation):
     data = {
         "ip": client_ip,
@@ -66,7 +64,7 @@ def get_client_ip():
         if not os.path.exists(base_path + "logs/" + client_ip):
             os.makedirs(base_path + "logs/" + client_ip)
 
-            client_mac = get_mac_address()
+            client_mac = get_mac_address(ip=client_ip)
             client_geolocation = get_client_geolocation(client_ip)
             initialize_client_data(client_ip, client_mac, client_port, server_port, client_geolocation)
 
