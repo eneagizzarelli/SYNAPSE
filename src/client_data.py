@@ -40,7 +40,7 @@ def write_client_MAC(client_ip):
         output = subprocess.check_output("ip addr show", shell=True).decode()
 
         for line in output.split('\n'):
-            if 'link/ether' in line and 'lo' not in line:
+            if ('link/ether' in line and 'lo' not in line) or ('eth0' in line) or ('en0' in line):
                 mac_address = line.split(' ')[-1]
                 client_mac = mac_address.strip()
     except subprocess.CalledProcessError as e:
