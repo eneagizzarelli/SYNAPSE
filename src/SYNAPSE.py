@@ -23,7 +23,7 @@ def main():
     session_end_time = time.time()
     session_duration_in_seconds = session_end_time - session_start_time
     session_duration_in_seconds = round(session_duration_in_seconds, 2)
-    write_client_session_duration(session_duration_in_seconds, client_ip)
+    write_client_session_duration_in_seconds(session_duration_in_seconds, client_ip)
 
 if __name__ == "__main__":
     main()
