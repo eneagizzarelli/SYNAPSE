@@ -93,7 +93,7 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
 def capture_traffic(interface, output_file, user_ip):
     # Execute tcpdump command to capture traffic
     tcpdump_cmd = ["tcpdump", "-i", interface, "-w", output_file, "host", user_ip]
-    subprocess.run(tcpdump_cmd)
+    subprocess.Popen(tcpdump_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def parse_pcap(file_path, user_ip):
     cap = pyshark.FileCapture(file_path)
