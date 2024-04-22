@@ -1,4 +1,5 @@
 import os
+import subprocess
 import json
 import geoip2.database
 
@@ -22,12 +23,33 @@ def get_client_ip():
 def initialize_client_data(client_ip, client_port, server_port):
     data = {
         "ip": client_ip,
+        "mac": "",
         "client_port": client_port,
         "server_port": server_port,
         "geolocation": None,
         "number_of_connections": 0,
         "session_durations_in_seconds": []
     }
+
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+        json.dump(data, client_data_file)
+        client_data_file.write("\n")
+
+def write_client_MAC(client_ip):
+    try:
+        output = subprocess.check_output("ip addr show", shell=True).decode()
+
+        for line in output.split('\n'):
+            if 'link/ether' in line and 'lo' not in line:
+                mac_address = line.split(' ')[-1]
+                client_mac = mac_address.strip()
+    except subprocess.CalledProcessError as e:
+        print("Error executing command:", e)
+    
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
+            data = json.load(client_data_file)
+            
+    data["mac"] = client_mac
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
         json.dump(data, client_data_file)
