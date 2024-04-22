@@ -55,14 +55,14 @@ def get_client_geolocation(client_ip):
 def get_client_traffic():
     ssh_pid = None
 
-    for conn in psutil.net_connections(kind='tcp'):
+    for conn in psutil.net_connections(kind='all'):
         if conn.status == psutil.CONN_ESTABLISHED and conn.laddr.port == 22:
             ssh_pid = conn.pid
             break
 
     if ssh_pid is None:
         print("SSH connection not found")
-        return 0
+        return 0, 0
     
     total_bytes_sent = 0
     total_bytes_recv = 0
