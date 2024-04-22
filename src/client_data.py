@@ -1,4 +1,5 @@
 import os
+import subprocess
 import psutil
 import json
 import geoip2.database
@@ -53,28 +54,12 @@ def get_client_geolocation(client_ip):
         reader.close()
 
 def get_client_traffic():
-    ssh_pid = None
+    ssh_processes = []
+    for proc in psutil.process_iter(attrs=['pid', 'name']):
+        if 'ssh' in proc.info['name']:
+            ssh_processes.append(proc.info['pid'])
 
-    for conn in psutil.net_connections(kind='tcp'):
-        print(conn.pid)
-        if conn.status == psutil.CONN_ESTABLISHED and conn.laddr.port == 22:
-            ssh_pid = conn.pid
-            break
-
-    if ssh_pid is None:
-        print("SSH connection not found")
-        return 0, 0
-    
-    total_bytes_sent = 0
-    total_bytes_recv = 0
-    for proc in psutil.process_iter(['pid', 'io']):
-        if proc.info['pid'] == ssh_pid:
-            io_counters = proc.info['io']
-            total_bytes_sent = io_counters.bytes_sent
-            total_bytes_recv = io_counters.bytes_recv
-            break
-
-    return total_bytes_sent, total_bytes_recv
+    print(ssh_processes)
 
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")
