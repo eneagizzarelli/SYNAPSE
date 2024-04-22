@@ -7,12 +7,12 @@ from client_data import get_client_ip, get_client_traffic, increment_client_numb
 def main():
     client_ip = get_client_ip()
     increment_client_number_of_connections(client_ip)
-
-    print(get_client_traffic())
     
     terminal_prompt = load_terminal_prompt(client_ip)
     args = parse_terminal_argument(terminal_prompt, client_ip)
     terminal_messages = load_terminal_messages(args.terminal_personality, client_ip)
+
+    print(get_client_traffic())
 
     session_start_time = time.time()
 
