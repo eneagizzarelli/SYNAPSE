@@ -10,7 +10,7 @@ def load_terminal_prompt(client_ip):
     terminal_history = open(base_path + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
     if os.stat(base_path + client_ip + "_terminal_history.txt").st_size == 0:
-        with open(base_path + "terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
+        with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
@@ -28,7 +28,7 @@ def load_mysql_prompt(client_ip):
     mysql_history = open(base_path + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
     if os.stat(base_path + client_ip + "_mysql_history.txt").st_size == 0:
-        with open(base_path + "services_personality.yml", 'r', encoding="utf-8") as services_file:
+        with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
             mysql_identity = yaml.safe_load(services_file)
         mysql_identity = mysql_identity['services']
         mysql_identity = mysql_identity['mysql']
