@@ -56,8 +56,7 @@ def get_client_traffic():
     ssh_pid = None
 
     for conn in psutil.net_connections(kind='tcp'):
-        print(conn.status == psutil.CONN_ESTABLISHED)
-        print(conn.laddr.port == 22)
+        print(conn.pid)
         if conn.status == psutil.CONN_ESTABLISHED and conn.laddr.port == 22:
             ssh_pid = conn.pid
             break
