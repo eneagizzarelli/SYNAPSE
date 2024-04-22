@@ -44,11 +44,11 @@ def load_mysql_prompt():
     
     return mysql_prompt
 
-def parse_terminal_argument(terminal_prompt):
+def parse_terminal_argument(terminal_prompt, client_ip):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
-                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
+                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today} and for ip address user {client_ip}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
         
     args = parser.parse_args()
     
