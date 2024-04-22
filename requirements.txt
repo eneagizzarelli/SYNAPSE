@@ -3,4 +3,3 @@ python-dotenv
 pyyaml
 requests
 geoip2
-getmac
