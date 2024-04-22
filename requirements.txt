@@ -3,4 +3,4 @@ python-dotenv
 pyyaml
 requests
 geoip2
-dpkt
+pyshark

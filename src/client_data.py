@@ -1,8 +1,9 @@
 import os
-import subprocess
 import json
 import geoip2.database
-import dpkt
+
+import subprocess
+import pyshark
 
 base_path = "/home/user/SYNAPSE/"
 
@@ -89,53 +90,23 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
-def capture_traffic(user_ip, interface, sent_output_file, received_output_file):
-    # Construct the command to capture sent and received traffic
-    sent_cmd = [
-        "tcpdump", "-i", interface, "src", user_ip, "-w", sent_output_file
-    ]
-    received_cmd = [
-        "tcpdump", "-i", interface, "dst", user_ip, "-w", received_output_file
-    ]
+def capture_traffic(interface, output_file, user_ip):
+    # Execute tcpdump command to capture traffic
+    tcpdump_cmd = ["tcpdump", "-i", interface, "-w", output_file, "host", user_ip]
+    subprocess.run(tcpdump_cmd)
 
-    # Start the tcpdump processes to capture sent and received traffic
-    sent_process = subprocess.Popen(sent_cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
-    received_process = subprocess.Popen(received_cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+def parse_pcap(file_path, user_ip):
+    cap = pyshark.FileCapture(file_path)
+    sent_traffic = 0
+    received_traffic = 0
 
-    # Return the process objects for both sent and received traffic
-    return sent_process, received_process
+    for packet in cap:
+        try:
+            if 'TCP' in packet and packet['IP'].src == user_ip:
+                sent_traffic += int(packet['IP'].len)
+            elif 'TCP' in packet and packet['IP'].dst == user_ip:
+                received_traffic += int(packet['IP'].len)
+        except Exception as e:
+            print("Error parsing packet:", e)
 
-def stop_capture(sent_process, received_process):
-    # Terminate the tcpdump processes
-    sent_process.terminate()
-    received_process.terminate()
-    sent_process.wait()  # Wait for the processes to complete
-    received_process.wait()
-
-def read_pcap(file_path):
-    sent_packets = 0
-    sent_bytes = 0
-    received_packets = 0
-    received_bytes = 0
-
-    with open(file_path, 'rb') as file:
-        pcap = dpkt.pcap.Reader(file)
-
-        # Iterate through each packet in the pcap file
-        for timestamp, buf in pcap:
-            # Parse Ethernet frame
-            eth = dpkt.ethernet.Ethernet(buf)
-
-            # Extract IP packet (if Ethernet frame contains IP packet)
-            if isinstance(eth.data, dpkt.ip.IP):
-                ip = eth.data
-
-                # Check if the IP packet is sent or received
-                if eth.src == b'\x00\x00\x00\x00\x00\x00':  # Assuming broadcast or multicast is not considered
-                    received_packets += 1
-                    received_bytes += len(buf)
-                else:
-                    sent_packets += 1
-                    sent_bytes += len(buf)
-
-    return sent_packets, sent_bytes, received_packets, received_bytes
+    return sent_traffic, received_traffic
