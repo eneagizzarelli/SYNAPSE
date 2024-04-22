@@ -18,10 +18,10 @@ def initialize_client_data(client_ip):
     data = {
         "ip": client_ip,
         "number_of_connections": 0,
-        "session_durations": []
+        "session_durations_in_seconds": []
     }
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "a+") as client_data_file:
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
         json.dump(data, client_data_file)
         client_data_file.write("\n")
 
@@ -39,7 +39,7 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
         data = json.load(client_data_file)
         
-    data["session_durations"].append(session_duration_in_seconds)
+    data["session_durations_in_seconds"].append(session_duration_in_seconds)
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
         json.dump(data, client_data_file)
