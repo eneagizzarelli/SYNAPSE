@@ -1,23 +1,13 @@
-import os
-
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
+from user_info import get_ssh_client_ip
+
+client_ip = get_ssh_client_ip()
 
 terminal_prompt = load_terminal_prompt()
 
-def get_ssh_client_ip():
-    ssh_connection_info = os.environ.get("SSH_CONNECTION")
-    if ssh_connection_info:
-        return ssh_connection_info.split()
-
 def main():
-    client_ip = get_ssh_client_ip()
-    if client_ip:
-        print("SSH connection from:", client_ip)
-    else:
-        print("Not connected via SSH.")
-
-    args = parse_terminal_argument(terminal_prompt)
+    args = parse_terminal_argument(terminal_prompt, client_ip)
 
     terminal_messages = load_terminal_messages(args.terminal_personality)
 
