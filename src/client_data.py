@@ -39,24 +39,35 @@ def write_client_geolocation(client_ip):
 
     try:
         response = reader.city(client_ip)
-
-        print(response)
         
-        # Extract relevant information from the response
-        country = response.country.name
-        city = response.city.name
-        latitude = response.location.latitude
-        longitude = response.location.longitude
-        
-        # Construct geolocation data
         geolocation_data = {
-            "country": country,
-            "city": city,
-            "latitude": latitude,
-            "longitude": longitude
+            "country": {
+                "name": response.country.name,
+                "iso_code": response.country.iso_code
+            },
+            "region": response.subdivisions.most_specific.name,
+            "city": response.city.name,
+            "postal_code": response.postal.code,
+            "location": {
+                "latitude": response.location.latitude,
+                "longitude": response.location.longitude,
+                "time_zone": response.location.time_zone,
+                "accuracy_radius": response.location.accuracy_radius
+            },
+            "continent": {
+                "name": response.continent.name,
+                "code": response.continent.code
+            }
         }
         
-        return geolocation_data
+        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
+            data = json.load(client_data_file)
+            
+        data["geolocation"] = geolocation_data
+
+        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+            json.dump(data, client_data_file)
+            client_data_file.write("\n")
     except geoip2.errors.AddressNotFoundError:
         return None
     finally:
