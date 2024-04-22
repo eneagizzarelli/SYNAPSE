@@ -8,17 +8,21 @@ def get_client_ip():
     
     if ssh_connection_info:
         client_ip = ssh_connection_info.split()[0]
+        client_port = ssh_connection_info.split()[1]
+        server_port = ssh_connection_info.split()[3]
         
         if not os.path.exists(base_path + "logs/" + client_ip):
             os.makedirs(base_path + "logs/" + client_ip)
 
-            initialize_client_data(client_ip)
+            initialize_client_data(client_ip, client_port, server_port)
 
         return client_ip
 
-def initialize_client_data(client_ip):
+def initialize_client_data(client_ip, client_port, server_port):
     data = {
         "ip": client_ip,
+        "client_port": client_port,
+        "server_port": server_port,
         "number_of_connections": 0,
         "session_durations_in_seconds": []
     }
