@@ -9,7 +9,6 @@ def main():
     increment_client_number_of_connections(client_ip)
 
     sent_process, received_process = capture_traffic(client_ip, "eth0", "/home/user/SYNAPSE/sent_captured_traffic.pcap", "/home/user/SYNAPSE/received_captured_traffic.pcap")
-    capture_process = capture_traffic(client_ip, "eth0", "/home/user/SYNAPSE/captured_traffic.pcap")
     
     terminal_prompt = load_terminal_prompt(client_ip)
     args = parse_terminal_argument(terminal_prompt, client_ip)
