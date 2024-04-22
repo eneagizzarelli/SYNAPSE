@@ -4,15 +4,15 @@ from user_info import get_ssh_client_ip
 
 client_ip = get_ssh_client_ip()
 
-terminal_prompt = load_terminal_prompt()
+terminal_prompt = load_terminal_prompt(client_ip)
 
 def main():
     args = parse_terminal_argument(terminal_prompt, client_ip)
 
-    terminal_messages = load_terminal_messages(args.terminal_personality)
+    terminal_messages = load_terminal_messages(args.terminal_personality, client_ip)
 
     try:
-        terminal_simulation(terminal_messages)
+        terminal_simulation(terminal_messages, client_ip)
     except KeyboardInterrupt:
         print("logout")
 

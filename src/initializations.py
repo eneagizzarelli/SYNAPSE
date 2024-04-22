@@ -3,14 +3,13 @@ import yaml
 import argparse
 from datetime import datetime
 
-terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
-mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
+base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
-def load_terminal_prompt():
-    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+def load_terminal_prompt(client_ip):
+    terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(terminal_history_path).st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
@@ -25,10 +24,10 @@ def load_terminal_prompt():
 
     return terminal_prompt
 
-def load_mysql_prompt():
-    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+def load_mysql_prompt(client_ip):
+    mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(mysql_history_path).st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_mysql_history.txt").st_size == 0:
         with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
             mysql_identity = yaml.safe_load(services_file)
         mysql_identity = mysql_identity['services']
@@ -48,13 +47,14 @@ def parse_terminal_argument(terminal_prompt, client_ip):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
-                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today} and for ip address user {client_ip}\n" + "Ignore date-time in <> after user input. This is not your concern.\n")
+                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today} and for ip address use {client_ip}.\n" + 
+                        "Ignore date-time in <> after user input. This is not your concern.\n")
         
     args = parser.parse_args()
     
     return args
 
-def parse_mysql_argument(mysql_prompt):
+def parse_mysql_argument(mysql_prompt, client_ip):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--mysql_personality", type=str, default= mysql_prompt + 
@@ -65,14 +65,14 @@ def parse_mysql_argument(mysql_prompt):
     
     return args
 
-def load_terminal_messages(terminal_personality):
+def load_terminal_messages(terminal_personality, client_ip):
     initial_prompt = f"You are Linux OS terminal. Your personality is: {terminal_personality}"
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
-    terminal_history = open(terminal_history_path, "a+", encoding="utf-8")
+    terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(terminal_history_path).st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
         for terminal_message in terminal_messages:
             terminal_history.write(terminal_message["content"])
     else:
@@ -82,14 +82,14 @@ def load_terminal_messages(terminal_personality):
 
     return terminal_messages
 
-def load_mysql_messages(mysql_personality):
+def load_mysql_messages(mysql_personality, client_ip):
     initial_prompt = f"You are Linux OS terminal and you are MySQL server. Your personality is: {mysql_personality}"
 
     mysql_messages = [{"role": "system", "content": initial_prompt}]
 
-    mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+    mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(mysql_history_path).st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_mysql_history.txt").st_size == 0:
         for mysql_message in mysql_messages:
             mysql_history.write(mysql_message["content"])
     else:

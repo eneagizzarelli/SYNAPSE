@@ -5,13 +5,12 @@ import random
 
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
-terminal_history_path = "/home/user/SYNAPSE/logs/terminal_history.txt"
-mysql_history_path = "/home/user/SYNAPSE/logs/mysql_history.txt"
+base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
-def terminal_simulation(terminal_messages):
+def terminal_simulation(terminal_messages, client_ip):
     while True:
-        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
+        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         
@@ -23,7 +22,7 @@ def terminal_simulation(terminal_messages):
         
         terminal_history.close()
 
-        terminal_history = open(terminal_history_path, "a", encoding="utf-8")
+        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -53,7 +52,7 @@ def terminal_simulation(terminal_messages):
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
-                run_mysql_simulation()
+                run_mysql_simulation(client_ip)
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
@@ -70,7 +69,7 @@ def terminal_simulation(terminal_messages):
             elif "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
-                run_mysql_simulation()
+                run_mysql_simulation(client_ip)
                 print("Bye")
 
                 terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
@@ -80,21 +79,21 @@ def terminal_simulation(terminal_messages):
 
         terminal_history.close()
 
-def run_mysql_simulation():
-    mysql_prompt = load_mysql_prompt()
+def run_mysql_simulation(client_ip):
+    mysql_prompt = load_mysql_prompt(client_ip)
 
-    args = parse_mysql_argument(mysql_prompt)
+    args = parse_mysql_argument(mysql_prompt, client_ip)
 
-    mysql_messages = load_mysql_messages(args.mysql_personality)
+    mysql_messages = load_mysql_messages(args.mysql_personality, client_ip)
 
     try:
-        mysql_simulation(mysql_messages)
+        mysql_simulation(mysql_messages, client_ip)
     except KeyboardInterrupt:
         pass
 
-def mysql_simulation(mysql_messages):
+def mysql_simulation(mysql_messages, client_ip):
     while True:
-        mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
         mysql_message = generate_response(mysql_messages)
 
@@ -103,7 +102,7 @@ def mysql_simulation(mysql_messages):
 
         mysql_history.close()
 
-        mysql_history = open(mysql_history_path, "a+", encoding="utf-8")
+        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
         
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
         # check over user trying to exit
