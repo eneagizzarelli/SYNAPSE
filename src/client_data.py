@@ -1,7 +1,7 @@
 import os
-import subprocess
 import json
 import geoip2.database
+from getmac import get_mac_address
 
 base_path = "/home/user/SYNAPSE/"
 
@@ -37,16 +37,10 @@ def initialize_client_data(client_ip, client_port, server_port):
 
 def write_client_MAC(client_ip):
     try:
-        output = subprocess.check_output("ip addr show", shell=True).decode()
-
-        print(output)
-
-        for line in output.split('\n'):
-            if ('link/ether' in line and 'lo' not in line) or ('eth0' in line) or ('en0' in line):
-                mac_address = line.split(' ')[-1]
-                client_mac = mac_address.strip()
-    except subprocess.CalledProcessError as e:
-        print("Error executing command:", e)
+        client_mac = get_mac_address()
+    except Exception as e:
+        print("Error:", e)
+        return None
     
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
             data = json.load(client_data_file)
