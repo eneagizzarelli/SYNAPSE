@@ -52,13 +52,6 @@ def get_client_geolocation(client_ip):
     finally:
         reader.close()
 
-def get_client_traffic():
-    cmd = ["tcpdump", "-l", "-i", "eth0"]
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
-
-    for line in process.stdout:
-        print(line.strip())
-
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")
     
@@ -94,3 +87,27 @@ def write_client_session_duration_in_seconds(session_duration_in_seconds, client
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
+
+def capture_traffic(user_ip, interface, output_file):
+    cmd = [
+        "/bin/bash",
+        "-c",
+        f"tcpdump -i {interface} src {user_ip} -w {output_file}"
+    ]
+
+    return subprocess.Popen(cmd)
+
+def stop_capture(process):
+    process.terminate()
+    process.wait()
+
+def read_traffic_data(file_path):
+    if not os.path.exists(file_path):
+        print("Captured traffic file does not exist.")
+        return []
+
+    captured_traffic = []
+    with open(file_path, 'rb') as file:
+        captured_traffic = file.read()
+
+    return captured_traffic
