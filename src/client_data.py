@@ -5,6 +5,10 @@ from getmac import get_mac_address
 
 base_path = "/home/user/SYNAPSE/"
 
+print(os.getenv("SSH_CLIENT"))
+print(os.getenv("SSH_TTY"))
+print(os.getenv("SSH_CLIENT_VERSION"))
+
 def initialize_client_data(client_ip, client_mac, client_port, server_port, client_geolocation):
     data = {
         "ip": client_ip,
