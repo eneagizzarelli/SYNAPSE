@@ -26,7 +26,7 @@ def main():
     session_duration_in_seconds = round(session_duration_in_seconds, 2)
     write_client_session_duration_in_seconds(session_duration_in_seconds, client_ip)
 
-    sent, received = parse_pcap("/home/user/SYNAPSE/", client_ip)
+    sent, received = parse_pcap("/home/user/SYNAPSE/output.pcap", client_ip)
     print("Sent traffic:", sent, "bytes")
     print("Received traffic:", received, "bytes")
 
