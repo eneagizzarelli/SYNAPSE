@@ -10,7 +10,7 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages, client_ip):
     while True:
-        terminal_history = open(base_path + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
+        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         
@@ -22,7 +22,7 @@ def terminal_simulation(terminal_messages, client_ip):
         
         terminal_history.close()
 
-        terminal_history = open(base_path + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
+        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a", encoding="utf-8")
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -93,7 +93,7 @@ def run_mysql_simulation(client_ip):
 
 def mysql_simulation(mysql_messages, client_ip):
     while True:
-        mysql_history = open(base_path + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
         mysql_message = generate_response(mysql_messages)
 
@@ -102,7 +102,7 @@ def mysql_simulation(mysql_messages, client_ip):
 
         mysql_history.close()
 
-        mysql_history = open(base_path + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
         
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
         # check over user trying to exit

@@ -7,9 +7,9 @@ base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
 def load_terminal_prompt(client_ip):
-    terminal_history = open(base_path + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
+    terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(base_path + client_ip + "_terminal_history.txt").st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
         with open("/home/user/SYNAPSE/terminal_personality.yml", 'r', encoding="utf-8") as personality_file:
             terminal_identity = yaml.safe_load(personality_file)
         terminal_identity = terminal_identity['personality']
@@ -25,9 +25,9 @@ def load_terminal_prompt(client_ip):
     return terminal_prompt
 
 def load_mysql_prompt(client_ip):
-    mysql_history = open(base_path + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+    mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(base_path + client_ip + "_mysql_history.txt").st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_mysql_history.txt").st_size == 0:
         with open("/home/user/SYNAPSE/services_personality.yml", 'r', encoding="utf-8") as services_file:
             mysql_identity = yaml.safe_load(services_file)
         mysql_identity = mysql_identity['services']
@@ -70,9 +70,9 @@ def load_terminal_messages(terminal_personality, client_ip):
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
     
-    terminal_history = open(base_path + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
+    terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(base_path + client_ip + "_terminal_history.txt").st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
         for terminal_message in terminal_messages:
             terminal_history.write(terminal_message["content"])
     else:
@@ -87,9 +87,9 @@ def load_mysql_messages(mysql_personality, client_ip):
 
     mysql_messages = [{"role": "system", "content": initial_prompt}]
 
-    mysql_history = open(base_path + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+    mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
-    if os.stat(base_path + client_ip + "_mysql_history.txt").st_size == 0:
+    if os.stat(base_path + client_ip + "/" + client_ip + "_mysql_history.txt").st_size == 0:
         for mysql_message in mysql_messages:
             mysql_history.write(mysql_message["content"])
     else:
