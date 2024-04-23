@@ -58,7 +58,7 @@ def parse_mysql_argument(mysql_prompt, client_ip):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--mysql_personality", type=str, default= mysql_prompt + 
-                        f"\nBased on these examples make something of your own (use different connection id and server version, the rest MUST remain unchanged) to be a starting message. Always start the communication in this way and make sure your output ends with 'mysql >'.\n" + 
+                        f"\nBased on these examples make something of your own (use different connection id and server version, the rest MUST remain unchanged) to be a starting message. Do not use trivial ids like '12345'. You must generate a real-case one. Always start the communication in this way and make sure your output ends with 'mysql >'.\n" + 
                         "Ignore date-time in <> after user input. This is not your concern.\n")
     
     args = parser.parse_args()
