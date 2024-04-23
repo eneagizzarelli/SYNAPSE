@@ -14,6 +14,8 @@ def generate_tab_completions(text):
     return completions
 
 def completer(text, state):
+    print(text)
+    print(state)
     completions = generate_tab_completions(text)
     matches = [option for option in completions if option.startswith(text)]
     if state < len(matches):
