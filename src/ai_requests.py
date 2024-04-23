@@ -16,7 +16,7 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
-    messages = [{"role": 'system', "contet": "Emulate the tab autocompletion of a Linux terminal. Start from the text that follows. "}, {"role": 'user', "content": text}]
+    messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. Start from the text that follows. "}, {"role": 'user', "content": text}]
 
     completions = generate_tab_completions(messages)
 
