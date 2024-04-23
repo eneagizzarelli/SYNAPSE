@@ -8,7 +8,9 @@ openai.api_key = config["OPENAI_API_KEY"]
 model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(text):
-    response = openai.chat.completions.create(model = model, messages = [text], temperature = 0.0, max_tokens = 500, n = 5)
+    messages = ["Hello!", "How are you?", "I'm fine, thank you!", text]
+    print(messages)
+    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 500, n = 5)
     completions = [choice.message.strip() for choice in response.choices]
 
     return completions
@@ -28,7 +30,7 @@ readline.parse_and_bind('tab: complete')
 
 def generate_response(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 800)
-    terminal_msg = response.choices[0].message.content
-    terminal_message = {"role": 'assistant', "content": terminal_msg}
+    msg = response.choices[0].message.content
+    message = {"role": 'assistant', "content": msg}
     
-    return terminal_message
+    return message
