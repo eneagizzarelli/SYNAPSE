@@ -1,4 +1,4 @@
-from ai_requests import generate_response
+from ai_requests import *
 from time import sleep
 from datetime import datetime
 import random
