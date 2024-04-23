@@ -12,6 +12,7 @@ def terminal_simulation(terminal_messages, client_ip):
     while True:
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
+        print(terminal_messages)
         terminal_message = generate_response(terminal_messages)
         
         if "$cd" in terminal_message["content"] or "$ cd" in terminal_message["content"]:
