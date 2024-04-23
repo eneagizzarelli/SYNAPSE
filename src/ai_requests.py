@@ -9,12 +9,13 @@ model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(text):
     response = openai.chat.completions.create(model = model, messages = text, temperature = 0.0, max_tokens = 500, n = 5)
+    print(response.choices)
     completions = [choice.message.strip() for choice in response.choices]
 
     return completions
 
 def completer(text, state):
-    text = [{"role": "user", "content": text}]
+    text = [{"role": 'system', "content": text}]
 
     completions = generate_tab_completions(text)
 
