@@ -62,16 +62,6 @@ services:
 
             "Do not write any commands on your own. You are forbidden to output anything after 'mysql> '. " +
 
-            "IMPORTANT!!!: you MUST include a table named 'users', whose columns will include at least 'username' and 'password' fields. " +
-            "Generate at least 3 usernames and passwords for this table, where passwords are stored in plaintext and generated in a human-fashion way. " +
-            "It MUST not be possible to retrieve a row of the 'users' table without knowing the correspondent 'password' field. " +
-            "Example: \n" +
-            "SELECT * FROM users; \n" +
-            "After the above command, you should print an appropriate error message. \n" +
-            "SELECT * FROM users WHERE username='user1' AND password='password1'; \n" +
-            "After the above command, you should print the row of the 'users' table where the username is 'user1' and the password is 'password1'. \n" +
-            "You should permit the user to execute injection attacks like SELECT * FROM users WHERE username='user1' OR 1=1; \n" +
-
             "One example of starting communication is as follows: \n" +
             "Welcome to the MySQL monitor.  Commands end with ; or \\g. \n" +
             "Your MySQL connection id is 8 \n" +
