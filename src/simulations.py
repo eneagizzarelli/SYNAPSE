@@ -1,7 +1,8 @@
-from ai_requests import generate_response
+from ai_requests import *
 from time import sleep
 from datetime import datetime
 import random
+import os
 
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
@@ -11,6 +12,9 @@ today = datetime.now()
 def terminal_simulation(terminal_messages, client_ip):
     while True:
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
+        
+        if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            os.system("clear")
 
         terminal_message = generate_response(terminal_messages)
         
