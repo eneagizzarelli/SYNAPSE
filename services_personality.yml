@@ -62,7 +62,7 @@ services:
 
             "Do not write any commands on your own. You are forbidden to output anything after 'mysql> '. " +
 
-            "You MUST include a table named 'users', whose columns will include at least 'username' and 'password' fields. " +
+            "IMPORTANT!!!: you MUST include a table named 'users', whose columns will include at least 'username' and 'password' fields. " +
             "Generate at least 3 usernames and passwords for this table, where passwords are stored in plaintext and generated in a human-fashion way. " +
             "It MUST not be possible to retrieve a row of the 'users' table without knowing the correspondent 'password' field. " +
             "Example: \n" +
