@@ -4,12 +4,13 @@ from datetime import datetime
 import random
 import os
 
+from config.config import client_ip
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
-def terminal_simulation(terminal_messages, client_ip):
+def terminal_simulation(terminal_messages):
     while True:
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
@@ -66,21 +67,21 @@ def terminal_simulation(terminal_messages, client_ip):
 
         terminal_history.close()
 
-def run_mysql_simulation(client_ip):
-    mysql_prompt = load_mysql_prompt(client_ip)
+def run_mysql_simulation():
+    mysql_prompt = load_mysql_prompt()
 
-    args = parse_mysql_argument(mysql_prompt, client_ip)
+    args = parse_mysql_argument(mysql_prompt)
 
-    mysql_messages = load_mysql_messages(args.mysql_personality, client_ip)
+    mysql_messages = load_mysql_messages(args.mysql_personality)
 
     try:
-        mysql_simulation(mysql_messages, client_ip)
+        mysql_simulation(mysql_messages)
     except KeyboardInterrupt:
         pass
     except EOFError:
         pass
 
-def mysql_simulation(mysql_messages, client_ip):
+def mysql_simulation(mysql_messages):
     while True:
         if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
             break
