@@ -18,14 +18,14 @@ def completer(text, state):
         return None
     
     messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                 "Generate a single word to complete the already started one. " + 
+                 "Generate many words to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " +
                  "Do not start in any case a conversation with the user. A terminal would not do so." +
                  "Start from the text that follows. "}, {"role": 'user', "content": text}]
 
     completions = generate_tab_completions(messages)
 
-    matches = [option for option in completions if option.startswith(text)]
+    matches = [option.split("\t") for option in completions if option.startswith(text)]
 
     print(matches)
     
