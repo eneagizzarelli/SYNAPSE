@@ -8,15 +8,13 @@ openai.api_key = config["OPENAI_API_KEY"]
 model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.1, max_tokens = 5)
+    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 5)
     completions = response.choices[0].message.content
 
     return completions
 
 def completer(text, state):
     from SYNAPSE import client_ip
-
-    print(client_ip)
 
     if state == 0:
         if text == "":
