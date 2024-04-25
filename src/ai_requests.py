@@ -12,7 +12,7 @@ model = "gpt-3.5-turbo-0125"
 base_path = "/home/user/SYNAPSE/logs/"
 
 def generate_tab_completions(messages):
-    print(messages["content"])
+    print(messages)
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 5)
     completions = response.choices[0].message.content
 
