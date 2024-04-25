@@ -36,7 +36,6 @@ def terminal_simulation(terminal_messages):
         
         terminal_history.close()
         
-        print(terminal_messages[len(terminal_messages) - 3]["content"])
         print(terminal_messages[len(terminal_messages) - 2]["content"])
         print(terminal_messages[len(terminal_messages) - 1]["content"])
         if "ls" in terminal_messages[len(terminal_messages) - 2]["content"]:
