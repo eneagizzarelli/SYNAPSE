@@ -25,7 +25,7 @@ def completer(text, state):
 
     completions = generate_tab_completions(messages)
 
-    matches = [option.split("\t") for option in completions if option.startswith(text)]
+    matches = [option.split(" ") for option in completions if option.startswith(text)]
 
     print(matches)
     
