@@ -9,9 +9,8 @@ model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.5, max_tokens = 10, n = 10)
+    print(response.choices)
     completions = [choice.message.content for choice in response.choices]
-
-    print(completions)
 
     return completions
 
