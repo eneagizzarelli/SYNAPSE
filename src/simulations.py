@@ -36,10 +36,12 @@ def terminal_simulation(terminal_messages):
         
         terminal_history.close()
 
-        if "ls" in terminal_messages[len(terminal_messages) - 2]["content"].splitlines()[-1]:
+        print(terminal_messages[len(terminal_messages) - 2]["content"])
+        if "ls" in terminal_messages[len(terminal_messages) - 2]["content"]:
             tab_completion_history = open(base_path + "tab_completion_history.txt", "a+", encoding="utf-8")
-            tab_completion_history.write(terminal_messages[len(terminal_messages) - 3]["content"].splitlines()[-1])
-            tab_completion_history.write(terminal_messages[len(terminal_messages) - 2]["content"].splitlines()[-1])
+            tab_completion_history.write(terminal_messages[len(terminal_messages) - 3]["content"])
+            tab_completion_history.write(terminal_messages[len(terminal_messages) - 2]["content"])
+            tab_completion_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
             tab_completion_history.close()
 
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
