@@ -1,6 +1,8 @@
 import time
+import sys
+sys.path.append("..")
 
-from ..config.config import client_ip
+from config import client_ip
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
 from client_data import initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
