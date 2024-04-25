@@ -15,7 +15,7 @@ def completer(text, state):
     if text == "":
         return None
     
-    prompt = "Emulate the tab autocompletion of a Linux terminal. Generate many words separated by '\n' to complete the already started one. If you don't know what to answer, do not print anything. Do not start in any case a conversation with the user. A terminal would not do so. Start from the following text and complete it: " + text
+    prompt = "Emulate the tab autocompletion of a Linux terminal. Generate many DIFFERENT words separated by '\n' to complete the already started one. If you don't know what to answer, do not print anything. Do not start in any case a conversation with the user. A terminal would not do so. Start from the following text and complete it: " + text
 
     completions = generate_tab_completions(prompt)
 
