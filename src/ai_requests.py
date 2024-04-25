@@ -14,22 +14,23 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
-    if text == "":
-        return None
+    if state == 0:
+        if text == "":
+            return None
 
-    messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                "Generate words to complete the already started one. " + 
-                "If you don't know what to answer, do not print anything. " + 
-                "Do not start in any case a conversation with the user. A terminal would not do so. " + 
-                "Start from the following text and complete it. \n"}]
-    messages.append({"role": 'user', "content": text})
+        messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
+                    "Generate words to complete the already started one. " + 
+                    "If you don't know what to answer, do not print anything. " + 
+                    "Do not start in any case a conversation with the user. A terminal would not do so. " + 
+                    "Start from the following text and complete it. \n"}]
+        messages.append({"role": 'user', "content": text})
 
-    completions = generate_tab_completions(messages)
-    
-    if len(completions.split(" ")) > 1:
-        print("\n" + completions)
-    else:
-        return completions
+        completions = generate_tab_completions(messages)
+        
+        if len(completions.split(" ")) > 1:
+            print("\n" + completions)
+        else:
+            return completions
 
     
 readline.set_completer(completer)
