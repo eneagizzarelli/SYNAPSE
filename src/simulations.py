@@ -11,9 +11,8 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages, client_ip):
     while True:
-        print(terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1])
         # check over user trying to exit
-        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"]:
+        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             raise KeyboardInterrupt
 
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
