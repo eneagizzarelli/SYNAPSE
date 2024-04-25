@@ -21,7 +21,7 @@ def terminal_simulation(terminal_messages):
             print("\nBye")
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
-        if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
+        if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
 
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")

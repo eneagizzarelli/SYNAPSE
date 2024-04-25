@@ -2,8 +2,6 @@ import openai
 from dotenv import dotenv_values
 import readline
 
-from client_data import client_ip
-
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
 
@@ -23,7 +21,7 @@ def completer(text, state):
         messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
                     "Generate words separated by " " to complete the already started one. " + 
                     "If you don't know what to answer, do not print anything. " + 
-                    "Do not start in any case a conversation with the user. A terminal would not do so. " + 
+                    "Do not start in any case a conversation with the user. A terminal would not do so. \n" + 
                     "Start from the following text and complete it. \n"}]
         messages.append({"role": 'user', "content": text})
 
