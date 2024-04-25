@@ -22,7 +22,7 @@ def complete(text, state):
             return None
     
         messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                 "Generate many DIFFERENT words separated by ' ' to complete the already started one. " + 
+                 "Generate words to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " + 
                  "Do not start in any case a conversation with the user. A terminal would not do so. " + 
                  "Start from the following text and complete it. \n"}]
