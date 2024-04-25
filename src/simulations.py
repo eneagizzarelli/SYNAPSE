@@ -4,7 +4,7 @@ from datetime import datetime
 import random
 import os
 
-from config.config import client_ip
+from config import client_ip
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
 base_path = "/home/user/SYNAPSE/logs/"

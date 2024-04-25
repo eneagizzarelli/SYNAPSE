@@ -3,7 +3,7 @@ import yaml
 import argparse
 from datetime import datetime
 
-from config.config import client_ip
+from config import client_ip
 
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
