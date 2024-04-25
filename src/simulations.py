@@ -15,7 +15,7 @@ def terminal_simulation(terminal_messages, client_ip):
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             raise KeyboardInterrupt
 
-        if "mysql" in user_input:
+        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             run_mysql_simulation(client_ip)
             print("Bye")
 
