@@ -11,7 +11,7 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages, client_ip):
     while True:
-        print(terminal_messages[len(terminal_messages) - 1]["content"][-1])
+        print(terminal_messages[len(terminal_messages) - 1]["content"].rsplit('\n', 1)[-1])
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"]:
             raise KeyboardInterrupt
