@@ -25,8 +25,10 @@ def completer(text, state):
 
     matches = [option for option in completions if option.startswith(text)]
 
+    print(matches[state])
+    print(len(matches))
+    
     if state < len(matches):
-        print(matches[state])
         return matches[state]
     else:
         return None
