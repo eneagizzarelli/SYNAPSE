@@ -77,10 +77,12 @@ def run_mysql_simulation(client_ip):
         mysql_simulation(mysql_messages, client_ip)
     except KeyboardInterrupt:
         pass
+    except EOFError:
+        pass
 
 def mysql_simulation(mysql_messages, client_ip):
     while True:
-        if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
+        if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
             break
 
         mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
