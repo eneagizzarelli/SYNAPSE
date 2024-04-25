@@ -15,10 +15,14 @@ def terminal_simulation(terminal_messages, client_ip):
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             raise KeyboardInterrupt
 
-        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
-        
+        if "mysql" in user_input:
+            run_mysql_simulation(client_ip)
+            print("Bye")
+
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
             os.system("clear")
+
+        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         
@@ -52,28 +56,12 @@ def terminal_simulation(terminal_messages, client_ip):
                 print(lines[i])
             
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            if "mysql" in user_input:
-                terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
-
-                run_mysql_simulation(client_ip)
-                print("Bye")
-
-                terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
-            else:
-                terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            if "mysql" in user_input:
-                terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
-
-                run_mysql_simulation(client_ip)
-                print("Bye")
-
-                terminal_messages.append({"role": "user", "content": " " + "cd ." + f"\t<{datetime.now()}>\n"})
-            else:
-                terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-                terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+            terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
 
         terminal_history.close()
 
