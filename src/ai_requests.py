@@ -33,13 +33,7 @@ def completer(text, state):
         completions = generate_tab_completions(messages)
         matches = [option for option in completions if option.startswith(text)]
 
-    if state < len(matches):
-        current_state = state
-        print(current_state)
-        return matches[state]
-    else:
-        current_state = 0
-        return None
+    return matches[state]
     
 readline.set_completer(completer)
 readline.parse_and_bind('tab: complete')
