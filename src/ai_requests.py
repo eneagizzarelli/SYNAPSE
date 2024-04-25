@@ -21,6 +21,7 @@ def completer(text, state):
 
     matches = [option for option in completions if option.startswith(text) and option != '']
 
+    print(state)
     print(matches)
     print(matches[state])
     print(len(matches))
