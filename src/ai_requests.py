@@ -30,6 +30,7 @@ def completer(text, state):
     matches = [option for option in completions if option.startswith(text)]
     
     print(matches)
+    print(matches[state])
 
     if state < len(matches):
         return matches[state]
