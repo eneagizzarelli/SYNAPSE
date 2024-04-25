@@ -28,6 +28,8 @@ def completer(text, state):
         completions = generate_tab_completions(messages)
         matches = [option for option in completions if option.startswith(text)]
 
+        print(matches)
+
     print(state)
 
     if state < len(matches):
