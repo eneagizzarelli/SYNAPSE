@@ -31,7 +31,7 @@ def terminal_simulation(terminal_messages, client_ip):
             raise KeyboardInterrupt
         
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
-            print('\x1b[2J')
+            print("\n" * 100)
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
