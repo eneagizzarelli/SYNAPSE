@@ -2,8 +2,6 @@ import os
 import json
 import geoip2.database
 
-from SYNAPSE import client_ip
-
 base_path = "/home/user/SYNAPSE/"
 
 def initialize_client_data(client_ip, client_port, server_port, client_geolocation):
@@ -69,11 +67,7 @@ def get_client_ip():
 
         return client_ip
 
-def increment_client_number_of_connections():
-    global client_ip
-
-    print(client_ip)
-
+def increment_client_number_of_connections(client_ip):
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
         data = json.load(client_data_file)
         

@@ -3,10 +3,16 @@ import yaml
 import argparse
 from datetime import datetime
 
+from SYNAPSE import client_ip
+
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
-def load_terminal_prompt(client_ip):
+def load_terminal_prompt():
+    global client_ip
+
+    print(client_ip)
+
     terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
     if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
