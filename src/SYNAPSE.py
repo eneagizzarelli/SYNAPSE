@@ -18,7 +18,9 @@ def main():
     try:
         terminal_simulation(terminal_messages, client_ip)
     except KeyboardInterrupt:
-        print("logout")
+        print("\nlogout")
+    except EOFError:
+        print("\nlogout")
 
     session_end_time = time.time()
     session_duration_in_seconds = session_end_time - session_start_time
