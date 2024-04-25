@@ -2,8 +2,6 @@ import openai
 from dotenv import dotenv_values
 import readline
 
-from SYNAPSE import client_ip
-
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
 
@@ -16,8 +14,8 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
-    global client_ip
-    
+    from SYNAPSE import client_ip
+
     print(client_ip)
 
     if state == 0:
