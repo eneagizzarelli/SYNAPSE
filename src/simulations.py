@@ -17,7 +17,7 @@ def terminal_simulation(terminal_messages):
             raise KeyboardInterrupt
 
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            run_mysql_simulation(client_ip)
+            run_mysql_simulation()
             print("\nBye")
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
