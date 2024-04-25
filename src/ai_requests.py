@@ -14,13 +14,13 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
-    messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. Start from the text that follows. "}, {"role": 'user', "content": text}]
+    messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
+                 "Generate just a single word to complete the already started one. " + 
+                 "Start from the text that follows. "}, {"role": 'user', "content": text}]
 
     completions = generate_tab_completions(messages)
 
     matches = [option for option in completions if option.startswith(text)]
-
-    print(matches)
     
     if state < len(matches):
         return matches[state]
