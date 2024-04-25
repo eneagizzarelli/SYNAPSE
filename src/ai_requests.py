@@ -7,7 +7,7 @@ openai.api_key = config["OPENAI_API_KEY"]
 
 def generate_tab_completions(prompt):
     response = openai.completions.create(model = "gpt-3.5-turbo-instruct", prompt = prompt, temperature = 0.1, max_tokens = 50)
-    completions = response.choices[0].text.split("\n").
+    completions = response.choices[0].text.split("\n")
 
     return completions
 
