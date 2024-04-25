@@ -18,7 +18,7 @@ def terminal_simulation(terminal_messages, client_ip):
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             run_mysql_simulation(client_ip)
             print("Bye")
-            terminal_messages.append({"role": "user", "content": "cd ." + user_input + f"\t<{datetime.now()}>\n"})
+            terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
             os.system("clear")
