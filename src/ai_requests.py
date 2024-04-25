@@ -28,7 +28,7 @@ def completer(text, state):
 
     print(completions)
 
-    matches = [option for option in completions if option.startswith(text)]
+    matches = [option for option in completions[0] if option.startswith(text)]
 
     print(matches)
 
