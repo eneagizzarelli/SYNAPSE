@@ -14,6 +14,9 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
+    if text == "":
+        return None
+    
     messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
                  "Generate just a single word to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " +
