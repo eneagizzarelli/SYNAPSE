@@ -35,12 +35,9 @@ def terminal_simulation(terminal_messages):
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
         
         terminal_history.close()
-        
-        print(terminal_messages[len(terminal_messages) - 2]["content"])
-        print(terminal_messages[len(terminal_messages) - 1]["content"])
+    
         if "ls" in terminal_messages[len(terminal_messages) - 2]["content"]:
             tab_completion_history = open(base_path + "tab_completion_history.txt", "a+", encoding="utf-8")
-            tab_completion_history.write(terminal_messages[len(terminal_messages) - 3]["content"])
             tab_completion_history.write(terminal_messages[len(terminal_messages) - 2]["content"])
             tab_completion_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
             tab_completion_history.close()
