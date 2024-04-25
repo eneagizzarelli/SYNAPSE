@@ -11,6 +11,10 @@ today = datetime.now()
 
 def terminal_simulation(terminal_messages, client_ip):
     while True:
+        # check over user trying to exit
+        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            raise KeyboardInterrupt
+
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
         
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -48,12 +52,7 @@ def terminal_simulation(terminal_messages, client_ip):
                 print(lines[i])
             
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                terminal_history.write(" " + "exit" + f"\t<{datetime.now()}>\n")
-                terminal_history.close()
-                raise KeyboardInterrupt
-            elif "mysql" in user_input:
+            if "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
                 run_mysql_simulation(client_ip)
@@ -65,12 +64,7 @@ def terminal_simulation(terminal_messages, client_ip):
                 terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
-            # check over user trying to exit
-            if "exit" in user_input:
-                terminal_history.write(" " + "exit" + f"\t<{datetime.now()}>\n")
-                terminal_history.close()
-                raise KeyboardInterrupt
-            elif "mysql" in user_input:
+            if "mysql" in user_input:
                 terminal_history.write(" " + "mysql" + f"\t<{datetime.now()}>\n")
 
                 run_mysql_simulation(client_ip)

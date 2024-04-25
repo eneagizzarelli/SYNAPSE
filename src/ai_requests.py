@@ -16,8 +16,6 @@ def generate_tab_completions(messages):
 def completer(text, state):
     from SYNAPSE import client_ip
 
-    print(client_ip)
-
     if state == 0:
         if text == "":
             return None
