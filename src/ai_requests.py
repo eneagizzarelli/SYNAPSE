@@ -21,7 +21,7 @@ def completer(text, state):
     + "Generate many words separated by '\n' to complete the already started one. " 
     + "If you don't know what to answer, do not print anything. " 
     + "Do not start in any case a conversation with the user. A terminal would not do so." 
-    + "Start from the text that follows. \n" + text
+    + "Start from the following text: {text} and complete it. "
 
     completions = generate_tab_completions(prompt)
 
