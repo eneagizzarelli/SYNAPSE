@@ -8,8 +8,7 @@ openai.api_key = config["OPENAI_API_KEY"]
 model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 10, n=10)
-    print(response.choices)
+    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 10)
     completions = [choice.message.content for choice in response.choices]
 
     return completions
@@ -27,6 +26,8 @@ def completer(text, state):
     completions = generate_tab_completions(messages)
 
     matches = [option for option in completions if option.startswith(text)]
+
+    print(matches)
     
     if state < len(matches):
         return matches[state]
