@@ -9,26 +9,24 @@ model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.1, max_tokens = 50)
-    completions = [choice.message.content.split(" ") for choice in response.choices]
+    completions = response.choices[0].message.content.split(" ")
 
     return completions
 
 def completer(text, state):
-    if text == "":
-        return None
+    if state == 0:
+        if text == "":
+            return None
     
-    messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
+        messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
                  "Generate many DIFFERENT words separated by ' ' to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " + 
                  "Do not start in any case a conversation with the user. A terminal would not do so. " + 
                  "Start from the following text and complete it. \n"}]
-    messages.append({"role": 'user', "content": text})
+        messages.append({"role": 'user', "content": text})
 
-    completions = generate_tab_completions(messages)
-
-    print(completions)
-
-    matches = [option for option in completions[0] if option.startswith(text)]
+        completions = generate_tab_completions(messages)
+        matches = [option for option in completions if option.startswith(text)]
 
     print(matches)
 
