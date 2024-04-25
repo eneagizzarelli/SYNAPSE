@@ -4,7 +4,7 @@ import readline
 import sys
 sys.path.append("..")
 
-from config import client_ip
+from ..config import client_ip
 
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
