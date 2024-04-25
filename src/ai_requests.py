@@ -5,10 +5,8 @@ import readline
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
 
-model = "gpt-3.5-turbo-0125"
-
 def generate_tab_completions(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.1, max_tokens = 50)
+    response = openai.chat.completions.create(model = "gpt-3.5-turbo-instruct", messages = messages, temperature = 0.1, max_tokens = 50)
     completions = response.choices[0].message.content.split("\n")
 
     return completions
@@ -25,12 +23,7 @@ def completer(text, state):
 
     completions = generate_tab_completions(messages)
 
-    print(completions)
-
     matches = [option for option in completions if option.startswith(text)]
-    
-    print(matches)
-    print(matches[state])
 
     if state < len(matches):
         return matches[state]
@@ -41,7 +34,7 @@ readline.set_completer(completer)
 readline.parse_and_bind('tab: complete')
 
 def generate_response(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 800)
+    response = openai.chat.completions.create(model = "gpt-3.5-turbo-0125", messages = messages, temperature = 0.0, max_tokens = 800)
     msg = response.choices[0].message.content
     message = {"role": 'assistant', "content": msg}
     
