@@ -42,6 +42,7 @@ def terminal_simulation(terminal_messages):
             tab_completion_history.write(terminal_messages[len(terminal_messages) - 3]["content"].splitlines()[-1])
             tab_completion_history.write(terminal_messages[len(terminal_messages) - 2]["content"])
             tab_completion_history.write(terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[0])
+            tab_completion_history.write("\n\n")
 
             tab_completion_history.close()
 
