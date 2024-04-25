@@ -3,10 +3,12 @@ import yaml
 import argparse
 from datetime import datetime
 
+from client_data import client_ip
+
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
-def load_terminal_prompt(client_ip):
+def load_terminal_prompt():
     terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
 
     if os.stat(base_path + client_ip + "/" + client_ip + "_terminal_history.txt").st_size == 0:
@@ -24,7 +26,7 @@ def load_terminal_prompt(client_ip):
 
     return terminal_prompt
 
-def load_mysql_prompt(client_ip):
+def load_mysql_prompt():
     mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
     if os.stat(base_path + client_ip + "/" + client_ip + "_mysql_history.txt").st_size == 0:
@@ -43,7 +45,7 @@ def load_mysql_prompt(client_ip):
     
     return mysql_prompt
 
-def parse_terminal_argument(terminal_prompt, client_ip):
+def parse_terminal_argument(terminal_prompt):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
@@ -54,7 +56,7 @@ def parse_terminal_argument(terminal_prompt, client_ip):
     
     return args
 
-def parse_mysql_argument(mysql_prompt, client_ip):
+def parse_mysql_argument(mysql_prompt):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--mysql_personality", type=str, default= mysql_prompt + 
@@ -65,7 +67,7 @@ def parse_mysql_argument(mysql_prompt, client_ip):
     
     return args
 
-def load_terminal_messages(terminal_personality, client_ip):
+def load_terminal_messages(terminal_personality):
     initial_prompt = f"You are Linux OS terminal. Your personality is: {terminal_personality}"
     
     terminal_messages = [{"role": "system", "content": initial_prompt}]
@@ -82,7 +84,7 @@ def load_terminal_messages(terminal_personality, client_ip):
 
     return terminal_messages
 
-def load_mysql_messages(mysql_personality, client_ip):
+def load_mysql_messages(mysql_personality):
     initial_prompt = f"You are Linux OS terminal and you are MySQL server. Your personality is: {mysql_personality}"
 
     mysql_messages = [{"role": "system", "content": initial_prompt}]
