@@ -79,6 +79,9 @@ def run_mysql_simulation(client_ip):
 
 def mysql_simulation(mysql_messages, client_ip):
     while True:
+        if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
+            break
+
         mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
 
         mysql_message = generate_response(mysql_messages)
@@ -91,13 +94,7 @@ def mysql_simulation(mysql_messages, client_ip):
         mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
         
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
-        # check over user trying to exit
-        if "exit" in user_input or "quit" in user_input:
-            mysql_history.write(" " + "exit" + f"\t<{datetime.now()}>\n")
-            mysql_history.close()
-            break
-        else:
-            mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
-            mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+        mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
+        mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
         
         mysql_history.close()
