@@ -18,7 +18,7 @@ def completer(text, state):
         return None
     
     messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                 "Generate many different words separated by '\n' to complete the already started one. " + 
+                 "Generate many words (each one different from the next one) always separated by '\n' to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " +
                  "Do not start in any case a conversation with the user. A terminal would not do so." +
                  "Start from the text that follows. "}, {"role": 'user', "content": text}]
