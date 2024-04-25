@@ -29,7 +29,7 @@ def completer(text, state):
     matches = [option for option in completions if option.startswith(text)]
 
     if state < len(matches):
-        print("ciao")
+        print(matches[state])
         return matches[state]
     else:
         return None
