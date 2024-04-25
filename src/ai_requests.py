@@ -12,6 +12,7 @@ model = "gpt-3.5-turbo-0125"
 base_path = "/home/user/SYNAPSE/logs/"
 
 def generate_tab_completions(messages):
+    print(messages["content"])
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 5)
     completions = response.choices[0].message.content
 
@@ -30,7 +31,7 @@ def completer(text, state):
                     "Generate words separated by " " to complete the already started one. " + 
                     "If you don't know what to answer, do not print anything. " + 
                     "Do not start in any case a conversation with the user. A terminal would not do so. \n" + 
-                    "To generate completions, consider also the following text: \n" + tab_completion_history_content + "\n" +
+                    "To generate completions, consider also the following results of ls commands: \n" + tab_completion_history_content + "\n" +
                     "Start from the following text and complete it. \n"}]
         messages.append({"role": 'user', "content": text})
 
