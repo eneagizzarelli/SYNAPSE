@@ -9,8 +9,6 @@ model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 10)
-
-    print(response.choices)
     completions = response.choices[0].message.content.split("\n")
 
     return completions
@@ -29,7 +27,8 @@ def completer(text, state):
 
     matches = [option for option in completions if option.startswith(text)]
 
-    print(matches)
+    print(state)
+    print(matches[0])
     
     if state < len(matches):
         return matches[state]
