@@ -7,6 +7,8 @@ openai.api_key = config["OPENAI_API_KEY"]
 
 model = "gpt-3.5-turbo-0125"
 
+current_state = 0
+
 def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.1, max_tokens = 20)
     completions = response.choices[0].message.content.split(" ")
@@ -14,8 +16,11 @@ def generate_tab_completions(messages):
     return completions
 
 def completer(text, state):
+    global current_state
+    
     if state == 0:
         if text == "":
+            current_state = 0
             return None
     
         messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
@@ -28,13 +33,12 @@ def completer(text, state):
         completions = generate_tab_completions(messages)
         matches = [option for option in completions if option.startswith(text)]
 
-        print(matches)
-
-    print(state)
-
     if state < len(matches):
+        current_state = state
+        print(current_state)
         return matches[state]
     else:
+        current_state = 0
         return None
     
 readline.set_completer(completer)
