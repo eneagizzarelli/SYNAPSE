@@ -11,7 +11,7 @@ def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 10)
 
     print(response.choices)
-    completions = response.choices[0].message.content.split(" ")
+    completions = response.choices[0].message.content.split("\n")
 
     return completions
 
@@ -20,7 +20,7 @@ def completer(text, state):
         return None
     
     messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                 "Generate many words to complete the already started one. " + 
+                 "Generate many words separated by '\n' to complete the already started one. " + 
                  "If you don't know what to answer, do not print anything. " +
                  "Do not start in any case a conversation with the user. A terminal would not do so." +
                  "Start from the text that follows. "}, {"role": 'user', "content": text}]
