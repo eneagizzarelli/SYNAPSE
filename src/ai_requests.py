@@ -11,7 +11,7 @@ def generate_tab_completions(messages):
     response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 10)
     completions = [choice.message.content for choice in response.choices]
 
-    print(completions)
+    print("COMPLETIONS: " + completions)
 
     return completions
 
