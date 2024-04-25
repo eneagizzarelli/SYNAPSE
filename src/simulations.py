@@ -2,6 +2,7 @@ from ai_requests import *
 from time import sleep
 from datetime import datetime
 import random
+import os
 
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
@@ -29,6 +30,9 @@ def terminal_simulation(terminal_messages, client_ip):
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
             raise KeyboardInterrupt
+        
+        if "clear" in terminal_messages[len(terminal_messages) - 1]["content"]:
+            os.system("clear")
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
