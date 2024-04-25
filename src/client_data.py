@@ -2,8 +2,6 @@ import os
 import json
 import geoip2.database
 
-base_path = "/home/user/SYNAPSE/"
-
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")
     
@@ -11,6 +9,9 @@ def get_client_ip():
         client_ip = ssh_connection_info.split()[0]
 
     return client_ip
+
+client_ip = get_client_ip()
+base_path = "/home/user/SYNAPSE/"
 
 def initialize_client_data(client_ip):
     ssh_connection_info = os.environ.get("SSH_CLIENT")
