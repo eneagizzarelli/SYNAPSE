@@ -3,3 +3,8 @@ python-dotenv
 pyyaml
 requests
 geoip2
+scikit-learn
+pandas
+nltk
+numpy
+mitreattack-python
