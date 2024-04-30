@@ -12,6 +12,8 @@ import numpy as np
 import pickle
 import os
 
+from classification import get_classification, get_attack_object, print_attack_object
+
 base_path = "/home/user/SYNAPSE/"
 
 def lemmatize_set(dataset):
@@ -94,4 +96,8 @@ bow_vocab = vectorizer.get_feature_names_out()
 
 nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
 
-train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+# train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+
+id = get_classification("Adversaries may attempt to dump the contents of /etc/passwd and /etc/shadow to enable offline password cracking.")
+obj = get_attack_object(id)
+print_attack_object(obj)
