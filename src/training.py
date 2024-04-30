@@ -99,5 +99,6 @@ nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
 # train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
 
 id = get_classification("Adversaries may attempt to dump the contents of /etc/passwd and /etc/shadow to enable offline password cracking.")
+print(id)
 obj = get_attack_object(id)
 print_attack_object(obj)
