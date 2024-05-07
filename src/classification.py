@@ -5,64 +5,64 @@ import pickle
 import os
 
 from client_data import client_ip
+from ai_requests import generate_response
 
 base_path = "/home/user/SYNAPSE/"
 
 mitre_attack_data = MitreAttackData(base_path + 'data/enterprise-attack-10.1.json')
 
-prompt = {"role": "user", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened. Output 'False' if you think nothing related to an attack happened.\n" + 
-          "Examples: \n" + 
-          "alex@datalab:~$ ls\n" +
-          "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
-          "alex@datalab:~$ cd Desktop\n" +
-          "alex@datalab:~/Desktop$ exit\n" +
-          "logout\n\n" +
-          "Answer: False\n\n" +
-
-          "alex@datalab:~$ mysql\n" +
-          "Welcome to the MySQL monitor.  Commands end with ; or \\g.\n" +
-          "Your MySQL connection id is 8\n" +
-          "Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)\n" +
-          "Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\n" +
-          "mysql> SHOW DATABASES;\n" +
-          "+--------------------+\n" +
-          "| Database           |\n" +
-          "+--------------------+\n" +
-          "| information_schema |\n" +
-          "| mysql              |\n" +
-          "| performance_schema |\n" +
-          "| Users              |\n" +
-          "+--------------------+\n" +
-          "4 rows in set (0.01 sec)\n" +
-          "mysql> USE Users;\n" +
-          "Database changed\n" +
-          "mysql> SELECT * FROM Users WHERE UserId = 105 OR 1=1;\n" +
-          "+--------+-----------------+-----------------+\n" +
-          "| UserId | Username        | Password        |\n" +
-          "+--------+-----------------+-----------------+\n" +
-          "| 105    | admin           | admin           |\n" +
-          "| 106    | root            | toor            |\n" +
-          "| 107    | administrator   | password        |\n" +
-          "+--------+-----------------+-----------------+\n" +
-          "3 rows in set (0.00 sec)\n" +
-          "mysql> \q\n" +
-          "Bye\n" +
-          "alex@datalab:~$ exit\n\n" +
-          
-          "Answer: True\n\n"}
-
 def attack_happened():
-    if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
-        classification_history_file = open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8")
-
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
-        print(classification_history)
+        classification_messages = {"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened. Output 'False' if you think nothing related to an attack happened.\n" + 
+        "Examples: \n" + 
+        "alex@datalab:~$ ls\n" +
+        "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
+        "alex@datalab:~$ cd Desktop\n" +
+        "alex@datalab:~/Desktop$ exit\n" +
+        "logout\n\n" +
+        "Answer: False\n\n" +
 
-        classification_history_file.close()
+        "alex@datalab:~$ mysql\n" +
+        "Welcome to the MySQL monitor.  Commands end with ; or \\g.\n" +
+        "Your MySQL connection id is 8\n" +
+        "Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)\n" +
+        "Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\n" +
+        "mysql> SHOW DATABASES;\n" +
+        "+--------------------+\n" +
+        "| Database           |\n" +
+        "+--------------------+\n" +
+        "| information_schema |\n" +
+        "| mysql              |\n" +
+        "| performance_schema |\n" +
+        "| Users              |\n" +
+        "+--------------------+\n" +
+        "4 rows in set (0.01 sec)\n" +
+        "mysql> USE Users;\n" +
+        "Database changed\n" +
+        "mysql> SELECT * FROM Users WHERE UserId = 105 OR 1=1;\n" +
+        "+--------+-----------------+-----------------+\n" +
+        "| UserId | Username        | Password        |\n" +
+        "+--------+-----------------+-----------------+\n" +
+        "| 105    | admin           | admin           |\n" +
+        "| 106    | root            | toor            |\n" +
+        "| 107    | administrator   | password        |\n" +
+        "+--------+-----------------+-----------------+\n" +
+        "3 rows in set (0.00 sec)\n" +
+        "mysql> \q\n" +
+        "Bye\n" +
+        "alex@datalab:~$ exit\n\n" +
+        
+        "Answer: True\n\n"}
 
+        classification_messages.append({"role": "user", "content": classification_history})
 
-    return False
+        response = generate_response(classification_messages)
+
+        if "True" in response["content"]:
+            return True
+        return False
 
 def get_sentence():
     return ""
