@@ -3,7 +3,7 @@ import time
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
 from client_data import initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
-from classification import attack_happened, get_sentence, get_classification, get_attack_object, print_attack_object
+from classification import attack_happened, get_sentence, get_classification, get_attack_object, print_attack_object_to_file
 
 def main():
     initialize_client_data()
@@ -34,7 +34,7 @@ def main():
 
         classification = get_classification(sentence)
         attack_object = get_attack_object(classification)
-        print_attack_object(attack_object)
+        print_attack_object_to_file(attack_object)
     else :
         print("No attack happened.")
 

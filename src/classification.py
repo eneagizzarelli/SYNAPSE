@@ -2,6 +2,8 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
 import pickle
+import sys
+import os
 
 from client_data import client_ip
 from ai_requests import generate_response
@@ -98,5 +100,20 @@ def get_attack_object(attack_id):
 
     return attack_object
 
-def print_attack_object(attack_object):
-    mitre_attack_data.print_stix_object(attack_object, pretty=True)
+def print_attack_object_to_file(attack_object):
+    count_attack_files = 0
+
+    for attack_file in os.listdir(base_path + "logs/" + client_ip):
+        if attack_file.startswith(client_ip + "_attack_"):
+            count_attack_files += 1
+
+    print(count_attack_files)
+
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_attack_" + count_attack_files + ".txt", 'w') as attack_file:
+        original_stdout = sys.stdout
+
+        sys.stdout = attack_file
+
+        mitre_attack_data.print_stix_object(attack_object, pretty=True)
+
+        sys.stdout = original_stdout
