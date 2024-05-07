@@ -2,7 +2,6 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
 import pickle
-import os
 
 from client_data import client_ip
 from ai_requests import generate_response
