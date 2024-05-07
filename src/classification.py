@@ -65,8 +65,7 @@ def attack_happened():
             return True
         return False
 
-def get_sentence_and_remove_classification_history():
-    # get sentence
+def get_sentence():
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
@@ -75,12 +74,12 @@ def get_sentence_and_remove_classification_history():
         classification_messages.append({"role": "user", "content": classification_history})
 
         response = generate_response(classification_messages)
+        
+        return response["content"]
 
-    # remove classification history
+def remove_classification_history():
     if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
         os.remove(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt")
-
-    return response["content"]
 
 def get_classification(text):
     with open(base_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
