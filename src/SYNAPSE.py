@@ -30,7 +30,7 @@ def main():
     if(attack_happened()):
         sentence = get_sentence()
 
-        print("Attack happened.")
+        print(sentence)
 
         # classification = get_classification(sentence)
         # attack_object = get_attack_object(classification)
