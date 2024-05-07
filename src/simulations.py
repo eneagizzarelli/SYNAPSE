@@ -25,6 +25,7 @@ def terminal_simulation(terminal_messages):
             os.system("clear")
 
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
+        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history.txt", "a+", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         
@@ -33,15 +34,19 @@ def terminal_simulation(terminal_messages):
 
         terminal_messages.append(terminal_message)
         terminal_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
+        classification_history.write(terminal_messages[len(terminal_messages) - 1]["content"])
         
         terminal_history.close()
+        classification_history.close()
 
         terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
+        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history.txt", "a+", encoding="utf-8")
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
+            classification_history.close()
             raise KeyboardInterrupt
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
@@ -60,12 +65,15 @@ def terminal_simulation(terminal_messages):
             user_input = input(f'{lines[len(lines)-1]}'.strip() + " ")
             terminal_messages.append({"role": "user", "content": user_input + f"\t<{datetime.now()}>\n" })
             terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            classification_history.write(" " + user_input + "\n")
         else:
             user_input = input(f'\n{terminal_messages[len(terminal_messages) - 1]["content"]}'.strip() + " ")
             terminal_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
             terminal_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+            classification_history.write(" " + user_input + "\n")
 
         terminal_history.close()
+        classification_history.close()
 
 def run_mysql_simulation():
     mysql_prompt = load_mysql_prompt()
@@ -87,18 +95,24 @@ def mysql_simulation(mysql_messages):
             break
 
         mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history.txt", "a+", encoding="utf-8")
 
         mysql_message = generate_response(mysql_messages)
 
         mysql_messages.append(mysql_message)
         mysql_history.write(mysql_messages[len(mysql_messages) - 1]["content"])
+        classification_history.write(mysql_messages[len(mysql_messages) - 1]["content"])
 
         mysql_history.close()
+        classification_history.close()
 
         mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
+        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history.txt", "a+", encoding="utf-8")
         
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
         mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
         mysql_history.write(" " + user_input + f"\t<{datetime.now()}>\n")
+        classification_history.write(" " + user_input + "\n")
         
         mysql_history.close()
+        classification_history.close()
