@@ -15,14 +15,14 @@ def get_client_ip():
 client_ip = get_client_ip()
 
 def initialize_client_data():
-    ssh_connection_info = os.environ.get("SSH_CLIENT")
-
-    if ssh_connection_info:
-        client_port = ssh_connection_info.split()[1]
-        server_port = ssh_connection_info.split()[2]
-
     if not os.path.exists(base_path + "logs/" + client_ip):
         os.makedirs(base_path + "logs/" + client_ip)
+
+        ssh_connection_info = os.environ.get("SSH_CLIENT")
+
+        if ssh_connection_info:
+            client_port = ssh_connection_info.split()[1]
+            server_port = ssh_connection_info.split()[2]
 
         client_geolocation = get_client_geolocation()
         
@@ -35,9 +35,9 @@ def initialize_client_data():
             "session_durations_in_seconds": []
         }
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
-        json.dump(data, client_data_file, indent=4)
-        client_data_file.write("\n")
+        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+            json.dump(data, client_data_file, indent=4)
+            client_data_file.write("\n")
 
 def get_client_geolocation():
     database_path = base_path + "data/" + "GeoLite2-City.mmdb"
