@@ -57,8 +57,6 @@ def attack_happened():
 
         classification_messages.append({"role": "user", "content": classification_history})
 
-        print(classification_messages)
-
         response = generate_response(classification_messages)
 
         print(response)
