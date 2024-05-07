@@ -65,7 +65,7 @@ def attack_happened():
             return True
         return False
 
-def get_sentence_and_clear_classification_history():
+def get_sentence_and_remove_classification_history():
     # get sentence
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
@@ -76,9 +76,9 @@ def get_sentence_and_clear_classification_history():
 
         response = generate_response(classification_messages)
 
-    # clear classification history
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "w", encoding="utf-8") as classification_history_file:
-        pass
+    # remove classification history
+    if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
+        os.remove(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt")
 
     return response["content"]
 

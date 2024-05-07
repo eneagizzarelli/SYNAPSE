@@ -3,7 +3,7 @@ import time
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
 from client_data import initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
-from classification import attack_happened, get_sentence_and_clear_classification_history, get_classification, get_attack_object, print_attack_object_to_file
+from classification import attack_happened, get_sentence_and_remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
 
 def main():
     initialize_client_data()
@@ -28,7 +28,7 @@ def main():
     write_client_session_duration_in_seconds(session_duration_in_seconds)
 
     if(attack_happened()):
-        sentence = get_sentence_and_clear_classification_history()
+        sentence = get_sentence_and_remove_classification_history()
 
         print(sentence)
 
