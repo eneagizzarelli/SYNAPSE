@@ -30,11 +30,11 @@ def main():
     if(attack_happened()):
         sentence = get_sentence()
 
-        print("Attack happened.")
+        print(sentence)
 
-        # classification = get_classification(sentence)
-        # attack_object = get_attack_object(classification)
-        # print_attack_object(attack_object)
+        classification = get_classification(sentence)
+        attack_object = get_attack_object(classification)
+        print_attack_object(attack_object)
     else :
         print("No attack happened.")
 

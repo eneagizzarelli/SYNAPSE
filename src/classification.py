@@ -59,14 +59,21 @@ def attack_happened():
 
         response = generate_response(classification_messages)
 
-        print(response)
-
         if "True" in response["content"]:
             return True
         return False
 
 def get_sentence():
-    return ""
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
+        classification_history = classification_history_file.read()
+
+        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without too much care about responses. The output will be mapped to the MITRE ATT&CK database. Try to use words that help the automatic mapping. \n\n"}]
+
+        classification_messages.append({"role": "user", "content": classification_history})
+
+        response = generate_response(classification_messages)
+
+        return response["content"]
 
 def get_classification(text):
     with open(base_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
