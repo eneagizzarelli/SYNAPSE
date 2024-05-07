@@ -67,7 +67,7 @@ def get_sentence():
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
-        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without taking care about responses. Take into account mainly user commands. \n\n"}]
+        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without too much care about responses. The output will be mapped to the MITRE ATT&CK database. Try to use words that help the automatic mapping. \n\n"}]
 
         classification_messages.append({"role": "user", "content": classification_history})
 
