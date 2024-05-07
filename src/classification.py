@@ -65,7 +65,8 @@ def attack_happened():
             return True
         return False
 
-def get_sentence():
+def get_sentence_and_clear_classification_history():
+    # get sentence
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
@@ -75,7 +76,11 @@ def get_sentence():
 
         response = generate_response(classification_messages)
 
-        return response["content"]
+    # clear classification history
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "w", encoding="utf-8") as classification_history_file:
+        pass
+
+    return response["content"]
 
 def get_classification(text):
     with open(base_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
