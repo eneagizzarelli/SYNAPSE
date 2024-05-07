@@ -16,7 +16,7 @@ def attack_happened():
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
-        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened. Output 'False' if you think nothing related to an attack happened.\n" + 
+        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. Output 'False' if you think nothing related to an attack happened.\n" + 
         "Examples: \n" + 
         "alex@datalab:~$ ls\n" +
         "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
