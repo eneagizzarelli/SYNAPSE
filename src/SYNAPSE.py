@@ -27,7 +27,7 @@ def main():
     session_duration_in_seconds = round(session_duration_in_seconds, 2)
     write_client_session_duration_in_seconds(session_duration_in_seconds)
 
-    if(attack_happened):
+    if(attack_happened()):
         sentence = get_sentence()
 
         print("Attack happened.")
