@@ -109,7 +109,7 @@ def print_attack_object_to_file(attack_object):
 
     print(count_attack_files)
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_attack_" + count_attack_files + ".txt", 'w') as attack_file:
+    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
         original_stdout = sys.stdout
 
         sys.stdout = attack_file
