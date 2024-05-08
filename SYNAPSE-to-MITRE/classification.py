@@ -5,14 +5,13 @@ import pickle
 import sys
 import os
 
-from client_data import client_ip
-from ai_requests import generate_response
+from src.ai_requests import generate_response
 
 base_path = "/home/user/SYNAPSE/"
 
-mitre_attack_data = MitreAttackData(base_path + 'data/enterprise-attack-10.1.json')
+mitre_attack_data = MitreAttackData(base_path + 'SYNAPSE-to-MITRE/' + 'data/enterprise-attack-10.1.json')
 
-def attack_happened():
+def attack_happened(client_ip):
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
@@ -65,7 +64,7 @@ def attack_happened():
             return True
         return False
 
-def get_sentence():
+def get_sentence(client_ip):
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
@@ -77,12 +76,8 @@ def get_sentence():
         
         return response["content"]
 
-def remove_classification_history():
-    if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
-        os.remove(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt")
-
 def get_classification(text):
-    with open(base_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
+    with open(base_path + 'SYNAPSE-to-MITRE/' + 'ml_model/MLP_classifier.sav', 'rb') as file:
         vectorizer, classifier = pickle.load(file)
 
     lemmatizer = WordNetLemmatizer()
@@ -104,7 +99,7 @@ def get_attack_object(attack_id):
 
     return attack_object
 
-def print_attack_object_to_file(attack_object):
+def print_attack_object_to_file(attack_object, client_ip):
     count_attack_files = 0
 
     for attack_file in os.listdir(base_path + "logs/" + client_ip):
@@ -119,3 +114,7 @@ def print_attack_object_to_file(attack_object):
         mitre_attack_data.print_stix_object(attack_object, pretty=True)
 
         sys.stdout = original_stdout
+
+def remove_classification_history(client_ip):
+    if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
+        os.remove(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt")
