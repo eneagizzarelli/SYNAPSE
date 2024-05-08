@@ -14,6 +14,17 @@ def get_client_ip():
 
 client_ip = get_client_ip()
 
+def get_count_classification_history_files():
+    count_classification_history_files = 0
+
+    for classification_file in os.listdir(base_path + "logs/" + client_ip):
+        if classification_file.startswith(client_ip + "_classification_history_"):
+            count_classification_history_files += 1
+    
+    return count_classification_history_files
+
+count_classification_history_files = get_count_classification_history_files()
+
 def initialize_client_data():
     if not os.path.exists(base_path + "logs/" + client_ip):
         os.makedirs(base_path + "logs/" + client_ip)

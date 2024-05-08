@@ -4,16 +4,11 @@ from datetime import datetime
 import random
 import os
 
-from client_data import client_ip
+from client_data import client_ip, count_classification_history_files
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
-
-count_classification_history_files = 0
-for classification_file in os.listdir(base_path + client_ip):
-    if classification_file.startswith(client_ip + "_classification_history_"):
-        count_classification_history_files += 1
 
 def terminal_simulation(terminal_messages):
     while True:
