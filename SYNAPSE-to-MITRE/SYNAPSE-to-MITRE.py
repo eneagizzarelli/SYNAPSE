@@ -33,5 +33,7 @@ def main():
 
                     remove_classification_history(classification_file, client_ip)
 
+    print("\nSYNAPSE-to-MITRE mapping finished.")
+
 if __name__ == "__main__":
     main()
