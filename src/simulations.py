@@ -4,13 +4,15 @@ from datetime import datetime
 import random
 import os
 
-from client_data import client_ip, count_classification_history_files
+from client_data import client_ip, get_count_classification_history_files
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 
 base_path = "/home/user/SYNAPSE/logs/"
 today = datetime.now()
 
 def terminal_simulation(terminal_messages):
+    count_classification_history_files = get_count_classification_history_files()
+
     while True:
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
@@ -90,6 +92,8 @@ def run_mysql_simulation():
         pass
 
 def mysql_simulation(mysql_messages):
+    count_classification_history_files = get_count_classification_history_files()
+    
     while True:
         if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
             break

@@ -14,9 +14,8 @@ def get_client_ip():
 
 client_ip = get_client_ip()
 
-count_classification_history_files = 0
 def get_count_classification_history_files():
-    global count_classification_history_files
+    count_classification_history_files = 0
 
     for classification_file in os.listdir(base_path + "logs/" + client_ip):
         if classification_file.startswith(client_ip + "_classification_history_"):
@@ -25,8 +24,6 @@ def get_count_classification_history_files():
     return count_classification_history_files
 
 def initialize_client_data():
-    global count_classification_history_files
-
     if not os.path.exists(base_path + "logs/" + client_ip):
         os.makedirs(base_path + "logs/" + client_ip)
 
@@ -50,8 +47,6 @@ def initialize_client_data():
         with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
             json.dump(data, client_data_file, indent=4)
             client_data_file.write("\n")
-
-    count_classification_history_files = get_count_classification_history_files()
 
 def get_client_geolocation():
     database_path = base_path + "data/" + "GeoLite2-City.mmdb"
