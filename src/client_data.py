@@ -16,6 +16,8 @@ client_ip = get_client_ip()
 
 count_classification_history_files = 0
 def get_count_classification_history_files():
+    global count_classification_history_files
+    
     for classification_file in os.listdir(base_path + "logs/" + client_ip):
         if classification_file.startswith(client_ip + "_classification_history_"):
             count_classification_history_files += 1
