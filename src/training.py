@@ -12,7 +12,7 @@ import numpy as np
 import pickle
 import os
 
-base_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/"
+base_path = "/home/user/SYNAPSE/"
 
 def lemmatize_set(dataset):
     lemmatizer = WordNetLemmatizer()
