@@ -23,11 +23,9 @@ count_classification_history_files = 0
 
 def initialize_client_data():
     global count_classification_history_files
-    
+
     if not os.path.exists(base_path + "logs/" + client_ip):
         os.makedirs(base_path + "logs/" + client_ip)
-
-        count_classification_history_files = get_count_classification_history_files()
 
         ssh_connection_info = os.environ.get("SSH_CLIENT")
 
@@ -49,6 +47,8 @@ def initialize_client_data():
         with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
             json.dump(data, client_data_file, indent=4)
             client_data_file.write("\n")
+
+    count_classification_history_files = get_count_classification_history_files()
 
 def get_client_geolocation():
     database_path = base_path + "data/" + "GeoLite2-City.mmdb"
