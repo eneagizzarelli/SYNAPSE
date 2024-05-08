@@ -1,34 +1,26 @@
-import os
+import sys
 
 from classification import attack_happened, get_sentence, remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
 
-ssh_client_info = os.getenv('SSH_CLIENT')
-
-if ssh_client_info:
-    client_ip = ssh_client_info.split()[0]
-
-base_path = "/home/user/SYNAPSE/logs/"
-
-os.mkdir(base_path + client_ip + "ciao")
-os.mkdir(base_path + "ciao")
-
 def main():
-    pass
-    # for classification_file in os.listdir(base_path):
-    #     if os.path.isfile(base_path + classification_file):
-    #         client_ip = classification_file.split('_')[0]
-    # if(attack_happened()):
-    #     sentence = get_sentence()
+    if len(sys.argv) != 2:
+        print("Usage: python3 SYNAPSE-to-MITRE.py <ip>")
+        sys.exit(1)
+    
+    client_ip = sys.argv[1]
 
-    #     print(sentence)
+    if(attack_happened(client_ip)):
+        sentence = get_sentence(client_ip)
 
-    #     classification = get_classification(sentence)
-    #     attack_object = get_attack_object(classification)
-    #     print_attack_object_to_file(attack_object)
-    # else :
-    #     print("No attack happened.")
+        print(sentence)
 
-    # remove_classification_history()
+        classification = get_classification(sentence)
+        attack_object = get_attack_object(classification, client_ip)
+        print_attack_object_to_file(attack_object, client_ip)
+    else :
+        print("No attack happened.")
+
+    remove_classification_history(client_ip)
 
 if __name__ == "__main__":
     main()
