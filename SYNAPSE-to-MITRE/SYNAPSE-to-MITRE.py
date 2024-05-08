@@ -5,7 +5,7 @@ from classification import attack_happened, get_sentence, remove_classification_
 base_path = "/home/user/SYNAPSE/"
 
 def main():
-    print("Starting SYNAPSE-to-MITRE mapping...\n\n")
+    print("Starting SYNAPSE-to-MITRE mapping...\n")
 
     for client_ip in os.listdir(base_path + "logs/"):
         if os.path.isdir(base_path + "logs/" + client_ip):
@@ -15,7 +15,7 @@ def main():
             for classification_file in os.listdir(base_path + "logs/" + client_ip):
                 if os.path.isfile(base_path + "logs/" + client_ip + "/" + classification_file) and classification_file.startswith(client_ip + "_classification_history_"):
 
-                    print("- " + classification_file + ": ")
+                    print("- " + classification_file + ": ", end="")
 
                     if(attack_happened(classification_file, client_ip)):
 
@@ -33,7 +33,7 @@ def main():
 
                     remove_classification_history(classification_file, client_ip)
 
-    print("\nSYNAPSE-to-MITRE mapping finished.")
+    print("SYNAPSE-to-MITRE mapping finished.")
 
 if __name__ == "__main__":
     main()
