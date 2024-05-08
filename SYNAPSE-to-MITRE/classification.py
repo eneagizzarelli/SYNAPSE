@@ -5,7 +5,8 @@ import pickle
 import sys
 import os
 
-from src.ai_requests import generate_response
+sys.path.append("/home/user/SYNAPSE/src")
+from ai_requests import generate_response
 
 base_path = "/home/user/SYNAPSE/"
 
