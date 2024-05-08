@@ -5,15 +5,15 @@ import pickle
 import sys
 import os
 
-from client_data import client_ip
+sys.path.append("/home/user/SYNAPSE/src")
 from ai_requests import generate_response
 
 base_path = "/home/user/SYNAPSE/"
 
-mitre_attack_data = MitreAttackData(base_path + 'data/enterprise-attack-10.1.json')
+mitre_attack_data = MitreAttackData(base_path + 'SYNAPSE-to-MITRE/' + 'data/enterprise-attack-10.1.json')
 
-def attack_happened():
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
+def attack_happened(classification_file, client_ip):
+    with open(base_path + "logs/" + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. Output 'False' if you think nothing related to an attack happened.\n" + 
@@ -65,8 +65,8 @@ def attack_happened():
             return True
         return False
 
-def get_sentence():
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt", "r", encoding="utf-8") as classification_history_file:
+def get_sentence(classification_file, client_ip):
+    with open(base_path + "logs/" + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without too much care about responses. The output will be mapped to the MITRE ATT&CK database. Try to use words that help the automatic mapping. \n\n"}]
@@ -77,12 +77,8 @@ def get_sentence():
         
         return response["content"]
 
-def remove_classification_history():
-    if os.path.exists(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt"):
-        os.remove(base_path + "logs/" + client_ip + "/" + client_ip + "_classification_history.txt")
-
 def get_classification(text):
-    with open(base_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
+    with open(base_path + 'SYNAPSE-to-MITRE/ml_model/MLP_classifier.sav', 'rb') as file:
         vectorizer, classifier = pickle.load(file)
 
     lemmatizer = WordNetLemmatizer()
@@ -104,14 +100,12 @@ def get_attack_object(attack_id):
 
     return attack_object
 
-def print_attack_object_to_file(attack_object):
+def print_attack_object_to_file(attack_object, client_ip):
     count_attack_files = 0
 
     for attack_file in os.listdir(base_path + "logs/" + client_ip):
         if attack_file.startswith(client_ip + "_attack_"):
             count_attack_files += 1
-
-    print(count_attack_files)
 
     with open(base_path + "logs/" + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
         original_stdout = sys.stdout
@@ -121,3 +115,7 @@ def print_attack_object_to_file(attack_object):
         mitre_attack_data.print_stix_object(attack_object, pretty=True)
 
         sys.stdout = original_stdout
+
+def remove_classification_history(classification_file, client_ip):
+    if os.path.exists(base_path + "logs/" + client_ip + "/" + classification_file):
+        os.remove(base_path + "logs/" + client_ip + "/" + classification_file)
