@@ -8,7 +8,7 @@ import os
 from client_data import client_ip
 from ai_requests import generate_response
 
-base_path = "/home/user/SYNAPSE/"
+base_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/"
 
 mitre_attack_data = MitreAttackData(base_path + 'data/enterprise-attack-10.1.json')
 
