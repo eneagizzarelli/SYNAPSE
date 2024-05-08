@@ -7,9 +7,9 @@ ssh_client_info = os.getenv('SSH_CLIENT')
 if ssh_client_info:
     client_ip = ssh_client_info.split()[0]
 
-print(client_ip)
-
 base_path = "/home/user/SYNAPSE/logs/"
+
+os.mkdir(base_path + client_ip + "ciao")
 
 def main():
     pass
