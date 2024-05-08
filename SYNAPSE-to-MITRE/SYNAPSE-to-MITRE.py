@@ -9,7 +9,8 @@ if ssh_client_info:
 
 base_path = "/home/user/SYNAPSE/logs/"
 
-os.mkdir(base_path + client_ip + "ciao")
+print("ciao")
+print(client_ip)
 
 def main():
     pass
