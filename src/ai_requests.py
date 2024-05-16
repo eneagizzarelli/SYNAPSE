@@ -38,8 +38,13 @@ readline.parse_and_bind('tab: complete')
 
 def generate_response(messages):
     response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.0, max_tokens = 800)
+
+    # possible presence of ``` in the response
     msg = response.choices[0].message.content
-    print(msg)
-    message = {"role": 'assistant', "content": msg}
+
+    # ``` cleaned from the response
+    msg_cleaned = msg.replace('```', '').strip()
+    
+    message = {"role": 'assistant', "content": msg_cleaned}
     
     return message
