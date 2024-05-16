@@ -12,7 +12,7 @@ def get_client_ip():
 
 client_ip = get_client_ip()
 
-logs_ip_path = "/home/user/SYNAPSE/logs" + client_ip
+logs_ip_path = "/home/user/SYNAPSE/logs/" + client_ip
 logs_ip_data_path = logs_ip_path + "/" + client_ip + "_data.json"
 database_path = "/home/user/SYNAPSE/data/GeoLite2-City.mmdb"
 
