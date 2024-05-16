@@ -7,9 +7,9 @@ from client_data import client_ip, get_count_classification_history_files
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 from ai_requests import *
 
-logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_terminal_history.txt"
-logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_mysql_history.txt"
-logs_ip_classification_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_classification_history.txt"
+logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
+logs_ip_classification_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_classification_history.txt"
 
 today = datetime.now()
 

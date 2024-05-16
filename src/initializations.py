@@ -7,8 +7,8 @@ from client_data import client_ip
 
 today = datetime.now()
 
-logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_terminal_history.txt"
-logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_mysql_history.txt"
+logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
 terminal_personality_path = "/home/user/SYNAPSE/prompts/terminal_personality.yml"
 services_personality_path = "/home/user/SYNAPSE/prompts/services_personality.yml"
 
