@@ -1,13 +1,16 @@
-from ai_requests import *
+import os
+import random
 from time import sleep
 from datetime import datetime
-import random
-import os
 
 from client_data import client_ip, get_count_classification_history_files
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
+from ai_requests import *
 
-base_path = "/home/user/SYNAPSE/logs/"
+logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_mysql_history.txt"
+logs_ip_classification_history_path = "/home/user/SYNAPSE/logs" + client_ip + "/" + client_ip + "_classification_history.txt"
+
 today = datetime.now()
 
 def terminal_simulation(terminal_messages):
@@ -26,8 +29,8 @@ def terminal_simulation(terminal_messages):
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
 
-        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
-        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history_" + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
+        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         terminal_message = generate_response(terminal_messages)
         
@@ -41,8 +44,8 @@ def terminal_simulation(terminal_messages):
         terminal_history.close()
         classification_history.close()
 
-        terminal_history = open(base_path + client_ip + "/" + client_ip + "_terminal_history.txt", "a+", encoding="utf-8")
-        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history_" + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
+        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
         
         # check over user trying to sudo
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -98,8 +101,8 @@ def mysql_simulation(mysql_messages):
         if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
             break
 
-        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
-        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history_" + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
+        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         mysql_message = generate_response(mysql_messages)
 
@@ -110,8 +113,8 @@ def mysql_simulation(mysql_messages):
         mysql_history.close()
         classification_history.close()
 
-        mysql_history = open(base_path + client_ip + "/" + client_ip + "_mysql_history.txt", "a+", encoding="utf-8")
-        classification_history = open(base_path + client_ip + "/" + client_ip + "_classification_history_" + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
+        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
         
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
         mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})

@@ -1,3 +1,9 @@
+import os
+import pickle
+import numpy as np
+import pandas as pd
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer, porter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
@@ -5,12 +11,6 @@ from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import top_k_accuracy_score
-import pandas as pd
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer, porter
-import numpy as np
-import pickle
-import os
 
 base_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/"
 
