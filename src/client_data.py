@@ -2,11 +2,9 @@ import os
 import json
 import geoip2.database
 
-base_path = "/home/user/SYNAPSE/"
-
 def get_client_ip():
     ssh_connection_info = os.environ.get("SSH_CLIENT")
-    
+
     if ssh_connection_info:
         client_ip = ssh_connection_info.split()[0]
 
@@ -14,18 +12,13 @@ def get_client_ip():
 
 client_ip = get_client_ip()
 
-def get_count_classification_history_files():
-    count_classification_history_files = 0
-
-    for classification_file in os.listdir(base_path + "logs/" + client_ip):
-        if classification_file.startswith(client_ip + "_classification_history_"):
-            count_classification_history_files += 1
-
-    return count_classification_history_files
+logs_ip_path = "/home/user/SYNAPSE/logs" + client_ip
+logs_ip_data_path = logs_ip_path + "/" + client_ip + "_data.json"
+database_path = "/home/user/SYNAPSE/data/GeoLite2-City.mmdb"
 
 def initialize_client_data():
-    if not os.path.exists(base_path + "logs/" + client_ip):
-        os.makedirs(base_path + "logs/" + client_ip)
+    if not os.path.exists(logs_ip_path):
+        os.makedirs(logs_ip_path)
 
         ssh_connection_info = os.environ.get("SSH_CLIENT")
 
@@ -44,12 +37,11 @@ def initialize_client_data():
             "session_durations_in_seconds": []
         }
 
-        with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+        with open(logs_ip_data_path, "w") as client_data_file:
             json.dump(data, client_data_file, indent=4)
             client_data_file.write("\n")
 
 def get_client_geolocation():
-    database_path = base_path + "data/" + "GeoLite2-City.mmdb"
     reader = geoip2.database.Reader(database_path)
 
     try:
@@ -82,21 +74,30 @@ def get_client_geolocation():
         reader.close()
 
 def increment_client_number_of_connections():
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
+    with open(logs_ip_data_path, "r") as client_data_file:
         data = json.load(client_data_file)
         
     data["number_of_connections"] += 1
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+    with open(logs_ip_data_path, "w") as client_data_file:
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
 def write_client_session_duration_in_seconds(session_duration_in_seconds):
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
+    with open(logs_ip_data_path, "r") as client_data_file:
         data = json.load(client_data_file)
         
     data["session_durations_in_seconds"].append(session_duration_in_seconds)
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_data.json", "w") as client_data_file:
+    with open(logs_ip_data_path, "w") as client_data_file:
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
+
+def get_count_classification_history_files():
+    count_classification_history_files = 0
+
+    for classification_file in os.listdir(logs_ip_path):
+        if classification_file.startswith(client_ip + "_classification_history_"):
+            count_classification_history_files += 1
+
+    return count_classification_history_files

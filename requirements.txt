@@ -1,10 +1,9 @@
+geoip2
+pyyaml
 openai
 python-dotenv
-pyyaml
-requests
-geoip2
-scikit-learn
+numpy
 pandas
 nltk
-numpy
+scikit-learn
 mitreattack-python

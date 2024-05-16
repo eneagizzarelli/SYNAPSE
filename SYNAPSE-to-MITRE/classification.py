@@ -1,9 +1,9 @@
+import os
+import sys
+import pickle
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
-import pickle
-import sys
-import os
 
 sys.path.append("/home/user/SYNAPSE/src")
 from ai_requests import generate_response

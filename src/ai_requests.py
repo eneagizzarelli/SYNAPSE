@@ -1,14 +1,14 @@
 import openai
-from dotenv import dotenv_values
 import readline
+from dotenv import dotenv_values
 
 config = dotenv_values(".env")
 openai.api_key = config["OPENAI_API_KEY"]
-
-model = "gpt-3.5-turbo-0125"
+gpt_4o_model = "gpt-4o"
+gpt_3_5_turbo_model = "gpt-3.5-turbo-0125"
 
 def generate_tab_completions(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 5)
+    response = openai.chat.completions.create(model = gpt_3_5_turbo_model, messages = messages, temperature = 0.0, max_tokens = 5)
     completions = response.choices[0].message.content
 
     return completions
@@ -37,7 +37,7 @@ readline.set_completer(completer)
 readline.parse_and_bind('tab: complete')
 
 def generate_response(messages):
-    response = openai.chat.completions.create(model = model, messages = messages, temperature = 0.0, max_tokens = 800)
+    response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.0, max_tokens = 800)
     msg = response.choices[0].message.content
     message = {"role": 'assistant', "content": msg}
     
