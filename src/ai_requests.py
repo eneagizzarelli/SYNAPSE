@@ -39,6 +39,7 @@ readline.parse_and_bind('tab: complete')
 def generate_response(messages):
     response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.0, max_tokens = 800)
     msg = response.choices[0].message.content
+    print(msg)
     message = {"role": 'assistant', "content": msg}
     
     return message
