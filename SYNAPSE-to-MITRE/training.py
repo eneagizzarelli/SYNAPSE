@@ -12,7 +12,8 @@ from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import top_k_accuracy_score
 
-base_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/"
+model_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
+dataset_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
 
 def lemmatize_set(dataset):
     lemmatizer = WordNetLemmatizer()
@@ -66,18 +67,17 @@ def train_classifier(classifier, name, X, Y):
     print("Results for" + name + "\n")
     print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + " AC@3: " + str(topk) + "\n")
 
-    path = base_path + 'ml_model'
     try:
-        os.mkdir(path)
+        os.mkdir(model_path)
     except OSError as error:
         print(error)
 
-    filename = path + '/' + name + '.sav'
+    filename = model_path + '/' + name + '.sav'
     pickle.dump((vectorizer, classifier), open(filename, 'wb'))
 
 TRAINING_SIZE = 0.80
 
-data_df = pd.read_csv(base_path + 'data/dataset.csv')
+data_df = pd.read_csv(dataset_path)
 num_classes = len(data_df['label_tec'].value_counts())
 
 print(num_classes)
