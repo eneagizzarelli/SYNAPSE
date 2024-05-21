@@ -2,7 +2,7 @@ import openai
 import readline
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = dotenv_values("/home/enea/.env")
 openai.api_key = config["OPENAI_API_KEY"]
 gpt_4o_model = "gpt-4o"
 gpt_3_5_turbo_model = "gpt-3.5-turbo-0125"
