@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 /home/enea/SYNAPSE/src/SYNAPSE.py
+python /home/enea/SYNAPSE/src/SYNAPSE.py
