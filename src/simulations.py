@@ -22,7 +22,7 @@ def terminal_simulation(terminal_messages):
             raise KeyboardInterrupt
 
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            run_mysql_simulation()
+            run_mysql_simulation(count_classification_history_files)
             print("\nBye")
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
@@ -80,7 +80,7 @@ def terminal_simulation(terminal_messages):
         terminal_history.close()
         classification_history.close()
 
-def run_mysql_simulation():
+def run_mysql_simulation(count_classification_history_files):
     mysql_prompt = load_mysql_prompt()
 
     args = parse_mysql_argument(mysql_prompt)
@@ -88,15 +88,13 @@ def run_mysql_simulation():
     mysql_messages = load_mysql_messages(args.mysql_personality)
 
     try:
-        mysql_simulation(mysql_messages)
+        mysql_simulation(mysql_messages, count_classification_history_files)
     except KeyboardInterrupt:
         pass
     except EOFError:
         pass
 
-def mysql_simulation(mysql_messages):
-    count_classification_history_files = get_count_classification_history_files()
-    
+def mysql_simulation(mysql_messages, count_classification_history_files):
     while True:
         if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
             break
