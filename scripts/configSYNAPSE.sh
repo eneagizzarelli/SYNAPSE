@@ -3,7 +3,7 @@
 SYNAPSE_path="/home/enea/SYNAPSE"
 
 if [ -d "${SYNAPSE_path}" ]; then
-    rm -rf ${SYNAPSE_path}
+    sudo rm -rf ${SYNAPSE_path}
 fi
 
 git clone https://github.com/eneagizzarelli/SYNAPSE.git ${SYNAPSE_path}
