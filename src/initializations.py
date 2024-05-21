@@ -7,10 +7,10 @@ from client_data import client_ip
 
 today = datetime.now()
 
-logs_ip_terminal_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
-logs_ip_mysql_history_path = "/home/user/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
-terminal_personality_path = "/home/user/SYNAPSE/prompts/terminal_personality.yml"
-services_personality_path = "/home/user/SYNAPSE/prompts/services_personality.yml"
+logs_ip_terminal_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
+terminal_personality_path = "/home/enea/SYNAPSE/prompts/terminal_personality.yml"
+services_personality_path = "/home/enea/SYNAPSE/prompts/services_personality.yml"
 
 def load_terminal_prompt():
     terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")

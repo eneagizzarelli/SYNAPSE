@@ -12,8 +12,8 @@ from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import top_k_accuracy_score
 
-model_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
-dataset_path = "/home/user/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
+model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
+dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
 
 def lemmatize_set(dataset):
     lemmatizer = WordNetLemmatizer()

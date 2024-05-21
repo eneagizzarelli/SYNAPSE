@@ -2,7 +2,7 @@ import os
 
 from classification import attack_happened, get_sentence, remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
 
-logs_path = "/home/user/SYNAPSE/logs/"
+logs_path = "/home/enea/SYNAPSE/logs/"
 
 def main():
     print("Starting SYNAPSE-to-MITRE mapping...\n")

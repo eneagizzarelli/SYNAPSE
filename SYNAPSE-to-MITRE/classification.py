@@ -5,27 +5,28 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
 
-sys.path.append("/home/user/SYNAPSE/src")
+sys.path.append("/home/enea/SYNAPSE/src")
 from ai_requests import generate_response
 
-base_path = "/home/user/SYNAPSE/"
+SYNAPSE_to_MITRE_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/"
+logs_path = "/home/enea/SYNAPSE/logs/"
 
-mitre_attack_data = MitreAttackData(base_path + 'SYNAPSE-to-MITRE/' + 'data/enterprise-attack-10.1.json')
+mitre_attack_data = MitreAttackData(SYNAPSE_to_MITRE_path + 'data/enterprise-attack-10.1.json')
 
 def attack_happened(classification_file, client_ip):
-    with open(base_path + "logs/" + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
+    with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. Output 'False' if you think nothing related to an attack happened.\n" + 
         "Examples: \n" + 
-        "alex@datalab:~$ ls\n" +
+        "enea@datalab:~$ ls\n" +
         "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
-        "alex@datalab:~$ cd Desktop\n" +
-        "alex@datalab:~/Desktop$ exit\n" +
+        "enea@datalab:~$ cd Desktop\n" +
+        "enea@datalab:~/Desktop$ exit\n" +
         "logout\n\n" +
         "Answer: False\n\n" +
 
-        "alex@datalab:~$ mysql\n" +
+        "enea@datalab:~$ mysql\n" +
         "Welcome to the MySQL monitor.  Commands end with ; or \\g.\n" +
         "Your MySQL connection id is 8\n" +
         "Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)\n" +
@@ -53,7 +54,7 @@ def attack_happened(classification_file, client_ip):
         "3 rows in set (0.00 sec)\n" +
         "mysql> \q\n" +
         "Bye\n" +
-        "alex@datalab:~$ exit\n\n" +
+        "enea@datalab:~$ exit\n\n" +
         
         "Answer: True\n\n"}]
 
@@ -66,7 +67,7 @@ def attack_happened(classification_file, client_ip):
         return False
 
 def get_sentence(classification_file, client_ip):
-    with open(base_path + "logs/" + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
+    with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without too much care about responses. The output will be mapped to the MITRE ATT&CK database. Try to use words that help the automatic mapping. \n\n"}]
@@ -78,7 +79,7 @@ def get_sentence(classification_file, client_ip):
         return response["content"]
 
 def get_classification(text):
-    with open(base_path + 'SYNAPSE-to-MITRE/ml_model/MLP_classifier.sav', 'rb') as file:
+    with open(SYNAPSE_to_MITRE_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
         vectorizer, classifier = pickle.load(file)
 
     lemmatizer = WordNetLemmatizer()
@@ -103,11 +104,11 @@ def get_attack_object(attack_id):
 def print_attack_object_to_file(attack_object, client_ip):
     count_attack_files = 0
 
-    for attack_file in os.listdir(base_path + "logs/" + client_ip):
+    for attack_file in os.listdir(logs_path + client_ip):
         if attack_file.startswith(client_ip + "_attack_"):
             count_attack_files += 1
 
-    with open(base_path + "logs/" + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
+    with open(logs_path + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
         original_stdout = sys.stdout
 
         sys.stdout = attack_file
@@ -117,5 +118,5 @@ def print_attack_object_to_file(attack_object, client_ip):
         sys.stdout = original_stdout
 
 def remove_classification_history(classification_file, client_ip):
-    if os.path.exists(base_path + "logs/" + client_ip + "/" + classification_file):
-        os.remove(base_path + "logs/" + client_ip + "/" + classification_file)
+    if os.path.exists(logs_path + client_ip + "/" + classification_file):
+        os.remove(logs_path + client_ip + "/" + classification_file)
