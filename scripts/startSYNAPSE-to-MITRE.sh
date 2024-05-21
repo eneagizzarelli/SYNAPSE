@@ -1,2 +1,2 @@
 #!/bin/bash
-python /home/enea/SYNAPSE/SYNAPSE-to-MITRE/SYNAPSE-to-MITRE.py
+python3 /home/enea/SYNAPSE/SYNAPSE-to-MITRE/SYNAPSE-to-MITRE.py
