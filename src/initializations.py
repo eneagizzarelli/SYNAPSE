@@ -21,8 +21,11 @@ def load_terminal_prompt():
         terminal_identity = terminal_identity['personality']
         terminal_prompt = terminal_identity['prompt']
     else:
-        terminal_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
-                              "Make sure you use same file and folder names. Ignore date-time in <>. This is not your concern.\n")
+        terminal_history.write("\nHere the session stopped. " + 
+                               "Now you will start it again from the beginning with the same user. " + 
+                               "You must respond just with starting message and nothing more. " +
+                               "Make sure you use same file and folder names as in the previous sessions. " + 
+                               "Ignore date-time in <> after user input. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
 
@@ -34,8 +37,10 @@ def parse_terminal_argument(terminal_prompt):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
-                        f"\nBased on these examples make something of your own (different username and hostname) to be a starting message. Always start the communication in this way and make sure your output ends with '$'. For the last login date use {today} and for ip address use {client_ip}.\n" + 
-                        "Ignore date-time in <> after user input. This is not your concern.\n")
+                        f"\nBased on these examples make something of your own (different hostname) to be a starting message. " + 
+                        "Always start the communication in this way and make sure your output ends with '$'. " + 
+                        "For the last login date use {today} and for the ip address use {client_ip}. " + 
+                        "Ignore date-time in <> after user input. This is not your concern.\n\n")
         
     args = parser.parse_args()
     
