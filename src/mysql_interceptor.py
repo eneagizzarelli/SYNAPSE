@@ -2,7 +2,7 @@ import socket
 
 if __name__ == "__main__":
     mysql_interceptor_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    mysql_interceptor_socket.bind('0.0.0.0', 3307)
+    mysql_interceptor_socket.bind(('0.0.0.0', 3307))
     mysql_interceptor_socket.listen(5)
 
     print(f'Server listening on 0.0.0.0:3307')
