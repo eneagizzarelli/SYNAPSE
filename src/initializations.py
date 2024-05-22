@@ -38,9 +38,9 @@ def parse_terminal_argument(terminal_prompt):
 
     parser.add_argument("--terminal_personality", type=str, default= terminal_prompt + 
                         f"\nBased on these examples make something of your own (different hostname) to be a starting message. " + 
-                        "Always start the communication in this way and make sure your output ends with '$'. " + 
-                        "For the last login date use {today} and for the ip address use {client_ip}. " + 
-                        "Ignore date-time in <> after user input. This is not your concern.\n\n")
+                        f"Always start the communication in this way and make sure your output ends with '$'. " + 
+                        f"For the last login date use {today} and for the ip address use {client_ip}. " + 
+                        f"Ignore date-time in <> after user input. This is not your concern.\n\n")
         
     args = parser.parse_args()
     
