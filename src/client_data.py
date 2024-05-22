@@ -7,6 +7,9 @@ def get_client_ip():
 
     if ssh_connection_info:
         client_ip = ssh_connection_info.split()[0]
+    # TODO: handle cases in which IP address not available
+    else:
+        raise KeyboardInterrupt
 
     return client_ip
 
