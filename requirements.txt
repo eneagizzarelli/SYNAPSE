@@ -2,8 +2,7 @@ geoip2
 pyyaml
 openai
 python-dotenv
-# socket
-# mysql-connector-python
+socket
 numpy
 pandas
 nltk
