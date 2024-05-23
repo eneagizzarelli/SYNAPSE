@@ -17,8 +17,8 @@ def generate_response(messages):
     msg = response.choices[0].message.content
 
     # cleaning response
-    msg_cleaned = msg.replace('\n```\nenea', '\nenea').strip()
-    msg_cleaned = msg.replace('\n\nenea', '\nenea').strip()
+    msg_cleaned = msg.replace('\\n```\\nenea', '\\nenea').strip()
+    msg_cleaned = msg.replace('\\n\\nenea', '\\nenea').strip()
     msg_cleaned = msg.replace('```', '').strip()
     
     message = {"role": 'assistant', "content": msg_cleaned}
