@@ -27,7 +27,7 @@ def terminal_simulation(terminal_messages):
                 run_mysql_simulation(count_classification_history_files)
                 terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
             else:
-                print("ERROR 1045 (28000): Access denied for user 'ec2-user'@'localhost' (using password: NO)")
+                print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: NO)")
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
