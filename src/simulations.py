@@ -22,11 +22,12 @@ def terminal_simulation(terminal_messages):
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             raise KeyboardInterrupt
 
-        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] and "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            run_mysql_simulation(count_classification_history_files)
-            terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
-        else:
-            print("ERROR 1045 (28000): Access denied for user 'ec2-user'@'localhost' (using password: NO)")
+        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
+            if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
+                run_mysql_simulation(count_classification_history_files)
+                terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
+            else:
+                print("ERROR 1045 (28000): Access denied for user 'ec2-user'@'localhost' (using password: NO)")
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
