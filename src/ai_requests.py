@@ -11,15 +11,13 @@ gpt_3_5_turbo_0125_model = "gpt-3.5-turbo-0125"
 def generate_response(messages):
     response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.1, max_tokens = 800)
 
-    print(response.choices[0].message)
-
     # possible presence of ``` in the response
     msg = response.choices[0].message.content
 
     # cleaning response
-    msg_cleaned = msg.replace('\\n```\\nenea', '\\nenea').strip()
-    msg_cleaned = msg.replace('\\n\\nenea', '\\nenea').strip()
     msg_cleaned = msg.replace('```', '').strip()
+    msg_parts = msg_cleaned.split("\n")
+    print(msg_parts)
     
     message = {"role": 'assistant', "content": msg_cleaned}
     
