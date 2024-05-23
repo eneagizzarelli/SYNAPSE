@@ -14,11 +14,13 @@ def generate_response(messages):
     # possible presence of ``` in the response
     msg = response.choices[0].message.content
 
-    # cleaning response
+    # cleaning ```
     msg_cleaned = msg.replace('```', '').strip()
     
+    # cleaning unwanted \n\n
     if 'mysql> ' not in msg_cleaned.split("\n"):
-        msg_cleaned = [m for m in msg_cleaned.split("\n") if m].join("\n")
+        msg_parts = [m for m in msg_cleaned.split("\n") if m]
+        msg_cleaned = "\n".join(msg_parts)
     
     message = {"role": 'assistant', "content": msg_cleaned}
     
