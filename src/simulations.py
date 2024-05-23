@@ -1,5 +1,6 @@
 import os
 import random
+import getpass
 from time import sleep
 from datetime import datetime
 
@@ -22,9 +23,11 @@ def terminal_simulation(terminal_messages):
             raise KeyboardInterrupt
 
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            run_mysql_simulation(count_classification_history_files)
-            print("\nBye")
-            terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
+            if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
+                run_mysql_simulation(count_classification_history_files)
+                terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
+            else:
+                print("ERROR 1045 (28000): Access denied for user 'ec2-user'@'localhost' (using password: NO)")
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
@@ -81,6 +84,11 @@ def terminal_simulation(terminal_messages):
         classification_history.close()
 
 def run_mysql_simulation(count_classification_history_files):
+    password = getpass.getpass("Enter password: ")
+    if password != "password":
+        print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: YES)")
+        return
+
     mysql_prompt = load_mysql_prompt()
     args = parse_mysql_argument(mysql_prompt)
     mysql_messages = load_mysql_messages(args.mysql_personality)
@@ -88,8 +96,10 @@ def run_mysql_simulation(count_classification_history_files):
     try:
         mysql_simulation(mysql_messages, count_classification_history_files)
     except KeyboardInterrupt:
+        print("\nBye")
         pass
     except EOFError:
+        print("\nBye")
         pass
 
 def mysql_simulation(mysql_messages, count_classification_history_files):
