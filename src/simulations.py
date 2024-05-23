@@ -20,14 +20,15 @@ def terminal_simulation(terminal_messages):
     while True:
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            raise KeyboardInterrupt
+            return
 
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
                 run_mysql_simulation(count_classification_history_files)
-                terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
             else:
-                print("ERROR 1045 (28000): Access denied for user 'ec2-user'@'localhost' (using password: NO)")
+                print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: NO)")
+            
+            terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
@@ -55,7 +56,7 @@ def terminal_simulation(terminal_messages):
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
             classification_history.close()
-            raise KeyboardInterrupt
+            return
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
@@ -96,11 +97,10 @@ def run_mysql_simulation(count_classification_history_files):
     try:
         mysql_simulation(mysql_messages, count_classification_history_files)
     except KeyboardInterrupt:
-        print("\nBye")
-        pass
+        print("\n", end="")
     except EOFError:
-        print("\nBye")
-        pass
+        print("\n", end="")
+    print("Bye")
 
 def mysql_simulation(mysql_messages, count_classification_history_files):
     while True:

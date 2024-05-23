@@ -17,9 +17,10 @@ def main():
     try:
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
-        print("\nlogout")
+        print("\n", end="")
     except EOFError:
-        print("\nlogout")
+        print("\n", end="")
+    print("logout")
 
     session_end_time = time.time()
     session_duration_in_seconds = session_end_time - session_start_time
