@@ -82,9 +82,7 @@ def terminal_simulation(terminal_messages):
 
 def run_mysql_simulation(count_classification_history_files):
     mysql_prompt = load_mysql_prompt()
-
     args = parse_mysql_argument(mysql_prompt)
-
     mysql_messages = load_mysql_messages(args.mysql_personality)
 
     try:
