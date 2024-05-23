@@ -35,7 +35,7 @@ def generate_tab_completions(messages):
 
     return completions
 
-# TODO: to improve
+# TODO: improve
 def completer(text, state):
     if state == 0:
         if text == "":
