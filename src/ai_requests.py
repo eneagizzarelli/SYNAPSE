@@ -17,6 +17,8 @@ def generate_response(messages):
     # ``` and trailing \n cleaned from the response
     msg_cleaned = msg.replace('```', '').strip()
     msg_cleaned = msg_cleaned.rstrip("\n")
+
+    print(msg_cleaned)
     
     message = {"role": 'assistant', "content": msg_cleaned}
     
