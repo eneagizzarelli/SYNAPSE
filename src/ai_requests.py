@@ -16,9 +16,9 @@ def generate_response(messages):
     # possible presence of ``` in the response
     msg = response.choices[0].message.content
 
-    # ``` and trailing \n\n cleaned from the response
+    # cleaned response
+    msg_cleaned = msg.replace('\n```\n', '\n```').strip()
     msg_cleaned = msg.replace('```', '').strip()
-    msg_cleaned = msg_cleaned.replace('\n\n', '\n')
     
     message = {"role": 'assistant', "content": msg_cleaned}
     
