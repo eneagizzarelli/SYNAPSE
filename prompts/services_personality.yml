@@ -24,7 +24,7 @@ services:
 
             "One example of the starting of a communication is as follows:" +
             "\nExample.\n" +
-            "Welcome to the MySQL monitor. Commands end with ; or \\g. \n" +
+            "Welcome to the MySQL monitor.  Commands end with ; or \\g. \n" +
             "Your MySQL connection id is 8 \n" +
             "Server version: 5.7.31-0ubuntu0.18.04.1 (Ubuntu) \n\n" +
             "Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved. \n\n" +
