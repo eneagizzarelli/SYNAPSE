@@ -10,14 +10,14 @@ gpt_3_5_turbo_0125_model = "gpt-3.5-turbo-0125"
 
 def generate_response(messages):
     response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.1, max_tokens = 800)
-    print(response.choices[0].message)
+    
     # possible presence of ``` in the response
     msg = response.choices[0].message.content
 
     # cleaning ```
     msg_cleaned = msg.replace('```', '').strip()
     
-    # cleaning unwanted \n\n
+    # cleaning unwanted \n\n (wanted in mysql)
     if 'mysql>' not in msg_cleaned.split("\n"):
         msg_parts = [m for m in msg_cleaned.split("\n") if m]
         msg_cleaned = "\n".join(msg_parts)
