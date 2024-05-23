@@ -25,9 +25,10 @@ def terminal_simulation(terminal_messages):
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
                 run_mysql_simulation(count_classification_history_files)
-                terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
             else:
                 print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: NO)")
+            
+            terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
         if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             os.system("clear")
