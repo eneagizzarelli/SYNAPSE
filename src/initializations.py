@@ -24,7 +24,7 @@ def load_terminal_prompt():
         terminal_history.write("\nHere the session stopped. " + 
                                "Now you will start it again from the beginning with the same user. " + 
                                "You must respond just with starting message and nothing more. " +
-                               "Make sure you use same file and folder names as in the previous sessions. " + 
+                               "Make sure you use same files and folders names as in the previous sessions. " + 
                                "Ignore date-time in <> after user input. This is not your concern.\n")
         terminal_history.seek(0)
         terminal_prompt = terminal_history.read()
@@ -73,8 +73,11 @@ def load_mysql_prompt():
         mysql_identity = mysql_identity['mysql']
         mysql_prompt = mysql_identity['prompt']
     else:
-        mysql_history.write("\nHere the session stopped. Now you will start it again from the beginning with the same user. You must respond just with starting message and nothing more. " +
-                              "Make sure you use same database, tables and folder names. Ignore date-time in <>. This is not your concern.\n")
+        mysql_history.write("\nHere the session stopped. " + 
+                            "Now you will start it again from the beginning with the same user. " + 
+                            "You must respond just with starting message and nothing more. " + 
+                            "Make sure you use same databases, tables and folders names. " + 
+                            "Ignore date-time in <>. This is not your concern.\n")
         mysql_history.seek(0)
         mysql_prompt = mysql_history.read()
 
@@ -86,15 +89,17 @@ def parse_mysql_argument(mysql_prompt):
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--mysql_personality", type=str, default= mysql_prompt + 
-                        f"\nBased on these examples make something of your own (use different connection id and server version, the rest MUST remain unchanged) to be a starting message. Do not use trivial ids like '12345'. You must generate one similar to real case scenario (example: '12'). Always start the communication in this way and make sure your output ends with 'mysql >'.\n" + 
-                        "Ignore date-time in <> after user input. This is not your concern.\n")
+                        f"\nBased on these examples make something of your own (different connection ID and server version) to be a starting message. " + 
+                        f"Do not use trivial IDs like '12345'. You must generate one similar to real case scenarios ('12' for example). " + 
+                        f"Always start the communication in this way and make sure your output ends with 'mysql>'. " + 
+                        f"Ignore date-time in <> after user input. This is not your concern.\n\n")
     
     args = parser.parse_args()
     
     return args
 
 def load_mysql_messages(mysql_personality):
-    initial_prompt = f"You are Linux OS terminal and you are MySQL server. Your personality is: {mysql_personality}"
+    initial_prompt = f"You are MySQL server inside Linux OS terminal. Your personality is: {mysql_personality}"
 
     mysql_messages = [{"role": "system", "content": initial_prompt}]
 
