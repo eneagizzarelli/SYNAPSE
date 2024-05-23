@@ -18,7 +18,7 @@ def generate_response(messages):
     msg_cleaned = msg.replace('```', '').strip()
     
     # cleaning unwanted \n\n
-    if 'mysql> ' not in msg_cleaned.split("\n"):
+    if 'mysql>' not in msg_cleaned.split("\n"):
         msg_parts = [m for m in msg_cleaned.split("\n") if m]
         msg_cleaned = "\n".join(msg_parts)
     
