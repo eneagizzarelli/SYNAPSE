@@ -21,6 +21,8 @@ def generate_response(messages):
     if 'mysql>' not in msg_cleaned.split("\n"):
         msg_parts = [m for m in msg_cleaned.split("\n") if m]
         msg_cleaned = "\n".join(msg_parts)
+    else:
+        msg_cleaned = msg_cleaned.replace('sql\n', '')
     
     message = {"role": 'assistant', "content": msg_cleaned}
     
