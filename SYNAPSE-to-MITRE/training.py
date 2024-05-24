@@ -41,7 +41,7 @@ def stemmatize_set(dataset):
 
 def train_classifier(classifier, name, X, Y):
     print(X.shape, Y.shape)
-    train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4, stratify=Y)
+    train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4)
     
     stemmatized_set = stemmatize_set(train_set_x)
     lemmatized_set = lemmatize_set(stemmatized_set)
