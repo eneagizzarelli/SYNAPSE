@@ -85,7 +85,7 @@ def terminal_simulation(terminal_messages):
 def run_mysql_simulation(count_classification_history_files, last_terminal_message):
     user = "enea"
     parts = last_terminal_message.split()[:-2]
-    
+
     if "-u" in parts:
         user_index = parts.index('-u') + 1
         if user_index < len(parts):
@@ -117,7 +117,9 @@ def run_mysql_simulation(count_classification_history_files, last_terminal_messa
 
 def mysql_simulation(mysql_messages, count_classification_history_files):
     while True:
-        if "exit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "quit" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1] or "\q" in mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]:
+        last_mysql_message = mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]
+
+        if "exit" in last_mysql_message or "quit" in last_mysql_message or "\q" in last_mysql_message:
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
