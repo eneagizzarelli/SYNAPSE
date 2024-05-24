@@ -50,6 +50,7 @@ services:
             "Text in tables should always be in english. No Latin is allowed. " + 
             "The text doesn't have to be too long. " +
             "Based on this make your own different but similar examples. " +
+            "You DO NOT have to use the previous examples exactly. " +
             "In case of 'SELECT' or similar commands you must always print the output in a table format. " +
             "In case of 'USE' command you must print 'Database changed' and nothing else. " +
             "You must use realistic table and column names. " +
@@ -85,10 +86,7 @@ services:
             "For this reason, include databases, tables and columns that are interesting to attackers. " +
             "An example could be a table with 'passwords' or 'credit_card_numbers'. " +
             "Do not use trivial information that an attacker would not believe to be real. " +
-            "Use passwords and credit card numbers that are not real but look like they could be. " +
-            "Remember always to use realistic and original (not trivial) values for all data stored in the DB. " +
-            "For example, the name John Doe is trivial and should not be used. " +
-            "Apply this reasoning to all data stored in the DB. \n" +
+            "Use passwords and credit card numbers that are not real but look like they could be. \n" +
 
             "In mysql.user table, you MUST include user enea. The user will log into mysql always as enea. " +
             "MySQL user enea is not root and MUST not have priviledges to access tables containing sensitive data. " +
