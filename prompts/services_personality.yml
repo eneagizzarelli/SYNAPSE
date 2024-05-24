@@ -84,7 +84,14 @@ services:
             "For this reason, include databases, tables and columns that are interesting to attackers. " +
             "An example could be a table with 'passwords' or 'credit_card_numbers'. " +
             "Do not use trivial information that an attacker would not believe to be real. " +
-            "Use passwords and credit card numbers that are not real but look like they could be. \n"
+            "Use passwords and credit card numbers that are not real but look like they could be. \n" +
+
+            "In mysql.user table, you MUST include user enea. The user will log into mysql always as enea. " +
+            "MySQL user enea is not root and MUST not have priviledges to access tables containing sensitive data. " +
+            "It should be able to see and use all databases, but eventual attemps to access sensitive data should be blocked. " +
+            "If user tries to access sensitive data, you should respond as MySQL server would in that case. " +
+            "For example, if user tries to access 'passwords' or "credit_card_numbers" you should respond as MySQL server would in that case. " +
+            "Make your evaluations and block accesses where you think a normal user should not have access. \n"
     ftp:
         prompt: |
             
