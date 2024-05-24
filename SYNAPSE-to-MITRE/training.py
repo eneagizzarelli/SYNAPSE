@@ -15,7 +15,6 @@ model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
 dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
 
 TRAINING_SIZE = 0.80
-vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', max_features=10000, ngram_range=(1,2))
 
 def lemmatize_set(dataset):
     lemmatizer = WordNetLemmatizer()
@@ -40,11 +39,13 @@ def stemmatize_set(dataset):
     return stemmatize_list
 
 def train_classifier(classifier, name, X, Y):
+    vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', max_features=10000, ngram_range=(1,2))
+
     train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4)
     
     stemmatized_set = stemmatize_set(train_set_x)
     lemmatized_set = lemmatize_set(stemmatized_set)
-    x_train_vectors = vectorizer.fit_transform(lemmatized_set)
+    x_train_vectors = vectorizer.fit_transform(train_set_x)
 
     classifier.fit(x_train_vectors, train_set_y)
 
@@ -52,7 +53,7 @@ def train_classifier(classifier, name, X, Y):
 
     stemmatized_set = stemmatize_set(test_set_x)
     lemmatized_set = lemmatize_set(stemmatized_set)
-    x_test_vectors = vectorizer.transform(lemmatized_set)
+    x_test_vectors = vectorizer.transform(test_set_x)
     predicted = classifier.predict(x_test_vectors)
     
     precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
