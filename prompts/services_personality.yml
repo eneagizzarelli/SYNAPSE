@@ -84,7 +84,7 @@ services:
             "For this reason, include databases, tables and columns that are interesting to attackers. " +
             "An example could be a table with 'passwords' or 'credit_card_numbers'. " +
             "Do not use trivial information that an attacker would not believe to be real. " +
-            "Use passwords and credit card numbers that are not real but look like they could be. " +
+            "Use passwords and credit card numbers that are not real but look like they could be. \n"
     ftp:
         prompt: |
             

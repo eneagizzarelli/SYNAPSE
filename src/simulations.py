@@ -18,19 +18,17 @@ def terminal_simulation(terminal_messages):
     count_classification_history_files = get_count_classification_history_files()
 
     while True:
+        last_terminal_message = terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]
+
         # check over user trying to exit
-        if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
+        if "exit" in last_terminal_message or "logout" in last_terminal_message:
             return
 
-        if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-                run_mysql_simulation(count_classification_history_files)
-            else:
-                print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: NO)")
-            
+        if "mysql" in last_terminal_message:
+            run_mysql_simulation(count_classification_history_files, last_terminal_message)
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
-        if "clear" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
+        if "clear" in last_terminal_message:
             os.system("clear")
 
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
@@ -84,10 +82,22 @@ def terminal_simulation(terminal_messages):
         terminal_history.close()
         classification_history.close()
 
-def run_mysql_simulation(count_classification_history_files):
+def run_mysql_simulation(count_classification_history_files, last_terminal_message):
+    user = "enea"
+    parts = last_terminal_message.split()
+    if "-u" in parts:
+        user_index = parts.index('-u') + 1
+        if user_index < len(parts):
+            user = parts[user_index]
+        else:
+            print("mysql: [ERROR] mysql: option '-u' requires an argument.")
+
+    if "-p" not in last_terminal_message:
+        print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: NO)")
+
     password = getpass.getpass("Enter password: ")
-    if password != "password":
-        print("ERROR 1045 (28000): Access denied for user 'enea'@'localhost' (using password: YES)")
+    if user != "enea" or password != "password":
+        print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
         return
 
     mysql_prompt = load_mysql_prompt()
