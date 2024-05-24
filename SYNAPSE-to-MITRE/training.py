@@ -44,16 +44,16 @@ def train_classifier(classifier, name, X, Y):
     train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4)
     
     stemmatized_set = stemmatize_set(train_set_x)
-    lemmatized_set = lemmatize_set(stemmatized_set)
-    x_train_vectors = vectorizer.fit_transform(train_set_x)
+    lemmatized_set = lemmatize_set(train_set_x)
+    x_train_vectors = vectorizer.fit_transform(lemmatized_set)
 
     classifier.fit(x_train_vectors, train_set_y)
 
     print("Model has been trained!")
 
     stemmatized_set = stemmatize_set(test_set_x)
-    lemmatized_set = lemmatize_set(stemmatized_set)
-    x_test_vectors = vectorizer.transform(test_set_x)
+    lemmatized_set = lemmatize_set(train_set_x)
+    x_test_vectors = vectorizer.transform(lemmatized_set)
     predicted = classifier.predict(x_test_vectors)
     
     precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
