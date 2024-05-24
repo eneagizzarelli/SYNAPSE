@@ -52,7 +52,7 @@ def train_classifier(classifier, name, X, Y):
     print("Model has been trained!")
 
     stemmatized_set = stemmatize_set(test_set_x)
-    lemmatized_set = lemmatize_set(train_set_x)
+    lemmatized_set = lemmatize_set(test_set_x)
     x_test_vectors = vectorizer.transform(lemmatized_set)
     predicted = classifier.predict(x_test_vectors)
     
