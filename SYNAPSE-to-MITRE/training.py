@@ -40,7 +40,6 @@ def stemmatize_set(dataset):
     return stemmatize_list
 
 def train_classifier(classifier, name, X, Y):
-    print(X.shape, Y.shape)
     train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4)
     
     stemmatized_set = stemmatize_set(train_set_x)
@@ -60,8 +59,9 @@ def train_classifier(classifier, name, X, Y):
     predict_proba_scores = classifier.predict_proba(x_test_vectors)
     top_k_predictions = np.argsort(predict_proba_scores, axis = 1)[:,-k:]
     top_class = classifier.classes_[top_k_predictions]
-    
+
     labels = unique_labels(Y)
+    print(test_set_y.shape, labels.shape)
     sample_weights = compute_sample_weight(class_weight='balanced', y=test_set_y)
     
     precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted')
