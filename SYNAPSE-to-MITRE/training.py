@@ -58,7 +58,7 @@ def train_classifier(classifier, name, X, Y):
     
     precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
 
-    print("Results for" + name + "\n")
+    print("Results for " + name + "\n")
     print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + "\n")
 
     try:
