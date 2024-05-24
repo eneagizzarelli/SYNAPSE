@@ -2,7 +2,6 @@ geoip2
 pyyaml
 openai
 python-dotenv
-socket
 numpy
 pandas
 nltk
