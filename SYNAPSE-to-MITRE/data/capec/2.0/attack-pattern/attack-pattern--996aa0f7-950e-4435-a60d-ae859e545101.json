@@ -1,0 +1,39 @@
+{
+    "id": "bundle--a322e27a-9103-4248-a115-d2a41b8b17b0",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary creates a false front organizations with the appearance of a legitimate supplier in the critical life cycle path that then injects corrupted/malicious information system components into the organizational supply chain.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-544",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/544.html"
+                }
+            ],
+            "id": "attack-pattern--996aa0f7-950e-4435-a60d-ae859e545101",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "Counterfeit Organizations",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_child_of_refs": [
+                "attack-pattern--862d18f1-a87c-4f1b-acc2-882697d5d6e5"
+            ],
+            "x_capec_domains": [
+                "Social Engineering"
+            ],
+            "x_capec_prerequisites": [
+                "None"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

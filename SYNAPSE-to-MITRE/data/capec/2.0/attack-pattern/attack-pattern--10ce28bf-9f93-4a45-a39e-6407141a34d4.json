@@ -1,0 +1,64 @@
+{
+    "id": "bundle--d630fe85-698a-4959-8ba0-64319c6b597c",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary intercepts an implicit intent sent to launch a Android-based trusted activity and instead launches a counterfeit activity in its place. The malicious activity is then used to mimic the trusted activity's user interface and prompt the target to enter sensitive data as if they were interacting with the trusted activity.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-501",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/501.html"
+                },
+                {
+                    "external_id": "CWE-923",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/923.html"
+                },
+                {
+                    "description": "Erika Chin, Adrienne Porter Felt, Kate Greenwood, David Wagner, Analyzing Inter-Application Communication in Android, 2011, International Conference on Mobile Systems, Applications, and Services (MobiSys)",
+                    "external_id": "REF-427",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "https://people.eecs.berkeley.edu/~daw/papers/intents-mobisys11.pdf"
+                }
+            ],
+            "id": "attack-pattern--10ce28bf-9f93-4a45-a39e-6407141a34d4",
+            "modified": "2021-10-21T00:00:00.000Z",
+            "name": "Android Activity Hijack",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_child_of_refs": [
+                "attack-pattern--48f21dcd-2490-49c6-9690-1cb586b201f4",
+                "attack-pattern--fc3a9a6f-66c9-4363-8ebd-9bd18725fff8"
+            ],
+            "x_capec_consequences": {
+                "Confidentiality": [
+                    "Read Data"
+                ]
+            },
+            "x_capec_domains": [
+                "Software",
+                "Software"
+            ],
+            "x_capec_execution_flow": "<h2> Execution Flow </h2><div><h3>Explore</h3><ol><li> <p> <b>Find an android application that uses implicit intents: </b>Since this attack only works on android applications that use implicit intents, rather than explicit intents, an adversary must first identify an app that uses implicit intents to launch an Android-based trusted activity, and what that activity is.</p></li></ol></div><div><h3>Experiment</h3><ol><li> <p> <b>Create a malicious app: </b>The adversary must create a malicious android app meant to intercept implicit intents to launch an Adroid-based trusted activity. This malicious app will mimic the trusted activiy's user interface to get the user to enter sensitive data.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>Specify the type of intent wished to be intercepted in the malicious app's manifest file using an intent filter</td></tr></tbody></table><li> <p> <b>Get user to download malicious app: </b>The adversary must get a user using the targeted app to download the malicious app by any means necessary</p></li></ol></div><div><h3>Exploit</h3><ol><li> <p> <b>Gather sensitive data through malicious app: </b>Once the target application sends an implicit intent to launch a trusted activity, the malicious app will be launched instead that looks identical to the interface of that activity. When the user enters sensitive information it will be captured by the malicious app.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>Gather login information from a user using a malicious app</td></tr></tbody></table></ol></div>",
+            "x_capec_prerequisites": [
+                "The adversary must have previously installed the malicious application onto the Android device that will run in place of the trusted activity."
+            ],
+            "x_capec_resources_required": [
+                "Malware capable of acting on the adversary's objectives."
+            ],
+            "x_capec_skills_required": {
+                "High": "The adversary must typically overcome network and host defenses in order to place malware on the system."
+            },
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "Medium",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

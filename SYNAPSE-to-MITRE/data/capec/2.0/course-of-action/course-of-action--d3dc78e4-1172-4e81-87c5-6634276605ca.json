@@ -1,0 +1,20 @@
+{
+    "id": "bundle--2e539e9a-083c-4f53-a644-4679e47b8e66",
+    "objects": [
+        {
+            "created": "2017-02-06T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "\n               <xhtml:p>Implementation: Validate object before deserialization process</xhtml:p>\n            ",
+            "id": "course-of-action--d3dc78e4-1172-4e81-87c5-6634276605ca",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-586-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

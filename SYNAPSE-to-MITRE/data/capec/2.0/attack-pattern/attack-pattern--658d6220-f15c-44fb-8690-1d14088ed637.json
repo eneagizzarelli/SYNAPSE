@@ -1,0 +1,57 @@
+{
+    "id": "bundle--1c0511b4-386e-492a-b281-52b4c8097a9c",
+    "objects": [
+        {
+            "created": "2018-07-31T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Adversaries may attempt to obtain information about attached peripheral devices and components connected to a computer system. Examples may include discovering the presence of iOS devices by searching for backups, analyzing the Windows registry to determine what USB devices have been connected, or infecting a victim system with malware to report when a USB device has been connected. This may allow the adversary to gain additional insight about the system or network environment, which may be useful in constructing further attacks.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-646",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/646.html"
+                },
+                {
+                    "external_id": "CWE-200",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/200.html"
+                },
+                {
+                    "description": "Peripheral Device Discovery",
+                    "external_id": "T1120",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1120"
+                }
+            ],
+            "id": "attack-pattern--658d6220-f15c-44fb-8690-1d14088ed637",
+            "modified": "2020-07-30T00:00:00.000Z",
+            "name": "Peripheral Footprinting",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_can_follow_refs": [
+                "attack-pattern--c8c9dfbe-7a40-4041-84ff-89942878a2f4"
+            ],
+            "x_capec_child_of_refs": [
+                "attack-pattern--87b0d2df-b246-4bf9-aee8-4912e2fa1a30"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_likelihood_of_attack": "Low",
+            "x_capec_prerequisites": [
+                "The adversary needs either physical or remote access to the victim system."
+            ],
+            "x_capec_skills_required": {
+                "Medium": "If analyzing the Windows registry, the adversary must understand the registry structure to know where to look for devices."
+            },
+            "x_capec_status": "Stable",
+            "x_capec_typical_severity": "Medium",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--4ab3fb05-0c12-4d86-9f85-170e38a6c337",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Pre-design: Use a language or compiler that performs automatic bounds checking.",
+            "id": "course-of-action--7bd078cd-9dbf-44a2-9bd8-4f13425b385d",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-24-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

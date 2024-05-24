@@ -1,0 +1,20 @@
+{
+    "id": "bundle--473b72cd-d7f1-47f6-bc2c-9769d5e7059b",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Regularly patch all software.",
+            "id": "course-of-action--6637d129-28e5-4beb-9e50-e0127d76b7ec",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-549-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

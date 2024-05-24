@@ -1,0 +1,52 @@
+{
+    "id": "bundle--237a65b7-77cc-4198-a52d-fd27b907e5fb",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary exploits the temporary, insecure storage of information by monitoring the content of files used to store temp data during an application's routine execution flow. Many applications use temporary files to accelerate processing or to provide records of state across multiple executions of the application. Sometimes, however, these temporary files may end up storing sensitive information. By screening an application's temporary files, an adversary might be able to discover such sensitive information. For example, web browsers often cache content to accelerate subsequent lookups. If the content contains sensitive information then the adversary could recover this from the web cache.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-155",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/155.html"
+                },
+                {
+                    "external_id": "CWE-377",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/377.html"
+                }
+            ],
+            "id": "attack-pattern--7fea6e82-183a-4811-9b71-1ebe4d6c8b11",
+            "modified": "2021-10-21T00:00:00.000Z",
+            "name": "Screen Temporary Files for Sensitive Information",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_can_follow_refs": [
+                "attack-pattern--bddd2549-167f-4f7b-8d0f-6d1e647b26f6"
+            ],
+            "x_capec_child_of_refs": [
+                "attack-pattern--797f4b4e-371a-4d06-9e98-5cccb8a7ebc1"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_execution_flow": "<h2> Execution Flow </h2><div><h3>Explore</h3><ol><li> <p> <b>Look for temporary files in target application: </b>An adversary will try to discover temporary files in a target application. Knowledge of where the temporary files are being stored is important information.</p></li></ol></div><div><h3>Experiment</h3><ol><li> <p> <b>Attempt to read temporary files: </b>An adversary will attempt to read any temporary files they may have discovered through normal means.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>Attempt to get the file by querying the file path to a web server</td></tr><tr><td>Using a remote shell into an application, read temporary files and send out information remotely if necessary</td></tr><tr><td>Recover temporary information from a user's browser cache</td></tr></tbody></table></ol></div><div><h3>Exploit</h3><ol><li> <p> <b>Use function weaknesses to gain access to temporary files: </b>If normal means to read temporary files did not work, an adversary will attempt to exploit weak temporary file functions to gain access to temporary files.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>Some C functions such as tmpnam(), tempnam(), and mktemp() will create a temporary file with a unique name, but do not stop an adversary from creating a file of the same name before it is opened by the application. Because these functions do not create file names that are sufficiently random, an adversary will try to make a file of the same name, causing a collision, and possibly altering file permissions for the temporary file so that it is able to be read.</td></tr><tr><td>Similar to the last technique, an adversary might also create a file name collision using a linked file in a unix system such that the temporary file contents written out by the application write to a file of the adversaries choosing, allowing them to read the file contents.</td></tr></tbody></table></ol></div>",
+            "x_capec_likelihood_of_attack": "Medium",
+            "x_capec_prerequisites": [
+                "The target application must utilize temporary files and must fail to adequately secure them against other parties reading them."
+            ],
+            "x_capec_resources_required": [
+                "Because some application may have a large number of temporary files and/or these temporary files may be very large, an adversary may need tools that help them quickly search these files for sensitive information. If the adversary can simply copy the files to another location and if the speed of the search is not important, the adversary can still perform the attack without any special resources."
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "Medium",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--2ddceb6e-ac3d-4997-8a62-4cbc2f4af8e6",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "While some information is shared by systems automatically based on standards and protocols, remove potentially sensitive information that is not necessary for the application's functionality as much as possible.",
+            "id": "course-of-action--e117150b-4841-447b-aef4-8a9aa1d5ad94",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-224-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

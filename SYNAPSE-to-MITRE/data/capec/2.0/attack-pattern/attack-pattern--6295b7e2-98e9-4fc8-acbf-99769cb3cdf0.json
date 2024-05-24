@@ -1,0 +1,54 @@
+{
+    "id": "bundle--b3634f76-32aa-4813-9244-bde79d0cf655",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "This attack pattern involves an adversary manipulating a pointer within a target application resulting in the application accessing an unintended memory location. This can result in the crashing of the application or, for certain pointer values, access to data that would not normally be possible or the execution of arbitrary code. Since pointers are simply integer variables, Integer Attacks may often be used in Pointer Attacks.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-129",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/129.html"
+                },
+                {
+                    "external_id": "CWE-682",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/682.html"
+                },
+                {
+                    "external_id": "CWE-822",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/822.html"
+                },
+                {
+                    "external_id": "CWE-823",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/823.html"
+                }
+            ],
+            "id": "attack-pattern--6295b7e2-98e9-4fc8-acbf-99769cb3cdf0",
+            "modified": "2019-04-04T00:00:00.000Z",
+            "name": "Pointer Manipulation",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Meta",
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_prerequisites": [
+                "The target application must have a pointer variable that the attacker can influence to hold an arbitrary value."
+            ],
+            "x_capec_resources_required": [
+                "None: No specialized resources are required to execute this type of attack."
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "Medium",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

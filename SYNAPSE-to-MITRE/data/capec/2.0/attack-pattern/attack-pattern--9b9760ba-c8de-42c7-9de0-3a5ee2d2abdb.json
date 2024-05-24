@@ -1,0 +1,66 @@
+{
+    "id": "bundle--791a2d10-b1f3-48e1-bf13-9372ab1ce32f",
+    "objects": [
+        {
+            "created": "2020-12-17T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An attackers uses identify or content spoofing to trick a client into performing an automated software update from a malicious source. A malicious automated software update that leverages spoofing can include content or identity spoofing as well as protocol spoofing. Content or identity spoofing attacks can trigger updates in software by embedding scripted mechanisms within a malicious web page, which masquerades as a legitimate update source. Scripting mechanisms communicate with software components and trigger updates from locations specified by the attackers' server. The result is the client believing there is a legitimate software update available but instead downloading a malicious update from the attacker.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-657",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/657.html"
+                },
+                {
+                    "external_id": "CWE-494",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/494.html"
+                },
+                {
+                    "description": "Software Deployment Tools",
+                    "external_id": "T1072",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1072"
+                }
+            ],
+            "id": "attack-pattern--9b9760ba-c8de-42c7-9de0-3a5ee2d2abdb",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "Malicious Automated Software Update via Spoofing",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_can_follow_refs": [
+                "attack-pattern--862d18f1-a87c-4f1b-acc2-882697d5d6e5"
+            ],
+            "x_capec_child_of_refs": [
+                "attack-pattern--3c9e7b88-a1eb-4cfd-aa34-10df08b23317"
+            ],
+            "x_capec_consequences": {
+                "Access_Control": [
+                    "Execute Unauthorized Commands"
+                ],
+                "Availability": [
+                    "Execute Unauthorized Commands"
+                ],
+                "Confidentiality": [
+                    "Execute Unauthorized Commands"
+                ]
+            },
+            "x_capec_domains": [
+                "Supply Chain",
+                "Software"
+            ],
+            "x_capec_example_instances": [
+                "An example of the spoofing strategy would be the eTrust Antivirus Webscan Automated Update Remote Code Execution vulnerability (CVE-2006-3976) and (CVE-2006-3977) whereby an ActiveX control could be remotely manipulated by an attacker controlled web page to download and execute the attackers' code without integrity checking."
+            ],
+            "x_capec_likelihood_of_attack": "High",
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -9,9 +9,10 @@ sys.path.append("/home/enea/SYNAPSE/src")
 from ai_requests import generate_response
 
 SYNAPSE_to_MITRE_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/"
+enterprise_attack_path = SYNAPSE_to_MITRE_path + "data/enterprise-attack/enterprise-attack.json"
 logs_path = "/home/enea/SYNAPSE/logs/"
 
-mitre_attack_data = MitreAttackData(SYNAPSE_to_MITRE_path + 'data/enterprise-attack-10.1.json')
+mitre_attack_data = MitreAttackData(enterprise_attack_path)
 
 def attack_happened(classification_file, client_ip):
     with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:

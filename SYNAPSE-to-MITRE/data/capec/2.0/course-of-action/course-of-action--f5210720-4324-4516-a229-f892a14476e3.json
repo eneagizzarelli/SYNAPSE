@@ -1,0 +1,20 @@
+{
+    "id": "bundle--f3d0ea34-6f1b-433c-bfed-d423e73465f6",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Check for the existence of files to be created, if in existence verify they are neither symlinks nor hard links before opening them.",
+            "id": "course-of-action--f5210720-4324-4516-a229-f892a14476e3",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-132-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

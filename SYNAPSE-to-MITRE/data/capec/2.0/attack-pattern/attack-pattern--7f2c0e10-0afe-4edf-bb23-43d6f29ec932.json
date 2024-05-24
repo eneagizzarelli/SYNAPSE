@@ -1,0 +1,84 @@
+{
+    "id": "bundle--f6749145-431f-4fc5-94cc-e7c60c088eba",
+    "objects": [
+        {
+            "created": "2018-05-31T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Files on various operating systems can have a complex format which allows for the storage of other data, in addition to its contents. Often this is metadata about the file, such as a cached thumbnail for an image file. Unless utilities are invoked in a particular way, this data is not visible during the normal use of the file. It is possible for an attacker to store malicious data or code using these facilities, which would be difficult to discover.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-636",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/636.html"
+                },
+                {
+                    "external_id": "CWE-506",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/506.html"
+                },
+                {
+                    "description": "Data Obfuscation: Steganography",
+                    "external_id": "T1001.002",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1001/002"
+                },
+                {
+                    "description": "Obfuscated Files or Information: Steganography",
+                    "external_id": "T1027.003",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1027/003"
+                },
+                {
+                    "description": "Obfuscated Files or Information: Compile After Delivery",
+                    "external_id": "T1027.004",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1027/004"
+                },
+                {
+                    "description": "Signed Binary Proxy Execution: Compiled HTML File",
+                    "external_id": "T1218.001",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1218/001"
+                },
+                {
+                    "description": "Template Injection",
+                    "external_id": "T1221",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1221"
+                },
+                {
+                    "description": "Means, Ryan L., Alternate Data Streams: Out of the Shadows and into the Light, SANS Institute",
+                    "external_id": "REF-493",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "https://www.giac.org/paper/gcwn/230/alternate-data-streams-shadows-light/104234"
+                }
+            ],
+            "id": "attack-pattern--7f2c0e10-0afe-4edf-bb23-43d6f29ec932",
+            "modified": "2023-01-24T00:00:00.000Z",
+            "name": "Hiding Malicious Data or Code within Files",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_child_of_refs": [
+                "attack-pattern--f8533ce1-5f23-4660-8f70-1a05af2c70d3"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_parent_of_refs": [
+                "attack-pattern--0d2d1e18-6e28-4c58-b442-c5450e6c1112",
+                "attack-pattern--9a7c6cbc-e3f9-4925-992e-f07e1359de87"
+            ],
+            "x_capec_prerequisites": [
+                "The operating system must support a file system that allows for alternate data storage for a file."
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

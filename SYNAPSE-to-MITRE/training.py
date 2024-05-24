@@ -15,6 +15,9 @@ from sklearn.metrics import top_k_accuracy_score
 model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
 dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
 
+TRAINING_SIZE = 0.80
+vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', max_features=10000, ngram_range=(1,2))
+
 def lemmatize_set(dataset):
     lemmatizer = WordNetLemmatizer()
     lemmatized_list = []
@@ -75,23 +78,23 @@ def train_classifier(classifier, name, X, Y):
     filename = model_path + '/' + name + '.sav'
     pickle.dump((vectorizer, classifier), open(filename, 'wb'))
 
-TRAINING_SIZE = 0.80
+def main():
+    data_df = pd.read_csv(dataset_path)
+    num_classes = len(data_df['label_tec'].value_counts())
 
-data_df = pd.read_csv(dataset_path)
-num_classes = len(data_df['label_tec'].value_counts())
+    print(num_classes)
 
-print(num_classes)
+    data_df['sentence'] = data_df['sentence'].astype(str)
 
-data_df['sentence'] = data_df['sentence'].astype(str)
+    stemmatized_set = stemmatize_set(data_df.sentence)
+    lemmatized_set = lemmatize_set(stemmatized_set)
+    x_train_vectors = vectorizer.fit_transform(lemmatized_set)
 
-vectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', max_features=10000, ngram_range=(1,2))
+    bow_vocab = vectorizer.get_feature_names_out()
 
-stemmatized_set = stemmatize_set(data_df.sentence)
-lemmatized_set = lemmatize_set(stemmatized_set)
-x_train_vectors = vectorizer.fit_transform(lemmatized_set)
+    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
 
-bow_vocab = vectorizer.get_feature_names_out()
+    train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
 
-nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
-
-train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+if __name__ == "__main__":
+    main()

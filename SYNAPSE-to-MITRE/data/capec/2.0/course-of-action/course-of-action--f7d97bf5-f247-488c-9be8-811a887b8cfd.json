@@ -1,0 +1,20 @@
+{
+    "id": "bundle--883e9f90-546d-4fc8-af38-db84b41e2542",
+    "objects": [
+        {
+            "created": "2019-09-30T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Ensure virtualization software is current and up-to-date.",
+            "id": "course-of-action--f7d97bf5-f247-488c-9be8-811a887b8cfd",
+            "modified": "2021-10-21T00:00:00.000Z",
+            "name": "coa-480-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

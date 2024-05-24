@@ -1,0 +1,20 @@
+{
+    "id": "bundle--559bb7aa-3e3a-42c0-b8bb-1fad5c3b661b",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: Make use of indirect references passed in URL parameters instead of file names",
+            "id": "course-of-action--69b6bab3-0a47-402a-b11e-6f7897b75465",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-193-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

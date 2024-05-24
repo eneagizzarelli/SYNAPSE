@@ -1,0 +1,20 @@
+{
+    "id": "bundle--bc314b3b-6898-41b7-8bf0-a621c542c330",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Develop an incident response process, disclose supply chain incidents and notify customers with accurate and timely information.",
+            "id": "course-of-action--92b13ced-765d-4949-8947-7d5e45c19556",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-523-5",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,64 @@
+{
+    "id": "bundle--f88f37de-0959-4b09-a32b-b1b5a203e6a3",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An attacker performs flooding at the HTTP level to bring down only a particular web application rather than anything listening on a TCP/IP connection. This denial of service attack requires substantially fewer packets to be sent which makes DoS harder to detect. This is an equivalent of SYN flood in HTTP. The idea is to keep the HTTP session alive indefinitely and then repeat that hundreds of times. This attack targets resource depletion weaknesses in web server software. The web server will wait to attacker's responses on the initiated HTTP sessions while the connection threads are being exhausted.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-469",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/469.html"
+                },
+                {
+                    "external_id": "CWE-770",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/770.html"
+                },
+                {
+                    "external_id": "CWE-772",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/772.html"
+                },
+                {
+                    "description": "Endpoint Denial of Service: Service Exhaustion Flood",
+                    "external_id": "T1499.002",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1499/002"
+                },
+                {
+                    "description": "Robert Hansen, Slowris HTTP DoS, 2009--06---17",
+                    "external_id": "REF-406",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "http://ha.ckers.org/blog/20090617/slowloris-http-dos/"
+                }
+            ],
+            "id": "attack-pattern--aa92a904-ed9d-4dc3-a01f-c965521e9934",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "HTTP DoS",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_child_of_refs": [
+                "attack-pattern--6e3dda09-c1da-4f44-a0b3-e0e3b6fe0601"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_prerequisites": [
+                "HTTP protocol is usedWeb server used is vulnerable to denial of service via HTTP flooding"
+            ],
+            "x_capec_resources_required": [
+                "Ability to issues hundreds of HTTP requests"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "Low",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

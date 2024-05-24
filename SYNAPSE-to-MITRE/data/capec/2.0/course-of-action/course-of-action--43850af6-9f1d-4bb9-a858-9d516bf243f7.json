@@ -1,0 +1,20 @@
+{
+    "id": "bundle--e44c5ec2-ff2f-4b0a-9527-72d161140c43",
+    "objects": [
+        {
+            "created": "2020-12-17T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Inspect the application's stack trace for suspicious method calls.",
+            "id": "course-of-action--43850af6-9f1d-4bb9-a858-9d516bf243f7",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-660-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

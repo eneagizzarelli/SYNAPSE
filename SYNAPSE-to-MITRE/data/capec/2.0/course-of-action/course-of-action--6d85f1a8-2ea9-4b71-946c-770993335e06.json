@@ -1,0 +1,20 @@
+{
+    "id": "bundle--9e369747-1c52-4fe0-9ad8-f26159aa0e52",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "To mitigate this type of an attack, an organization can create rule based filters to silently drop connections if too many are attempted in a certain time period.",
+            "id": "course-of-action--6d85f1a8-2ea9-4b71-946c-770993335e06",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-489-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

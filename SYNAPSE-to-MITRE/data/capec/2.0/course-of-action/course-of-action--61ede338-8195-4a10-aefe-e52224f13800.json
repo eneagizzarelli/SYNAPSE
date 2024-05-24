@@ -1,0 +1,20 @@
+{
+    "id": "bundle--b0b38392-5c78-4384-b719-d6c8f2d1a7c5",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Take an iterative approach to input validation (defense in depth).",
+            "id": "course-of-action--61ede338-8195-4a10-aefe-e52224f13800",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-3-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}
