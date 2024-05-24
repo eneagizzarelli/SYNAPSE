@@ -12,7 +12,7 @@ from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import precision_recall_fscore_support, top_k_accuracy_score
 
-model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
+model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml_model"
 dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
 
 TRAINING_SIZE = 0.80
