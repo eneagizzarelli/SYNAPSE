@@ -60,7 +60,7 @@ def train_classifier(classifier, name, X, Y):
     top_k_predictions = np.argsort(predict_proba_scores, axis = 1)[:,-k:]
     top_class = classifier.classes_[top_k_predictions]
 
-    labels = unique_labels(Y)
+    labels = unique_labels(test_set_y)
     print(test_set_y.shape, labels.shape)
     sample_weights = compute_sample_weight(class_weight='balanced', y=test_set_y)
     
