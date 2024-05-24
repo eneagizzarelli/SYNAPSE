@@ -78,10 +78,10 @@ def main():
 
     data_df['sentence'] = data_df['sentence'].astype(str)
 
-    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
-    rf_clf = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
-
+    # nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
     # train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+
+    rf_clf = RandomForestClassifier(n_estimators=1000, max_depth=40, random_state=42)
     train_classifier(rf_clf, "Random_Forest_classifier",  data_df.sentence, data_df.label_tec)
 
 if __name__ == "__main__":
