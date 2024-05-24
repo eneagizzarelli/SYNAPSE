@@ -77,7 +77,7 @@ def main():
 
     data_df['sentence'] = data_df['sentence'].astype(str)
 
-    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True, hidden_layer_sizes=(200,100), n_layers=4)
+    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True, hidden_layer_sizes=(200,100))
 
     train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
 
