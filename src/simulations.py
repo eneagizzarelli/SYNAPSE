@@ -91,9 +91,11 @@ def run_mysql_simulation(count_classification_history_files, last_terminal_messa
             user = parts[user_index]
         else:
             print("mysql: [ERROR] mysql: option '-u' requires an argument.")
+            return
 
     if "-p" not in last_terminal_message:
         print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: NO)")
+        return
 
     password = getpass.getpass("Enter password: ")
     if user != "enea" or password != "password":
