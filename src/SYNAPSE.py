@@ -17,7 +17,7 @@ def main():
     try:
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
-        print("\n")
+        pass
     except EOFError:
         pass
     print("logout")
