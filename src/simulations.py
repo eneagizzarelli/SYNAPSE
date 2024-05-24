@@ -85,6 +85,7 @@ def terminal_simulation(terminal_messages):
 def run_mysql_simulation(count_classification_history_files, last_terminal_message):
     user = "enea"
     parts = last_terminal_message.split()
+    print(parts)
     if "-u" in parts:
         user_index = parts.index('-u') + 1
         if user_index < len(parts):
