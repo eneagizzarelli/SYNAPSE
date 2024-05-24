@@ -54,21 +54,11 @@ def train_classifier(classifier, name, X, Y):
     lemmatized_set = lemmatize_set(stemmatized_set)
     x_test_vectors = vectorizer.transform(lemmatized_set)
     predicted = classifier.predict(x_test_vectors)
-    k = 3
-
-    predict_proba_scores = classifier.predict_proba(x_test_vectors)
-    top_k_predictions = np.argsort(predict_proba_scores, axis = 1)[:,-k:]
-    top_class = classifier.classes_[top_k_predictions]
-
-    labels = unique_labels(test_set_y)
-    print(test_set_y.shape, labels.shape)
-    sample_weights = compute_sample_weight(class_weight='balanced', y=test_set_y)
     
     precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted')
-    topk = top_k_accuracy_score(test_set_y, predict_proba_scores, k=3, labels=labels, sample_weight=sample_weights)
 
     print("Results for" + name + "\n")
-    print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + " AC@3: " + str(topk) + "\n")
+    print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + "\n")
 
     try:
         os.mkdir(model_path)
