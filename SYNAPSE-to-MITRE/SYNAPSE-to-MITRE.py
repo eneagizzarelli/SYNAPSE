@@ -23,7 +23,7 @@ def main():
 
                         sentence = get_sentence(classification_file, client_ip)
 
-                        print("\t" + sentence + "\n")
+                        print("\tUnstructured CTI: " + sentence + "\n")
 
                         classification = get_classification(sentence)
                         attack_object = get_attack_object(classification)
