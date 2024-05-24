@@ -44,7 +44,7 @@ def train_classifier(classifier, name, X, Y):
     train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4)
     
     stemmatized_set = stemmatize_set(train_set_x)
-    lemmatized_set = lemmatize_set(train_set_x)
+    lemmatized_set = lemmatize_set(stemmatized_set)
     x_train_vectors = vectorizer.fit_transform(lemmatized_set)
 
     classifier.fit(x_train_vectors, train_set_y)
@@ -52,11 +52,11 @@ def train_classifier(classifier, name, X, Y):
     print("Model has been trained!")
 
     stemmatized_set = stemmatize_set(test_set_x)
-    lemmatized_set = lemmatize_set(test_set_x)
+    lemmatized_set = lemmatize_set(stemmatized_set)
     x_test_vectors = vectorizer.transform(lemmatized_set)
     predicted = classifier.predict(x_test_vectors)
     
-    precision, recall, fscore, support = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
+    precision, recall, fscore, _ = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
 
     print("Results for " + name + "\n")
     print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + "\n")
@@ -77,7 +77,7 @@ def main():
 
     data_df['sentence'] = data_df['sentence'].astype(str)
 
-    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
+    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True, hidden_layer_sizes=(200,100), n_layers=4)
 
     train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
 
