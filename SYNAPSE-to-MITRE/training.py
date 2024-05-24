@@ -9,8 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.utils.multiclass import unique_labels
-from sklearn.metrics import precision_recall_fscore_support
-from sklearn.metrics import top_k_accuracy_score
+from sklearn.metrics import precision_recall_fscore_support, top_k_accuracy_score
 
 model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml-model"
 dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
