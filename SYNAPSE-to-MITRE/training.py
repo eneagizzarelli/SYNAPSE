@@ -7,6 +7,7 @@ from nltk.stem import WordNetLemmatizer, porter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import precision_recall_fscore_support, top_k_accuracy_score
@@ -77,9 +78,11 @@ def main():
 
     data_df['sentence'] = data_df['sentence'].astype(str)
 
-    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True, hidden_layer_sizes=(200,100))
+    nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
+    rf_clf = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
 
-    train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+    # train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
+    train_classifier(rf_clf, "Random_Forest_classifier",  data_df.sentence, data_df.label_tec)
 
 if __name__ == "__main__":
     main()
