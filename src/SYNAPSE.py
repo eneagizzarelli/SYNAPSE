@@ -17,9 +17,9 @@ def main():
     try:
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
-        pass
+        print("\n")
     except EOFError:
-        pass
+        print("\n")
     print("logout")
 
     session_end_time = time.time()

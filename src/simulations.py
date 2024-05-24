@@ -20,7 +20,7 @@ def terminal_simulation(terminal_messages):
     while True:
         # check over user trying to exit
         if "exit" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1] or "logout" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
-            raise KeyboardInterrupt
+            return
 
         if "mysql" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
             if "-p" in terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]:
@@ -56,7 +56,7 @@ def terminal_simulation(terminal_messages):
             print(terminal_messages[len(terminal_messages) - 1]["content"])
             terminal_history.close()
             classification_history.close()
-            raise KeyboardInterrupt
+            return
 
         # check over user trying to ping: print ping messages in a coherent way (pause between each ping message)
         lines = []
