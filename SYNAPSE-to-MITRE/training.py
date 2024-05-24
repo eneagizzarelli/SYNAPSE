@@ -40,6 +40,7 @@ def stemmatize_set(dataset):
     return stemmatize_list
 
 def train_classifier(classifier, name, X, Y):
+    print(X.shape, Y.shape)
     train_set_x, test_set_x, train_set_y, test_set_y = train_test_split(X, Y, test_size=(1-TRAINING_SIZE),  random_state=4, stratify=Y)
     
     stemmatized_set = stemmatize_set(train_set_x)
@@ -84,12 +85,6 @@ def main():
     print(num_classes)
 
     data_df['sentence'] = data_df['sentence'].astype(str)
-
-    stemmatized_set = stemmatize_set(data_df.sentence)
-    lemmatized_set = lemmatize_set(stemmatized_set)
-    x_train_vectors = vectorizer.fit_transform(lemmatized_set)
-
-    bow_vocab = vectorizer.get_feature_names_out()
 
     nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
 
