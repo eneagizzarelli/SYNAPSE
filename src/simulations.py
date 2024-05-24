@@ -97,9 +97,9 @@ def run_mysql_simulation(count_classification_history_files):
     try:
         mysql_simulation(mysql_messages, count_classification_history_files)
     except KeyboardInterrupt:
-        pass
+        print("\n", end="")
     except EOFError:
-        pass
+        print("\n", end="")
     print("Bye")
 
 def mysql_simulation(mysql_messages, count_classification_history_files):
