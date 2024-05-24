@@ -1,0 +1,20 @@
+{
+    "id": "bundle--503b6702-d4b8-4d42-b4ce-bf846bf78f63",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Known vulnerabilities in DNS or router software or in operating systems must be patched as soon as a fix has been released and tested.",
+            "id": "course-of-action--ca76ad8b-bd0c-4eec-a930-535476f450af",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-89-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

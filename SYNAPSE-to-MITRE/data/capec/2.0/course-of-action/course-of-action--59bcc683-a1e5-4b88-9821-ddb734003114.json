@@ -1,0 +1,20 @@
+{
+    "id": "bundle--17db553c-8363-4ae6-866f-259237f36795",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Execute programs with constrained privileges, so parent process does not open up further vulnerabilities. Ensure that all directories, temporary directories and files, and memory are executing with limited privileges to protect against remote execution.",
+            "id": "course-of-action--59bcc683-a1e5-4b88-9821-ddb734003114",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-126-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

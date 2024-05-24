@@ -1,0 +1,80 @@
+{
+    "id": "bundle--d519ac4b-f75c-4ece-bdf0-aba603224b98",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "The attacker injects, manipulates, deletes, or forges malicious log entries into the log file, in an attempt to mislead an audit of the log file or cover tracks of an attack. Due to either insufficient access controls of the log files or the logging mechanism, the attacker is able to perform such actions.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-268",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/268.html"
+                },
+                {
+                    "external_id": "CWE-117",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/117.html"
+                },
+                {
+                    "description": "Indicator Removal on Host",
+                    "external_id": "T1070",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1070"
+                },
+                {
+                    "description": "Impair Defenses: Disable Windows Event Logging",
+                    "external_id": "T1562.002",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1562/002"
+                },
+                {
+                    "description": "Impair Defenses: Impair Command History Logging",
+                    "external_id": "T1562.003",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1562/003"
+                },
+                {
+                    "description": "Impair Defenses: Disable Cloud Logs",
+                    "external_id": "T1562.008",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1562/008"
+                },
+                {
+                    "description": "Log Injection",
+                    "source_name": "OWASP Attacks",
+                    "url": "https://owasp.org/www-community/attacks/Log_Injection"
+                }
+            ],
+            "id": "attack-pattern--b3eaa7aa-9601-406c-ae82-0a0e2ea16116",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "Audit Log Manipulation",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_child_of_refs": [
+                "attack-pattern--2a6131f7-30af-4529-be4e-bc3b7bf22009"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_parent_of_refs": [
+                "attack-pattern--0b08a46d-d680-4f3d-91ad-f97e00878780",
+                "attack-pattern--1dd1397d-816a-4093-86a6-cf28bb32e486"
+            ],
+            "x_capec_prerequisites": [
+                "The target host is logging the action and data of the user.",
+                "The target host insufficiently protects access to the logs or logging mechanisms."
+            ],
+            "x_capec_resources_required": [
+                "\n               <xhtml:p>The attacker must understand how the logging mechanism works.</xhtml:p>\n               <xhtml:p>Optionally, the attacker must know the location and the format of individual entries of the log files.</xhtml:p>\n            "
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

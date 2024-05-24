@@ -1,0 +1,20 @@
+{
+    "id": "bundle--41f432b3-08cf-4d5d-b129-b6b379b4ab09",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Ensure that the program's compound parts, including all system dependencies, classpath, path, and so on, are secured to the same or higher level assurance as the program",
+            "id": "course-of-action--22eb9bea-93ce-4bec-b575-33aa10b6766a",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-38-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

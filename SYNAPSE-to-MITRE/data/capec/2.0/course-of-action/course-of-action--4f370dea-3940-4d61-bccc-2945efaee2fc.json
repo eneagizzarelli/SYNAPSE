@@ -1,0 +1,20 @@
+{
+    "id": "bundle--3ef77396-d1c9-4041-aeb4-5b30726cc788",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Protect the communication between the client and server. For instance it is best practice to use SSL to mitigate adversary in the middle attacks (CAPEC-94).",
+            "id": "course-of-action--4f370dea-3940-4d61-bccc-2945efaee2fc",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-60-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

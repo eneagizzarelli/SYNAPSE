@@ -1,0 +1,20 @@
+{
+    "id": "bundle--71dd1c40-6cd7-4142-9601-106c4c6c1ef3",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "To mitigate this type of attack, physical security techniques such as locks doors, alarms, and monitoring of targets should be implemented.",
+            "id": "course-of-action--a86bd9f5-9786-4d89-8d08-8c26d32b9178",
+            "modified": "2014-06-23T00:00:00.000Z",
+            "name": "coa-507-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

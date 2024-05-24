@@ -1,0 +1,20 @@
+{
+    "id": "bundle--8a06e919-3fc3-42ac-b1c6-238a7986f7b6",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Carefully control access to physical log files.",
+            "id": "course-of-action--0f8223ee-d815-41b0-8f0f-a9b23de56d8b",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-93-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

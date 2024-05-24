@@ -1,0 +1,20 @@
+{
+    "id": "bundle--b41ffbe4-4d51-4e69-9a75-39777ebed099",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "The server must initiate the handshake by issuing the challenge. This ensures that the client has to respond before the exchange can move any further",
+            "id": "course-of-action--cf90a75d-b958-4546-b730-3f37189d661d",
+            "modified": "2021-10-21T00:00:00.000Z",
+            "name": "coa-90-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

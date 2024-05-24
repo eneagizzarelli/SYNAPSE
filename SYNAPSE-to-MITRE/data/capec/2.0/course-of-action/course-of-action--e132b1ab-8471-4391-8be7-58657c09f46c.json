@@ -1,0 +1,20 @@
+{
+    "id": "bundle--81a62e35-3c46-4574-9ea2-3cbafb3224c5",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Always invalidate a session ID after the user logout.",
+            "id": "course-of-action--e132b1ab-8471-4391-8be7-58657c09f46c",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-60-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

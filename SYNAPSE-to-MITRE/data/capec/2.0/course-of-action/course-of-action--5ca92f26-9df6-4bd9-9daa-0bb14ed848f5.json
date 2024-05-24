@@ -1,0 +1,20 @@
+{
+    "id": "bundle--67dcf3c9-012b-443c-92da-bc9bd56fac64",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Configuration: Properly configure the crossdomain.xml file to only include the known domains that should host remote flash movies.",
+            "id": "course-of-action--5ca92f26-9df6-4bd9-9daa-0bb14ed848f5",
+            "modified": "2023-01-24T00:00:00.000Z",
+            "name": "coa-178-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--5344ab78-cf6e-4f92-8c64-cd89f0a08346",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Typically, an IDS/IPS system is very effective against this type of attack.",
+            "id": "course-of-action--a3232284-dcc4-4506-87db-eaf55fb043c9",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-307-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

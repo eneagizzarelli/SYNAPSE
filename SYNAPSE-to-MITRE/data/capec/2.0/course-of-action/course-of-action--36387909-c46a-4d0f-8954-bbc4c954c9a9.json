@@ -1,0 +1,20 @@
+{
+    "id": "bundle--da90754d-109f-469d-898d-25848300af1e",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implement an intelligent password throttling mechanism. Care must be taken to assure that these mechanisms do not excessively enable account lockout attacks such as CAPEC-2.",
+            "id": "course-of-action--36387909-c46a-4d0f-8954-bbc4c954c9a9",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-16-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--1c0667b2-9c75-422e-9c7e-b4a1db5764a0",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Properly validate and sanitize/reject user input at the service provider.",
+            "id": "course-of-action--b95cd192-7218-4771-85a6-6d6359c63b34",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-110-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--982b922d-59f2-43a6-b3de-cdd2d08fbe77",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Frequent changing of handset and retransmission device",
+            "id": "course-of-action--520b5a77-564b-4186-aadd-6e795b0bb798",
+            "modified": "2019-04-04T00:00:00.000Z",
+            "name": "coa-612-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

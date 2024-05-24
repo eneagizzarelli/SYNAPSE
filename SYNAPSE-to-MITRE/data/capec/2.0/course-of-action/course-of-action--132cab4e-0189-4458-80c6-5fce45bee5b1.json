@@ -1,0 +1,20 @@
+{
+    "id": "bundle--a93e97ab-d799-4cf5-9944-ea4a57403526",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Strong input validation - All user-controllable input must be validated and filtered for illegal formatting characters.",
+            "id": "course-of-action--132cab4e-0189-4458-80c6-5fce45bee5b1",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-135-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

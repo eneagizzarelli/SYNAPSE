@@ -1,0 +1,20 @@
+{
+    "id": "bundle--0ade9c62-0c9a-4430-890c-40f8ea19494d",
+    "objects": [
+        {
+            "created": "2017-01-12T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Ensure best practices with respect to communications channel protections.",
+            "id": "course-of-action--278ea0bd-2f3e-44e3-8398-566da0f8b0a1",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-589-3",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

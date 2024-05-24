@@ -1,0 +1,20 @@
+{
+    "id": "bundle--01b033c9-1705-4b45-b431-77818e1bbaba",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Perform allowlist validation against a positive specification for command length, type, and parameters.",
+            "id": "course-of-action--e5c4fb82-e889-429a-a343-f75a01e515dd",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-15-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

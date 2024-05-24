@@ -1,0 +1,20 @@
+{
+    "id": "bundle--2233cb4b-6f30-4982-9fc7-40f38a640586",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Strong input validation - All user-controllable input must be validated and filtered for illegal characters as well as content that can be interpreted in the context of an XML data or a query.",
+            "id": "course-of-action--209902e6-dabf-4389-bf2b-cdb41c18a692",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-250-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

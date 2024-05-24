@@ -1,0 +1,20 @@
+{
+    "id": "bundle--33bf1d84-bace-4c3b-9d2a-d280d30f99b1",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Consider configuring firewall rules to block ICMP Echo requests and prevent replies. If not practical, monitor and consider action when a system has fast and a repeated pattern of requests that move incrementally through port numbers.",
+            "id": "course-of-action--79e561d8-948d-4d24-ae3c-39104d77d66a",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-285-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

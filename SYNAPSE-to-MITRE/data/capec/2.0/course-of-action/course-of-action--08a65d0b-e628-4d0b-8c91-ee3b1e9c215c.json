@@ -1,0 +1,20 @@
+{
+    "id": "bundle--187421f2-e707-4da2-bd85-3c2ef6b7e0dd",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: Disallow the inclusion of DTDs as part of incoming messages.",
+            "id": "course-of-action--08a65d0b-e628-4d0b-8c91-ee3b1e9c215c",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-228-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

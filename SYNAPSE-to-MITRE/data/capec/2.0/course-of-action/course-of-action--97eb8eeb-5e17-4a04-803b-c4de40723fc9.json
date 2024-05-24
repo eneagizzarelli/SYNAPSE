@@ -1,0 +1,20 @@
+{
+    "id": "bundle--6d12b9ff-1a5a-485f-bd37-f1f97bbd06bb",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Server side developers should not proxy content via XHR or other means, if a http proxy for remote content is setup on the server side, the client's browser has no way of discerning where the data is originating from.",
+            "id": "course-of-action--97eb8eeb-5e17-4a04-803b-c4de40723fc9",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-32-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

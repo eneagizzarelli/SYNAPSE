@@ -1,0 +1,76 @@
+{
+    "id": "bundle--ce7d11b5-0947-4f33-89c3-ef1e4c941935",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary creates a serialized data file (e.g. XML, YAML, etc...) that contains an external data reference. Because serialized data parsers may not validate documents with external references, there may be no checks on the nature of the reference in the external data. This can allow an adversary to open arbitrary files or connections, which may further lead to the adversary gaining access to information on the system that they would normally be unable to obtain.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-201",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/201.html"
+                },
+                {
+                    "external_id": "CWE-829",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/829.html"
+                },
+                {
+                    "description": "XXE (Xml eXternal Entity) Attack, Beyond Security",
+                    "external_id": "REF-73",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "http://www.securiteam.com/securitynews/6D0100A5PU.html"
+                },
+                {
+                    "description": "CESA-2007-002 - rev 2: Sun JDK6 breaks XXE attack protection",
+                    "external_id": "REF-74",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "http://scary.beasts.org/security/CESA-2007-002.html"
+                }
+            ],
+            "id": "attack-pattern--d9717514-c621-49cd-b8e1-fd7cc1daa8d1",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "Serialized Data External Linking",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_child_of_refs": [
+                "attack-pattern--fd669b7d-0e79-473c-9808-a860dfb0c871",
+                "attack-pattern--b6f5248a-346f-484f-8091-8ab84288aa81"
+            ],
+            "x_capec_consequences": {
+                "Confidentiality": [
+                    "Read Data"
+                ]
+            },
+            "x_capec_domains": [
+                "Software",
+                "Communications",
+                "Software"
+            ],
+            "x_capec_example_instances": [
+                "\n               <xhtml:p>The following DTD would attempt to open the /dev/tty device:</xhtml:p>\n               <xhtml:div style=\"margin-left:1em;\" class=\"informative\"><!DOCTYPE doc [ <!ENTITY ent SYSTEM \"file:///dev/tty\"> ]></xhtml:div>\n               <xhtml:p>A malicious actor could use this crafted DTD to reveal sensitive information.</xhtml:p>\n            ",
+                "\n               <xhtml:p>The following XML snippet would attempt to open the /etc/passwd file:</xhtml:p>\n               <xhtml:div style=\"margin-left:1em;\" class=\"informative\"><foo xmlns:xi=\"http://www.w3.org/2001/XInclude\"> <xi:include parse=\"text\" href=\"file:///etc/passwd\"/></foo></xhtml:div>\n            "
+            ],
+            "x_capec_execution_flow": "<h2> Execution Flow </h2><div><h3>Explore</h3><ol><li> <p> <b>Survey the target: </b>Using a browser or an automated tool, an adversary records all instances of web services that process requests with serialized data.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>Use an automated tool to record all instances of URLs that process requests with serialized data.</td></tr><tr><td>Use a browser to manually explore the website and analyze how the application processes serialized data requests.</td></tr></tbody></table></ol></div><div><h3>Exploit</h3><ol><li> <p> <b>Craft malicious payload: </b>The adversary crafts malicious data message that contains references to sensitive files.</p></li><li> <p> <b>Launch an External Linking attack: </b>Send the malicious crafted message containing the reference to a sensitive file to the target URL.</p></li></ol></div>",
+            "x_capec_likelihood_of_attack": "High",
+            "x_capec_prerequisites": [
+                "The target must follow external data references without validating the validity of the reference target."
+            ],
+            "x_capec_resources_required": [
+                "None: No specialized resources are required to execute this type of attack."
+            ],
+            "x_capec_skills_required": {
+                "Low": "To send serialized data messages with maliciously crafted schema."
+            },
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

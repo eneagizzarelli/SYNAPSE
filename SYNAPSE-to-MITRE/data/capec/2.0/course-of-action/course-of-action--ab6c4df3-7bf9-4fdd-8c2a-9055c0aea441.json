@@ -1,0 +1,20 @@
+{
+    "id": "bundle--d5b0cbc4-b21c-433d-9d7f-293ea4bce2ec",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Monitor system and domain logs for abnormal credential access.",
+            "id": "course-of-action--ab6c4df3-7bf9-4fdd-8c2a-9055c0aea441",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-560-7",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

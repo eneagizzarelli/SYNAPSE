@@ -1,0 +1,29 @@
+{
+    "id": "bundle--fce6ba33-1a2a-49a2-a06a-e881c699464d",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "This pattern has been deprecated as it is covered by a chaining relationship between CAPEC-174: Flash Parameter Injection and CAPEC-591: Stored XSS. Please refer to these CAPECs going forward.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-246",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/246.html"
+                }
+            ],
+            "id": "attack-pattern--5ce3b5e2-c554-4530-be1c-44c6579369ed",
+            "modified": "2017-05-01T00:00:00.000Z",
+            "name": "DEPRECATED: XSS Using Flash",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_status": "Deprecated",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--bb5e2a6a-9c25-4b9b-b811-50ca70ade6ed",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Assume all input is malicious. Consider all potentially relevant properties when validating input.",
+            "id": "course-of-action--98557606-654b-48be-90f9-47ef76f7034b",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-130-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

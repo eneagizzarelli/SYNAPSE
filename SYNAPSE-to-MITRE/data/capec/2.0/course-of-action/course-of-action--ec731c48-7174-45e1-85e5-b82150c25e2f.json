@@ -1,0 +1,20 @@
+{
+    "id": "bundle--59ffab47-dfe5-4a32-b429-8afc760d2fcc",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Ensure that to the extent possible, no sensitive data is passed from the server to the client via JSON objects. JavaScript was never intended to play that role, hence the same origin policy does not adequate address this scenario.",
+            "id": "course-of-action--ec731c48-7174-45e1-85e5-b82150c25e2f",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-111-3",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

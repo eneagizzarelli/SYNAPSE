@@ -1,0 +1,20 @@
+{
+    "id": "bundle--d82ecab8-f9b3-4d5b-8216-12f38045815f",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "For competing actions, use well-known libraries which implement synchronization.",
+            "id": "course-of-action--7ce51af1-a48c-4762-97f7-120a71c115dc",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-25-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -2,9 +2,9 @@ geoip2
 pyyaml
 openai
 python-dotenv
-socket
 numpy
 pandas
 nltk
 scikit-learn
 mitreattack-python
+stix2

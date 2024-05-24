@@ -1,0 +1,20 @@
+{
+    "id": "bundle--a8eaf3e7-e0d9-476d-91e8-8e4edf1e4506",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Configuration: Ensure that the DBMS is patched with the latest security patches",
+            "id": "course-of-action--57dfed23-ac96-435d-9b02-e9c712b0bb48",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-470-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

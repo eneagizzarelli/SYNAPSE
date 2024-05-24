@@ -1,0 +1,20 @@
+{
+    "id": "bundle--f5a847e4-3efe-4ea0-85bd-6a4500a1c5bb",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Configuration: Configure web server software to limit the waiting period on opened HTTP sessions",
+            "id": "course-of-action--cac35d87-f34b-428c-95aa-1e5963873af5",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-469-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}
