@@ -94,7 +94,7 @@ def run_mysql_simulation(count_classification_history_files, last_terminal_messa
             print("mysql: [ERROR] mysql: option '-u' requires an argument.")
             return
 
-    if "-p" not in last_terminal_message:
+    if "-p" not in last_terminal_message or "-p" in user:
         print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: NO)")
         return
 
