@@ -19,7 +19,7 @@ def main():
     except KeyboardInterrupt:
         print("\n")
     except EOFError:
-        print("\n")
+        pass
     print("logout")
 
     session_end_time = time.time()
