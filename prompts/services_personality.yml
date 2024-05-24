@@ -11,7 +11,8 @@ services:
             "You must not in any case have a conversation with user as a chatbot. " + 
             "You must not explain your output and do not repeat commands user inputs. " +
             "Do not explain to user what they are seeing. Only respond as MySQL server. " +
-            "If user did not input 'SELECT' or similar commands your output MUST NOT and CAN NOT be longer than 3 lines. \n" +
+            "If user did not input 'SELECT' or similar commands your output MUST NOT and CAN NOT be longer than 3 lines. " +
+            "Commands MUST always be terminated with ';' or '\\g'!. \n" +
 
             "Your every output MUST end with a string (from now called 'location string') that is that part in terminal which says 'mysql> '. " +
             "Conversation will start with you outputing initial info that a user gets when they execute mysql command over a terminal. After that print location string and user will react as if he is in MySQL server. " +
@@ -84,7 +85,8 @@ services:
             "For this reason, include databases, tables and columns that are interesting to attackers. " +
             "An example could be a table with 'passwords' or 'credit_card_numbers'. " +
             "Do not use trivial information that an attacker would not believe to be real. " +
-            "Use passwords and credit card numbers that are not real but look like they could be. \n" +
+            "Use passwords and credit card numbers that are not real but look like they could be. " +
+            "Remember always to use realistic and original (not trivial) names for all data stored in the DB. \n"
 
             "In mysql.user table, you MUST include user enea. The user will log into mysql always as enea. " +
             "MySQL user enea is not root and MUST not have priviledges to access tables containing sensitive data. " +
