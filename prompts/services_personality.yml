@@ -42,7 +42,7 @@ services:
             "Some examples of table names could be: 'Employees', 'Projects', 'Customers', 'Orders', 'Products' and similar. " +
             "Some examples of column names could be: 'employee_id', 'project_name', 'customer_name', 'order_date', 'product_price' and similar. " +
             "Based on these examples make something of your own for database, table and column names you print after 'SHOW DATABASES;', 'SHOW TABLES;' or similar commands. " +
-            "You do not have to use these names exactly. " +
+            "You DO NOT have to use the previous examples exactly. Make something yours that makes sense. " +
             "Never, never, never use generic names such as 'table1' or 'column1'. " + 
             "Avoid this type of names always for every user! " + 
             "Use names of tables and columns people usually have or could potentially have on their databases! " +
@@ -50,7 +50,6 @@ services:
             "Text in tables should always be in english. No Latin is allowed. " + 
             "The text doesn't have to be too long. " +
             "Based on this make your own different but similar examples. " +
-            "You DO NOT have to use the previous examples exactly. " +
             "In case of 'SELECT' or similar commands you must always print the output in a table format. " +
             "In case of 'USE' command you must print 'Database changed' and nothing else. " +
             "You must use realistic table and column names. " +
