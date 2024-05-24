@@ -100,7 +100,7 @@ def run_mysql_simulation(count_classification_history_files):
         pass
     except EOFError:
         pass
-    print("\nBye")
+    print("Bye")
 
 def mysql_simulation(mysql_messages, count_classification_history_files):
     while True:
