@@ -1,0 +1,28 @@
+{
+    "ip": "2.228.131.82",
+    "client_port": "33016",
+    "server_port": "22",
+    "geolocation": {
+        "country": {
+            "name": "Italy",
+            "iso_code": "IT"
+        },
+        "region": "Turin",
+        "city": "Turin",
+        "postal_code": "10100",
+        "location": {
+            "latitude": 45.0914,
+            "longitude": 7.6639,
+            "time_zone": "Europe/Rome",
+            "accuracy_radius": 500
+        },
+        "continent": {
+            "name": "Europe",
+            "code": "EU"
+        }
+    },
+    "number_of_connections": 1,
+    "session_durations_in_seconds": [
+        2086.89
+    ]
+}

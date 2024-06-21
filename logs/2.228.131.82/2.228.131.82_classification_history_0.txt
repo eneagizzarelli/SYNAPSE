@@ -1,0 +1,372 @@
+Last login: Fri Jun 21 14:09:29 2024 from 2.228.131.82
+enea@techhub:~$ cd Projects
+enea@techhub:~/Projects$ ll
+total 16
+drwxr-xr-x  4 enea enea 4096 Jun 21 14:09 .
+drwxr-xr-x 10 enea enea 4096 Jun 21 14:09 ..
+drwxr-xr-x  3 enea enea 4096 Jun 21 14:09 WebApp
+drwxr-xr-x  2 enea enea 4096 Jun 21 14:09 DataAnalysis
+enea@techhub:~/Projects$ cd DataAnalysis
+enea@techhub:~/Projects/DataAnalysis$ ll
+total 12
+drwxr-xr-x 2 enea enea 4096 Jun 21 14:09 .
+drwxr-xr-x 4 enea enea 4096 Jun 21 14:09 ..
+-rw-r--r-- 1 enea enea  512 Jun 21 14:09 analysis.py
+enea@techhub:~/Projects/DataAnalysis$ cat analysis.py
+python
+import pandas as pd
+def analyze_data(file_path):
+    data = pd.read_csv(file_path)
+    summary = data.describe()
+    return summary
+if __name__ == "__main__":
+    file_path = "data.csv"
+    print(analyze_data(file_path))
+enea@techhub:~/Projects/DataAnalysis$ mysql
+enea@techhub:~/Projects/DataAnalysis$ mysql -p
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mysql;
+Database changed
+mysql> select host,user from user;
++-----------+------------------+
+| host      | user             |
++-----------+------------------+
+| localhost | mysql.infoschema |
+| localhost | mysql.session    |
+| localhost | mysql.sys        |
+| localhost | enea             |
++-----------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| Company            |
+| University         |
+| Hospital           |
+| Bank               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use Company
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_Company |
++------------------+
+| Employees        |
+| Projects         |
+| Customers        |
+| Orders           |
+| Products         |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Employees
++-------------+-------------+------------+----------------+----------------+
+| employee_id | first_name  | last_name  | email          | phone_number   |
++-------------+-------------+------------+----------------+----------------+
+| 1           | John        | Doe        | john.doe@comp.com | 555-1234      |
+| 2           | Jane        | Smith      | jane.smith@comp.com | 555-5678      |
+| 3           | Alice       | Johnson    | alice.johnson@comp.com | 555-8765      |
+| 4           | Bob         | Brown      | bob.brown@comp.com | 555-4321      |
++-------------+-------------+------------+----------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Projects
++-------------+---------------------+-----------------+------------+
+| project_id  | project_name        | start_date      | end_date   |
++-------------+---------------------+-----------------+------------+
+| 101         | Website Redesign    | 2023-01-15      | 2023-06-30 |
+| 102         | Mobile App Launch   | 2023-03-01      | 2023-12-31 |
+| 103         | Cloud Migration     | 2023-05-20      | 2024-02-28 |
+| 104         | Security Upgrade    | 2023-07-10      | 2023-11-15 |
++-------------+---------------------+-----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Customers
++-------------+----------------+-------------------+-------------------+----------------+
+| customer_id | customer_name  | contact_name      | email             | phone_number   |
++-------------+----------------+-------------------+-------------------+----------------+
+| 201         | Acme Corp      | Sarah Connor      | sarah.connor@acme.com | 555-9876      |
+| 202         | Globex Inc     | Hank Scorpio      | hank.scorpio@globex.com | 555-6543      |
+| 203         | Initech        | Peter Gibbons     | peter.gibbons@initech.com | 555-3210      |
+| 204         | Umbrella Corp  | Alice Abernathy   | alice.abernathy@umbrella.com | 555-7890      |
++-------------+----------------+-------------------+-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Orders
++-----------+-------------+------------+------------+----------------+
+| order_id  | customer_id | order_date | total      | status         |
++-----------+-------------+------------+------------+----------------+
+| 301       | 201         | 2023-04-01 | 1500.00    | Shipped        |
+| 302       | 202         | 2023-05-15 | 2500.00    | Processing     |
+| 303       | 203         | 2023-06-20 | 3500.00    | Delivered      |
+| 304       | 204         | 2023-07-05 | 4500.00    | Cancelled      |
++-----------+-------------+------------+------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Products
++-------------+------------------+----------------+------------+
+| product_id  | product_name     | product_price  | stock      |
++-------------+------------------+----------------+------------+
+| 401         | Laptop           | 1200.00        | 50         |
+| 402         | Smartphone       | 800.00         | 150        |
+| 403         | Tablet           | 600.00         | 100        |
+| 404         | Monitor          | 300.00         | 75         |
++-------------+------------------+----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| Company            |
+| University         |
+| Hospital           |
+| Bank               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use University;
+Database changed
+mysql> show tables
++------------------+
+| Tables_in_University |
++------------------+
+| Students         |
+| Courses          |
+| Professors       |
+| Enrollments      |
+| Departments      |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Students;
++-------------+-------------+------------+---------------------+----------------+
+| student_id  | first_name  | last_name  | email               | phone_number   |
++-------------+-------------+------------+---------------------+----------------+
+| 1           | Emily       | Davis      | emily.davis@uni.edu | 555-1111       |
+| 2           | Michael     | Brown      | michael.brown@uni.edu | 555-2222       |
+| 3           | Jessica     | Wilson     | jessica.wilson@uni.edu | 555-3333       |
+| 4           | Daniel      | Taylor     | daniel.taylor@uni.edu | 555-4444       |
++-------------+-------------+------------+---------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Courses
++-------------+-------------------------+-----------------+------------+
+| course_id   | course_name             | start_date      | end_date   |
++-------------+-------------------------+-----------------+------------+
+| 101         | Computer Science 101    | 2023-01-10      | 2023-05-15 |
+| 102         | Mathematics 201         | 2023-02-01      | 2023-06-20 |
+| 103         | Physics 301             | 2023-03-05      | 2023-07-25 |
+| 104         | Chemistry 101           | 2023-04-10      | 2023-08-30 |
++-------------+-------------------------+-----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Professors
++-------------+-------------+------------+---------------------+----------------+
+| professor_id| first_name  | last_name  | email               | phone_number   |
++-------------+-------------+------------+---------------------+----------------+
+| 1           | Robert      | Smith      | robert.smith@uni.edu| 555-5555       |
+| 2           | Linda       | Johnson    | linda.johnson@uni.edu| 555-6666       |
+| 3           | William     | Lee        | william.lee@uni.edu | 555-7777       |
+| 4           | Patricia    | Miller     | patricia.miller@uni.edu | 555-8888       |
++-------------+-------------+------------+---------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Enrollments
++-------------+-------------+-------------+------------+
+| enrollment_id| student_id | course_id   | enroll_date|
++-------------+-------------+-------------+------------+
+| 1           | 1           | 101         | 2023-01-15 |
+| 2           | 2           | 102         | 2023-02-05 |
+| 3           | 3           | 103         | 2023-03-10 |
+| 4           | 4           | 104         | 2023-04-15 |
++-------------+-------------+-------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Departments
++-------------+---------------------+---------------------+
+| department_id| department_name    | head_of_department  |
++-------------+---------------------+---------------------+
+| 1           | Computer Science    | Dr. Alan Turing     |
+| 2           | Mathematics         | Dr. Ada Lovelace    |
+| 3           | Physics             | Dr. Albert Einstein |
+| 4           | Chemistry           | Dr. Marie Curie     |
++-------------+---------------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| Company            |
+| University         |
+| Hospital           |
+| Bank               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use Hospital
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_Hospital |
++------------------+
+| Patients         |
+| Doctors          |
+| Appointments     |
+| Medications      |
+| Departments      |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Patients
++-------------+-------------+------------+---------------------+----------------+
+| patient_id  | first_name  | last_name  | email               | phone_number   |
++-------------+-------------+------------+---------------------+----------------+
+| 1           | James       | Anderson   | james.anderson@hos.com | 555-1010     |
+| 2           | Mary        | Thompson   | mary.thompson@hos.com | 555-2020     |
+| 3           | Patricia    | Martinez   | patricia.martinez@hos.com | 555-3030   |
+| 4           | Michael     | Garcia     | michael.garcia@hos.com | 555-4040     |
++-------------+-------------+------------+---------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Doctors
++-------------+-------------+------------+---------------------+----------------+
+| doctor_id   | first_name  | last_name  | email               | phone_number   |
++-------------+-------------+------------+---------------------+----------------+
+| 1           | John        | Smith      | john.smith@hos.com  | 555-5050       |
+| 2           | Linda       | Johnson    | linda.johnson@hos.com | 555-6060     |
+| 3           | Robert      | Brown      | robert.brown@hos.com | 555-7070     |
+| 4           | Susan       | Davis      | susan.davis@hos.com | 555-8080       |
++-------------+-------------+------------+---------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Appointments
++----------------+-------------+-------------+------------+------------+
+| appointment_id | patient_id  | doctor_id   | date       | time       |
++----------------+-------------+-------------+------------+------------+
+| 1              | 1           | 1           | 2023-06-01 | 09:00:00   |
+| 2              | 2           | 2           | 2023-06-02 | 10:00:00   |
+| 3              | 3           | 3           | 2023-06-03 | 11:00:00   |
+| 4              | 4           | 4           | 2023-06-04 | 12:00:00   |
++----------------+-------------+-------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Medications
++-------------+------------------+----------------+------------+
+| medication_id| medication_name | dosage         | patient_id |
++-------------+------------------+----------------+------------+
+| 1           | Ibuprofen        | 200mg          | 1          |
+| 2           | Paracetamol      | 500mg          | 2          |
+| 3           | Amoxicillin      | 250mg          | 3          |
+| 4           | Metformin        | 850mg          | 4          |
++-------------+------------------+----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Departments
++-------------+---------------------+---------------------+
+| department_id| department_name    | head_of_department  |
++-------------+---------------------+---------------------+
+| 1           | Cardiology         | Dr. Gregory House   |
+| 2           | Neurology          | Dr. Meredith Grey   |
+| 3           | Oncology           | Dr. Richard Webber  |
+| 4           | Pediatrics         | Dr. Miranda Bailey  |
++-------------+---------------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> use Bank;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_Bank   |
++------------------+
+| Accounts         |
+| Transactions     |
+| Customers        |
+| Loans            |
+| Employees        |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Accounts
++-------------+-------------+----------------+------------+
+| account_id  | customer_id | account_type   | balance    |
++-------------+-------------+----------------+------------+
+| 1           | 301         | Savings        | 5000.00    |
+| 2           | 302         | Checking       | 1500.00    |
+| 3           | 303         | Savings        | 3000.00    |
+| 4           | 304         | Checking       | 2500.00    |
++-------------+-------------+----------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Transactions
++----------------+-------------+------------+------------+------------+
+| transaction_id | account_id  | date       | amount     | type       |
++----------------+-------------+------------+------------+------------+
+| 1              | 1           | 2023-05-01 | 1000.00    | Deposit    |
+| 2              | 2           | 2023-05-02 | 500.00     | Withdrawal |
+| 3              | 3           | 2023-05-03 | 1500.00    | Deposit    |
+| 4              | 4           | 2023-05-04 | 200.00     | Withdrawal |
++----------------+-------------+------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Customers
++-------------+----------------+-------------------+-------------------+----------------+
+| customer_id | customer_name  | contact_name      | email             | phone_number   |
++-------------+----------------+-------------------+-------------------+----------------+
+| 301         | John Doe       | John Doe          | john.doe@bank.com | 555-1111       |
+| 302         | Jane Smith     | Jane Smith        | jane.smith@bank.com | 555-2222     |
+| 303         | Alice Johnson  | Alice Johnson     | alice.johnson@bank.com | 555-3333   |
+| 304         | Bob Brown      | Bob Brown         | bob.brown@bank.com | 555-4444      |
++-------------+----------------+-------------------+-------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Loans
++-------------+-------------+------------+------------+------------+
+| loan_id     | customer_id | amount     | start_date | end_date   |
++-------------+-------------+------------+------------+------------+
+| 1           | 301         | 10000.00   | 2023-01-01 | 2024-01-01 |
+| 2           | 302         | 20000.00   | 2023-02-01 | 2024-02-01 |
+| 3           | 303         | 15000.00   | 2023-03-01 | 2024-03-01 |
+| 4           | 304         | 25000.00   | 2023-04-01 | 2024-04-01 |
++-------------+-------------+------------+------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Employees
++-------------+-------------+------------+---------------------+----------------+
+| employee_id | first_name  | last_name  | email               | phone_number   |
++-------------+-------------+------------+---------------------+----------------+
+| 1           | Emma        | Wilson     | emma.wilson@bank.com | 555-5555      |
+| 2           | Liam        | Martinez   | liam.martinez@bank.com | 555-6666    |
+| 3           | Olivia      | Anderson   | olivia.anderson@bank.com | 555-7777  |
+| 4           | Noah        | Thompson   | noah.thompson@bank.com | 555-8888    |
++-------------+-------------+------------+---------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql>enea@techhub:~/Projects/DataAnalysis$ clear
+enea@techhub:~/Projects/DataAnalysis$
