@@ -215,13 +215,13 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/eneagizzarelli/SYNAPSE.svg?style=for-the-badge
 [contributors-url]: https://github.com/eneagizzarelli/SYNAPSE/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/eneagizzarelli/SYNAPSE.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/eneagizzarelli/SYNAPSE.svg?style=for-the-badges
 [forks-url]: https://github.com/eneagizzarelli/SYNAPSE/network/members
-[stars-shield]: https://img.shields.io/github/stars/eneagizzarelli/SYNAPSE.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/eneagizzarelli/SYNAPSE.svg?style=for-the-badges
 [stars-url]: https://github.com/eneagizzarelli/SYNAPSE/stargazers
-[issues-shield]: https://img.shields.io/github/issues/eneagizzarelli/SYNAPSE.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/eneagizzarelli/SYNAPSE.svg?style=for-the-badges
 [issues-url]: https://github.com/eneagizzarelli/SYNAPSE/issues
-[license-shield]: https://img.shields.io/github/license/eneagizzarelli/SYNAPSE.svg?style=for-the-badges
+[license-shield]: https://img.shields.io/github/license/eneagizzarelli/SYNAPSE.svg?style=for-the-badge
 [license-url]: https://github.com/eneagizzarelli/SYNAPSE/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/eneagizzarelli
