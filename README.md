@@ -42,9 +42,9 @@
     <a href="https://github.com/eneagizzarelli/synapse"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=bug&template=bug-report.md">Report Bug</a>
     ·
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=enhancement&template=feature-request.md">Request Feature</a>
   </p>
 </div>
 
