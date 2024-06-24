@@ -204,9 +204,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [shelLM](https://github.com/stratosphereips/SheLLM)
+* [cti-to-mitre-with-nlp]()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
