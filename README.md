@@ -58,11 +58,7 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#prerequisites">Installation</a>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
@@ -76,42 +72,27 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-**SYNAPSE** is a low-interaction server dynamic **honeypot** acting as a Linux OS terminal. Instead of relying on a real terminal, SYNAPSE works with **generative AI** to answer with plausible terminal outputs, as if the user was connecting to a real Linux OS. It implements the simulation of two services:
+**SYNAPSE** is a low-interaction server dynamic **honeypot** acting as a Linux OS terminal, written in Python. Instead of relying on a real terminal, SYNAPSE works with **generative AI** (currently _GPT 4o_ model) to answer with plausible terminal outputs, as if the user was connecting to a real Linux OS. It implements the simulation of two services:
  - SSH Server
  - MySQL Server
  
-**SYNAPSE-to-MITRE** extension leverages machine learning techniques to automatically map logs extracted from SYNAPSE into attack techniques of the [MITRE ATT&CK](https://attack.mitre.org) database.
+**SYNAPSE-to-MITRE** extension leverages machine learning techniques to automatically map logs extracted from SYNAPSE into attack techniques of the [MITRE ATT&CK](https://attack.mitre.org) database (currently _Enterprise Attack 15.1_).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
-## Getting Started
+## Installation
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone this repository
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/eneagizzarelli/SYNAPSE.git
    ```
-3. Install NPM packages
+2. Enter the project folder and install requirements
    ```sh
-   npm install
+   pip install -r requirements.txt
    ```
-4. Enter your API in `config.js`
+4. Create a .env file and add your OpenAI key
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   OPENAI_API_KEY='YOUR KEY';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -119,11 +100,21 @@ This is an example of how to list things you need to use the software and how to
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Usage 
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script whenever a user connects to your machine using SSH. Example:
+```sh
+Match User enea
+	ForceCommand /home/enea/SYNAPSE/scripts/startSYNAPSE.sh
+	X11Forwarding no
+	AllowTcpForwarding no
+	AllowAgentForwarding no
+	PermitTunnel no
+	PermitOpen none
+```
+In our configuration, SYNAPSE project folder has been cloned in a machine under the specific path _/home/enea/SYNAPSE_. Every script/source file in this project refers to other scripts/source files using the above absolute path as a base path. If you use a different configuration, remember to change the path everywhere.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Also, if you are hosting the code on a VM like AWS EC2 and you want to allow password authentication, remember to change your `/etc/ssh/sshd_config.d/50-cloud-init.conf` file setting `PasswordAuthentication yes`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
