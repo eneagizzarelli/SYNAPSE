@@ -76,7 +76,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+**SYNAPSE** is a low-interaction server dynamic **honeypot** acting as a Linux OS terminal. Instead of relying on a real terminal, SYNAPSE works with **generative AI** to answer with plausible terminal outputs, as if the user was connecting to a real Linux OS. It implements the simulation of two services:
+ - SSH Server
+ - MySQL Server
+ 
+**SYNAPSE-to-MITRE** extension leverages machine learning techniques to automatically map logs extracted from SYNAPSE into attack techniques of the [MITRE ATT&CK](https://attack.mitre.org) database.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
