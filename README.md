@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/eneagizzarelli/SYNAPSE">
+  <a href="https://github.com/eneagizzarelli/synapse">
     <img src="SYNAPSE_logo.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -42,9 +42,9 @@
     <a href="https://github.com/eneagizzarelli/synapse"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=bug&template=bug-report.md">Report Bug</a>
+    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
     ·
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=enhancement&template=feature-request.md">Request Feature</a>
+    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
   </p>
 </div>
 
@@ -54,12 +54,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#prerequisites">Installation</a>
-    </li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -76,7 +72,7 @@
  - SSH Server
  - MySQL Server
  
-**SYNAPSE-to-MITRE** extension leverages machine learning techniques to automatically map logs extracted from SYNAPSE into attack techniques of the [MITRE ATT&CK](https://attack.mitre.org) database (currently _Enterprise Attack 15.1_).
+Leverages **SYNAPSE-to-MITRE** submodule to automatically map logs into attack techniques of the [MITRE ATT&CK](https://attack.mitre.org) database.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
