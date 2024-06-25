@@ -140,6 +140,7 @@ Project Link: [https://github.com/eneagizzarelli/SYNAPSE](https://github.com/ene
 ## Acknowledgments
 
 * [shelLM](https://github.com/stratosphereips/SheLLM)
+* [GeoLite.mmdb](https://github.com/P3TERX/GeoLite.mmdb)
 * [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
