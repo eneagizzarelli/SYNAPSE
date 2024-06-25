@@ -1,0 +1,20 @@
+{
+    "id": "bundle--812c5e14-7807-49e2-a4df-5f17a75aaff0",
+    "objects": [
+        {
+            "created": "2021-06-24T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Configuration: Disable Copy-on-Write between Cloud VMs",
+            "id": "course-of-action--d4954d97-b73a-4bed-952e-83b9a609fc81",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-663-4",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

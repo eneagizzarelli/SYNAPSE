@@ -1,0 +1,20 @@
+{
+    "id": "bundle--c8dcff6c-3917-4c6a-a675-2b816a56f664",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Use cryptographic tokens to associate a request with a specific action. The token can be regenerated at every request so that if a request with an invalid token is encountered, it can be reliably discarded. The token is considered invalid if it arrived with a request other than the action it was supposed to be associated with.",
+            "id": "course-of-action--97c0cee2-43b4-4e35-a822-c2af1fda128d",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-62-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

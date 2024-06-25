@@ -1,0 +1,20 @@
+{
+    "id": "bundle--a714c137-380a-4589-9950-543ca2c52ddf",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Use commonly accepted algorithms and recommended key sizes. The key size used will depend on how important it is to keep the data confidential and for how long.",
+            "id": "course-of-action--14ea1dd8-a232-4071-897a-a930751702bb",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-20-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--6e0182c7-1bc9-45e9-839c-c85b93da2177",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Configure the access control correctly.",
+            "id": "course-of-action--49faa4e3-77fa-4b56-8186-be9d4302e09a",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-126-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

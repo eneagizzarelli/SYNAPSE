@@ -1,0 +1,20 @@
+{
+    "id": "bundle--3ac35925-cc48-4bae-a0f9-4e80b5260a79",
+    "objects": [
+        {
+            "created": "2018-07-31T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Leverage hardware components known to not be susceptible to these types of attacks.",
+            "id": "course-of-action--ee51f6de-33e8-47c5-8d8b-17a99bc76e1c",
+            "modified": "2021-06-24T00:00:00.000Z",
+            "name": "coa-638-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

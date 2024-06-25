@@ -1,0 +1,20 @@
+{
+    "id": "bundle--8ab23eb4-0fec-4acd-9027-8a29ba6923dc",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: Mail servers that perform strict validation may catch these attacks, because metacharacters are not allowed in many header variables such as dns names",
+            "id": "course-of-action--06350ba3-c63f-43d3-85a9-3d4be370deba",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-41-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

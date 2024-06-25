@@ -1,0 +1,49 @@
+{
+    "id": "bundle--002619a4-13fa-4bc3-b0e1-cf1b45639455",
+    "objects": [
+        {
+            "created": "2017-01-03T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary injects one or more TCP RST packets to a target after the target has made a HTTP GET request. The goal of this attack is to have the target and/or destination web server terminate the TCP connection.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-596",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/596.html"
+                },
+                {
+                    "external_id": "CWE-940",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/940.html"
+                },
+                {
+                    "description": "John-Paul Verkamp, Minaxi Gupta, Inferring Mechanics of Web Censorship Around the World, 2012, USENIX",
+                    "external_id": "REF-477",
+                    "source_name": "reference_from_CAPEC"
+                }
+            ],
+            "id": "attack-pattern--dfd75d4a-689b-4cbd-9013-4ed32713dc64",
+            "modified": "2019-04-04T00:00:00.000Z",
+            "name": "TCP RST Injection",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_child_of_refs": [
+                "attack-pattern--e6f6d082-2186-4008-b52f-91f67abdba90"
+            ],
+            "x_capec_domains": [
+                "Communications",
+                "Software"
+            ],
+            "x_capec_prerequisites": [
+                "An On/In Path Device"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

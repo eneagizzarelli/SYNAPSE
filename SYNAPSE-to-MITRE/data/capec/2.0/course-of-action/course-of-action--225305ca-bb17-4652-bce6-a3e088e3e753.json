@@ -1,0 +1,20 @@
+{
+    "id": "bundle--37ab5f4f-6e61-46ab-9ee7-47f1a6b9a5ae",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Any security checks should occur after the data has been decoded and validated as correct data format. Do not repeat decoding process, if bad character are left after decoding process, treat the data as suspicious, and fail the validation process. Refer to the RFCs to safely decode URL.",
+            "id": "course-of-action--225305ca-bb17-4652-bce6-a3e088e3e753",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-79-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

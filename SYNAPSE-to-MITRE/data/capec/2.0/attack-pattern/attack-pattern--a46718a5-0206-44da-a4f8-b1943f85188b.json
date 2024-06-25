@@ -1,0 +1,44 @@
+{
+    "id": "bundle--ca44ad91-a22f-47ef-a320-7d294d173d07",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Inter-component protocols are used to communicate between different software and hardware modules within a single computer. Common examples are: interrupt signals and data pipes. Subverting the protocol can allow an adversary to impersonate others, discover sensitive information, control the outcome of a session, or perform other attacks. This type of attack targets invalid assumptions that may be inherent in implementers of the protocol, incorrect implementations of the protocol, or vulnerabilities in the protocol itself.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-276",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/276.html"
+                },
+                {
+                    "external_id": "CWE-707",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/707.html"
+                }
+            ],
+            "id": "attack-pattern--a46718a5-0206-44da-a4f8-b1943f85188b",
+            "modified": "2018-07-31T00:00:00.000Z",
+            "name": "Inter-component Protocol Manipulation",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_child_of_refs": [
+                "attack-pattern--2166d3c5-baec-4f42-8284-c1b5b649ad34"
+            ],
+            "x_capec_domains": [
+                "Communications",
+                "Software"
+            ],
+            "x_capec_parent_of_refs": [
+                "attack-pattern--4317ab6c-93e4-4c5a-a814-0cd2752c61b9"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "bundle--a35b2fb9-bf29-4dc9-b51a-22c765b9e830",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "id": "relationship--2f74ac5d-bb0a-4f7e-9601-cfc8bac01201",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "relationship_type": "mitigates",
+            "source_ref": "course-of-action--97eb8eeb-5e17-4a04-803b-c4de40723fc9",
+            "target_ref": "attack-pattern--70b83583-ffe3-4e6d-b4a6-61a9b9efc346",
+            "type": "relationship",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

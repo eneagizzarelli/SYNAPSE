@@ -1,0 +1,88 @@
+{
+    "id": "bundle--ee120cec-49a4-4726-91b4-9bbd7e9e5873",
+    "objects": [
+        {
+            "created": "2018-07-31T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "The adversary takes advantage of a bug in an application failing to verify the integrity of the running process to execute arbitrary code in the address space of a separate live process. The adversary could use running code in the context of another process to try to access process's memory, system/network resources, etc. The goal of this attack is to evade detection defenses and escalate privileges by masking the malicious code under an existing legitimate process. Examples of approaches include but not limited to: dynamic-link library (DLL) injection, portable executable injection, thread execution hijacking, ptrace system calls, VDSO hijacking, function hooking, reflective code loading, and more.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-640",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/640.html"
+                },
+                {
+                    "external_id": "CWE-114",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/114.html"
+                },
+                {
+                    "external_id": "CWE-829",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/829.html"
+                },
+                {
+                    "description": "Server Software Component: Terminal Services DLL",
+                    "external_id": "T1505.005",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1505/005"
+                },
+                {
+                    "description": "Hijack Execution Flow: Dynamic Linker Hijacking",
+                    "external_id": "T1574.006",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1574/006"
+                },
+                {
+                    "description": "Hijack Execution Flow: KernelCallbackTable",
+                    "external_id": "T1574.013",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1574/013"
+                },
+                {
+                    "description": "Reflective Code Loading",
+                    "external_id": "T1620",
+                    "source_name": "ATTACK",
+                    "url": "https://attack.mitre.org/wiki/Technique/T1620"
+                }
+            ],
+            "id": "attack-pattern--8bb5fe8b-4746-4b90-9e89-b65c4daa21e4",
+            "modified": "2023-01-24T00:00:00.000Z",
+            "name": "Inclusion of Code in Existing Process",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_child_of_refs": [
+                "attack-pattern--283d665d-e109-4d5d-8993-6fb25e5923d6"
+            ],
+            "x_capec_consequences": {
+                "Confidentiality": [
+                    "Execute Unauthorized Commands",
+                    "Read Data"
+                ],
+                "Integrity": [
+                    "Execute Unauthorized Commands",
+                    "Read Data"
+                ]
+            },
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_execution_flow": "<h2> Execution Flow </h2><div><h3>Explore</h3><ol><li> <p> <b>Determine target process: </b>The adversary determines a process with sufficient privileges that they wish to include code into.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>On Windows, use the process explorer's security tab to see if a process is running with administror privileges.</td></tr><tr><td>On Linux, use the ps command to view running processes and pipe the output to a search for a particular user, or the root user.</td></tr></tbody></table></ol></div><div><h3>Experiment</h3><ol><li> <p> <b>Attempt to include simple code with known output: </b>The adversary attempts to include very simple code into the existing process to determine if the code inclusion worked. The code will differ based on the approach used to include code into an existing process.</p></li></ol></div><div><h3>Exploit</h3><ol><li> <p> <b>Include arbitrary code into existing process: </b>Once an adversary has determined that including code into the existing process is possible, they will include code for a targeted purpose, such as accessing that process's memory.</p></li></ol></div>",
+            "x_capec_likelihood_of_attack": "Low",
+            "x_capec_prerequisites": [
+                "The targeted application fails to verify the integrity of the running process that allows an adversary to execute arbitrary code."
+            ],
+            "x_capec_skills_required": {
+                "High": "Knowledge of how to load malicious code into the memory space of a running process, as well as the ability to have the running process execute this code. For example, with DLL injection, the adversary must know how to load a DLL into the memory space of another running process, and cause this process to execute the code inside of the DLL."
+            },
+            "x_capec_status": "Stable",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--2e8ce927-2b51-4dfc-bc3e-0fff74078b82",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Validate software updates before installing.",
+            "id": "course-of-action--c434bad9-76f4-48d5-8bb3-9c46c4c91696",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-186-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

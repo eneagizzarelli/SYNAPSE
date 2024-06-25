@@ -1,0 +1,20 @@
+{
+    "id": "bundle--3647b71e-2ef5-453b-8074-d9ad2060a4e7",
+    "objects": [
+        {
+            "created": "2020-07-30T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Be mindful of your surroundings when discussing or viewing sensitive information in public areas.",
+            "id": "course-of-action--d898b88c-d850-4a06-bd12-57de9ee9c1e2",
+            "modified": "2020-07-30T00:00:00.000Z",
+            "name": "coa-508-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

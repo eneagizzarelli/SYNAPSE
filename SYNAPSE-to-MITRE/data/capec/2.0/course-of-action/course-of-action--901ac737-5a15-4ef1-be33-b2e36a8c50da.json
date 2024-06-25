@@ -1,0 +1,20 @@
+{
+    "id": "bundle--9a264546-c80f-4d47-8896-e3450b504faf",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Do not implicitly trust the data stored in the database. Re-validate it prior to usage to make sure that it is safe to use in a given context (e.g. as a command line argument).",
+            "id": "course-of-action--901ac737-5a15-4ef1-be33-b2e36a8c50da",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-108-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

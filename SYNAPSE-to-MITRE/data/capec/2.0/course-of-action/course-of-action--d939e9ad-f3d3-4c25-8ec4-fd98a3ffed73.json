@@ -1,0 +1,20 @@
+{
+    "id": "bundle--7e835ce5-d019-4931-ad3e-df1b4cd5c3ba",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Design: Ensure that the transparent proxy uses an actual network layer IP address for routing requests. On the transparent proxy, disable the use of routing based on address information in the HTTP host header.",
+            "id": "course-of-action--d939e9ad-f3d3-4c25-8ec4-fd98a3ffed73",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-465-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

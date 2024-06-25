@@ -1,0 +1,20 @@
+{
+    "id": "bundle--e344ceaa-df25-4c75-b23d-7b5958f21044",
+    "objects": [
+        {
+            "created": "2018-05-04T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Verify that files have proper access controls set, and reduce the storage of sensitive information to only what is necessary.",
+            "id": "course-of-action--f7009ea8-ba2d-4cdb-86fe-352bd35ae5ff",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-639-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

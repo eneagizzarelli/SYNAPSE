@@ -1,0 +1,20 @@
+{
+    "id": "bundle--776f3d22-dcb9-4e67-b0ff-6e5a00152076",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Utilize side-channel resistant implementations of all crypto algorithms.",
+            "id": "course-of-action--2e9301ad-e907-414c-9bac-0be1517b0112",
+            "modified": "2018-07-31T00:00:00.000Z",
+            "name": "coa-622-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

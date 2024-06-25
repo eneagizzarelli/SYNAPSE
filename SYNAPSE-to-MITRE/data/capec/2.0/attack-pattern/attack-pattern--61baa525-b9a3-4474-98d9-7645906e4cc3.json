@@ -1,0 +1,29 @@
+{
+    "id": "bundle--5067ece6-e4ae-49e6-9029-cee9277392dc",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "This attack pattern has been deprecated.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-629",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/629.html"
+                }
+            ],
+            "id": "attack-pattern--61baa525-b9a3-4474-98d9-7645906e4cc3",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "DEPRECATED: Unauthorized Use of Device Resources",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_status": "Deprecated",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

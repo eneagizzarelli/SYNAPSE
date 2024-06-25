@@ -1,0 +1,20 @@
+{
+    "id": "bundle--3a540a61-4c1a-4ba3-bacd-d10c5ce14bf0",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: Use session IDs that are difficult to guess or brute-force: One way for the attackers to obtain valid session IDs is by brute-forcing or guessing them. By choosing session identifiers that are sufficiently random, brute-forcing or guessing becomes very difficult.",
+            "id": "course-of-action--aba24572-8817-4d88-92bf-765eaa6ae508",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-196-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

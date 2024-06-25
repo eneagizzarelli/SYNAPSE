@@ -1,0 +1,20 @@
+{
+    "id": "bundle--c3327e91-14bb-4d04-ab5f-3d6a839950c2",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: Use industry standards session key generation mechanisms that utilize high amount of entropy to generate the session key. Many standard web and application servers will perform this task on your behalf.",
+            "id": "course-of-action--1b5eb714-1670-4a73-8ca3-0de95cf15371",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-21-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

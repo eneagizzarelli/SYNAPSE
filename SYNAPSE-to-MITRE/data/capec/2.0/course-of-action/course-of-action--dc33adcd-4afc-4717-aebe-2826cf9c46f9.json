@@ -1,0 +1,20 @@
+{
+    "id": "bundle--e8129aa0-7504-4bcc-810a-7f2f5e8bf2ce",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Input should be parameterized, or restricted to data sections of a command, thus removing the chance that the input will be treated as part of the command itself.",
+            "id": "course-of-action--dc33adcd-4afc-4717-aebe-2826cf9c46f9",
+            "modified": "2020-12-17T00:00:00.000Z",
+            "name": "coa-248-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

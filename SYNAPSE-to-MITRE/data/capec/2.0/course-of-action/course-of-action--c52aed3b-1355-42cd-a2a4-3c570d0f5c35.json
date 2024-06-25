@@ -1,0 +1,20 @@
+{
+    "id": "bundle--fb8f911c-cf35-4264-b594-507efd92305f",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Server Side Includes must be enabled only if there is a strong business reason to do so. Every additional component enabled on the web server increases the attack surface as well as administrative overhead",
+            "id": "course-of-action--c52aed3b-1355-42cd-a2a4-3c570d0f5c35",
+            "modified": "2021-10-21T00:00:00.000Z",
+            "name": "coa-101-2",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

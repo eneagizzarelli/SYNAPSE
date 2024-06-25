@@ -1,0 +1,78 @@
+{
+    "id": "bundle--6752715f-be7c-4420-a1e5-8bd8891b74cd",
+    "objects": [
+        {
+            "created": "2014-06-23T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary adds duplicate HTTP GET/POST parameters by injecting query string delimiters. Via HPP it may be possible to override existing hardcoded HTTP parameters, modify the application behaviors, access and, potentially exploit, uncontrollable variables, and bypass input validation checkpoints and WAF rules.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-460",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/460.html"
+                },
+                {
+                    "external_id": "CWE-88",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/88.html"
+                },
+                {
+                    "external_id": "CWE-147",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/147.html"
+                },
+                {
+                    "external_id": "CWE-235",
+                    "source_name": "cwe",
+                    "url": "http://cwe.mitre.org/data/definitions/235.html"
+                },
+                {
+                    "description": "Web Parameter Tampering",
+                    "source_name": "OWASP Attacks",
+                    "url": "https://owasp.org/www-community/attacks/Web_Parameter_Tampering"
+                },
+                {
+                    "description": "Luca Carettoni, Stefano di Paola, HTTP Parameter Pollution (OWASP EU09 Poland), 2008, The Open Web Application Security Project (OWASP)",
+                    "external_id": "REF-397",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "https://www.owasp.org/images/b/ba/AppsecEU09_CarettoniDiPaola_v0.8.pdf"
+                },
+                {
+                    "description": "OWASP Web Security Testing Guide, The Open Web Application Security Project (OWASP)",
+                    "external_id": "REF-606",
+                    "source_name": "reference_from_CAPEC",
+                    "url": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/04-Testing_for_HTTP_Parameter_Pollution.html"
+                }
+            ],
+            "id": "attack-pattern--70c8a212-72da-4a98-a626-e5d38e5416e3",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "HTTP Parameter Pollution (HPP)",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Detailed",
+            "x_capec_can_precede_refs": [
+                "attack-pattern--9d435b55-e3ef-4a19-be67-c3350f20e44e"
+            ],
+            "x_capec_child_of_refs": [
+                "attack-pattern--582943a5-d66c-48a9-8cf8-76e511222c7d"
+            ],
+            "x_capec_domains": [
+                "Software"
+            ],
+            "x_capec_execution_flow": "<h2> Execution Flow </h2><div><h3>Explore</h3><ol><li> <p> <b>Find User Input: </b>The adversary finds anywhere in the web application that uses user-supplied input in a form or action. This can also be found by looking at parameters in the URL in the navigation bar of the browser</p></li></ol></div><div><h3>Experiment</h3><ol><li> <p> <b>Add Duplicate Parameter Values: </b>Once the adversary has identified what user input is used as HTTP parameters, they will add duplicates to each parameter one by one to observe the results. If the response from the HTTP request shows the duplicate parameter value concatenated with the original parameter value in some way, or simply just the duplicate parameter value, then HPP is possible.</p></li><table><tbody><tr><th>Techniques</th></tr><tr><td>In the URL, add a duplicate parameter by using the \"&\" delimiter. For example \"par1=val1\" becomes \"par1=val1&par1=val2\". Depending on the backend API, this could be treated as \"par1=val1, val2\", which could lead to par1 being set to val2, ignoring val1.</td></tr><tr><td>If the request is created based on user input directly on the page, the adversary will test by adding an encoded delimiter to the input. For example, the adverary might supply \"1000%26action=withdraw\" and the backend might interpret a POST request with the paramters \"action=deposit&amount=1000&action=withdraw\"</td></tr></tbody></table></ol></div><div><h3>Exploit</h3><ol><li> <p> <b>Leverage HPP: </b>Once the adversary has identified how the backend handles duplicate parameters, they will leverage this by polluting the paramters in a way that benefits them. In some cases, hardcoded parameters will be disregarded by the backend. In others, the adversary can bypass a WAF that might only check a parameter before it has been concatenated by the backend, resulting in malicious queries getting through.</p></li></ol></div>",
+            "x_capec_prerequisites": [
+                "HTTP protocol is used with some GET/POST parameters passed"
+            ],
+            "x_capec_resources_required": [
+                "Any tool that enables intercepting and tampering with HTTP requests"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "Medium",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

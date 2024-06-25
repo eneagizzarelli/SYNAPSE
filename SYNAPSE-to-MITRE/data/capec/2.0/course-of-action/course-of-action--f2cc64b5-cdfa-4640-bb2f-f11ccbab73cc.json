@@ -1,0 +1,20 @@
+{
+    "id": "bundle--e5f0d9f9-6fc9-4c35-8963-6d1f88cca2ed",
+    "objects": [
+        {
+            "created": "2021-06-24T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Configuration: Enable UEFI option Mixed USB/DisplayPort mode - Thunderbolt 3 system port operates as USB 3.1 Type C interface with support for DP mode",
+            "id": "course-of-action--f2cc64b5-cdfa-4640-bb2f-f11ccbab73cc",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-665-3",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

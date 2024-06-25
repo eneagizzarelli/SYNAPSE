@@ -1,0 +1,20 @@
+{
+    "id": "bundle--7099af97-8d16-4908-9937-de277274b04e",
+    "objects": [
+        {
+            "created": "2021-06-24T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Newer Bluetooth firmwares ensure that the KNOB is not negotaited in plaintext. Update your device.",
+            "id": "course-of-action--c40ed234-cae5-4a4e-9080-d0b461edab63",
+            "modified": "2022-09-29T00:00:00.000Z",
+            "name": "coa-668-0",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -1,0 +1,20 @@
+{
+    "id": "bundle--d601e116-2caf-4876-aa40-a4b7fe384126",
+    "objects": [
+        {
+            "created": "2021-06-24T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "Implementation: KPTI (Kernel Page-Table Isolation) to completely separate user-space and kernel space page tables",
+            "id": "course-of-action--58b2d339-c160-4d96-b0fa-3e4dba290713",
+            "modified": "2022-02-22T00:00:00.000Z",
+            "name": "coa-663-1",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "course-of-action",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

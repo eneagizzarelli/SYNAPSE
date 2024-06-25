@@ -1,0 +1,47 @@
+{
+    "id": "bundle--b9229cd0-bdd1-4fd4-9ef8-2d8c19bc72b3",
+    "objects": [
+        {
+            "created": "2015-11-09T00:00:00.000Z",
+            "created_by_ref": "identity--e50ab59c-5c4f-4d40-bf6a-d58418d89bcd",
+            "description": "An adversary uses radio noise or signals in an attempt to disrupt communications. By intentionally overwhelming system resources with illegitimate traffic, service is denied to the legitimate traffic of authorized users.",
+            "external_references": [
+                {
+                    "external_id": "CAPEC-601",
+                    "source_name": "capec",
+                    "url": "https://capec.mitre.org/data/definitions/601.html"
+                }
+            ],
+            "id": "attack-pattern--7534fc4c-f683-4918-8f62-005e0402d18a",
+            "modified": "2019-09-30T00:00:00.000Z",
+            "name": "Jamming",
+            "object_marking_refs": [
+                "marking-definition--17d82bb2-eeeb-4898-bda5-3ddbcd2b799d"
+            ],
+            "type": "attack-pattern",
+            "x_capec_abstraction": "Standard",
+            "x_capec_child_of_refs": [
+                "attack-pattern--576968ad-12ef-46d8-bb10-63f496bcaccb"
+            ],
+            "x_capec_consequences": {
+                "Availability": [
+                    "Other (The jamming of equipment denies the availability of functioning communications services.)"
+                ]
+            },
+            "x_capec_domains": [
+                "Communications"
+            ],
+            "x_capec_likelihood_of_attack": "Medium",
+            "x_capec_parent_of_refs": [
+                "attack-pattern--7a6e0e5c-f18e-4612-aaa6-68bdeb378b31",
+                "attack-pattern--bac3d2d8-864c-4519-8e16-6d4e4fee6031",
+                "attack-pattern--17593c9a-d8a0-4ef3-8da1-9d948426bbb8"
+            ],
+            "x_capec_status": "Draft",
+            "x_capec_typical_severity": "High",
+            "x_capec_version": "3.9"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}
