@@ -51,7 +51,7 @@
 
 [shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
 
-[**SYNAPSE-to-MITRE**](https://github.com/eneagizzarelli/SYNAPSE-to-MITRE.git) extension automatically maps logs collected by SYNAPSE into attack techniques of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, an MLP classifier trained over the [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp) dataset, re-generated using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_), has been used to achieve the desired behaviour.
+**SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attack techniques of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, an MLP classifier trained over the [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp) dataset, re-generated using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_), has been used to achieve the desired behaviour.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
