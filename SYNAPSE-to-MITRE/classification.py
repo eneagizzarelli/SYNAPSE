@@ -12,12 +12,25 @@ SYNAPSE_to_MITRE_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/"
 enterprise_attack_path = SYNAPSE_to_MITRE_path + "data/enterprise-attack/enterprise-attack.json"
 logs_path = "/home/enea/SYNAPSE/logs/"
 
+# initialize MITRE ATT&CK data object
 mitre_attack_data = MitreAttackData(enterprise_attack_path)
 
 def attack_happened(classification_file, client_ip):
+    """
+    Make AI decide if an attack happened given a classification history file.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns:
+    bool: True if an attack happened, False otherwise.
+    """
+    
     with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
+        # classification messages initialization
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. Output 'False' if you think nothing related to an attack happened.\n" + 
         "Examples: \n" + 
         "enea@datalab:~$ ls\n" +
@@ -59,8 +72,10 @@ def attack_happened(classification_file, client_ip):
         
         "Answer: True\n\n"}]
 
+        # append classification history to classification messages
         classification_messages.append({"role": "user", "content": classification_history})
 
+        # generate a response about attack happening or not by contacting AI
         response = generate_response(classification_messages)
 
         if "True" in response["content"]:
@@ -68,18 +83,42 @@ def attack_happened(classification_file, client_ip):
         return False
 
 def get_sentence(classification_file, client_ip):
+    """
+    Get an AI generated unstructured CTI sentence starting from command logs.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns:
+    str: unstructured CTI sentence string.
+    """
+        
     with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
+        # classification messages initialization
         classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, you need to take in mind that it corresponds to an attack. You have to generate a brief sentence that describes the attack, without too much care about responses. The output will be mapped to the MITRE ATT&CK database. Try to use words that help the automatic mapping. \n\n"}]
 
+        # append classification history to classification messages
         classification_messages.append({"role": "user", "content": classification_history})
 
+        # generate a response about the unstructured CTI sentence by contacting AI
         response = generate_response(classification_messages)
         
         return response["content"]
 
 def get_classification(text):
+    """
+    Get MITRE ATT&CK ID starting from an unstructured CTI sentence.
+
+    Parameters:
+    str: unstructured CTI sentence string.
+
+    Returns:
+    str: MITRE ATT&CK ID string.
+    """
+        
     with open(SYNAPSE_to_MITRE_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
         vectorizer, classifier = pickle.load(file)
 
@@ -98,26 +137,60 @@ def get_classification(text):
     return predicted_label[0]
 
 def get_attack_object(attack_id):
+    """
+    Get MITRE ATT&CK object starting from attack ID.
+
+    Parameters:
+    str: attack ID string.
+
+    Returns:
+    object: MITRE ATT&CK object.
+    """
+        
+    # get MITRE ATT&CK object by attack ID
     attack_object = mitre_attack_data.get_object_by_attack_id(attack_id, "attack-pattern")
 
     return attack_object
 
 def print_attack_object_to_file(attack_object, client_ip):
+    """
+    Print MITRE ATT&CK object to a file.
+
+    Parameters:
+    object: MITRE ATT&CK object.
+    str: client IP address string.
+
+    Returns: none.
+    """
+        
     count_attack_files = 0
 
+    # count total number of attack files to create a new one with correct name numbering
     for attack_file in os.listdir(logs_path + client_ip):
         if attack_file.startswith(client_ip + "_attack_"):
             count_attack_files += 1
 
+    # open/create new attack file
     with open(logs_path + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
         original_stdout = sys.stdout
 
         sys.stdout = attack_file
 
+        # print MITRE ATT&CK object to file
         mitre_attack_data.print_stix_object(attack_object, pretty=True)
 
         sys.stdout = original_stdout
 
 def remove_classification_history(classification_file, client_ip):
+    """
+    Delete classification history file.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns: none.
+    """
+
     if os.path.exists(logs_path + client_ip + "/" + classification_file):
         os.remove(logs_path + client_ip + "/" + classification_file)

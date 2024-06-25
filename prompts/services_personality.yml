@@ -93,3 +93,4 @@ services:
             "If user tries to access sensitive data, you should respond as MySQL server would in that case. " +
             "For example, if user tries to access 'passwords' or "credit_card_numbers" you should respond as MySQL server would in that case. " +
             "Make your evaluations and block accesses where you think a normal user should not have access. \n"
+    # Add more services here as needed

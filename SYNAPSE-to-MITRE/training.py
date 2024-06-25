@@ -1,16 +1,12 @@
 import os
 import pickle
-import numpy as np
 import pandas as pd
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.utils.class_weight import compute_sample_weight
-from sklearn.utils.multiclass import unique_labels
-from sklearn.metrics import precision_recall_fscore_support, top_k_accuracy_score
+from sklearn.metrics import precision_recall_fscore_support
 
 model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml_model"
 dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
@@ -81,10 +77,6 @@ def main():
     # MPL Classifier
     nn_clf = MLPClassifier(max_iter=1000, early_stopping=True)
     train_classifier(nn_clf, "MLP_classifier",  data_df.sentence, data_df.label_tec)
-
-    # Random Forest Classifier
-    # rf_clf = RandomForestClassifier(n_estimators=1000, max_depth=40, random_state=42)
-    # train_classifier(rf_clf, "Random_Forest_classifier",  data_df.sentence, data_df.label_tec)
 
 if __name__ == "__main__":
     main()
