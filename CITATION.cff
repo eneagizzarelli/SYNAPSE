@@ -1,0 +1,20 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: SYNAPSE
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Enea
+    family-names: Gizzarelli
+    email: eneagizzarelli2000@gmail.com
+repository-code: 'https://github.com/eneagizzarelli/SYNAPSE'
+abstract: >-
+  SYNAPSE: SYNthetic AI Pot for Security Enhancement and
+  SYNAPSE-to-MITRE.
+license: MIT
+version: 1.0.0
+date-released: '2024-06-25'
