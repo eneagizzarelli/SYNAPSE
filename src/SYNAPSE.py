@@ -1,10 +1,12 @@
 import time
 
+from client_data import initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
 from initializations import load_terminal_prompt, parse_terminal_argument, load_terminal_messages
 from simulations import terminal_simulation
-from client_data import initialize_client_data, increment_client_number_of_connections, write_client_session_duration_in_seconds
 
 def main():
+    # the following functions have self-explanatory names and are executed for the 
+    # IP address of the client that is currently connected
     initialize_client_data()
     increment_client_number_of_connections()
     
@@ -12,17 +14,22 @@ def main():
     args = parse_terminal_argument(terminal_prompt)
     terminal_messages = load_terminal_messages(args.terminal_personality)
 
+    # start session timer
     session_start_time = time.time()
 
     try:
+        # start terminal simulation
         terminal_simulation(terminal_messages)
     except KeyboardInterrupt:
         print("\n", end="")
     except EOFError:
         print("\n", end="")
+    # simulate exit from terminal
     print("logout")
 
+    # end session timer
     session_end_time = time.time()
+    # calculate session duration in seconds and round it to 2 decimal places
     session_duration_in_seconds = session_end_time - session_start_time
     session_duration_in_seconds = round(session_duration_in_seconds, 2)
     
