@@ -32,7 +32,7 @@
     <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contacts">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -48,8 +48,10 @@
 **honeypot** acting as a Linux OS terminal. It is entirely written in Python. Instead of relying on a real terminal, SYNAPSE works with **generative AI** (currently _GPT 4o_ model) to answer with realistic terminal outputs, as if the user was connecting to a real Linux OS using SSH. It currently implements the simulation of two services:
  - SSH Server
  - MySQL Server
- 
-SYNAPSE leverages the [**SYNAPSE-to-MITRE**](https://github.com/eneagizzarelli/SYNAPSE-to-MITRE.git) submodule to automatically map collected logs into attack techniques of the [**MITRE ATT&CK**](https://attack.mitre.org) database. For a more detailed description of SYNAPSE-to-MITRE project, installation, usage
+
+[shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
+
+[**SYNAPSE-to-MITRE**](https://github.com/eneagizzarelli/SYNAPSE-to-MITRE.git) extension automatically maps logs collected by SYNAPSE into attack techniques of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning techniques. More in detail, an MLP classifier trained over the [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp) dataset, re-generated using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_), has been used to achieve the desired behaviour.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -99,11 +101,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
-## Contact
+## Contacts
 
 Enea Gizzarelli - eneagizzarelli2000@gmail.com
 
-[LinkedIn](https://linkedin.com/in/eneagizzarelli)
+LinkedIn - https://linkedin.com/in/eneagizzarelli
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,8 +113,6 @@ Enea Gizzarelli - eneagizzarelli2000@gmail.com
 ## Other projects
 
 **SYNAPSE**: [https://github.com/eneagizzarelli/SYNAPSE](https://github.com/eneagizzarelli/synapse)
-
-**SYNAPSE-to-MITRE**: [https://github.com/eneagizzarelli/SYNAPSE-to-MITRE](https://github.com/eneagizzarelli/synapse-to-mitre)
 
 **DENDRITE**: [https://github.com/eneagizzarelli/DENDRITE](https://github.com/eneagizzarelli/dendrite)
 
@@ -122,7 +122,10 @@ Enea Gizzarelli - eneagizzarelli2000@gmail.com
 ## Acknowledgments
 
 - [shelLM](https://github.com/stratosphereips/SheLLM)
+- [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp)
 - [GeoLite.mmdb](https://github.com/P3TERX/GeoLite.mmdb)
+- [attack-stix-data/enterprise-attack](https://github.com/mitre-attack/attack-stix-data/tree/master/enterprise-attack)
+- [cti/capec](https://github.com/mitre/cti/tree/master/capec)
 - [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
