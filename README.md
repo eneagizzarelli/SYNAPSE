@@ -74,7 +74,7 @@ Generative AI, in this context, will be used to generate responses to issued com
    
 **Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source files using the above absolute path as a base path. If you plan to use a different configuration, like a different location or a different user, remember to change the paths and to replace _enea_ everywhere.
 
-4. Run `configSYNAPSE.sh` script in `script/` folder after assigning the necessary permissions
+4. Run `configSYNAPSE.sh` script in `scripts/` folder after assigning the necessary permissions
    ```sh
    chmod +x downloadGeoLiteDB.sh
    chmod +x configSYNAPSE.sh
