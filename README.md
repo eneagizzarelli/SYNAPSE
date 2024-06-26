@@ -74,7 +74,7 @@ Generative AI, in this context, will be used to generate responses to issued com
    
 **Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source files using the above absolute path as a base path. If you plan to use a different configuration, like a different location or a different user, remember to change the paths and to replace _enea_ everywhere.
 
-4. Run `configSYNAPSE.sh` script in `scripts/` folder after assigning the necessary permissions
+4. Copy `configSYNAPSE.sh` script from `scripts/` folder outside the `SYNAPSE` directory and, after assigning the necessary permissions, run it
    ```sh
    chmod +x downloadGeoLiteDB.sh
    chmod +x configSYNAPSE.sh
@@ -102,7 +102,7 @@ Generative AI, in this context, will be used to generate responses to issued com
 
 Adopting the aforementioned configuration will run SYNAPSE "fake" terminal instead of the real one whenever user _enea_ (or the one you specifically decided) connects to your SSH server.
 
-While SYNAPSE is running, many _classification files_ will be created in the `logs` directory. Those files will have a name format like  `IPaddr_classification_history_NUM.txt`, and will contain the history of commands the user with IP address _IPaddr_ issued on its session number _NUM_. Over those files **SYNAPSE-to-MITRE** extension will operate. After assigning the necessary permissions, executing the script `./startSYNAPSE-to-MITRE.sh` will automatically convert _classification files_ into _attack files_, containing the MITRE ATT&CK corresponding object content.
+While SYNAPSE is running, many _classification files_ will be created in the `logs` directory. Those files will have a name format like  `IPaddr_classification_history_NUM.txt`, and will contain the history of commands the user with IP address _IPaddr_ issued on its session number _NUM_. Over those files **SYNAPSE-to-MITRE** extension will operate. After assigning the necessary permissions, executing the script `./startSYNAPSE-to-MITRE.sh` will automatically convert _classification files_ into _attack files_ containing the corresponding MITRE ATT&CK object content, if AI thinks the attack happened.
 
 If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` script can be run. You'll need to replace _capec_ or _enterprise-attack_ databases in the `SYNAPSE-to-MITRE/data` folder with the versions you prefer (you can download them from the repositories linked in the below _acknowledgments_ section). Make sure to leave file and folder names unchanged. In the end, the model can be trained with the newly generated dataset using the `startModelTraining.sh` script.
 
