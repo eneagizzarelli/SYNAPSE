@@ -11,16 +11,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/eneagizzarelli/synapse">
+  <a href="https://github.com/eneagizzarelli/SYNAPSE">
     <img src="SYNAPSE_logo.png" alt="Logo" width="220" height="220">
   </a>
 
   <h3 align="center"><strong>SYNAPSE: SYNthetic AI Pot for Security Enhancement</strong></h3>
 
   <p align="center">
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
+    <a href="https://github.com/eneagizzarelli/SYNAPSE/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
     ·
-    <a href="https://github.com/eneagizzarelli/synapse/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
+    <a href="https://github.com/eneagizzarelli/SYNAPSE/issues/new?labels=enhancement&template=feature_request.md">Request Feature</a>
   </p>
 </div>
 
@@ -134,9 +134,9 @@ LinkedIn - https://linkedin.com/in/eneagizzarelli
 <!-- OTHER PROJECTS -->
 ## Other projects
 
-**SYNAPSE**: [https://github.com/eneagizzarelli/SYNAPSE](https://github.com/eneagizzarelli/synapse)
+**SYNAPSE**: [https://github.com/eneagizzarelli/SYNAPSE](https://github.com/eneagizzarelli/SYNAPSE)
 
-**DENDRITE**: [https://github.com/eneagizzarelli/DENDRITE](https://github.com/eneagizzarelli/dendrite)
+**DENDRITE**: [https://github.com/eneagizzarelli/DENDRITE](https://github.com/eneagizzarelli/DENDRITE)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
