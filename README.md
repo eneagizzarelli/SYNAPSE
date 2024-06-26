@@ -15,7 +15,7 @@
     <img src="SYNAPSE_logo.png" alt="Logo" width="220" height="220">
   </a>
 
-  <h3 align="center"><strong>SYNAPSE: SYNthetic AI Pot for Security Enhancement</strong></h3>
+  <h3 align="center"><strong>SYNAPSE</strong>: <strong>SYN</strong>thetic <strong>A</strong>I <strong>P</strong>ot for <strong>S</strong>ecurity <strong>E</strong>nhancement</h3>
 
   <p align="center">
     <a href="https://github.com/eneagizzarelli/SYNAPSE/issues/new?labels=bug&template=bug_report.md">Report Bug</a>
