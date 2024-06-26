@@ -93,7 +93,12 @@ Generative AI, in this context, will be used to generate responses to issued com
     PermitOpen none
    ```
 
-**Note 2**: if you are hosting the code on a VM like _AWS EC2_ and you want to allow password authentication, remember to change your `/etc/ssh/sshd_config.d/50-cloud-init.conf` file setting `PasswordAuthentication yes`.
+**Note 2**: if you are hosting the code on a VM like _AWS EC2_ and you want to allow password authentication, remember to change your `/etc/ssh/sshd_config.d/50-cloud-init.conf` file setting `PasswordAuthentication yes` (`60-cloudimg-settings.conf` for _Oracle Cloud Infrastructure_).
+
+6. Restart your SSH service
+   ```sh
+   systemctl restart sshd
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,7 +111,7 @@ While SYNAPSE is running, many _classification files_ will be created in the `lo
 
 If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` script can be run. You'll need to replace _capec_ or _enterprise-attack_ databases in the `SYNAPSE-to-MITRE/data` folder with the versions you prefer (you can download them from the repositories linked in the below _acknowledgments_ section). Make sure to leave file and folder names unchanged. In the end, the model can be trained with the newly generated dataset using the `startModelTraining.sh` script.
 
-**Note 3**: if you experience an error like `Resource punkt not found` and, further on, `>>> nltk.download('SOMETHING')`, please try the following command: `python -m nltk.downloader SOMETHING`.
+**Note 3**: if you experience an error like `Resource punkt not found` and, further on, `>>> nltk.download('SOMETHING')` when using SYNAPSE-to-MITRE, please try the following command: `python3 -m nltk.downloader SOMETHING`. It should happen only for resources _punkt_ and _wordnet_.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
