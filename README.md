@@ -55,7 +55,7 @@ Generative AI, in this context, will be used to generate responses to issued com
 
 Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by other users. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
 
-With the aim of a comparative evaluation, a static equivalent of SYNAPSE has been implemented: [DENDRITE](https://github.com/eneagizzarelli/DENDRITE).
+With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has been implemented: [**DENDRITE**](https://github.com/eneagizzarelli/DENDRITE).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
