@@ -53,7 +53,9 @@ Generative AI, in this context, will be used to generate responses to issued com
 
 **SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
 
-Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by other users. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI
+Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by other users. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
+
+With the aim of a comparative evaluation, a static equivalent of SYNAPSE has been implemented: [DENDRITE](https://github.com/eneagizzarelli/DENDRITE).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
