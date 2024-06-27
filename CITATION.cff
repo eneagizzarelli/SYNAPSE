@@ -15,6 +15,6 @@ repository-code: 'https://github.com/eneagizzarelli/SYNAPSE'
 abstract: >-
   SYNAPSE: SYNthetic AI Pot for Security Enhancement and
   SYNAPSE-to-MITRE.
-license: MIT
+license: CC BY-NC-SA 4.0
 version: 1.0.0
 date-released: '2024-06-25'
