@@ -49,9 +49,11 @@
  - SSH Server
  - MySQL Server
 
-Generative AI, in this context, will be used to generate responses to issued commands both for the fake Linux terminal and for the MySQL service. [shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
+Generative AI, in this context, will be used to generate responses to issued commands both for the fake Linux terminal and for the MySQL service, leveraging prompt engineering techniques. [shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
 
-**SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attack techniques of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
+**SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
+
+Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by other users. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -82,15 +84,15 @@ Generative AI, in this context, will be used to generate responses to issued com
    ```
     This will complete the configuration of SYNAPSE, creating the necessary folders, downloading GeoLite2 database and assigning ownership and permissions to user _enea_ (or the one you specifically decided).
 
-5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script whenever a user connects to your machine using SSH:
+5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script and to disable many SSH parameters (not handled by the code) whenever a user connects to your machine using SSH:
    ```sh
    Match User enea
-    ForceCommand /home/enea/SYNAPSE/scripts/startSYNAPSE.sh
-    X11Forwarding no
-    AllowTcpForwarding no
-    AllowAgentForwarding no
-    PermitTunnel no
-    PermitOpen none
+      ForceCommand /home/enea/SYNAPSE/scripts/startSYNAPSE.sh
+      X11Forwarding no
+      AllowTcpForwarding no
+      AllowAgentForwarding no
+      PermitTunnel no
+      PermitOpen none
    ```
 
 **Note 2**: if you are hosting the code on a VM like _AWS EC2_ and you want to allow password authentication, remember to change your `/etc/ssh/sshd_config.d/50-cloud-init.conf` file setting `PasswordAuthentication yes` (`60-cloudimg-settings.conf` for _Oracle Cloud Infrastructure_).
