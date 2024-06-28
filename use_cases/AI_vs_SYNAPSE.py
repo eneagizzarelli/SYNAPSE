@@ -21,21 +21,22 @@ try:
         if shell.recv_ready():
             SYNAPSE_output = shell.recv(1024).decode()
 
-            last_command = messages[-1]["content"]
-            if SYNAPSE_output.startswith(last_command):
-                SYNAPSE_output = SYNAPSE_output[len(last_command):]
-            print(SYNAPSE_output, end='')
+            if "will be reported" not in SYNAPSE_output:
+                last_command = messages[-1]["content"]
+                if SYNAPSE_output.startswith(last_command):
+                    SYNAPSE_output = SYNAPSE_output[len(last_command):]
+                print(SYNAPSE_output, end='')
 
-            messages.append({"role": 'user', "content": SYNAPSE_output})
+                messages.append({"role": 'user', "content": SYNAPSE_output})
 
-            AI_input = generate_response(messages)
-            print(AI_input["content"], end='')
+                AI_input = generate_response(messages)
+                print(AI_input["content"], end='')
 
-            messages.append(AI_input)
+                messages.append(AI_input)
 
-            shell.send(AI_input["content"] + '\n')
+                shell.send(AI_input["content"] + '\n')
 
-        time.sleep(3)
+                time.sleep(5)
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
 except OSError as osError:
