@@ -22,16 +22,12 @@ while True:
 
         messages.append({"role": 'user', "content": SYNAPSE_output})
 
-        print(messages)
-
         AI_input = generate_response(messages)
         print(AI_input["content"])
 
         messages.append(AI_input)
 
-        print(messages)
-
-        shell.send(AI_input)
+        shell.send(AI_input["content"])
 
         time.sleep(3)
     except KeyboardInterrupt:
