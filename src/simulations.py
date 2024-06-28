@@ -138,19 +138,24 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
         else:
             print("mysql: [ERROR] mysql: option '-u' requires an argument.")
             return
+    
+    # check if the user is "-p" (wrong login command format, e.g. "mysql -u -p")
+    if "-p" in user:
+        print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: NO)")
+        return
 
-    # check if the user provided a password for MySQL or if the user is "-p" 
-    # (wrong login command format, e.g. "mysql -u -p")
-    if "-p" not in last_terminal_message or "-p" in user:
+    # check if the user provided a password
+    if "-p" not in last_terminal_message and "-ppassword" not in last_terminal_message:
         print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: NO)")
         return
     
     # get the password in a realistic way
-    password = getpass.getpass("Enter password: ")
-    if user != "enea" or password != "password":
-        # if user is not "enea" or password is not "password", print corresponding error message and return
-        print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
-        return
+    if "-ppassword" not in last_terminal_message:
+        password = getpass.getpass("Enter password: ")
+        if user != "enea" or password != "password":
+            # if user is not "enea" or password is not "password", print corresponding error message and return
+            print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
+            return
     
     # the following functions have self-explanatory names and are executed for the 
     # IP address of the client that is currently connected
