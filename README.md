@@ -31,6 +31,7 @@
     <li><a href="#about-the-project">About the project</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#use-cases">Use cases</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contacts">Contacts</a></li>
     <li><a href="#other-projects">Other projects</a></li>
@@ -116,6 +117,16 @@ While SYNAPSE is running, many _classification files_ will be created in the `lo
 If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` script can be run. You'll need to replace _capec_ or _enterprise-attack_ databases in the `SYNAPSE-to-MITRE/data` folder with the versions you prefer (you can download them from the repositories linked in the below _acknowledgments_ section). Make sure to leave file and folder names unchanged. In the end, the model can be trained with the newly generated dataset using the `startModelTraining.sh` script.
 
 **Note 3**: if you experience an error like `Resource SOMETHING not found` and, further on, `>>> nltk.download('SOMETHING')` when using SYNAPSE-to-MITRE, please try the following command: `python3 -m nltk.downloader SOMETHING`. It should happen only for resources _punkt_ and _wordnet_.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Use cases
+
+Some experiments, or **use cases**, have been carried out over SYNAPSE to stress its functionalities:
+
+- **AI vs SYNAPSE** - basic interaction: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI interacts with it and navigates through the various file, folders, databases, tables and so on. Everything is automated, with the new **AI replacing user-interaction**.
+
+The code implemented to perform the above tests can be found under `use_cases/` folder.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
