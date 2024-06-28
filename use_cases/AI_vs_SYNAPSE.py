@@ -13,6 +13,14 @@ process = subprocess.Popen(
     text=True
 )
 
+def is_process_running(process):
+    return process.poll() is None
+
+if not is_process_running(process):
+    raise RuntimeError("Failed to launch SYNAPSE.py")
+
+print("SYNAPSE.py launched successfully.")
+
 while True:
     ready, _, _ = select.select([process.stdout], [], [], 1.0)
 
