@@ -27,7 +27,7 @@ try:
         messages.append({"role": 'user', "content": SYNAPSE_output})
 
         AI_input = generate_response(messages)
-        print(AI_input["content"])
+        print(AI_input["content"], end='')
 
         messages.append(AI_input)
 
