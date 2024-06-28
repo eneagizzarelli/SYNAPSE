@@ -22,26 +22,41 @@ shell = client.invoke_shell()
 
 try:
     while True:
+        # read the output from SYNAPSE
         SYNAPSE_output = shell.recv(1024).decode()
 
+        # check if AI tried to use sudo command
         if "will be reported" not in SYNAPSE_output:
+            # if not, print the message in a realistic fashion and continue the interaction
             last_command = messages[-1]["content"]
             if SYNAPSE_output.startswith(last_command):
                 SYNAPSE_output = SYNAPSE_output[len(last_command):]
             print(SYNAPSE_output, end='')
 
+            # add the output to the list of messages
             messages.append({"role": 'user', "content": SYNAPSE_output})
 
+            # generate the command to input using AI
             AI_input = generate_response(messages)
             print(AI_input["content"], end='')
 
+            # add the input to the list of messages
             messages.append(AI_input)
 
+            # send the command to SYNAPSE
             shell.send(AI_input["content"] + '\n')
 
+            # wait for SYNAPSE to process the command
             time.sleep(5)
+        # if yes, print the message and break the loop because SYNAPSE will exit
+        else:
+            print(SYNAPSE_output, end='')
+            print(f"\nScript interrupted by SYNAPSE.")
+            break
+# handle the case when the user interrupts the script
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
+# handle the case when SYNAPSE exits
 except OSError as osError:
     print(f"\nScript interrupted by SYNAPSE.")
 finally:
