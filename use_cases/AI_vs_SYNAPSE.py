@@ -1,4 +1,5 @@
 import paramiko
+import time
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -8,14 +9,22 @@ try:
 
     shell = client.invoke_shell()
 
-    initial_output = shell.recv(1024).decode()
+    time.sleep(1)
 
-    print(initial_output)
+    if shell.recv_ready():
+        initial_output = shell.recv(1024).decode()
+        print(initial_output)
+    else:
+        print('No data received')
 
-    shell.send('ls -l\n')
-    while not shell.recv_ready():
-        pass
-    command_output = shell.recv(1024).decode()
-    print(command_output)
+    shell.send('cd ..\n')
+
+    time.sleep(1)
+
+    if shell.recv_ready():
+        command_output = shell.recv(1024).decode()
+        print(command_output)
+    else:
+        print('No data received')
 finally:
     client.close()
