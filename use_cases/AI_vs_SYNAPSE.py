@@ -15,9 +15,13 @@ messages = [{"role": 'system', "content": "You are a normal Linux user interacti
 client.connect('localhost', 22, 'enea', 'password')
 shell = client.invoke_shell()
 
-while True:
-    try:
+try:
+    while True:
         SYNAPSE_output = shell.recv(1024).decode()
+
+        last_command = messages[-1]["content"].strip()
+        if SYNAPSE_output.startswith(last_command):
+            SYNAPSE_output = SYNAPSE_output[len(last_command):].strip()
         print(SYNAPSE_output, end='')
 
         messages.append({"role": 'user', "content": SYNAPSE_output})
@@ -30,8 +34,7 @@ while True:
         shell.send(AI_input["content"] + '\n')
 
         time.sleep(3)
-    except KeyboardInterrupt:
-        client.close()
-        break
+except KeyboardInterrupt:
+    client.close()
 
 print(messages)
