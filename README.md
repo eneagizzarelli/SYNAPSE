@@ -32,7 +32,7 @@
     <li><a href="#installation">Installation</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contacts">Contact</a></li>
+    <li><a href="#contacts">Contacts</a></li>
     <li><a href="#other-projects">Other projects</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
