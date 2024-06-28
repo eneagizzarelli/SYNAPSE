@@ -12,11 +12,11 @@ messages = [{"role": 'system', "content": "You are a normal Linux user interacti
                                         "Issue some commands to interact with the OS file system. " + 
                                         "Generate just the command you want to execute, nothing else. \n"}]
 
+client.connect('localhost', 22, 'enea', 'password')
+shell = client.invoke_shell()
+
 while True:
     try:
-        client.connect('localhost', 22, 'enea', 'password')
-        shell = client.invoke_shell()
-
         SYNAPSE_output = shell.recv(1024).decode()
         print(SYNAPSE_output, end='')
 
