@@ -1,23 +1,35 @@
-import paramiko
+import sys
 import time
+import paramiko
+
+sys.path.append("/home/enea/SYNAPSE/src")
+from ai_requests import generate_response
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-try:
-    client.connect('localhost', 22, 'enea', 'password')
+messages = [{"role": 'system', "content": "You are a normal Linux user interacting with a Linux OS terminal.\n"}]
 
-    shell = client.invoke_shell()
+while True:
+    try:
+        client.connect('localhost', 22, 'enea', 'password')
+        shell = client.invoke_shell()
 
-    initial_output = shell.recv(1024).decode()
+        SYNAPSE_output = shell.recv(1024).decode()
+        print(SYNAPSE_output, end='')
 
-    print(initial_output, end='')
+        messages.append({"role": 'user', "content": SYNAPSE_output})
 
-    shell.send('cd ..\n')
+        AI_input = generate_response(messages)
+        print(AI_input)
 
-    time.sleep(2)
+        messages.append(AI_input)
 
-    command_output = shell.recv(1024).decode()
-    print(command_output)
-finally:
-    client.close()
+        shell.send(AI_input)
+
+        time.sleep(3)
+    except KeyboardInterrupt:
+        client.close()
+        break
+
+print(messages)
