@@ -48,13 +48,13 @@
 
 **honeypot** acting as a Linux OS terminal. It is entirely written in Python. Instead of relying on a real terminal, SYNAPSE works with **generative AI** (currently _GPT-4o_ model) to answer with realistic terminal outputs, as if the user was connecting to a real Linux OS using SSH. It currently implements the simulation of two services:
  - SSH Server
- - MySQL Server
+ - MySQL Server.
 
-Generative AI, in this context, will be used to generate responses to issued commands both for the fake Linux terminal and for the MySQL service, leveraging prompt engineering techniques. [shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
+Generative AI, in this context, will be used to generate responses to issued commands both for the simulated Linux terminal and for the fake MySQL service, leveraging **prompt engineering** techniques. [shelLM](https://github.com/stratosphereips/SheLLM) project was used as a starting point to implement SYNAPSE code.
 
-**SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging machine learning technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
+**SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging **machine learning** technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
 
-Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by other users. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
+Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by others. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
 
 With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has been implemented: [**DENDRITE**](https://github.com/eneagizzarelli/DENDRITE).
 
@@ -77,17 +77,16 @@ With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has
    OPENAI_API_KEY='YOUR KEY';
    ```
    
-**Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source files using the above absolute path as a base path. If you plan to use a different configuration, like a different location or a different user, remember to change the paths and to replace _enea_ everywhere.
+**Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source file using the above absolute path as a base path. If you plan to use an alternative configuration, like different location or user, remember to change the paths and to replace _enea_ everywhere.
 
-4. Copy `configSYNAPSE.sh` script from `scripts/` folder outside the `SYNAPSE` directory and, after assigning the necessary permissions, run it
+4. Copy `configSYNAPSE.sh` script from `scripts/` folder outside the `SYNAPSE` directory and, after assigning the necessary permissions (also to `downloadGeoLiteDB.sh`), run it
    ```sh
-   chmod +x downloadGeoLiteDB.sh
    chmod +x configSYNAPSE.sh
    ./configSYNAPSE.sh
    ```
     This will complete the configuration of SYNAPSE, creating the necessary folders, downloading GeoLite2 database and assigning ownership and permissions to user _enea_ (or the one you specifically decided).
 
-5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script and to disable many SSH parameters (not handled by the code) whenever a user connects to your machine using SSH:
+5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script and to disable many SSH parameters (not handled by the code) whenever user _enea_ (or the one you specifically decided) connects to your machine using SSH:
    ```sh
    Match User enea
       ForceCommand /home/enea/SYNAPSE/scripts/startSYNAPSE.sh
@@ -116,7 +115,7 @@ While SYNAPSE is running, many _classification files_ will be created in the `lo
 
 If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` script can be run. You'll need to replace _capec_ or _enterprise-attack_ databases in the `SYNAPSE-to-MITRE/data` folder with the versions you prefer (you can download them from the repositories linked in the below _acknowledgments_ section). Make sure to leave file and folder names unchanged. In the end, the model can be trained with the newly generated dataset using the `startModelTraining.sh` script.
 
-**Note 3**: if you experience an error like `Resource punkt not found` and, further on, `>>> nltk.download('SOMETHING')` when using SYNAPSE-to-MITRE, please try the following command: `python3 -m nltk.downloader SOMETHING`. It should happen only for resources _punkt_ and _wordnet_.
+**Note 3**: if you experience an error like `Resource SOMETHING not found` and, further on, `>>> nltk.download('SOMETHING')` when using SYNAPSE-to-MITRE, please try the following command: `python3 -m nltk.downloader SOMETHING`. It should happen only for resources _punkt_ and _wordnet_.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
