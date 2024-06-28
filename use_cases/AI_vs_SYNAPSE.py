@@ -8,8 +8,9 @@ from ai_requests import generate_response
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-messages = [{"role": 'system', "content": "You are a normal Linux user interacting with a Linux OS terminal. " + 
-                                        "Issue some commands to interact with the OS file system. " + 
+messages = [{"role": 'system', "content": "You are a Linux user interacting with a Linux OS terminal. " +
+                                        "You can use not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
+                                        "Issue some commands to interact with the OS file system and the MySQL service. " + 
                                         "Generate just the command you want to execute, nothing else. \n"}]
 
 client.connect('localhost', 22, 'enea', 'password')
@@ -38,6 +39,6 @@ try:
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
 except OSError as osError:
-    print(f"Script interrupted by SYNAPSE.")
+    print(f"\nScript interrupted by SYNAPSE.")
 finally:
     client.close()
