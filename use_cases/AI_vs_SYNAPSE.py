@@ -36,7 +36,7 @@ try:
 
                 shell.send(AI_input["content"] + '\n')
 
-                time.sleep(10)
+                time.sleep(5)
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
 except OSError as osError:
