@@ -46,7 +46,7 @@
 - server
 - dynamic
 
-**honeypot** acting as a Linux OS terminal. It is entirely written in Python. Instead of relying on a real terminal, SYNAPSE works with **generative AI** (currently _GPT 4o_ model) to answer with realistic terminal outputs, as if the user was connecting to a real Linux OS using SSH. It currently implements the simulation of two services:
+**honeypot** acting as a Linux OS terminal. It is entirely written in Python. Instead of relying on a real terminal, SYNAPSE works with **generative AI** (currently _GPT-4o_ model) to answer with realistic terminal outputs, as if the user was connecting to a real Linux OS using SSH. It currently implements the simulation of two services:
  - SSH Server
  - MySQL Server
 
