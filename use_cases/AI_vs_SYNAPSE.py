@@ -19,9 +19,9 @@ try:
     while True:
         SYNAPSE_output = shell.recv(1024).decode()
 
-        last_command = messages[-1]["content"].strip()
+        last_command = messages[-1]["content"]
         if SYNAPSE_output.startswith(last_command):
-            SYNAPSE_output = SYNAPSE_output[len(last_command):].strip()
+            SYNAPSE_output = SYNAPSE_output[len(last_command):]
         print(SYNAPSE_output, end='')
 
         messages.append({"role": 'user', "content": SYNAPSE_output})
