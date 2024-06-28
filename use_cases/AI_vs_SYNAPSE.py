@@ -17,13 +17,12 @@ shell = client.invoke_shell()
 
 while True:
     try:
-        time.sleep(2)
         SYNAPSE_output = ""
         while shell.recv_ready():
             part = shell.recv(1024).decode()
             SYNAPSE_output += part
             time.sleep(0.1)
-            
+
         print(SYNAPSE_output, end='')
 
         messages.append({"role": 'user', "content": SYNAPSE_output})
