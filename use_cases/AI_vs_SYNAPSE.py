@@ -17,12 +17,7 @@ shell = client.invoke_shell()
 
 while True:
     try:
-        SYNAPSE_output = ""
-        while shell.recv_ready():
-            part = shell.recv(1024).decode()
-            SYNAPSE_output += part
-            time.sleep(0.1)
-
+        SYNAPSE_output = shell.recv(1024).decode()
         print(SYNAPSE_output, end='')
 
         messages.append({"role": 'user', "content": SYNAPSE_output})
@@ -32,7 +27,9 @@ while True:
 
         messages.append(AI_input)
 
-        shell.send(AI_input["content"])
+        shell.send(AI_input["content"] + '\n')
+
+        time.sleep(3)
     except KeyboardInterrupt:
         client.close()
         break
