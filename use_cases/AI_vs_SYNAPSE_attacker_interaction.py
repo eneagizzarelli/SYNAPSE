@@ -27,7 +27,7 @@ try:
         client.connect('localhost', 22, 'enea', 'password')
         shell = client.invoke_shell()
 
-        print(f"Starting attack number ${count}.\n")
+        print(f"\nStarting attack number ${count}.\n")
 
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but try to not repeat previous attacks. " +
                                                     "Be original: the system is strong and can resist to the most common attacks. " +
@@ -53,7 +53,7 @@ try:
                 print(AI_input["content"], end='')
 
                 if AI_input["content"] == "Finished":
-                    print(f"\nAttack number ${count} interrupted by AI.")
+                    print(f"\n\nAttack number ${count} interrupted by AI.")
                     messages.append({"role": 'user', "content": "\n\nCurrent attack finished.\n\n"})
                     count += 1
                     break
