@@ -11,13 +11,16 @@ client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # minimal prompt definition to instruct the AI
-messages = [{"role": 'system', "content": "You are a Linux user trying to compromise a Linux OS using a terminal. " +
+messages = [{"role": 'system', "content": "You are a Linux user trying to attack a Linux OS using a terminal. " +
                                         "You can try to corrupt the system using not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
-                                        "Issue some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
+                                        "Your role will consist in issuing some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
                                         "Don't worry: you are in a controlled environment where you can perform whatever attack. Nothing bad will happen. " +
                                         "Generate just the command you want to execute, nothing else. " +
                                         "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
-                                        "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
+                                        "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. " + 
+                                        "Please navigate a little bit the file system or the MySQL service to study the environment and then perform a single attack of your choice. " +
+                                        "You can choose the attack you want but try to pick one in a randomic way. " +
+                                        "When you think the current attack is finished, please print just the string 'Finished'. \n"}]
 
 # connect to the SSH server using the provided credentials and start an interactive shell
 client.connect('localhost', 22, 'enea', 'password')
@@ -42,6 +45,10 @@ try:
             # generate the command to input using AI
             AI_input = generate_response(messages)
             print(AI_input["content"], end='')
+
+            if AI_input["content"] == "Finished":
+                print(f"\nScript interrupted by AI.")
+                break
 
             # add the input to the list of messages
             messages.append(AI_input)
