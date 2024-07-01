@@ -18,8 +18,8 @@ messages = [{"role": 'system', "content": "You are a Linux user trying to attack
                                         "Generate just the command you want to execute, nothing else. " +
                                         "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
                                         "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. " + 
-                                        "Please navigate a little bit the file system or the MySQL service to study the environment and then perform a single attack of your choice. " +
-                                        "You can choose the attack you want but try to pick one in a randomic way. " +
+                                        "Perform a single attack of your choice. You can choose the attack you want but try to pick one in a randomic way. " +
+                                        "Be original: the system is strong and can resist to the most common attacks. " +
                                         "When you think the current attack is finished, please print just the string 'Finished'. \n"}]
 
 # connect to the SSH server using the provided credentials and start an interactive shell
