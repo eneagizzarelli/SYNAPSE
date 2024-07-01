@@ -152,7 +152,7 @@ def get_attack_object(attack_id):
 
     return attack_object
 
-def print_attack_object_to_file(attack_object, client_ip):
+def print_attack_object_to_file(attack_object, sentence, client_ip):
     """
     Print MITRE ATT&CK object to a file.
 
@@ -175,6 +175,8 @@ def print_attack_object_to_file(attack_object, client_ip):
         original_stdout = sys.stdout
 
         sys.stdout = attack_file
+
+        print("Unstructured CTI: " + sentence + "\n")
 
         # print MITRE ATT&CK object to file
         mitre_attack_data.print_stix_object(attack_object, pretty=True)
