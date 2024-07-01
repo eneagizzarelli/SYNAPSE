@@ -10,7 +10,7 @@ client = paramiko.SSHClient()
 # set policy to auto add the host key
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-# minimal prompt definition to instruct the AI
+# general prompt definition to instruct the AI
 messages = [{"role": 'system', "content": "You are a Linux user trying to attack a Linux OS using a terminal. " +
                                         "You can try to corrupt the system using not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
                                         "Your role will consist in issuing some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
@@ -19,9 +19,11 @@ messages = [{"role": 'system', "content": "You are a Linux user trying to attack
                                         "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
                                         "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
 
+# counter to keep track of the number of attacks performed
 count = 0
 
 try:
+    # perform a total of 5 attacks, each for a different connection to the SSH server
     while count < 5:
         # connect to the SSH server using the provided credentials and start an interactive shell
         client.connect('localhost', 22, 'enea', 'password')
@@ -29,10 +31,12 @@ try:
 
         print(f"\nStarting attack number {count}.\n")
 
+        # tell the AI to perform a single attack of its choice for the current connection
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but try to not repeat previous attacks. " +
                                                     "Be original: the system is strong and can resist to the most common attacks. " +
                                                     "When you think the current attack is finished, please print just the string 'Finished'. \n\n"})
 
+        # infinite cycle for the current attack until the AI decides to stop
         while True:
             # read the output from SYNAPSE
             SYNAPSE_output = shell.recv(1024).decode()
@@ -52,6 +56,7 @@ try:
                 AI_input = generate_response(messages)
                 print(AI_input["content"], end='')
 
+                # check if the AI decided to stop the current attack
                 if AI_input["content"] == "Finished":
                     print(f"\n\nAttack number {count} interrupted by AI.")
                     messages.append({"role": 'user', "content": "\n\nCurrent attack finished.\n\n"})
