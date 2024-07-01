@@ -176,6 +176,7 @@ def print_attack_object_to_file(attack_object, sentence, client_ip):
 
         sys.stdout = attack_file
 
+        # print unstructured CTI sentence to file
         print("Unstructured CTI: " + sentence + "\n")
 
         # print MITRE ATT&CK object to file

@@ -124,9 +124,14 @@ If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` scri
 
 Some experiments, or **use cases**, have been carried out over SYNAPSE to stress its functionalities:
 
-- **AI vs SYNAPSE** - basic interaction: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI interacts with it and navigates through the various file, folders, databases, tables and so on. Everything is automated, with the new **AI replacing user-interaction**.
+- **AI vs SYNAPSE** - **basic interaction**: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI interacts with it and navigates through the various file, folders, databases, tables and so on. Everything is automated, with the new **AI replacing user-interaction**.
 
-The code implemented to perform the above tests can be found under `use_cases/` folder.
+- **AI vs SYNAPSE** - **attacker interaction**: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI tries to attack and corrupt it with 5 different attack strategies. Everything is automated, with the new **AI replacing user-interaction**. After the execution of this script, that will stop autonomously when the fifth attack ends, SYNAPSE-to-MITRE extension can be run to map the attacks performed by the AI to the MITRE ATT&CK database.
+
+The code implemented to perform the above tests can be found under `use_cases/` folder and can be run by simply typing (e.g. if we want to execute the attacker interaction):
+   ```sh
+   python3 AI_vs_SYNAPSE_attacker_interaction.py
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

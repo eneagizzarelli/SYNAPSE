@@ -33,7 +33,7 @@ def main():
                         # get attack ID and attack object from unstructured CTI sentence
                         classification = get_classification(sentence)
                         attack_object = get_attack_object(classification)
-                        # print attack object to file
+                        # print sentence and attack object to file
                         print_attack_object_to_file(attack_object, sentence, client_ip)
                     # attack not happened
                     else :
