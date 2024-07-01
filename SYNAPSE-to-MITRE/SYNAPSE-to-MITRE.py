@@ -34,7 +34,7 @@ def main():
                         classification = get_classification(sentence)
                         attack_object = get_attack_object(classification)
                         # print attack object to file
-                        print_attack_object_to_file(attack_object, client_ip)
+                        print_attack_object_to_file(attack_object, sentence, client_ip)
                     # attack not happened
                     else :
                         print("No attack happened.\n")
