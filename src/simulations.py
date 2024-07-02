@@ -181,8 +181,6 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
             print("mysql: [ERROR] mysql: option '-e' requires an argument.")
             return
     
-    print(command)
-    
     # the following functions have self-explanatory names and are executed for the 
     # IP address of the client that is currently connected
     mysql_prompt = load_mysql_prompt()
@@ -191,7 +189,7 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
 
     try:
         # start mysql simulation
-        mysql_simulation(mysql_messages, count_classification_history_files)
+        mysql_simulation(mysql_messages, command, count_classification_history_files)
     except KeyboardInterrupt:
         print("\n", end="")
     except EOFError:
@@ -199,12 +197,13 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
     # simulate exit from mysql
     print("Bye")
 
-def mysql_simulation(mysql_messages, count_classification_history_files):
+def mysql_simulation(mysql_messages, command, count_classification_history_files):
     """
     Simulation of a MySQL server.
 
     Parameters:
     list[dict[str, str]]: dictionary of mysql messages.
+    str: command to execute after logging in (if any).
     int: number of classification history files.
 
     Returns: none.
@@ -241,8 +240,12 @@ def mysql_simulation(mysql_messages, count_classification_history_files):
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
         classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
         
+        if command != "":
+            user_input = command
+
         # input the next mysql command issued by the user
         user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
+        print(user_input)
         # append the user input to the mysql messages list together with the current timestamp 
         # and write it to the mysql and classification history files
         mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
