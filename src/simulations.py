@@ -160,11 +160,25 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
         
     command = ""
     
+    # check if the user provided a command to execute after logging in
     if "-e" in parts:
         command_index = parts.index('-e') + 1
         if command_index < len(parts):
-            # get the username from the parts list
-            command = parts[command_index]
+            # get the command from the parts list
+            if parts[command_index].startswith('"'):
+                command_parts = []
+                for part in parts[command_index:]:
+                    command_parts.append(part)
+                    if part.endswith('"'):
+                        break
+                command = ' '.join(command_parts)[1:-1] # remove the surrounding quotes
+            else:
+                command_parts = []
+                for part in parts[command_index:]:
+                    if part.startswith('-'): # stop at the next option
+                        break
+                    command_parts.append(part)
+                command = ' '.join(command_parts)
         else:
             print("mysql: [ERROR] mysql: option '-e' requires an argument.")
             return
