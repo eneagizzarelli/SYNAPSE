@@ -37,17 +37,17 @@ def terminal_simulation(terminal_messages):
         last_terminal_message = terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]
 
         # check if the client wants to exit the terminal
-        if "exit" in last_terminal_message or "logout" in last_terminal_message:
+        if last_terminal_message.lower().startswith("exit") or last_terminal_message.lower().startswith("logout"):
             return
 
         # check if the client wants to connect to MySQL and eventually enter MySQL simulation container function
-        if "mysql" in last_terminal_message:
+        if last_terminal_message.startswith("mysql"):
             run_mysql_simulation(last_terminal_message, count_classification_history_files)
             # make AI think the client issued a simple "cd ." command to re-enter terminal simulation after MySQL one
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
         # check if the client wants to clear the terminal
-        if "clear" in last_terminal_message:
+        if last_terminal_message.startswith("clear"):
             os.system("clear")
 
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
@@ -194,7 +194,7 @@ def mysql_simulation(mysql_messages, count_classification_history_files):
         last_mysql_message = mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]
 
         # check if the client wants to exit mysql
-        if "exit" in last_mysql_message.lower() or "quit" in last_mysql_message.lower() or "\q" in last_mysql_message.lower():
+        if last_mysql_message.lower().startswith("exit") or last_mysql_message.lower().startswith("quit") or last_mysql_message.lower().startswith("\q"):
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
