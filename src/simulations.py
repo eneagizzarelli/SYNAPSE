@@ -153,9 +153,34 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
     # get the password in a realistic way
     if "-ppassword" not in last_terminal_message:
         password = getpass.getpass("Enter password: ")
-        if user != "enea" or password != "password":
-            # if user is not "enea" or password is not "password", print corresponding error message and return
-            print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
+    else:
+        password = "password"
+
+    # if user is not "enea" or password is not "password", print corresponding error message and return
+    if user != "enea" or password != "password":
+        print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
+        return
+        
+    command = ""
+    
+    # check if the user provided a command to execute after logging in
+    if "-e" in parts:
+        command_index = parts.index('-e') + 1
+        if command_index < len(parts):
+            # get the command from the parts list
+            if parts[command_index].startswith('"'):
+                command_parts = []
+                # build the command from the parts list until the closing quote is found
+                for part in parts[command_index:]:
+                    command_parts.append(part)
+                    if part.endswith('"') or parts.index(part) >= len(parts) - 1:
+                        break
+                command = ' '.join(command_parts)[1:-1] # remove the surrounding quotes
+            else:
+                # if no quotes are found, get just the first string after the "-e" option
+                command = parts[command_index]
+        else:
+            print("mysql: [ERROR] mysql: option '-e' requires an argument.")
             return
     
     # the following functions have self-explanatory names and are executed for the 
@@ -166,20 +191,22 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
 
     try:
         # start mysql simulation
-        mysql_simulation(mysql_messages, count_classification_history_files)
+        mysql_simulation(mysql_messages, command, count_classification_history_files)
     except KeyboardInterrupt:
         print("\n", end="")
     except EOFError:
         print("\n", end="")
     # simulate exit from mysql
-    print("Bye")
+    if command == "":
+        print("Bye")
 
-def mysql_simulation(mysql_messages, count_classification_history_files):
+def mysql_simulation(mysql_messages, command, count_classification_history_files):
     """
     Simulation of a MySQL server.
 
     Parameters:
     list[dict[str, str]]: dictionary of mysql messages.
+    str: command to execute after logging in (if any).
     int: number of classification history files.
 
     Returns: none.
@@ -213,11 +240,28 @@ def mysql_simulation(mysql_messages, count_classification_history_files):
         # close files to store changes and re-open them
         mysql_history.close()
         classification_history.close()
+
+        # if command to execute after login was provided and parsed, print the last message content and exit
+        if command == "end":
+            last_message_content = mysql_messages[len(mysql_messages) - 1]["content"]
+            lines = last_message_content.split('\n')
+            # skip the last "mysql> " line
+            for line in lines[:-1]:
+                print(line)
+            break
+
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
         classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
-        
-        # input the next mysql command issued by the user
-        user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
+
+        user_input = ""
+        # check if command to execute after login was provided
+        if command != "":
+            user_input = command
+            command = "end"
+        else:
+            # input the next mysql command issued by the user
+            user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
+
         # append the user input to the mysql messages list together with the current timestamp 
         # and write it to the mysql and classification history files
         mysql_messages.append({"role": "user", "content": " " + user_input + f"\t<{datetime.now()}>\n"})
