@@ -17,7 +17,8 @@ messages = [{"role": 'system', "content": "You are a Linux user trying to attack
                                         "Don't worry: you are in a controlled environment where you can perform whatever attack. Nothing bad will happen. " +
                                         "Generate just the command you want to execute, nothing else. " +
                                         "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
-                                        "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
+                                        "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. " + 
+                                        "Do not start using command bash or sh. \n"}]
 
 # counter to keep track of the number of attacks performed
 count = 0
