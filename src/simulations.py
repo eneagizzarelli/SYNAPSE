@@ -247,6 +247,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         # check if command to execute after login was provided
         if command != "":
             user_input = command
+            command = ""
         else:
             # input the next mysql command issued by the user
             user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
