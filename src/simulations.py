@@ -241,9 +241,11 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         mysql_history.close()
         classification_history.close()
 
+        # if command to execute after login was provided and parsed, print the last message content and exit
         if command == "end":
             last_message_content = mysql_messages[len(mysql_messages) - 1]["content"]
             lines = last_message_content.split('\n')
+            # skip the last "mysql> " line
             for line in lines[:-1]:
                 print(line)
             break
