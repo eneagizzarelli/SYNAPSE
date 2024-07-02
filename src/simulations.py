@@ -129,6 +129,8 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
     user = "enea"
     parts = last_terminal_message.split()[:-2]
 
+    print(parts)
+
     # check if the user provided a username for MySQL
     if "-u" in parts:
         user_index = parts.index('-u') + 1
