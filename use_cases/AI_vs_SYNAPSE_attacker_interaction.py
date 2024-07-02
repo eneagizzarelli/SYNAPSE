@@ -32,9 +32,10 @@ try:
         print(f"\nStarting attack number {count}.\n")
 
         # tell the AI to perform a single attack of its choice for the current connection
-        messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but try to not repeat previous attacks. " +
+        messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
                                                     "Be original: the system is strong and can resist to the most common attacks. " +
-                                                    "When you think the current attack is finished, please print just the string 'Finished'. \n\n"})
+                                                    "When you think the current attack is finished, please print just the string 'Finished'. " +
+                                                    "Remember not to repeat previous attacks! \n\n"})
 
         # infinite cycle for the current attack until the AI decides to stop
         while True:
@@ -52,8 +53,9 @@ try:
                 # add the output to the list of messages
                 messages.append({"role": 'user', "content": SYNAPSE_output})
 
-                # generate the command to input using AI
+                # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
                 AI_input = generate_response(messages)
+                AI_input["content"] = AI_input["content"].replace('bash', '').replace('shell', '').strip()
                 print(AI_input["content"], end='')
 
                 # check if the AI decided to stop the current attack
