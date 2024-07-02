@@ -241,6 +241,8 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         classification_history.close()
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
         classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+
+        user_input = ""
         
         # check if command to execute after login was provided
         if command != "":
