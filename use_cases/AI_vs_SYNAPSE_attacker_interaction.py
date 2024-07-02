@@ -53,8 +53,8 @@ try:
                 # add the output to the list of messages
                 messages.append({"role": 'user', "content": SYNAPSE_output})
 
-                # generate the command to input using AI
-                AI_input = generate_response(messages)
+                # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
+                AI_input = generate_response(messages).replace("bash", "").replace("shell", "").strip()
                 print(AI_input["content"], end='')
 
                 # check if the AI decided to stop the current attack
