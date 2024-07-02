@@ -228,8 +228,6 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
         classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
-        print(mysql_messages)
-
         # generate a response to the last mysql command issued by the client by contacting AI
         mysql_message = generate_response(mysql_messages)
 
@@ -248,7 +246,6 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         
         # check if command to execute after login was provided
         if command != "":
-            print(command)
             user_input = command
             command = ""
         else:
