@@ -129,8 +129,6 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
     user = "enea"
     parts = last_terminal_message.split()[:-2]
 
-    print(parts)
-
     # check if the user provided a username for MySQL
     if "-u" in parts:
         user_index = parts.index('-u') + 1
@@ -174,16 +172,11 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
                 command_parts = []
                 for part in parts[command_index:]:
                     command_parts.append(part)
-                    if part.endswith('"'):
+                    if part.endswith('"') or parts.index(part) >= len(parts) - 1:
                         break
                 command = ' '.join(command_parts)[1:-1] # remove the surrounding quotes
             else:
-                command_parts = []
-                for part in parts[command_index:]:
-                    if part.startswith('-'): # stop at the next option
-                        break
-                    command_parts.append(part)
-                command = ' '.join(command_parts)
+                command = parts[command_index]
         else:
             print("mysql: [ERROR] mysql: option '-e' requires an argument.")
             return
