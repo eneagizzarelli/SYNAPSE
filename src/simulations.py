@@ -35,7 +35,7 @@ def terminal_simulation(terminal_messages):
     while True:
         # get the last command issued by the client
         last_terminal_message = terminal_messages[len(terminal_messages) - 1]["content"].splitlines()[-1]
-        dollar_position = last_terminal_message.rfind("$")
+        dollar_position = last_terminal_message.find("$")
 
         # check if the client wants to exit the terminal
         if last_terminal_message[dollar_position + 1:].lower().strip().startswith("exit") or last_terminal_message[dollar_position + 1:].lower().strip().startswith("logout"):
