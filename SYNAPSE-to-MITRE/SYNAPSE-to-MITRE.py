@@ -16,7 +16,7 @@ def main():
             # get all classification history files for the current client IP
             classification_files = [
                 f for f in os.listdir(logs_path + client_ip)
-                if os.path.isfile(logs_path + client_ip + "/" + classification_file) and f.startswith(client_ip + "_classification_history_")
+                if os.path.isfile(logs_path + client_ip + "/" + f) and f.startswith(client_ip + "_classification_history_")
             ]
 
             # sort the classification files in ascending order
