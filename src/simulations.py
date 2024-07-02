@@ -242,7 +242,10 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         classification_history.close()
 
         if command == "end":
-            print(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}')
+            last_message_content = mysql_messages[len(mysql_messages) - 1]["content"]
+            lines = last_message_content.split('\n')
+            for line in lines[:-1]:
+                print(line)
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
