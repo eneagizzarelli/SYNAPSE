@@ -157,6 +157,19 @@ def run_mysql_simulation(last_terminal_message, count_classification_history_fil
             # if user is not "enea" or password is not "password", print corresponding error message and return
             print(f"ERROR 1045 (28000): Access denied for user '{user}'@'localhost' (using password: YES)")
             return
+        
+    command = ""
+    
+    if "-e" in parts:
+        command_index = parts.index('-e') + 1
+        if command_index < len(parts):
+            # get the username from the parts list
+            command = parts[command_index]
+        else:
+            print("mysql: [ERROR] mysql: option '-e' requires an argument.")
+            return
+    
+    print(command)
     
     # the following functions have self-explanatory names and are executed for the 
     # IP address of the client that is currently connected
