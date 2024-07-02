@@ -193,10 +193,12 @@ def mysql_simulation(mysql_messages, count_classification_history_files):
     while True:
         # get the last mysql command issued by the client
         last_mysql_message = mysql_messages[len(mysql_messages) - 1]["content"].splitlines()[-1]
-        dollar_position = last_mysql_message.rfind(">")
+        gt_position = last_mysql_message.rfind(">")
+
+        print(last_mysql_message[gt_position + 1:])
 
         # check if the client wants to exit mysql
-        if last_mysql_message[dollar_position + 1:].lower().strip().startswith("exit") or last_mysql_message[dollar_position + 1:].lower().strip().startswith("quit") or last_mysql_message[dollar_position + 1:].lower().strip().startswith("\q"):
+        if last_mysql_message[gt_position + 1:].lower().strip().startswith("exit") or last_mysql_message[gt_position + 1:].lower().strip().startswith("quit") or last_mysql_message[gt_position + 1:].lower().strip().startswith("\q"):
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
