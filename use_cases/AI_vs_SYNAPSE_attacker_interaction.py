@@ -29,7 +29,7 @@ try:
         client.connect('localhost', 22, 'enea', 'password')
         shell = client.invoke_shell()
 
-        print(f"\nStarting attack number {count}.\n")
+        print(f"\nStarting attack number {count+1}.\n")
 
         # tell the AI to perform a single attack of its choice for the current connection
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
@@ -60,7 +60,7 @@ try:
 
                 # check if the AI decided to stop the current attack
                 if AI_input["content"] == "Finished":
-                    print(f"\n\nAttack number {count} interrupted by AI.")
+                    print(f"\n\nAttack number {count+1} interrupted by AI.")
                     messages.append({"role": 'user', "content": "\n\nCurrent attack finished.\n\n"})
                     count += 1
                     break

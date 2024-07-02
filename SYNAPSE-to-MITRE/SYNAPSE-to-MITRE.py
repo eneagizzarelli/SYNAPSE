@@ -1,6 +1,6 @@
 import os
 
-from classification import attack_happened, get_sentence, remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
+from classification import attack_happened, get_sentence, rename_classification_history, get_classification, get_attack_object, print_attack_object_to_file
 
 logs_path = "/home/enea/SYNAPSE/logs/"
 
@@ -13,34 +13,40 @@ def main():
 
             print("IP: " + client_ip + "\n")
 
-            # iterate over all classification history files for each client IP
-            for classification_file in os.listdir(logs_path + client_ip):
-                # check if file is a classification history file
-                if os.path.isfile(logs_path + client_ip + "/" + classification_file) and classification_file.startswith(client_ip + "_classification_history_"):
+            # get all classification history files for the current client IP
+            classification_files = [
+                f for f in os.listdir(logs_path + client_ip)
+                if os.path.isfile(logs_path + client_ip + "/" + f) and f.startswith(client_ip + "_classification_history_")
+            ]
 
-                    print("- " + classification_file + ": ", end="")
+            # sort the classification files in ascending order
+            classification_files.sort()
 
-                    # check if attack happened by asking AI
-                    if(attack_happened(classification_file, client_ip)):
+            # iterate over all classification history files
+            for classification_file in classification_files:
+                print("- " + classification_file + ": ", end="")
 
-                        print("Attack happened.\n")
+                # check if attack happened by asking AI
+                if(attack_happened(classification_file, client_ip)):
 
-                        # if attack happened, get unstructured CTI sentence from AI
-                        sentence = get_sentence(classification_file, client_ip)
+                    print("Attack happened.\n")
 
-                        print("\tUnstructured CTI: " + sentence + "\n")
+                    # if attack happened, get unstructured CTI sentence from AI
+                    sentence = get_sentence(classification_file, client_ip)
 
-                        # get attack ID and attack object from unstructured CTI sentence
-                        classification = get_classification(sentence)
-                        attack_object = get_attack_object(classification)
-                        # print sentence and attack object to file
-                        print_attack_object_to_file(attack_object, sentence, client_ip)
-                    # attack not happened
-                    else :
-                        print("No attack happened.\n")
-                    
-                    # remove classification history file after processing
-                    remove_classification_history(classification_file, client_ip)
+                    print("\tUnstructured CTI: " + sentence + "\n")
+
+                    # get attack ID and attack object from unstructured CTI sentence
+                    classification = get_classification(sentence)
+                    attack_object = get_attack_object(classification)
+                    # print sentence and attack object to file
+                    attack_file_number = print_attack_object_to_file(attack_object, sentence, client_ip)
+                # attack not happened
+                else :
+                    print("No attack happened.\n")
+                
+                # rename classification history into attack history file after processing
+                rename_classification_history(classification_file, attack_file_number, client_ip)
 
     print("SYNAPSE-to-MITRE mapping finished.")
 
