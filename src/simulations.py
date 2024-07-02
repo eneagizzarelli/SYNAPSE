@@ -240,6 +240,11 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         # close files to store changes and re-open them
         mysql_history.close()
         classification_history.close()
+
+        if command == "end":
+            print(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}')
+            break
+
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
         classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
@@ -247,6 +252,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         # check if command to execute after login was provided
         if command != "":
             user_input = command
+            command = "end"
         else:
             # input the next mysql command issued by the user
             user_input = input(f'\n{mysql_messages[len(mysql_messages) - 1]["content"]}'.strip() + " ")
@@ -259,6 +265,3 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
         
         mysql_history.close()
         classification_history.close()
-
-        if command != "":
-            break
