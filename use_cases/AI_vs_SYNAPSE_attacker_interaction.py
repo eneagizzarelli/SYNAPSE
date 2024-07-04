@@ -38,7 +38,7 @@ try:
                                                     "When you think the current attack is finished, please print just the string 'Finished'. " +
                                                     "Be aware: every command you execute in the same attack should be coherent with the previous ones. " +
                                                     "It is like you are an attacker trying to build an attack strategy step by step. " +
-                                                    "Remember not to repeat previous attacks! \n\n"})
+                                                    "Remember not to repeat previous attacks and to start with a random attack if it is the first one. \n\n"})
 
         # infinite cycle for the current attack until the AI decides to stop
         while True:
