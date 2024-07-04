@@ -11,7 +11,7 @@ from ai_requests import *
 
 logs_ip_terminal_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
 logs_ip_mysql_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
-logs_ip_classification_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_classification_history_"
+logs_attacks_ip_classification_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_attacks" + "/" + client_ip + "_classification_history_"
 
 today = datetime.now()
 
@@ -52,7 +52,7 @@ def terminal_simulation(terminal_messages):
             os.system("clear")
 
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         # generate a response to the last command issued by the client by contacting AI
         terminal_message = generate_response(terminal_messages)
@@ -70,7 +70,7 @@ def terminal_simulation(terminal_messages):
         terminal_history.close()
         classification_history.close()
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
         
         # check if the client used "sudo" command
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -227,7 +227,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         # generate a response to the last mysql command issued by the client by contacting AI
         mysql_message = generate_response(mysql_messages)
@@ -251,7 +251,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         user_input = ""
         # check if command to execute after login was provided

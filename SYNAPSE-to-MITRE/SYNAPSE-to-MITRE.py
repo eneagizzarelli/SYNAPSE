@@ -1,6 +1,6 @@
 import os
 
-from classification import attack_happened, get_sentence, rename_classification_history, get_classification, get_attack_object, print_attack_object_to_file
+from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
 
 logs_path = "/home/enea/SYNAPSE/logs/"
 
@@ -15,8 +15,8 @@ def main():
 
             # get all classification history files for the current client IP
             classification_files = [
-                f for f in os.listdir(logs_path + client_ip)
-                if os.path.isfile(logs_path + client_ip + "/" + f) and f.startswith(client_ip + "_classification_history_")
+                f for f in os.listdir(logs_path + client_ip + "/" + client_ip + "_attacks")
+                if os.path.isfile(logs_path + client_ip + "/" + client_ip + "_attacks/" + f) and f.startswith(client_ip + "_classification_history_")
             ]
 
             # sort the classification files in ascending order
@@ -41,12 +41,15 @@ def main():
                     attack_object = get_attack_object(classification)
                     # print sentence and attack object to file
                     attack_file_number = print_attack_object_to_file(attack_object, sentence, client_ip)
+
+                    # rename classification history into attack history file after processing
+                    rename_classification_history(classification_file, attack_file_number, client_ip)
                 # attack not happened
                 else :
                     print("No attack happened.\n")
-                
-                # rename classification history into attack history file after processing
-                rename_classification_history(classification_file, attack_file_number, client_ip)
+
+                    # remove classification history file after processing
+                    remove_classification_history(classification_file, client_ip)
 
     print("SYNAPSE-to-MITRE mapping finished.")
 

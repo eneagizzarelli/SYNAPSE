@@ -43,6 +43,8 @@ def initialize_client_data():
     if not os.path.exists(logs_ip_path):
         # if not, create it
         os.makedirs(logs_ip_path)
+        # create a subfolder for attacks
+        os.makedirs(logs_ip_path + "/" + client_ip + "_attacks")
 
         # get info from SSH_CLIENT environment variable
         ssh_connection_info = os.environ.get("SSH_CLIENT")
@@ -173,8 +175,8 @@ def get_count_classification_history_files():
 
     count_classification_history_files = 0
 
-    # iterate over files in the logs folder for the current IP address
-    for classification_file in os.listdir(logs_ip_path):
+    # iterate over files in the logs attacks folder for the current IP address
+    for classification_file in os.listdir(logs_ip_path + "/" + client_ip + "_attacks"):
         # if classification history file is found
         if classification_file.startswith(client_ip + "_classification_history_"):
             # increment number of classification history files

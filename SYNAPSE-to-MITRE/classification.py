@@ -27,7 +27,7 @@ def attack_happened(classification_file, client_ip):
     bool: True if an attack happened, False otherwise.
     """
     
-    with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
+    with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         # classification messages initialization
@@ -94,7 +94,7 @@ def get_sentence(classification_file, client_ip):
     str: unstructured CTI sentence string.
     """
         
-    with open(logs_path + client_ip + "/" + classification_file, "r", encoding="utf-8") as classification_history_file:
+    with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, "r", encoding="utf-8") as classification_history_file:
         classification_history = classification_history_file.read()
 
         # classification messages initialization
@@ -168,12 +168,12 @@ def print_attack_object_to_file(attack_object, sentence, client_ip):
     count_attack_files = 0
 
     # count total number of attack files to create a new one with correct name numbering
-    for attack_file in os.listdir(logs_path + client_ip):
+    for attack_file in os.listdir(logs_path + client_ip + "/" + client_ip + "_attacks/"):
         if attack_file.startswith(client_ip + "_attack_") and not attack_file.startswith(client_ip + "_attack_history_"):
             count_attack_files += 1
 
     # open/create new attack file
-    with open(logs_path + client_ip + "/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
+    with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
         original_stdout = sys.stdout
 
         sys.stdout = attack_file
@@ -200,5 +200,19 @@ def rename_classification_history(classification_file, attack_file_number, clien
     Returns: none.
     """
 
-    if os.path.exists(logs_path + client_ip + "/" + classification_file):
-        os.rename(logs_path + client_ip + "/" + classification_file, logs_path + client_ip + "/" + client_ip + "_attack_history_" + str(attack_file_number) + ".txt")
+    if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
+        os.rename(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, logs_path + client_ip + "/" + client_ip + "_attacks/" + client_ip + "_attack_history_" + str(attack_file_number) + ".txt")
+
+def remove_classification_history(classification_file, client_ip):
+    """
+    Remove classification history file.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns: none.
+    """
+
+    if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
+        os.remove(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file)
