@@ -26,7 +26,7 @@ count = 0
 
 try:
     # perform a total of 5 attacks, each for a different connection to the SSH server
-    while count < 5:
+    while count < 15:
         # connect to the SSH server using the provided credentials and start an interactive shell
         client.connect('localhost', 22, 'enea', 'password')
         shell = client.invoke_shell()
@@ -81,7 +81,7 @@ try:
                 print(SYNAPSE_output, end='')
                 print(f"\nScript interrupted by SYNAPSE.")
                 break
-    print(f"\nScript interrupted by AI, 5 attacks performed.")
+    print(f"\nScript interrupted by AI, {count+1} attacks performed.")
 # handle the case when the user interrupts the script
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
