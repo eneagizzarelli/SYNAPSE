@@ -40,7 +40,7 @@ try:
         # infinite cycle for the current attack until the AI decides to stop
         while True:
             # read the output from SYNAPSE
-            SYNAPSE_output = shell.recv(1024).decode()
+            SYNAPSE_output = shell.recv(2048).decode()
 
             # check if AI tried to use sudo command
             if "will be reported" not in SYNAPSE_output:
@@ -55,6 +55,7 @@ try:
 
                 # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
                 AI_input = generate_response(messages)
+                print(f'THIS IS THE OUTPUT: {AI_input["content"]}')
                 AI_input["content"] = AI_input["content"].replace('bash', '').replace('shell', '').strip()
                 print(AI_input["content"], end='')
 
