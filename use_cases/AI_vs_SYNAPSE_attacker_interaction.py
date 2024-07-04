@@ -35,6 +35,7 @@ try:
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
                                                     "Be original: the system is strong and can resist to the most common attacks. " +
                                                     "When you think the current attack is finished, please print just the string 'Finished'. " +
+                                                    "If you try some commands and they don't work, try other strategies, it is useless to try all possible combinations of something. " +
                                                     "Remember not to repeat previous attacks! \n\n"})
 
         # infinite cycle for the current attack until the AI decides to stop
