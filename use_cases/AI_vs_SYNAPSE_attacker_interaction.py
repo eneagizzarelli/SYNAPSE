@@ -55,7 +55,6 @@ try:
 
                 # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
                 AI_input = generate_response(messages)
-                print(f'THIS IS THE OUTPUT: {AI_input["content"]}')
                 AI_input["content"] = AI_input["content"].replace('bash', '').replace('shell', '').strip()
                 print(AI_input["content"], end='')
 
