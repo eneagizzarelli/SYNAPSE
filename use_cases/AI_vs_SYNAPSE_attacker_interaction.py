@@ -72,7 +72,7 @@ try:
                 shell.send(AI_input["content"] + '\n')
 
                 # wait for SYNAPSE to process the command
-                time.sleep(5)
+                time.sleep(10)
             # if yes, print the message and break the loop because SYNAPSE will exit
             else:
                 print(SYNAPSE_output, end='')
