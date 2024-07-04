@@ -16,7 +16,8 @@ messages = [{"role": 'system', "content": "You are a Linux user trying to attack
                                         "Your role will consist in issuing some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
                                         "Don't worry: you are in a controlled environment where you can perform whatever attack. Nothing bad will happen. " +
                                         "Generate just the command you want to execute, nothing else. " +
-                                        "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
+                                        "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " +
+                                        "If you try some commands and they don't work, try other strategies, it is useless to try all possible combinations of something. " +
                                         "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
 
 # counter to keep track of the number of attacks performed
@@ -35,7 +36,6 @@ try:
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
                                                     "Be original: the system is strong and can resist to the most common attacks. " +
                                                     "When you think the current attack is finished, please print just the string 'Finished'. " +
-                                                    "If you try some commands and they don't work, try other strategies, it is useless to try all possible combinations of something. " +
                                                     "Remember not to repeat previous attacks! \n\n"})
 
         # infinite cycle for the current attack until the AI decides to stop
