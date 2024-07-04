@@ -36,9 +36,11 @@ try:
             # add the output to the list of messages
             messages.append({"role": 'user', "content": SYNAPSE_output})
 
-            # generate the command to input using AI
+            # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
             AI_input = generate_response(messages)
+            AI_input["content"] = AI_input["content"].replace('bash', '').replace('shell', '').strip()
             print(AI_input["content"], end='')
+
 
             # add the input to the list of messages
             messages.append(AI_input)
