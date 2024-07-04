@@ -23,7 +23,7 @@ shell = client.invoke_shell()
 try:
     while True:
         # read the output from SYNAPSE
-        SYNAPSE_output = shell.recv(1024).decode()
+        SYNAPSE_output = shell.recv(2048).decode()
 
         # check if AI tried to use sudo command
         if "will be reported" not in SYNAPSE_output:
@@ -49,7 +49,7 @@ try:
             shell.send(AI_input["content"] + '\n')
 
             # wait for SYNAPSE to process the command
-            time.sleep(5)
+            time.sleep(10)
         # if yes, print the message and break the loop because SYNAPSE will exit
         else:
             print(SYNAPSE_output, end='')
