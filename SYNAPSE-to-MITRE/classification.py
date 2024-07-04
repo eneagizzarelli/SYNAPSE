@@ -202,3 +202,17 @@ def rename_classification_history(classification_file, attack_file_number, clien
 
     if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
         os.rename(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, logs_path + client_ip + "/" + client_ip + "_attacks/" + client_ip + "_attack_history_" + str(attack_file_number) + ".txt")
+
+def remove_classification_history(classification_file, client_ip):
+    """
+    Remove classification history file.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns: none.
+    """
+
+    if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
+        os.remove(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file)
