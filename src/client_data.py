@@ -43,6 +43,7 @@ def initialize_client_data():
     if not os.path.exists(logs_ip_path):
         # if not, create it
         os.makedirs(logs_ip_path)
+        os.makedirs(logs_ip_path + "/" + client_ip + "_attacks")
 
         # get info from SSH_CLIENT environment variable
         ssh_connection_info = os.environ.get("SSH_CLIENT")
