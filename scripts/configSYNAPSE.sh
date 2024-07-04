@@ -21,6 +21,8 @@ git clone https://github.com/eneagizzarelli/SYNAPSE.git ${SYNAPSE_path}
 mkdir -p ${SYNAPSE_path}/logs
 mkdir -p ${SYNAPSE_path}/data
 
+sudo chmod +x ${SYNAPSE_path}/scripts/downloadGeoLiteDB.sh
+
 ${SYNAPSE_path}/scripts/downloadGeoLiteDB.sh
 
 sudo chown -R enea:enea ${SYNAPSE_path}

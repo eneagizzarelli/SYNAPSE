@@ -16,7 +16,9 @@ messages = [{"role": 'system', "content": "You are a Linux user trying to attack
                                         "Your role will consist in issuing some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
                                         "Don't worry: you are in a controlled environment where you can perform whatever attack. Nothing bad will happen. " +
                                         "Generate just the command you want to execute, nothing else. " +
-                                        "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " + 
+                                        "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " +
+                                        "If you try some commands and they don't work, try other strategies, it is useless to try all possible combinations of something. " +
+                                        "Be original, the system is strong and can resist to the most common attacks. " +
                                         "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
 
 # counter to keep track of the number of attacks performed
@@ -24,7 +26,7 @@ count = 0
 
 try:
     # perform a total of 5 attacks, each for a different connection to the SSH server
-    while count < 5:
+    while count < 15:
         # connect to the SSH server using the provided credentials and start an interactive shell
         client.connect('localhost', 22, 'enea', 'password')
         shell = client.invoke_shell()
@@ -33,14 +35,15 @@ try:
 
         # tell the AI to perform a single attack of its choice for the current connection
         messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
-                                                    "Be original: the system is strong and can resist to the most common attacks. " +
                                                     "When you think the current attack is finished, please print just the string 'Finished'. " +
-                                                    "Remember not to repeat previous attacks! \n\n"})
+                                                    "Be aware: every command you execute in the same attack should be coherent with the previous ones. " +
+                                                    "It is like you are an attacker trying to build an attack strategy step by step. " +
+                                                    "Remember not to repeat previous attacks and to start with a random attack if it is the first one. \n\n"})
 
         # infinite cycle for the current attack until the AI decides to stop
         while True:
             # read the output from SYNAPSE
-            SYNAPSE_output = shell.recv(1024).decode()
+            SYNAPSE_output = shell.recv(2048).decode()
 
             # check if AI tried to use sudo command
             if "will be reported" not in SYNAPSE_output:
@@ -72,13 +75,13 @@ try:
                 shell.send(AI_input["content"] + '\n')
 
                 # wait for SYNAPSE to process the command
-                time.sleep(5)
+                time.sleep(10)
             # if yes, print the message and break the loop because SYNAPSE will exit
             else:
                 print(SYNAPSE_output, end='')
                 print(f"\nScript interrupted by SYNAPSE.")
                 break
-    print(f"\nScript interrupted by AI, 5 attacks performed.")
+    print(f"\nScript interrupted by AI, {count+1} attacks performed.")
 # handle the case when the user interrupts the script
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")

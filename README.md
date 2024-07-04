@@ -80,7 +80,7 @@ With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has
    
 **Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source file using the above absolute path as a base path. If you plan to use an alternative configuration, like different location or user, remember to change the paths and to replace _enea_ everywhere.
 
-4. Copy `configSYNAPSE.sh` script from `scripts/` folder outside the `SYNAPSE` directory and, after assigning the necessary permissions (also to `downloadGeoLiteDB.sh`), run it
+4. Copy `configSYNAPSE.sh` script from `scripts/` folder outside the `SYNAPSE` directory and, after assigning the necessary permissions, run it
    ```sh
    chmod +x configSYNAPSE.sh
    ./configSYNAPSE.sh

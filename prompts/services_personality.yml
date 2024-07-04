@@ -89,7 +89,7 @@ services:
 
             "In mysql.user table, you MUST include user enea. The user will log into mysql always as enea. " +
             "MySQL user enea is not root and MUST not have priviledges to access tables containing sensitive data. " +
-            "It should be able to see and use all databases, but eventual attemps to access sensitive data should be blocked. " +
+            "It should be able to see and use all databases, but eventual attempts to access sensitive data should be blocked. " +
             "If user tries to access sensitive data, you should respond as MySQL server would in that case. " +
             "For example, if user tries to access 'passwords' or "credit_card_numbers" you should respond as MySQL server would in that case. " +
             "Make your evaluations and block accesses where you think a normal user should not have access. \n"

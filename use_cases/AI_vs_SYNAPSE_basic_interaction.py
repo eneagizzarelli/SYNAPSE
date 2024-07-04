@@ -23,7 +23,7 @@ shell = client.invoke_shell()
 try:
     while True:
         # read the output from SYNAPSE
-        SYNAPSE_output = shell.recv(1024).decode()
+        SYNAPSE_output = shell.recv(2048).decode()
 
         # check if AI tried to use sudo command
         if "will be reported" not in SYNAPSE_output:
@@ -36,9 +36,11 @@ try:
             # add the output to the list of messages
             messages.append({"role": 'user', "content": SYNAPSE_output})
 
-            # generate the command to input using AI
+            # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
             AI_input = generate_response(messages)
+            AI_input["content"] = AI_input["content"].replace('bash', '').replace('shell', '').strip()
             print(AI_input["content"], end='')
+
 
             # add the input to the list of messages
             messages.append(AI_input)
@@ -47,7 +49,7 @@ try:
             shell.send(AI_input["content"] + '\n')
 
             # wait for SYNAPSE to process the command
-            time.sleep(5)
+            time.sleep(10)
         # if yes, print the message and break the loop because SYNAPSE will exit
         else:
             print(SYNAPSE_output, end='')
