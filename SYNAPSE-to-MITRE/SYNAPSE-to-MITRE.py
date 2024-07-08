@@ -20,7 +20,7 @@ def main():
             ]
 
             # sort the classification files in ascending order
-            classification_files.sort()
+            classification_files.sort(key=lambda x: int(x.split('_')[-1].split('.')[0]))
 
             # iterate over all classification history files
             for classification_file in classification_files:
