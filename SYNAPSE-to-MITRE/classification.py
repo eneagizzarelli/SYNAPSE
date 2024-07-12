@@ -110,13 +110,11 @@ def get_sentence(classification_file, client_ip):
                                     "2. 'Adversaries may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses.'\n" +
                                     "3. 'Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries.'\n" +
                                     "4. 'Adversaries may insert, delete, or manipulate data at rest in order to manipulate external outcomes or hide activity.'\n" +
-                                    "5. 'Adversaries may perform Endpoint Denial of Service  attacks to degrade or block the availability of services to users'\n" +
-                                    "6. 'Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit.'\n" +
-                                    "7. 'Adversaries may exploit software vulnerabilities in an attempt to elevate privileges.'\n" +
-                                    "Be aware: you MUST be careful about each word you use. " +
+                                    "5. 'Adversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit.'\n" +
+                                    "6. 'Adversaries may exploit software vulnerabilities in an attempt to elevate privileges.'\n" +
+                                    "Be aware: you MUST be careful about each single word you use. " +
                                     "The model will output a mapping based on the words you produce, so try to avoid using misleading words that can bring the model to output the wrong result. " +
-                                    "For example, in case of a fork bomb attack, if you say that it can be used in a denial of service, the model will map it to the 'Endpoint Denial of Service' MITRE attack, which is not the best way to consider it, so it is wrong. " +
-                                    "Apply this reasoning to all your responses.\n\n"}]
+                                    "Try to use just words that are strictly related to the attack you are summarizing.\n\n"}]
 
         # append classification history to classification messages
         classification_messages.append({"role": "user", "content": classification_history})
