@@ -1,6 +1,7 @@
 import os
 import pickle
 import pandas as pd
+import numpy as np
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -51,12 +52,25 @@ def train_classifier(classifier, name, X, Y):
     stemmatized_set = stemmatize_set(test_set_x)
     lemmatized_set = lemmatize_set(stemmatized_set)
     x_test_vectors = vectorizer.transform(lemmatized_set)
-    predicted = classifier.predict(x_test_vectors)
-    
-    precision, recall, fscore, _ = precision_recall_fscore_support(test_set_y, predicted, average='weighted', zero_division=0)
+    probabilities = classifier.predict_proba(x_test_vectors)
+
+    top_3_indices = np.argsort(probabilities, axis=1)[:, -3:]
+    top_3_labels = np.array(classifier.classes_)[top_3_indices]
+
+    top_3_correct = []
+
+    for i in range(len(test_set_y)):
+        if test_set_y.iloc[i] in top_3_labels[i]:
+            top_3_correct.append(test_set_y.iloc[i])
+        else:
+            top_3_correct.append("Not_in_top_3")
+
+    top_3_correct = pd.Series(top_3_correct, index=test_set_y.index)
+
+    precision, recall, f1, _ = precision_recall_fscore_support(test_set_y, top_3_correct, average='weighted', zero_division=0)
 
     print("Results for " + name + "\n")
-    print("Precision: " + str(precision) + " Recall: " + str(recall) + " F-Score: " + str(fscore) + "\n")
+    print(f"Precision: {precision} Recall: {recall} F-Score: {f1}\n")
 
     try:
         os.mkdir(model_path)
