@@ -1,6 +1,7 @@
 import os
 import sys
 import pickle
+import numpy as np
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
@@ -125,15 +126,15 @@ def get_sentence(classification_file, client_ip):
         
         return response["content"]
 
-def get_classification(text):
+def get_classifications(text):
     """
-    Get MITRE ATT&CK ID starting from an unstructured CTI sentence.
+    Get top three MITRE ATT&CK IDs starting from an unstructured CTI sentence.
 
     Parameters:
     str: unstructured CTI sentence string.
 
     Returns:
-    str: MITRE ATT&CK ID string.
+    list[Any]: list of MITRE ATT&CK ID strings.
     """
         
     with open(SYNAPSE_to_MITRE_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
@@ -149,65 +150,78 @@ def get_classification(text):
     preprocessed_text = ' '.join(stemmed_list)
     text_vectorized = vectorizer.transform([preprocessed_text])
 
-    predicted_label = classifier.predict(text_vectorized)
+    probabilities = classifier.predict_proba(text_vectorized)
+    top_3_indices = np.argsort(probabilities[0])[-3:][::-1]
+    top_3_labels = [classifier.classes_[index] for index in top_3_indices]
 
-    return predicted_label[0]
+    return top_3_labels
 
-def get_attack_object(attack_id):
+def get_attack_objects(attack_ids):
     """
-    Get MITRE ATT&CK object starting from attack ID.
+    Get MITRE ATT&CK objects starting from top three attack IDs.
 
     Parameters:
-    str: attack ID string.
+    list[Any]: list of attack ID strings.
 
     Returns:
-    object: MITRE ATT&CK object.
+    list[object]: MITRE ATT&CK objects.
     """
         
     # get MITRE ATT&CK object by attack ID
-    attack_object = mitre_attack_data.get_object_by_attack_id(attack_id, "attack-pattern")
+    attack_objects = [mitre_attack_data.get_object_by_attack_id(str(attack_id), "attack-pattern") for attack_id in attack_ids]
 
-    return attack_object
+    return attack_objects
 
-def print_attack_object_to_file(attack_object, sentence, client_ip):
+def print_attack_objects_to_file(attack_objects, sentence, client_ip):
     """
-    Print MITRE ATT&CK object to a file.
+    Print MITRE ATT&CK objects to a file.
 
     Parameters:
-    object: MITRE ATT&CK object.
+    list[object]: MITRE ATT&CK objects.
     str: unstructured CTI sentence string.
     str: client IP address string.
 
     Returns: 
-    int: current attack file number.
+    int: current attack directory number.
     """
-        
-    count_attack_files = 0
+    
+    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+    count_attack_directories = 0
 
     # count total number of attack files to create a new one with correct name numbering
-    for attack_file in os.listdir(logs_path + client_ip + "/" + client_ip + "_attacks/"):
-        if attack_file.startswith(client_ip + "_attack_") and not attack_file.startswith(client_ip + "_attack_history_"):
-            count_attack_files += 1
+    for item in os.listdir(attack_path):
+        if os.path.isdir(attack_path + item) and item.startswith(client_ip + "_attack_"):
+            count_attack_directories += 1
 
-    # open/create new attack file
-    with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + client_ip + "_attack_" + str(count_attack_files) + ".txt", 'w') as attack_file:
-        original_stdout = sys.stdout
+    current_attack_path = attack_path + client_ip + "_attack_" + str(count_attack_directories) + "/"
+    count_current_attack_file = 0
 
-        sys.stdout = attack_file
+    # create directory for the current attack
+    os.mkdir(current_attack_path)
 
-        # print unstructured CTI sentence to file
-        print("Unstructured CTI: " + sentence + "\n")
+    # for each attack object
+    for attack_object in attack_objects:
+        # open/create new attack file
+        with open(current_attack_path + client_ip + "_attack_" + str(count_attack_directories) + "_mapping_" + str(count_current_attack_file) + ".txt", 'w') as attack_file:
+            original_stdout = sys.stdout
+            sys.stdout = attack_file
 
-        # print MITRE ATT&CK object to file
-        mitre_attack_data.print_stix_object(attack_object, pretty=True)
+            # print unstructured CTI sentence to file
+            print("Unstructured CTI: " + sentence + "\n")
 
-        sys.stdout = original_stdout
+            # print MITRE ATT&CK object to file
+            mitre_attack_data.print_stix_object(attack_object, pretty=True)
 
-    return count_attack_files
+            sys.stdout = original_stdout
 
-def rename_classification_history(classification_file, attack_file_number, client_ip):
+            # increment attack file number for the next file
+            count_current_attack_file += 1
+
+    return count_attack_directories
+
+def rename_classification_history(classification_file, attack_directory_number, client_ip):
     """
-    Rename classification history into attack history file.
+    Rename and move classification history into attack history file.
 
     Parameters:
     str: classification filename string.
@@ -217,8 +231,11 @@ def rename_classification_history(classification_file, attack_file_number, clien
     Returns: none.
     """
 
-    if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
-        os.rename(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, logs_path + client_ip + "/" + client_ip + "_attacks/" + client_ip + "_attack_history_" + str(attack_file_number) + ".txt")
+    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+    current_attack_path = attack_path + client_ip + "_attack_" + str(attack_directory_number) + "/"
+
+    if os.path.exists(attack_path + classification_file):
+        os.rename(attack_path + classification_file, current_attack_path + client_ip + "_attack_history_" + str(attack_directory_number) + ".txt")
 
 def remove_classification_history(classification_file, client_ip):
     """
@@ -231,5 +248,7 @@ def remove_classification_history(classification_file, client_ip):
     Returns: none.
     """
 
-    if os.path.exists(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file):
-        os.remove(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file)
+    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+
+    if os.path.exists(attack_path + classification_file):
+        os.remove(attack_path + classification_file)

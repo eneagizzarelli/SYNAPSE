@@ -1,6 +1,6 @@
 import os
 
-from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classification, get_attack_object, print_attack_object_to_file
+from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classifications, get_attack_objects, print_attack_objects_to_file
 
 logs_path = "/home/enea/SYNAPSE/logs/"
 
@@ -36,14 +36,14 @@ def main():
 
                     print("\tUnstructured CTI: " + sentence + "\n")
 
-                    # get attack ID and attack object from unstructured CTI sentence
-                    classification = get_classification(sentence)
-                    attack_object = get_attack_object(classification)
-                    # print sentence and attack object to file
-                    attack_file_number = print_attack_object_to_file(attack_object, sentence, client_ip)
+                    # get top three attack IDs and attack objects from unstructured CTI sentence
+                    top_3_classifications = get_classifications(sentence)
+                    attack_objects = get_attack_objects(top_3_classifications)
+                    # print sentence and attack objects to file
+                    attack_directory_number = print_attack_objects_to_file(attack_objects, sentence, client_ip)
 
-                    # rename classification history into attack history file after processing
-                    rename_classification_history(classification_file, attack_file_number, client_ip)
+                    # rename and move classification history into attack history file after processing
+                    rename_classification_history(classification_file, attack_directory_number, client_ip)
                 # attack not happened
                 else :
                     print("No attack happened.\n")
