@@ -1,4 +1,5 @@
 import os
+import json
 
 from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classifications, get_attack_objects, print_attack_objects_to_file
 
@@ -10,8 +11,14 @@ def main():
     # iterate over all client IPs previously connected to the server
     for client_ip in os.listdir(logs_path): 
         if os.path.isdir(logs_path + client_ip):
+            
+            ip_reputation = 0
+            with open(logs_path + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
+                # load client data structure and extract IP reputation
+                data = json.load(client_data_file)
+                ip_reputation = data["ip_info"]["reputation"]
 
-            print("IP: " + client_ip + "\n")
+            print("IP: " + client_ip + " (reputation = " + str(ip_reputation) + ")\n")
 
             # get all classification history files for the current client IP
             classification_files = [
@@ -27,7 +34,7 @@ def main():
                 print("- " + classification_file + ": ", end="")
 
                 # check if attack happened by asking AI
-                if(attack_happened(classification_file, client_ip)):
+                if(attack_happened(classification_file, client_ip, ip_reputation)):
 
                     print("Attack happened.\n")
 

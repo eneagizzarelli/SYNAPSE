@@ -16,13 +16,14 @@ logs_path = "/home/enea/SYNAPSE/logs/"
 # initialize MITRE ATT&CK data object
 mitre_attack_data = MitreAttackData(enterprise_attack_path)
 
-def attack_happened(classification_file, client_ip):
+def attack_happened(classification_file, client_ip, ip_reputation):
     """
     Make AI decide if an attack happened given a classification history file.
 
     Parameters:
     str: classification filename string.
     str: client IP address string.
+    int: IP reputation.
 
     Returns:
     bool: True if an attack happened, False otherwise.
@@ -32,46 +33,53 @@ def attack_happened(classification_file, client_ip):
         classification_history = classification_history_file.read()
 
         # classification messages initialization
-        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. Output 'False' if you think nothing related to an attack happened.\n" + 
-        "Examples: \n" + 
-        "enea@datalab:~$ ls\n" +
-        "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
-        "enea@datalab:~$ cd Desktop\n" +
-        "enea@datalab:~/Desktop$ exit\n" +
-        "logout\n\n" +
-        "Answer: False\n\n" +
+        classification_messages = [{"role": "system", "content": "Given the following log of commands executed in a terminal by a user with the corresponding terminal outputs, classify it as benign or malicious. " + 
+                                    "Output 'True' if you think that an attack or an attempt of an attack happened in the command inserted by the user. " +
+                                    "Output 'False' if you think nothing related to an attack happened. " +
+                                    "You also need to take a decision based on the reputation of the IP address that the user is connecting from. " +
+                                    "A reputation greater than 0 means that the IP address good. " +
+                                    "A reputation less than 0 means that the IP address is bad. " +
+                                    "A reputation equal to 0 means that the IP address is neutral. " +
+                                    "The reputation for the current IP address is: " + str(ip_reputation) + ". " +
+                                    "Examples: \n" +
+                                    "enea@datalab:~$ ls\n" +
+                                    "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
+                                    "enea@datalab:~$ cd Desktop\n" +
+                                    "enea@datalab:~/Desktop$ exit\n" +
+                                    "logout\n\n" +
+                                    "Answer: False\n\n" +
 
-        "enea@datalab:~$ mysql\n" +
-        "Welcome to the MySQL monitor.  Commands end with ; or \\g.\n" +
-        "Your MySQL connection id is 8\n" +
-        "Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)\n" +
-        "Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\n" +
-        "mysql> SHOW DATABASES;\n" +
-        "+--------------------+\n" +
-        "| Database           |\n" +
-        "+--------------------+\n" +
-        "| information_schema |\n" +
-        "| mysql              |\n" +
-        "| performance_schema |\n" +
-        "| Users              |\n" +
-        "+--------------------+\n" +
-        "4 rows in set (0.01 sec)\n" +
-        "mysql> USE Users;\n" +
-        "Database changed\n" +
-        "mysql> SELECT * FROM Users WHERE UserId = 105 OR 1=1;\n" +
-        "+--------+-----------------+-----------------+\n" +
-        "| UserId | Username        | Password        |\n" +
-        "+--------+-----------------+-----------------+\n" +
-        "| 105    | admin           | admin           |\n" +
-        "| 106    | root            | toor            |\n" +
-        "| 107    | administrator   | password        |\n" +
-        "+--------+-----------------+-----------------+\n" +
-        "3 rows in set (0.00 sec)\n" +
-        "mysql> \q\n" +
-        "Bye\n" +
-        "enea@datalab:~$ exit\n\n" +
-        
-        "Answer: True\n\n"}]
+                                    "enea@datalab:~$ mysql\n" +
+                                    "Welcome to the MySQL monitor.  Commands end with ; or \\g.\n" +
+                                    "Your MySQL connection id is 8\n" +
+                                    "Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)\n" +
+                                    "Type 'help;' or '\\h' for help. Type '\\c' to clear the current input statement.\n" +
+                                    "mysql> SHOW DATABASES;\n" +
+                                    "+--------------------+\n" +
+                                    "| Database           |\n" +
+                                    "+--------------------+\n" +
+                                    "| information_schema |\n" +
+                                    "| mysql              |\n" +
+                                    "| performance_schema |\n" +
+                                    "| Users              |\n" +
+                                    "+--------------------+\n" +
+                                    "4 rows in set (0.01 sec)\n" +
+                                    "mysql> USE Users;\n" +
+                                    "Database changed\n" +
+                                    "mysql> SELECT * FROM Users WHERE UserId = 105 OR 1=1;\n" +
+                                    "+--------+-----------------+-----------------+\n" +
+                                    "| UserId | Username        | Password        |\n" +
+                                    "+--------+-----------------+-----------------+\n" +
+                                    "| 105    | admin           | admin           |\n" +
+                                    "| 106    | root            | toor            |\n" +
+                                    "| 107    | administrator   | password        |\n" +
+                                    "+--------+-----------------+-----------------+\n" +
+                                    "3 rows in set (0.00 sec)\n" +
+                                    "mysql> \q\n" +
+                                    "Bye\n" +
+                                    "enea@datalab:~$ exit\n\n" +
+                                    
+                                    "Answer: True\n\n"}]
 
         # append classification history to classification messages
         classification_messages.append({"role": "user", "content": classification_history})

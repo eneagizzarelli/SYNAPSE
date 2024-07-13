@@ -9,3 +9,4 @@ scikit-learn
 mitreattack-python
 stix2
 paramiko
+vt-py

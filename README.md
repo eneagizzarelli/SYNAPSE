@@ -55,6 +55,8 @@ Generative AI, in this context, will be used to generate responses to issued com
 
 **SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging **machine learning** technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
 
+[GeoLite2](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) database and [VirusTotal](https://www.virustotal.com/gui/home/upload) APIs are used respectively to obtain geolocation information and to get IP address reputation among the other data extracted by the honeypot. Reputation will be provided to the AI as an additional factor to decide whether an attack happened or not.
+
 Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by others. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
 
 With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has been implemented: [**DENDRITE**](https://github.com/eneagizzarelli/DENDRITE).
@@ -73,9 +75,10 @@ With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has
    pip install -r requirements.txt
    ```
 
-3. Create a .env file (in my configuration under `/home/enea/.env`) and add your OpenAI key
-   ```js
-   OPENAI_API_KEY='YOUR KEY';
+3. Create a .env file (in my configuration under `/home/enea/.env`) and add your OpenAI and VirusTotal API keys
+   ```sh
+   OPENAI_API_KEY='YOUR KEY'
+   VIRUSTOTAL_API_KEY='YOUR KEY'
    ```
    
 **Note 1**: in my configuration, SYNAPSE project folder has been cloned under the specific path `/home/enea/SYNAPSE`. Every script/source file in this project refers to other scripts/source file using the above absolute path as a base path. If you plan to use an alternative configuration, like different location or user, remember to change the paths and to replace _enea_ everywhere.
@@ -112,7 +115,7 @@ With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has
 
 Adopting the aforementioned configuration will run SYNAPSE "fake" terminal instead of the real one whenever user _enea_ (or the one you specifically decided) connects to your SSH server.
 
-While SYNAPSE is running, many _classification files_ will be created in the `logs` directory. Those files will have a name format like  `IPaddr_classification_history_NUM.txt`, and will contain the history of commands the user with IP address _IPaddr_ issued on its session number _NUM_. Over those files **SYNAPSE-to-MITRE** extension will operate. After assigning the necessary permissions, executing the script `./startSYNAPSE-to-MITRE.sh` will automatically convert _classification files_ into _attack files_ containing the corresponding MITRE ATT&CK object content, if AI thinks the attack happened.
+While SYNAPSE is running, many _classification files_ will be created in the `logs` directory. Those files will have a name format like `IPaddr_classification_history_NUM.txt`, and will contain the history of commands the user with IP address _IPaddr_ issued on its session number _NUM_. Over those files **SYNAPSE-to-MITRE** extension will operate. After assigning the necessary permissions, executing the script `./startSYNAPSE-to-MITRE.sh` will automatically convert _classification files_ into _attack files_ containing the corresponding MITRE ATT&CK object content, if AI thinks the attack happened.
 
 If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` script can be run. You'll need to replace _capec_ or _enterprise-attack_ databases in the `SYNAPSE-to-MITRE/data` folder with the versions you prefer (you can download them from the repositories linked in the below _acknowledgments_ section). Make sure to leave file and folder names unchanged. In the end, the model can be trained with the newly generated dataset using the `startModelTraining.sh` script.
 
