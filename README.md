@@ -90,7 +90,7 @@ With the aim of a **comparative evaluation**, a static equivalent of SYNAPSE has
    ```
     This will complete the configuration of SYNAPSE, creating the necessary folders, downloading GeoLite2 database and assigning ownership and permissions to user _enea_ (or the one you specifically decided).
 
-5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script and to disable many SSH parameters (not handled by the code) whenever user _enea_ (or the one you specifically decided) connects to your machine using SSH:
+5. Modify your `/etc/ssh/sshd_config` file in order to run `startSYNAPSE.sh` script (after assigning the necessary permissions) and to disable many SSH parameters (not handled by the code) whenever user _enea_ (or the one you specifically decided) connects to your machine using SSH:
    ```sh
    Match User enea
       ForceCommand /home/enea/SYNAPSE/scripts/startSYNAPSE.sh
@@ -129,7 +129,7 @@ Some experiments, or **use cases**, have been carried out over SYNAPSE to stress
 
 - **AI vs SYNAPSE** - **basic interaction**: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI interacts with it and navigates through the various file, folders, databases, tables and so on. Everything is automated, with the new **AI replacing user-interaction**.
 
-- **AI vs SYNAPSE** - **attacker interaction**: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI tries to attack and corrupt it with 5 different attack strategies. Everything is automated, with the new **AI replacing user-interaction**. After the execution of this script, that will stop autonomously when the fifth attack ends, SYNAPSE-to-MITRE extension can be run to map the attacks performed by the AI to the MITRE ATT&CK database.
+- **AI vs SYNAPSE** - **attacker interaction**: SYNAPSE is dinamically generating the content of file system and MySQL service, an additional AI tries to attack and corrupt it with _N_ different attack strategies, where _N_ can be customized. Everything is automated, with the new **AI replacing user-interaction**. After the execution of this script, that will stop autonomously when the _N_-th attack ends, SYNAPSE-to-MITRE extension can be run to map the attacks performed by the AI to the MITRE ATT&CK database.
 
 The code implemented to perform the above tests can be found under `use_cases/` folder and can be run by simply typing (e.g. if we want to execute the attacker interaction):
    ```sh
@@ -156,8 +156,6 @@ LinkedIn - https://linkedin.com/in/eneagizzarelli
 
 <!-- OTHER PROJECTS -->
 ## Other projects
-
-**SYNAPSE**: [https://github.com/eneagizzarelli/SYNAPSE](https://github.com/eneagizzarelli/SYNAPSE)
 
 **DENDRITE**: [https://github.com/eneagizzarelli/DENDRITE](https://github.com/eneagizzarelli/DENDRITE)
 

@@ -9,8 +9,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import precision_recall_fscore_support
 
-model_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/ml_model"
-dataset_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset.csv"
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+SYNAPSE_to_MITRE_path = SYNAPSE_path + "SYNAPSE-to-MITRE/"
+
+model_path = SYNAPSE_to_MITRE_path + "ml_model/"
 
 TRAINING_SIZE = 0.80
 
@@ -77,11 +79,11 @@ def train_classifier(classifier, name, X, Y):
     except OSError as error:
         print(error)
 
-    filename = model_path + '/' + name + '.sav'
+    filename = model_path + name + '.sav'
     pickle.dump((vectorizer, classifier), open(filename, 'wb'))
 
 def main():
-    data_df = pd.read_csv(dataset_path)
+    data_df = pd.read_csv(SYNAPSE_to_MITRE_path + "data/dataset.csv")
     num_classes = len(data_df['label_tec'].value_counts())
 
     print(num_classes)

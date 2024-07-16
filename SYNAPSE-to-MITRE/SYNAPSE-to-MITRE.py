@@ -3,18 +3,23 @@ import json
 
 from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classifications, get_attack_objects, print_attack_objects_to_file
 
-logs_path = "/home/enea/SYNAPSE/logs/"
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+
+logs_path = SYNAPSE_path + "logs/"
 
 def main():
     print("Starting SYNAPSE-to-MITRE mapping...\n")
     
     # iterate over all client IPs previously connected to the server
-    for client_ip in os.listdir(logs_path): 
-        if os.path.isdir(logs_path + client_ip):
+    for client_ip in os.listdir(logs_path):
+        logs_ip_path = logs_path + client_ip + "/"
+
+        if os.path.isdir(logs_ip_path):
+            logs_ip_attacks_path = logs_ip_path + client_ip + "_attacks/"
             
             ip_reputation = 0
-            with open(logs_path + client_ip + "/" + client_ip + "_data.json", "r") as client_data_file:
-                # load client data structure and extract IP reputation
+            # load client data structure and extract IP reputation
+            with open(logs_ip_path + client_ip + "_data.json", "r") as client_data_file:
                 data = json.load(client_data_file)
                 ip_reputation = data["ip_info"]["reputation"]
 
@@ -22,8 +27,8 @@ def main():
 
             # get all classification history files for the current client IP
             classification_files = [
-                f for f in os.listdir(logs_path + client_ip + "/" + client_ip + "_attacks")
-                if os.path.isfile(logs_path + client_ip + "/" + client_ip + "_attacks/" + f) and f.startswith(client_ip + "_classification_history_")
+                f for f in os.listdir(logs_ip_attacks_path)
+                if os.path.isfile(logs_ip_attacks_path + f) and f.startswith(client_ip + "_classification_history_")
             ]
 
             # sort the classification files in ascending order
@@ -35,7 +40,6 @@ def main():
 
                 # check if attack happened by asking AI
                 if(attack_happened(classification_file, client_ip, ip_reputation)):
-
                     print("Attack happened.\n")
 
                     # if attack happened, get unstructured CTI sentence from AI

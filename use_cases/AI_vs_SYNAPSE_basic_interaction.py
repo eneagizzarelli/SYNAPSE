@@ -12,9 +12,9 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 # minimal prompt definition to instruct the AI
 messages = [{"role": 'system', "content": "You are a Linux user interacting with a Linux OS terminal. " +
-                                        "You can use not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
-                                        "Issue some commands to interact with the OS file system and the MySQL service. " + 
-                                        "Generate just the command you want to execute, nothing else. \n"}]
+             "You can use not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
+             "Issue some commands to interact with the OS file system and the MySQL service. " + 
+             "Generate just the command you want to execute, nothing else. \n"}]
 
 # connect to the SSH server using the provided credentials and start an interactive shell
 client.connect('localhost', 22, 'enea', 'password')

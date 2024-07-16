@@ -4,4 +4,6 @@
 # Container script to run SYNAPSE code
 #
 
-python3 /home/enea/SYNAPSE/src/SYNAPSE.py
+SYNAPSE_path="/home/enea/SYNAPSE"
+
+python3 ${SYNAPSE_path}/src/SYNAPSE.py

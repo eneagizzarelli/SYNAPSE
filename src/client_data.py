@@ -4,6 +4,8 @@ import vt
 import geoip2.database
 from dotenv import dotenv_values
 
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+
 # load .env file and configure VirusTotal API key
 config = dotenv_values("/home/enea/.env")
 VIRUSTOTAL_API_KEY = config["VIRUSTOTAL_API_KEY"]
@@ -32,52 +34,9 @@ def get_client_ip():
 # get client IP address as a global variable when this module is imported
 client_ip = get_client_ip()
 
-def get_client_ip_info():
-    """
-    Extract client IP address information by contacting VirusTotal APIs.
-
-    Parameters: none.
-
-    Returns:
-    dict[str, Any]: client IP information dictionary.
-    """
-    
-    vt_client = vt.Client(VIRUSTOTAL_API_KEY)
-    
-    ip_info = {
-        'total_votes': None,
-        'whois': None,
-        'reputation': None,
-        'last_analisys_stats': None,
-        'regional_internet_registry': None,
-        'as_owner': None
-    }
-
-    try:
-        # get IP address information from VirusTotal
-        ip_info_json = vt_client.get_json("/ip_addresses/{}", client_ip)
-        # extract attributes from the JSON response
-        attributes = ip_info_json.get("data", {}).get("attributes", {})
-
-        # fill IP information dictionary with relevant fields
-        ip_info = {
-            'total_votes': attributes.get('total_votes'),
-            'whois': attributes.get('whois'),
-            'reputation': attributes.get('reputation'),
-            'last_analisys_stats': attributes.get('last_analysis_stats'),
-            'regional_internet_registry': attributes.get('regional_internet_registry'),
-            'as_owner': attributes.get('as_owner')
-        }
-    except vt.error.APIError as e:
-        # pass and return None for all fields
-        pass
-
-    vt_client.close()
-    return ip_info
-
-logs_ip_path = "/home/enea/SYNAPSE/logs/" + client_ip
-logs_ip_data_path = logs_ip_path + "/" + client_ip + "_data.json"
-database_path = "/home/enea/SYNAPSE/data/GeoLite2-City.mmdb"
+logs_ip_path = SYNAPSE_path + "logs/" + client_ip + "/"
+logs_ip_data_path = logs_ip_path + client_ip + "_data.json"
+logs_ip_attacks_path = logs_ip_path + client_ip + "_attacks/"
 
 def initialize_client_data():
     """
@@ -93,7 +52,7 @@ def initialize_client_data():
         # if not, create it
         os.makedirs(logs_ip_path)
         # create a subfolder for attacks
-        os.makedirs(logs_ip_path + "/" + client_ip + "_attacks")
+        os.makedirs(logs_ip_attacks_path)
 
         # get info from SSH_CLIENT environment variable
         ssh_connection_info = os.environ.get("SSH_CLIENT")
@@ -122,7 +81,44 @@ def initialize_client_data():
                 client_data_file.write("\n")
         
         # TODO: handle case when SSH_CLIENT is not available
+
+def get_client_ip_info():
+    """
+    Extract information for the current IP address using VirusTotal APIs.
+
+    Parameters: none.
+
+    Returns:
+    dict[str, Any]: dictionary of IP information.
+
+    Raises:
+    vt.error.APIError: if there is any error in the VirusTotal APIs.
+    """
+    
+    vt_client = vt.Client(VIRUSTOTAL_API_KEY)
+
+    try:
+        # get IP address information from VirusTotal
+        ip_info_json = vt_client.get_json("/ip_addresses/{}", client_ip)
+        # extract attributes from the JSON response
+        attributes = ip_info_json.get("data", {}).get("attributes", {})
+
+        # fill IP information dictionary with relevant fields
+        ip_info = {
+            "total_votes": attributes.get('total_votes'),
+            "whois": attributes.get('whois'),
+            "reputation": attributes.get('reputation'),
+            "last_analisys_stats": attributes.get('last_analysis_stats'),
+            "regional_internet_registry": attributes.get('regional_internet_registry'),
+            "as_owner": attributes.get('as_owner')
+        }
+
+        return ip_info
+    except vt.error.APIError:
         return None
+    finally:
+        # close VirusTotal client
+        vt_client.close()
     
 def get_client_geolocation():
     """
@@ -137,7 +133,7 @@ def get_client_geolocation():
     geoip2.errors.AddressNotFoundError: if the IP address is not found in the database.
     """
 
-    reader = geoip2.database.Reader(database_path)
+    reader = geoip2.database.Reader(SYNAPSE_path + "data/GeoLite2-City.mmdb")
 
     try:
         # get geolocation object for the current IP address
@@ -192,15 +188,20 @@ def increment_client_number_of_connections():
         json.dump(data, client_data_file, indent=4)
         client_data_file.write("\n")
 
-def write_client_session_duration_in_seconds(session_duration_in_seconds):
+def write_client_session_duration_in_seconds(session_start_time, session_end_time):
     """
-    Write duration in seconds of the terminated session for the current IP address.
+    Write duration of the terminated session for the current IP address.
     
     Parameters:
-    float: duration in seconds of the terminated session.
+    float: session start time.
+    float: session end time.
 
     Returns: none.
     """
+
+    # calculate session duration in seconds and round it to 2 decimal places
+    session_duration_in_seconds = session_end_time - session_start_time
+    session_duration_in_seconds = round(session_duration_in_seconds, 2)
     
     with open(logs_ip_data_path, "r") as client_data_file:
         # load client data structure
@@ -226,8 +227,8 @@ def get_count_classification_history_files():
 
     count_classification_history_files = 0
 
-    # iterate over files in the logs attacks folder for the current IP address
-    for classification_file in os.listdir(logs_ip_path + "/" + client_ip + "_attacks"):
+    # iterate over file in the attacks folder of the current IP address
+    for classification_file in os.listdir(logs_ip_attacks_path):
         # if classification history file is found
         if classification_file.startswith(client_ip + "_classification_history_"):
             # increment number of classification history files

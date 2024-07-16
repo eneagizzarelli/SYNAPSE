@@ -6,12 +6,14 @@ from datetime import datetime
 # import client IP address global variable from client_data module
 from client_data import client_ip
 
-today = datetime.now()
+SYNAPSE_path = "/home/enea/SYNAPSE/"
 
-logs_ip_terminal_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
-logs_ip_mysql_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
-terminal_personality_path = "/home/enea/SYNAPSE/prompts/terminal_personality.yml"
-services_personality_path = "/home/enea/SYNAPSE/prompts/services_personality.yml"
+terminal_personality_path = SYNAPSE_path + "prompts/terminal_personality.yml"
+services_personality_path = SYNAPSE_path + "prompts/services_personality.yml"
+logs_ip_terminal_history_path = SYNAPSE_path + "logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = SYNAPSE_path + "logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
+
+today = datetime.now()
 
 def load_terminal_prompt():
     """

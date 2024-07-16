@@ -6,7 +6,7 @@
 #   1. Previous SYNAPSE folder is removed and the new one is cloned in the same location.
 #   2. "logs" and "data" folders are created.
 #   3. GeoLite2-City.mmdb is downloaded leveraging downloadGeoLiteDB.sh script.
-#   4. Ownership and permissions are set to the enea user.
+#   4. Ownership and permissions are changed to the enea user.
 # This script must be executed as root.
 #
 

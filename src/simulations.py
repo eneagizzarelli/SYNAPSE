@@ -9,9 +9,11 @@ from client_data import client_ip, get_count_classification_history_files
 from initializations import load_mysql_prompt, parse_mysql_argument, load_mysql_messages
 from ai_requests import *
 
-logs_ip_terminal_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
-logs_ip_mysql_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
-logs_attacks_ip_classification_history_path = "/home/enea/SYNAPSE/logs/" + client_ip + "/" + client_ip + "_attacks" + "/" + client_ip + "_classification_history_"
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+
+logs_ip_terminal_history_path = SYNAPSE_path + "logs/" + client_ip + "/" + client_ip + "_terminal_history.txt"
+logs_ip_mysql_history_path = SYNAPSE_path + "logs/" + client_ip + "/" + client_ip + "_mysql_history.txt"
+logs_ip_attacks_classification_history_path = SYNAPSE_path + "logs/" + client_ip + "/" + client_ip + "_attacks" + "/" + client_ip + "_classification_history_"
 
 today = datetime.now()
 
@@ -20,13 +22,13 @@ def terminal_simulation(terminal_messages):
     Simulation of a Linux OS terminal.
 
     Parameters:
-    list[dict[str, str]]: dictionary of terminal messages.
+    list[dict[str, str]]: list of dictionaries of terminal messages.
 
     Returns: none.
 
     Raises:
-    KeyboardInterrupt: whenever a user press CTRL+C to terminate the SSH connection.
-    EOFError: whenever a user press CTRL+D to terminate the SSH connection.
+    KeyboardInterrupt: whenever the user press CTRL+C to terminate the SSH connection.
+    EOFError: whenever the user press CTRL+D to terminate the SSH connection.
     """
     
     count_classification_history_files = get_count_classification_history_files() # for the current IP address
@@ -44,7 +46,7 @@ def terminal_simulation(terminal_messages):
         # check if the client wants to connect to MySQL and eventually enter MySQL simulation container function
         if last_terminal_message[dollar_position + 1:].strip().startswith("mysql"):
             run_mysql_simulation(last_terminal_message, count_classification_history_files)
-            # make AI think the client issued a simple "cd ." command to re-enter terminal simulation after MySQL one
+            # make AI think the client issued a simple "cd ." command to re-enter terminal simulation
             terminal_messages.append({"role": "user", "content": "cd ." + f"\t<{datetime.now()}>\n"})
 
         # check if the client wants to clear the terminal
@@ -52,7 +54,7 @@ def terminal_simulation(terminal_messages):
             os.system("clear")
 
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_ip_attacks_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         # generate a response to the last command issued by the client by contacting AI
         terminal_message = generate_response(terminal_messages)
@@ -70,7 +72,7 @@ def terminal_simulation(terminal_messages):
         terminal_history.close()
         classification_history.close()
         terminal_history = open(logs_ip_terminal_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_ip_attacks_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
         
         # check if the client used "sudo" command
         if "will be reported" in terminal_messages[len(terminal_messages) - 1]["content"]:
@@ -205,7 +207,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
     Simulation of a MySQL server.
 
     Parameters:
-    list[dict[str, str]]: dictionary of mysql messages.
+    list[dict[str, str]]: list of dictionaries of mysql messages.
     str: command to execute after logging in (if any).
     int: number of classification history files.
 
@@ -227,7 +229,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_ip_attacks_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         # generate a response to the last mysql command issued by the client by contacting AI
         mysql_message = generate_response(mysql_messages)
@@ -251,7 +253,7 @@ def mysql_simulation(mysql_messages, command, count_classification_history_files
             break
 
         mysql_history = open(logs_ip_mysql_history_path, "a+", encoding="utf-8")
-        classification_history = open(logs_attacks_ip_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
+        classification_history = open(logs_ip_attacks_classification_history_path + str(count_classification_history_files) + ".txt", "a+", encoding="utf-8")
 
         user_input = ""
         # check if command to execute after login was provided

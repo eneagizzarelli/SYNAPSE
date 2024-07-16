@@ -29,11 +29,8 @@ def main():
 
     # end session timer
     session_end_time = time.time()
-    # calculate session duration in seconds and round it to 2 decimal places
-    session_duration_in_seconds = session_end_time - session_start_time
-    session_duration_in_seconds = round(session_duration_in_seconds, 2)
     
-    write_client_session_duration_in_seconds(session_duration_in_seconds)
+    write_client_session_duration_in_seconds(session_start_time, session_end_time)
 
 if __name__ == "__main__":
     main()

@@ -4,4 +4,6 @@
 # Container script to run dataset build code
 #
 
-python3 /home/enea/SYNAPSE/SYNAPSE-to-MITRE/build_dataset.py
+SYNAPSE_to_MITRE_path="/home/enea/SYNAPSE/SYNAPSE-to-MITRE"
+
+python3 ${SYNAPSE_to_MITRE_path}/build_dataset.py

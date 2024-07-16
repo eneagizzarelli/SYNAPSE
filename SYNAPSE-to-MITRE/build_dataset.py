@@ -6,9 +6,8 @@ from stix2 import FileSystemSource
 from stix2 import Filter
 from stix2 import parse
 
-enterprise_attack_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/enterprise-attack/enterprise-attack.json"
-capec_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/capec/2.0"
-dataset_new_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/data/dataset_new.csv"
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+SYNAPSE_to_MITRE_data_path = SYNAPSE_path + "SYNAPSE-to-MITRE/data/"
 
 def combine_text(list_of_text):
     combined_text = ' '.join(list_of_text)
@@ -41,7 +40,7 @@ def map_subtec_to_tec(id):
 	return id.split(".", 2)[0]
 
 def add_description_from_capec(capec_id):
-	capec_fs = FileSystemSource(capec_path)
+	capec_fs = FileSystemSource(SYNAPSE_to_MITRE_data_path + "capec/2.0")
 	capec_filters = [Filter('type', '=', 'attack-pattern'), Filter("description", "!=", ""), Filter("external_references.external_id", "=", capec_id)]
 	capec_attack_patterns = capec_fs.query(capec_filters)
 	descriptions = []
@@ -75,10 +74,8 @@ def get_attack_dict(src, attack_patterns):
 	return attack_ids_dict, attack_ids_names_dict
 
 def main():
-	TACTIC = 'all'
-
 	src = MemoryStore()
-	src.load_from_file(enterprise_attack_path)
+	src.load_from_file(SYNAPSE_to_MITRE_data_path + "enterprise-attack/enterprise-attack.json")
 
 	filters = [Filter('type', '=', 'attack-pattern'), Filter("description", "!=", ""), Filter("external_references.source_name", "=", "mitre-attack")]
 
@@ -165,7 +162,7 @@ def main():
 
 	data_df = pd.DataFrame(data, columns=['label_tec', 'label_subtec','tec_name', 'sentence'])
 
-	data_df.to_csv(dataset_new_path)
+	data_df.to_csv(SYNAPSE_to_MITRE_data_path + "dataset_new.csv")
 
 	print(len(train_texts))
 

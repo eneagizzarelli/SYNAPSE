@@ -6,15 +6,16 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
 
-sys.path.append("/home/enea/SYNAPSE/src")
+SYNAPSE_path = "/home/enea/SYNAPSE/"
+SYNAPSE_to_MITRE_path = SYNAPSE_path + "SYNAPSE-to-MITRE/"
+
+sys.path.append(SYNAPSE_path + "src")
 from ai_requests import generate_response
 
-SYNAPSE_to_MITRE_path = "/home/enea/SYNAPSE/SYNAPSE-to-MITRE/"
-enterprise_attack_path = SYNAPSE_to_MITRE_path + "data/enterprise-attack/enterprise-attack.json"
-logs_path = "/home/enea/SYNAPSE/logs/"
+logs_path = SYNAPSE_path + "logs/"
 
 # initialize MITRE ATT&CK data object
-mitre_attack_data = MitreAttackData(enterprise_attack_path)
+mitre_attack_data = MitreAttackData(SYNAPSE_to_MITRE_path + "data/enterprise-attack/enterprise-attack.json")
 
 def attack_happened(classification_file, client_ip, ip_reputation):
     """
@@ -26,7 +27,7 @@ def attack_happened(classification_file, client_ip, ip_reputation):
     int: IP reputation.
 
     Returns:
-    bool: True if an attack happened, False otherwise.
+    bool: 'True' if an attack happened, 'False' otherwise.
     """
     
     with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, "r", encoding="utf-8") as classification_history_file:
@@ -180,7 +181,7 @@ def get_attack_objects(attack_ids):
 
 def print_attack_objects_to_file(attack_objects, sentence, client_ip):
     """
-    Print MITRE ATT&CK objects to a file.
+    Print MITRE ATT&CK objects to file.
 
     Parameters:
     list[object]: MITRE ATT&CK objects.
@@ -191,24 +192,24 @@ def print_attack_objects_to_file(attack_objects, sentence, client_ip):
     int: current attack directory number.
     """
     
-    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+    logs_ip_attacks_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
     count_attack_directories = 0
 
     # count total number of attack files to create a new one with correct name numbering
-    for item in os.listdir(attack_path):
-        if os.path.isdir(attack_path + item) and item.startswith(client_ip + "_attack_"):
+    for item in os.listdir(logs_ip_attacks_path):
+        if os.path.isdir(logs_ip_attacks_path + item) and item.startswith(client_ip + "_attack_"):
             count_attack_directories += 1
 
-    current_attack_path = attack_path + client_ip + "_attack_" + str(count_attack_directories) + "/"
+    logs_ip_current_attack_path = logs_ip_attacks_path + client_ip + "_attack_" + str(count_attack_directories) + "/"
     count_current_attack_file = 0
 
     # create directory for the current attack
-    os.mkdir(current_attack_path)
+    os.mkdir(logs_ip_current_attack_path)
 
     # for each attack object
     for attack_object in attack_objects:
         # open/create new attack file
-        with open(current_attack_path + client_ip + "_attack_" + str(count_attack_directories) + "_mapping_" + str(count_current_attack_file) + ".txt", 'w') as attack_file:
+        with open(logs_ip_current_attack_path + client_ip + "_attack_" + str(count_attack_directories) + "_mapping_" + str(count_current_attack_file) + ".txt", 'w') as attack_file:
             original_stdout = sys.stdout
             sys.stdout = attack_file
 
@@ -237,11 +238,11 @@ def rename_classification_history(classification_file, attack_directory_number, 
     Returns: none.
     """
 
-    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
-    current_attack_path = attack_path + client_ip + "_attack_" + str(attack_directory_number) + "/"
+    logs_ip_attacks_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+    logs_ip_current_attack_path = logs_ip_attacks_path + client_ip + "_attack_" + str(attack_directory_number) + "/"
 
-    if os.path.exists(attack_path + classification_file):
-        os.rename(attack_path + classification_file, current_attack_path + client_ip + "_attack_history_" + str(attack_directory_number) + ".txt")
+    if os.path.exists(logs_ip_attacks_path + classification_file):
+        os.rename(logs_ip_attacks_path + classification_file, logs_ip_current_attack_path + client_ip + "_attack_history_" + str(attack_directory_number) + ".txt")
 
 def remove_classification_history(classification_file, client_ip):
     """
@@ -254,7 +255,7 @@ def remove_classification_history(classification_file, client_ip):
     Returns: none.
     """
 
-    attack_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
+    logs_ip_attacks_path = logs_path + client_ip + "/" + client_ip + "_attacks/"
 
-    if os.path.exists(attack_path + classification_file):
-        os.remove(attack_path + classification_file)
+    if os.path.exists(logs_ip_attacks_path + classification_file):
+        os.remove(logs_ip_attacks_path + classification_file)

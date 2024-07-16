@@ -12,10 +12,10 @@ gpt_3_5_turbo_0125_model = "gpt-3.5-turbo-0125"
 
 def generate_response(messages):
     """
-    Generate AI response based on the entire history file.
+    Generate AI response based on the entire history of commands.
 
     Parameters:
-    list[dict[str, str]]: dictionary of messages.
+    list[dict[str, str]]: list of dictionaries of messages.
 
     Returns:
     dict[str, str]: dictionary of AI response.
@@ -45,7 +45,7 @@ def generate_tab_completions(messages):
     Generate AI tab completion response based on partial word.
 
     Parameters:
-    list[dict[str, str]]: dictionary of messages.
+    list[dict[str, str]]: list of dictionaries of messages.
 
     Returns:
     str: tab completed word string.
@@ -64,10 +64,10 @@ def completer(text, state):
             return None
 
         messages = [{"role": 'system', "content": "Emulate the tab autocompletion of a Linux terminal. " + 
-                    "Generate words separated by " " to complete the already started one. " + 
-                    "If you don't know what to answer, do not print anything. " + 
-                    "Do not start in any case a conversation with the user. A terminal would not do so. " + 
-                    "Start from the following text and generate the completed word. \n"}]
+                     "Generate words separated by " " to complete the already started one. " +
+                     "If you don't know what to answer, do not print anything. " + 
+                     "Do not start in any case a conversation with the user. A terminal would not do so. " + 
+                     "Start from the following text and generate the completed word. \n"}]
         messages.append({"role": 'user', "content": text})
 
         completions = generate_tab_completions(messages)
@@ -77,6 +77,6 @@ def completer(text, state):
         else:
             return completions
 
-# Comment/Uncomment the following two lines to disable/enable (sperimental) tab completion leveraging AI
+# Comment/Uncomment the following lines to disable/enable (sperimental) tab completion leveraging AI
 # readline.set_completer(completer)
 # readline.parse_and_bind('tab: complete')

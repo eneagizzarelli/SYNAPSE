@@ -4,7 +4,7 @@
 # Script to automate GeoLite2-City.mmdb download. 
 # Previous database is removed and the new one is downloaded.
 # This script is intended to be run periodically to keep the database updated.
-# Use crontab -e to schedule the script execution.
+# Use crontab -e to schedule the automatic execution.
 #
 
 SYNAPSE_path="/home/enea/SYNAPSE"
