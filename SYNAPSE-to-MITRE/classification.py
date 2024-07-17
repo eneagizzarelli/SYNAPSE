@@ -1,7 +1,10 @@
 import os
+import re
+import vt
 import sys
 import pickle
 import numpy as np
+from dotenv import dotenv_values
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer, porter
 from mitreattack.stix20 import MitreAttackData
@@ -12,19 +15,127 @@ SYNAPSE_to_MITRE_path = SYNAPSE_path + "SYNAPSE-to-MITRE/"
 sys.path.append(SYNAPSE_path + "src")
 from ai_requests import generate_response
 
+# load .env file and configure VirusTotal API key
+config = dotenv_values("/home/enea/.env")
+VIRUSTOTAL_API_KEY = config["VIRUSTOTAL_API_KEY"]
+
 logs_path = SYNAPSE_path + "logs/"
 
 # initialize MITRE ATT&CK data object
 mitre_attack_data = MitreAttackData(SYNAPSE_to_MITRE_path + "data/enterprise-attack/enterprise-attack.json")
 
-def attack_happened(classification_file, client_ip, ip_reputation):
+def get_ips_and_domains_from_classification_file(classification_file, client_ip):
     """
-    Make AI decide if an attack happened given a classification history file.
+    Get all IP addresses and domains from classification history file.
+
+    Parameters:
+    str: classification filename string.
+    str: client IP address string.
+
+    Returns:
+    tuple: list of IP address strings, list of domain strings.
+    """
+    
+    # compile regex patterns for IP addresses and domains
+    ip_pattern = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
+    domain_pattern = re.compile(r'\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}\b')
+    
+    ips = []
+    domains = []
+
+    # open classification history file
+    with open(logs_path + client_ip + "/" + client_ip + "_attacks/" + classification_file, "r", encoding="utf-8") as classification_history_file:
+        # skip first line
+        classification_history_file.readline()
+
+        # read rest of the file
+        classification_history = classification_history_file.read()
+
+        # extract IPs and domains from classification history by leveraging regex patterns
+        ips = ip_pattern.findall(classification_history)
+        domains = domain_pattern.findall(classification_history)
+        # remove possible file from domains
+        domains = [domain for domain in domains if domain.split('.')[-1] not in {'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'html', 'htm',
+                                                                                 'py', 'js', 'css', 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg', 'ico',
+                                                                                 'c', 'cpp', 'h', 'hpp', 'java', 'class', 'sh', 'bat', 'exe', 'dll', 'so',
+                                                                                 'zip', 'rar', 'tar', 'gz', 'bz2', '7z', 'mp3', 'wav', 'wma', 'ogg', 'flac',
+                                                                                 'mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'swf', 'sql', 'xml', 'json', 'csv',
+                                                                                 'log', 'dat', 'ini', 'cfg', 'tmp'}]
+    
+    # remove duplicates
+    ips = list(set(ips))
+    domains = list(set(domains))
+
+    return ips, domains
+
+def get_ip_reputation(ip):
+    """
+    Extract reputation for an IP address using VirusTotal APIs.
+
+    Parameters:
+    str: IP address string.
+
+    Returns:
+    int: IP reputation.
+
+    Raises:
+    vt.error.APIError: if there is any error in the VirusTotal APIs.
+    """
+    
+    vt_client = vt.Client(VIRUSTOTAL_API_KEY)
+
+    try:
+        # get IP address information from VirusTotal
+        ip_info_json = vt_client.get_json("/ip_addresses/{}", ip)
+        # extract reputation from the JSON response
+        ip_reputation = ip_info_json.get("data", {}).get("attributes", {}).get('reputation', None)
+
+        return ip_reputation
+    except vt.error.APIError:
+        return None
+    finally:
+        # close VirusTotal client
+        vt_client.close()
+
+def get_domain_reputation(domain):
+    """
+    Extract reputation for a domain using VirusTotal APIs.
+
+    Parameters:
+    str: domain string.
+
+    Returns:
+    int: domain reputation.
+
+    Raises:
+    vt.error.APIError: if there is any error in the VirusTotal APIs.
+    """
+    
+    vt_client = vt.Client(VIRUSTOTAL_API_KEY)
+
+    try:
+        # get domain information from VirusTotal
+        domain_info_json = vt_client.get_json("/domains/{}", domain)
+        # extract reputation from the JSON response
+        domain_reputation = domain_info_json.get("data", {}).get("attributes", {}).get('reputation', None)
+
+        return domain_reputation
+    except vt.error.APIError:
+        return None
+    finally:
+        # close VirusTotal client
+        vt_client.close()
+
+def attack_happened(classification_file, client_ip, ip_reputation, ips_and_reputations, domains_and_reputations):
+    """
+    Make AI decide if an attack happened given a classification history file, client IP reputation, IPs and domains with their respective reputations.
 
     Parameters:
     str: classification filename string.
     str: client IP address string.
     int: IP reputation.
+    list[(str, int)]: list of IP address strings and their respective reputations.
+    list[(str, int)]: list of domain strings and their respective reputations.
 
     Returns:
     bool: 'True' if an attack happened, 'False' otherwise.
@@ -42,6 +153,9 @@ def attack_happened(classification_file, client_ip, ip_reputation):
                                     "A reputation less than 0 means that the IP address is bad. " +
                                     "A reputation equal to 0 means that the IP address is neutral. " +
                                     "The reputation for the current IP address is: " + str(ip_reputation) + ". " +
+                                    "You also have to take your decision based on the following reputations of IPs and domains entered by the attacker in the commands inserted. " +
+                                    "IPs and reputations (in the form [(IP1, REPUTATION1), (IP2, REPUTATION2), ...]): " + str(ips_and_reputations) + ". " +
+                                    "Domains and reputations (in the form [(DOMAIN1, REPUTATION1), (DOMAIN2, REPUTATION2), ...]): " + str(domains_and_reputations) + ". " +
                                     "Examples: \n" +
                                     "enea@datalab:~$ ls\n" +
                                     "Desktop  Documents  Downloads  Music  Pictures  Videos\n" +
@@ -79,7 +193,18 @@ def attack_happened(classification_file, client_ip, ip_reputation):
                                     "mysql> \q\n" +
                                     "Bye\n" +
                                     "enea@datalab:~$ exit\n\n" +
+                                    "Answer: True\n\n" +
+
+                                    "enea@datalab:~$ ssh user@100.10.10.10 (where reputation of '100.10.10.10' is 50)\n" +
+                                    "Answer: False\n\n" +
+
+                                    "enea@datalab:~$ ssh user@100.10.10.20 (where reputation of '100.10.10.20' is -50)\n" +
+                                    "Answer: True\n\n" +
                                     
+                                    "enea@datalab:~$ wget example.com (where reputation of 'example.com' is 50)\n" +
+                                    "Answer: False\n\n" +
+        
+                                    "enea@datalab:~$ wget example.it (where reputation of 'example.it' is -50)\n" +
                                     "Answer: True\n\n"}]
 
         # append classification history to classification messages

@@ -55,7 +55,7 @@ Generative AI, in this context, will be used to generate responses to issued com
 
 **SYNAPSE-to-MITRE** extension automatically maps logs collected by SYNAPSE into attacks of the [**MITRE ATT&CK**](https://attack.mitre.org) database, leveraging **machine learning** technologies. More in detail, a MLP classifier has been trained to achieve the desired behaviour. The dataset used to train the model is the one proposed by [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp), re-created using the (currently) last version of the MITRE ATT&CK database (_enterprise-attack-15.1_). Generative AI, in this context, will be used both for deciding if an attack happened or not, and to generate a brief sentence summing up the eventual attack.
 
-[GeoLite2](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) database and [VirusTotal](https://www.virustotal.com/gui/home/upload) APIs are used respectively to obtain geolocation information and to get IP address reputation among the other data extracted by the honeypot. Reputation will be provided to the AI as an additional factor to decide whether an attack happened or not.
+[GeoLite2](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data) database is used to obtain geolocation information about the connected IP address. [VirusTotal](https://www.virustotal.com/gui/home/upload) APIs are used to get client IP address reputation among the other data extracted by the honeypot. Also, for each log of commands, reputations of IPs and domains entered by the user/attacker (e.g. _ping_ to a certain IP address or _wget_ from a certain domain) are fetched. All these information will be provided to the AI as additional factors to decide whether an attack happened or not.
 
 Among its features, SYNAPSE supports **multiple sessions** for the same user. Each IP address will have its own simulated file system for each subsequent session. Different users will never see modifications done by others. File system file and directories together with MySQL databases and tables will be populated creatively (dinamically) by generative AI.
 
@@ -167,6 +167,7 @@ LinkedIn - https://linkedin.com/in/eneagizzarelli
 - [shelLM](https://github.com/stratosphereips/SheLLM)
 - [cti-to-mitre-with-nlp](https://github.com/dessertlab/cti-to-mitre-with-nlp)
 - [GeoLite.mmdb](https://github.com/P3TERX/GeoLite.mmdb)
+- [VirusTotal](https://www.virustotal.com)
 - [attack-stix-data/enterprise-attack](https://github.com/mitre-attack/attack-stix-data/tree/master/enterprise-attack)
 - [cti/capec](https://github.com/mitre/cti/tree/master/capec)
 - [Best-README-Template](https://github.com/othneildrew/Best-README-Template)

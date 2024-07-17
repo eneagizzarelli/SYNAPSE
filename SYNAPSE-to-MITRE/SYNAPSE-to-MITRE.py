@@ -1,7 +1,7 @@
 import os
 import json
 
-from classification import attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classifications, get_attack_objects, print_attack_objects_to_file
+from classification import get_ips_and_domains_from_classification_file, get_ip_reputation, get_domain_reputation, attack_happened, get_sentence, rename_classification_history, remove_classification_history, get_classifications, get_attack_objects, print_attack_objects_to_file
 
 SYNAPSE_path = "/home/enea/SYNAPSE/"
 
@@ -17,13 +17,13 @@ def main():
         if os.path.isdir(logs_ip_path):
             logs_ip_attacks_path = logs_ip_path + client_ip + "_attacks/"
             
-            ip_reputation = 0
+            client_ip_reputation = 0
             # load client data structure and extract IP reputation
             with open(logs_ip_path + client_ip + "_data.json", "r") as client_data_file:
                 data = json.load(client_data_file)
-                ip_reputation = data["ip_info"]["reputation"]
+                client_ip_reputation = data["ip_info"]["reputation"]
 
-            print("IP: " + client_ip + " (reputation = " + str(ip_reputation) + ")\n")
+            print("IP: " + client_ip + " (reputation = " + str(client_ip_reputation) + ")\n")
 
             # get all classification history files for the current client IP
             classification_files = [
@@ -36,16 +36,35 @@ def main():
 
             # iterate over all classification history files
             for classification_file in classification_files:
-                print("- " + classification_file + ": ", end="")
+                print("- " + classification_file + ": ")
+
+                # get IPs and domains from classification history file
+                ips, domains = get_ips_and_domains_from_classification_file(classification_file, client_ip)
+                
+                ips_and_reputations = []
+                # print IPs together with respective reputation
+                print("\tIPs found:")
+                for ip in ips:
+                    ip_reputation = get_ip_reputation(ip)
+                    ips_and_reputations.append((ip, ip_reputation))
+                    print("\t\t- " + ip + " (reputation = " + str(ip_reputation) + ")")
+
+                domains_and_reputations = []
+                # print domains together with respective reputation
+                print("\tDomains found:")
+                for domain in domains:
+                    domain_reputation = get_domain_reputation(domain)
+                    domains_and_reputations.append((domain, domain_reputation))
+                    print("\t\t- " + domain + " (reputation = " + str(domain_reputation) + ")")
 
                 # check if attack happened by asking AI
-                if(attack_happened(classification_file, client_ip, ip_reputation)):
-                    print("Attack happened.\n")
+                if(attack_happened(classification_file, client_ip, client_ip_reputation, ips_and_reputations, domains_and_reputations)):
+                    print("\n\tAttack happened -> ", end="")
 
                     # if attack happened, get unstructured CTI sentence from AI
                     sentence = get_sentence(classification_file, client_ip)
 
-                    print("\tUnstructured CTI: " + sentence + "\n")
+                    print(sentence + "\n")
 
                     # get top three attack IDs and attack objects from unstructured CTI sentence
                     top_3_classifications = get_classifications(sentence)
@@ -57,7 +76,7 @@ def main():
                     rename_classification_history(classification_file, attack_directory_number, client_ip)
                 # attack not happened
                 else :
-                    print("No attack happened.\n")
+                    print("\nNo attack happened.\n")
 
                     # remove classification history file after processing
                     remove_classification_history(classification_file, client_ip)
