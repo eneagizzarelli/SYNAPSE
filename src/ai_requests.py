@@ -22,7 +22,7 @@ def generate_response(messages):
     """
 
     # create AI response and extract the content
-    response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.1, max_tokens = 800)
+    response = openai.chat.completions.create(model = gpt_4o_model, messages = messages, temperature = 0.1, max_tokens = 1500)
     msg = response.choices[0].message.content
 
     # cleaning unwanted ``` from the response

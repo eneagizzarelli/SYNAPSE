@@ -121,6 +121,8 @@ If you plan to rebuild the dataset from scratch, the `startDatasetBuild.sh` scri
 
 **Note 3**: if you experience an error like `Resource SOMETHING not found` and, further on, `>>> nltk.download('SOMETHING')` when using SYNAPSE-to-MITRE, please try the following command: `python3 -m nltk.downloader SOMETHING`. It should happen only for resources _punkt_ and _wordnet_.
 
+`startSystemLogsAnalysis.sh` script can be executed to perform a basic analysis of Linux OS logs leveraging AI. `auth.log`, `kern.log` and `syslog` will be given as a prompt to generative AI, obtaining as a result a report describing what happened in the system.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Use cases
