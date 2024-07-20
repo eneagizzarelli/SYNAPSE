@@ -1,0 +1,15 @@
+,label_tec,label_subtec,tec_name,sentence
+0,T1485,T1485.001,Data Destruction,Adversaries may attempt to manipulate or destroy database records to disrupt operations or corrupt data.
+1,T1485,T1485.001,Data Destruction,"Adversaries may destroy data and files on specific systems or in large numbers on a network to interrupt availability to systems, services, and network resources."
+2,T1499,T1499.004,Endpoint Denial of Service,Adversaries may execute a fork bomb to exhaust system resources and cause a denial of service.
+3,T1485,T1485.001,Data Destruction,Adversaries may destroy data and files on specific systems to interrupt availability to systems and services.
+4,T1562,T1562.001,Impair Defenses,Adversaries may execute a fork bomb to consume system resources and modify network configuration files to disrupt system and network availability.
+5,T1222,T1222.002,File and Directory Permissions Modification,Adversaries may change file permissions to restrict access and disrupt system functionality.
+6,T1053,T1053.005,Scheduled Task/Job,"Adversaries may attempt to schedule tasks to execute destructive commands and access databases to delete or drop tables, aiming to disrupt system availability and data integrity."
+7,T1485,T1485.001,Data Destruction,Adversaries may attempt to destroy data and files on specific systems or databases to interrupt availability and manipulate external outcomes.
+8,T1485,T1485.001,Data Destruction,Adversaries may attempt to destroy or manipulate data in databases to disrupt operations or corrupt information.
+9,T1485,T1485.001,Data Destruction,Adversaries may attempt to manipulate or destroy database records to disrupt operations or corrupt data.
+10,T1565,T1565.001,Data Manipulation,Adversaries may attempt to manipulate network configurations by modifying the hosts file to redirect traffic.
+11,T1485,T1485.001,Data Destruction,Adversaries may delete or modify system files and logs to remove evidence of their presence and disrupt system functionality.
+12,T1565,T1565.002,Data Manipulation,Adversaries may attempt to manipulate network configuration files to redirect traffic or disrupt services.
+13,T1485,T1485.001,Data Destruction,Adversaries may destroy data and files on specific systems to interrupt availability to systems and services.

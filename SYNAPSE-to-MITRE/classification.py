@@ -269,8 +269,8 @@ def get_classifications(text):
     list[Any]: list of MITRE ATT&CK ID strings.
     """
         
-    with open(SYNAPSE_to_MITRE_path + 'ml_model/MLP_classifier.sav', 'rb') as file:
-        vectorizer, classifier = pickle.load(file)
+    with open(SYNAPSE_to_MITRE_path + 'ml_model/MLP_classifier.sav', 'rb') as model_file:
+        vectorizer, classifier = pickle.load(model_file)
 
     lemmatizer = WordNetLemmatizer()
     ps = porter.PorterStemmer()
