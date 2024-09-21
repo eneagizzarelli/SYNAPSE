@@ -1,15 +1,41 @@
 ,label_tec,label_subtec,tec_name,sentence
-0,T1485,T1485.001,Data Destruction,Adversaries may attempt to manipulate or destroy database records to disrupt operations or corrupt data.
-1,T1485,T1485.001,Data Destruction,"Adversaries may destroy data and files on specific systems or in large numbers on a network to interrupt availability to systems, services, and network resources."
-2,T1499,T1499.004,Endpoint Denial of Service,Adversaries may execute a fork bomb to exhaust system resources and cause a denial of service.
-3,T1485,T1485.001,Data Destruction,Adversaries may destroy data and files on specific systems to interrupt availability to systems and services.
-4,T1562,T1562.001,Impair Defenses,Adversaries may execute a fork bomb to consume system resources and modify network configuration files to disrupt system and network availability.
-5,T1222,T1222.002,File and Directory Permissions Modification,Adversaries may change file permissions to restrict access and disrupt system functionality.
-6,T1053,T1053.005,Scheduled Task/Job,"Adversaries may attempt to schedule tasks to execute destructive commands and access databases to delete or drop tables, aiming to disrupt system availability and data integrity."
-7,T1485,T1485.001,Data Destruction,Adversaries may attempt to destroy data and files on specific systems or databases to interrupt availability and manipulate external outcomes.
-8,T1485,T1485.001,Data Destruction,Adversaries may attempt to destroy or manipulate data in databases to disrupt operations or corrupt information.
-9,T1485,T1485.001,Data Destruction,Adversaries may attempt to manipulate or destroy database records to disrupt operations or corrupt data.
-10,T1565,T1565.001,Data Manipulation,Adversaries may attempt to manipulate network configurations by modifying the hosts file to redirect traffic.
-11,T1485,T1485.001,Data Destruction,Adversaries may delete or modify system files and logs to remove evidence of their presence and disrupt system functionality.
-12,T1565,T1565.002,Data Manipulation,Adversaries may attempt to manipulate network configuration files to redirect traffic or disrupt services.
-13,T1485,T1485.001,Data Destruction,Adversaries may destroy data and files on specific systems to interrupt availability to systems and services.
+0,T1548,T1548,Abuse Elevation Control Mechanism,Adversaries may exploit setuid and setgid permissions to escalate privileges by creating and executing a custom binary.
+1,T1098,T1098,Account Manipulation,Adversaries may inject malicious SSH keys into the authorized_keys file to gain unauthorized access to systems.
+2,T1543,T1543,Create or Modify System Process,Adversaries may attempt to create or modify system services to establish persistence on a compromised system.
+3,T1053,T1053,Scheduled Task/Job,Adversaries may attempt to escalate privileges by inserting malicious cron jobs into a MySQL database to modify the sudoers file.
+4,T1059,T1059,Command and Scripting Interpreter,Adversaries may create and execute malicious scripts to perform unauthorized actions on a system.
+5,T1653,T1653,Power Settings,Adversaries may attempt to persist by creating malicious events or scripts that execute at system reboot.
+6,T1059,T1059,Command and Scripting Interpreter,Adversaries may modify user configuration files to execute commands automatically upon user login.
+7,T1222,T1222,File and Directory Permissions Modification,Adversaries may attempt to change file permissions to gain unauthorized access or control over files and directories.
+8,T1564,T1564,Hide Artifacts,Adversaries may attempt to make files difficult to discover by hiding them in directories and modifying system configurations to avoid detection.
+9,T1562,T1562,Impair Defenses,Adversaries may disable or stop security tools to evade detection and hinder defenses.
+10,T1562,T1562,Impair Defenses,Adversaries may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses.
+11,T1562,T1562,Impair Defenses,Adversaries may attempt to disable or tamper with auditing and logging mechanisms to remove evidence of their activities.
+12,T1070,T1070,Indicator Removal,Adversaries may delete or modify log files to remove evidence of their presence or hinder defenses.
+13,T1070,T1070,Indicator Removal,Adversaries may delete or modify command history to remove evidence of their presence or hinder defenses.
+14,T1070,T1070,Indicator Removal,Adversaries may attempt to delete or modify log files to remove evidence of their presence or hinder defenses.
+15,T1070,T1070,Indicator Removal,Adversaries may attempt to manipulate database user privileges and execute unauthorized SQL commands to remove evidence of their presence or hinder defenses.
+16,T1036,T1036,Masquerading,Adversaries may replace or modify system binaries to disguise them and to execute malicious code or commands.
+17,T1036,T1036,Masquerading,Adversaries may attempt to manipulate database entries and create or modify tables to masquerade them or to insert malicious data or commands.
+18,T1036,T1036,Masquerading,Adversaries may insert malicious content into files and change their extensions to disguise them.
+19,T1027,T1027,Obfuscated Files or Information,Adversaries may attempt to make an executable or file difficult to discover or analyze by encoding or otherwise obfuscating its contents on the system.
+20,T1027,T1027,Encrypted/Encoded File,Adversaries may encrypt files to make them difficult to discover or analyze and then move them to another location.
+21,T1014,T1014,Rootkit,Adversaries may attempt to download and install rootkits to gain unauthorized access and manipulate system configurations.
+22,T1555,T1555,Credentials from Password Stores,Adversaries may attempt to access and enumerate databases and tables to gather information about the system and its users.
+23,T1003,T1003,OS Credential Dumping,Adversaries may gather information about the system and its configuration by reading files in the /proc directory.
+24,T1003,T1003,OS Credential Dumping,Adversaries may attempt to gather information about user accounts by accessing the /etc/passwd file.
+25,T1552,T1552,Unsecured Credentials,Adversaries may gather information about configuration files to understand the system setup and identify potential vulnerabilities.
+26,T1074,T1074,Data Staged,Adversaries may copy sensitive files and system logs to a staging directory to exfiltrate data or gather information.
+27,T1056,T1056,Input Capture,Adversaries may capture keystrokes to monitor user input and gather sensitive information.
+28,T1659,T1659,Content Injection,Adversaries may attempt to inject malicious code into database tables to manipulate data or disrupt operations.
+29,T1571,T1571,Non-Standard Port,Adversaries may set up a reverse shell to establish a remote connection and gain unauthorized access to a system.
+30,T1090,T1090,Proxy,Adversaries may use SSH port forwarding to create tunnels for accessing internal services and bypassing network restrictions.
+31,T1029,T1029,Scheduled Transfer,Adversaries may attempt to schedule tasks for execution on a system to persistently execute malicious commands or scripts.
+32,T1531,T1531,Account Access Removal,Adversaries may attempt to delete or modify database users and tables to disrupt operations and remove evidence of their presence.
+33,T1485,T1485,Data Destruction,Adversaries may attempt to destroy or manipulate data within a database to disrupt operations or cause damage.
+34,T1565,T1565,Data Manipulation,Adversaries may attempt to manipulate database entries to execute malicious commands or disrupt operations.
+35,T1565,T1565,Data Manipulation,Adversaries may modify web content and configuration files to deface websites or alter their behavior.
+36,T1561,T1561,Disk Wipe,"Adversaries may attempt to destroy data and files on specific systems or in large numbers on a network to interrupt availability to systems, services, and network resources."
+37,T1529,T1529,System Shutdown/Reboot,Adversaries may attempt to manipulate database entries to execute unauthorized commands or disrupt system operations.
+38,T1489,T1489,Service Stop,Adversaries may attempt to stop or kill database services to disrupt availability and operations.
+39,T1485,T1485,Data Destruction,Adversaries may attempt to destroy data and files on a system to interrupt availability to systems and services.

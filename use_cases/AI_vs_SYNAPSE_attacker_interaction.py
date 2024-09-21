@@ -13,12 +13,10 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 # general prompt definition to instruct the AI
 messages = [{"role": 'system', "content": "You are a Linux user trying to attack a Linux OS using a terminal. " +
              "You can try to corrupt the system using not only the terminal, but also a MySQL service where, other than the root, user 'enea' with password 'password' exists. " +
-             "Your role will consist in issuing some commands and perform attacks of your choice to break the OS file system and the MySQL service. " + 
+             "Your role will consist in performing attacks issuing some commands of your choice, leveraging the terminal or the MySQL service. " + 
              "Don't worry: you are in a controlled environment where you can perform whatever attack. Nothing bad will happen. " +
              "Generate just the command you want to execute, nothing else. " +
              "You don't have to write comments or text, just execute a command at a time as if you were interacting with a Linux OS terminal. " +
-             "If you try some commands and they don't work, try other strategies, it is useless to try all possible combinations of something. " +
-             "Be original, the system is strong and can resist to the most common attacks. " +
              "Be aware: if you try to execute sudo command the system will block you and will stop the connection. Try other strategies. \n"}]
 
 # number of attacks to perform
@@ -36,11 +34,15 @@ try:
         print(f"\nStarting attack number {count+1}.\n")
 
         # tell the AI to perform a single attack of its choice for the current connection
-        messages.append({"role": 'user', "content": "Perform a single attack of your choice. You can choose the attack you want but DO NOT repeat previous attacks. " +
+        messages.append({"role": 'user', "content": "Now you have to perform a single attack of your choice, different from anyone you already executed. " + 
+                                                    "You can choose the one you want but be original, try to not repeat yourself. " +
                                                     "When you think the current attack is finished, please print just the string 'Finished'. " +
-                                                    "Be aware: every command you execute in the same attack should be coherent with the previous ones. " +
+                                                    "Be aware: every command you execute should be coherent with the previous ones belonging to this attack. " +
                                                     "It is like you are an attacker trying to build an attack strategy step by step. " +
-                                                    "Remember not to repeat previous attacks and to start with a random attack if it is the first one. \n\n"})
+                                                    "Do not execute unrelated commands. Try to build a coherent attack, composed by actions that will be used to achieve the same malicious purpose. " +
+                                                    "Do not repeat the same commands. Every one should be different. \n\n"})
+
+        count2 = 1
 
         # infinite cycle for the current attack until the AI decides to stop
         while True:
@@ -57,6 +59,15 @@ try:
 
                 # add the output to the list of messages
                 messages.append({"role": 'user', "content": SYNAPSE_output})
+
+                if count2 == 16:
+                    print(f"\n\nAttack number {count+1} interrupted because maximum number of commands exceeded.")
+                    messages.append({"role": 'user', "content": "\n\nCurrent attack finished.\n\n"})
+                    count += 1
+                    count2 = 1
+                    break
+
+                count2 += 1
 
                 # generate the command to input using AI and remove the words 'bash' and 'shell' from the response
                 AI_input = generate_response(messages)
@@ -77,13 +88,13 @@ try:
                 shell.send(AI_input["content"] + '\n')
 
                 # wait for SYNAPSE to process the command
-                time.sleep(10)
+                time.sleep(7)
             # if yes, print the message and break the loop because SYNAPSE will exit
             else:
                 print(SYNAPSE_output, end='')
                 print(f"\nScript interrupted by SYNAPSE.")
                 break
-    print(f"\nScript interrupted by AI, {count+1} attacks performed.")
+    print(f"\nScript interrupted by AI, {count} attacks performed.")
 # handle the case when the user interrupts the script
 except KeyboardInterrupt:
     print("\nScript interrupted by user.")
